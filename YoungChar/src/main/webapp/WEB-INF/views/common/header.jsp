@@ -137,7 +137,7 @@
 								<!-- Main Nav Menu-->
 								<ul class="rn-navbar">
 									<li class="active">
-										<a href="index.jsp">home</a>
+										<a href="index.jsp">Home</a>
 									</li>
 									<li>
 										<a href="#">충전소
@@ -162,43 +162,21 @@
 										</ul>
 									</li>
 									<li>
-										<a href="#">차량 검색 
+										<a href="#">Cars 
 											<i class="lnr lnr-chevron-down"></i>
 										</a>
 										<ul>
 											<li>
-												<a href="about.html">About Us</a>
+												<a href="${contextPath }/car/list">SEARCH CAR</a>
 											</li>
 											<li>
-												<a href="fullwidth.html">Fullwidth Page</a>
+												<a href="${contextPath}/board/list/1">REVIEW</a>
 											</li>
 											<li>
-												<a href="right-sidebar.html">Right Sidebar Page</a>
+												<a href="${contextPath}/board/list/2">INFORMATION</a>
 											</li>
 											<li>
-												<a href="left-sidebar.html">Left Sidebar Page</a>
-											</li>
-											<li>
-												<a href="faq.html">FAQ</a>
-											</li>
-											<li>
-												<a href="404.html">404 Error</a>
-											</li>
-											<li>
-												<a href="#">Gallery 
-													<i class="lnr lnr-chevron-right"></i>
-												</a>
-												<ul>
-													<li>
-														<a href="gallery-col-2.html">2 Columns</a>
-													</li>
-													<li>
-														<a href="gallery-col-3.html">3 Columns</a>
-													</li>
-													<li>
-														<a href="gallery-col-4.html">4 Columns</a>
-													</li>
-												</ul>
+												<a href="${contextPath}/board/list/3">FREE CHAT</a>
 											</li>
 										</ul>
 									</li>
