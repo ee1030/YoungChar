@@ -227,6 +227,9 @@
 									<li>
 										<a href="contact.html">시승예약</a>
 									</li>
+									<li>
+										<a href="${contextPath}/member/login">로그인</a>
+									</li>
 								</ul>
 
 							</nav>
