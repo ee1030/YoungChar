@@ -127,6 +127,9 @@
 											<li>
 												<a href="${contextPath}/member/signUp">회원가입</a>
 											</li>
+											<li>
+												<a href="${contextPath}/admin">관리자</a>
+											</li>
 										</ul>
 								</div>
 							</div>
