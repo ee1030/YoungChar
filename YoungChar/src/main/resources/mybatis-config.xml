@@ -11,5 +11,6 @@
 	
 	
 	<mappers>
+		<mapper resource="/mappers/admin-mapper.xml" />
 	</mappers>
 </configuration>
