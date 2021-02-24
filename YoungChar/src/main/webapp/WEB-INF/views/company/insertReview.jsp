@@ -9,7 +9,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Insert Review</title>
-
+	<style>
+			.card{
+				font-family: 'Noto Sans KR', sans-serif;
+			}
+	</style>
 </head>
 
 <body class="rn-preloader">
@@ -56,15 +60,15 @@
 										<h4>업체: OO지점 </h4>
 									</div>
 									<div class="col-sm-3">
-										<h4>차종: 아이오닉 </h4>
+										<h4>차명: 아이오닉 </h4>
 									</div>
 									<div class="col-sm-3">
 										<select id="select1">
-											<option value="none">★★★★★</option>
-											<option value="none">★★★★☆</option>
-											<option value="none">★★★☆☆</option>
-											<option value="none">★★☆☆☆</option>
-											<option value="none">★☆☆☆☆</option>
+											<option value="5">★★★★★</option>
+											<option value="4">★★★★☆</option>
+											<option value="3">★★★☆☆</option>
+											<option value="2">★★☆☆☆</option>
+											<option value="1">★☆☆☆☆</option>
 										</select>
 									</div>
 								  </div>

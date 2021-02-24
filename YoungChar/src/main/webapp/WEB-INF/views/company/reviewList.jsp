@@ -12,6 +12,10 @@
 
 	<!-- Preloader CSS-->
 	<style>
+		.card{
+			font-family: 'Noto Sans KR', sans-serif;
+			}
+	
 		.rn-pagination {
 			margin-bottom: 40px;
 			text-align: center;
@@ -31,6 +35,15 @@
 		#search-bar{
 			width: 300px !important;
 		}
+		
+		.td{
+			width: 10%;
+		}
+		
+		.icofont-ui-rating{
+    color: #f8d62b;
+		}
+		
 	</style>
 
 </head>
@@ -97,66 +110,72 @@
 							<table class="table table-hover">
 								<thead>
 									<tr>
-										<th scope="col">No</th>
-										<th scope="col">별점</th>
-										<th scope="col">브랜드</th>
-										<th colspan="2" scope="col">제목</th>
-										<th scope="col">글쓴이</th>
-										<th scope="col">작성일시</th>
-										<th scope="col">댓글</th>
-										<th scope="col">조회수</th>
+										<th class="td" scope="col">No</th>
+										<th class="td" scope="col">별점</th>
+										<th class="td" scope="col">브랜드</th>
+										<th class="td" scope="col">대리점</th>
+										<th colspan="3" scope="col">제목</th>
+										<th class="td" scope="col">글쓴이</th>
+										<th class="td" scope="col">작성일시</th>
+										<th class="td" scope="col">댓글</th>
+										<th class="td" scope="col">조회수</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="row">1</th>
-										<td>★★★★★</td>
-										<td>테슬라</td>
-										<th colspan="2" scope="col">글제목입니다.</th>
-										<td>김영차</td>
-										<td>21-02-02</td>
-										<td>10</td>
-										<td>20</td>
+										<td class="td">1</td>
+										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
+										<td class="td">테슬라</td>
+										<td class="td">대리점</td>
+										<td colspan="3">글제목입니다.</td>
+										<td class="td">김영차</td>
+										<td class="td">21-02-02</td>
+										<td class="td">10</td>
+										<td class="td">20</td>
 									</tr>
 									<tr>
-										<th scope="row">1</th>
-										<td>★★★★★</td>
-										<td>테슬라</td>
-										<th colspan="2" scope="col">글제목입니다.</th>
-										<td>김영차</td>
-										<td>21-02-02</td>
-										<td>10</td>
-										<td>20</td>
+										<td class="td">1</td>
+										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
+										<td class="td">테슬라</td>
+										<td class="td">대리점</td>
+										<td colspan="3">글제목입니다.</td>
+										<td class="td">김영차</td>
+										<td class="td">21-02-02</td>
+										<td class="td">10</td>
+										<td class="td">20</td>
 									</tr>
 									<tr>
-										<th scope="row">1</th>
-										<td>★★★★★</td>
-										<td>테슬라</td>
-										<th colspan="2" scope="col">글제목입니다.</th>
-										<td>김영차</td>
-										<td>21-02-02</td>
-										<td>10</td>
-										<td>20</td>
+										<td class="td">1</td>
+										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
+										<td class="td">테슬라</td>
+										<td class="td">대리점</td>
+										<td colspan="3">글제목입니다.</td>
+										<td class="td">김영차</td>
+										<td class="td">21-02-02</td>
+										<td class="td">10</td>
+										<td class="td">20</td>
 									</tr>
 									<tr>
-										<th scope="row">1</th>
-										<td>★★★★★</td>
-										<td>테슬라</td>
-										<th colspan="2" scope="col">글제목입니다.</th>
-										<td>김영차</td>
-										<td>21-02-02</td>
-										<td>10</td>
-										<td>20</td>
+										<td class="td">1</td>
+										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
+										<td class="td">테슬라</td>
+										<td class="td">대리점</td>
+										<td colspan="3">글제목입니다.</td>
+										<td class="td">김영차</td>
+										<td class="td">21-02-02</td>
+										<td class="td">10</td>
+										<td class="td">20</td>
 									</tr>
 									<tr>
-										<th scope="row">1</th>
-										<td>★★★★★</td>
-										<td>테슬라</td>
-										<th colspan="2" scope="col">글제목입니다.</th>
-										<td>김영차</td>
-										<td>21-02-02</td>
-										<td>10</td>
-										<td>20</td>
+										<td class="td">1</td>
+										<td class="td"><i class="icofont icofont-ui-rating"></i></td>
+										<td class="td">테슬라</td>
+										<td class="td">대리점</td>
+										<td colspan="3">글제목입니다.</td>
+										<td class="td">김영차</td>
+										<td class="td">21-02-02</td>
+										<td class="td">10</td>
+										<td class="td">20</td>
 									</tr>
 								</tbody>
 							</table>

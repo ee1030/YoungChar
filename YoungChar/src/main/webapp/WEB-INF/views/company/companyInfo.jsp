@@ -14,15 +14,15 @@
 
 		<!-- Preloader CSS-->
 		<style>
+				.card{
+				font-family: 'Noto Sans KR', sans-serif;
+			}
 		
 			.rn-header{
 				position: inherit !important;
 				background-color: rgb(85, 85, 85);
 			}
 			
-					#side-bar{
-				width: 300px;
-			}
 
 			.bg-wrap .user-logo .img {
 				width: 100px;
@@ -190,42 +190,7 @@
 					<div id="side-bar">
 
 						<!-- Sidebar-->
-						<aside class="rn-widget-area rn-left-sidebar" id="secondary">
-		
-							<!-- Widget Item-->
-							
-							<div class="rn-widget">
-								<div class="img bg-wrap text-center">
-									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}/resources/assets/images/dog.PNG);"></div>
-										<h3>company name</h3>
-									</div>
-								</div>
-							</div>
-								
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Categories</h2>
-								<div class="rn-widget-content">
-									<ul>
-										<li>
-											<a href="dashboard">Dash board</a>
-										</li>
-										<li>
-											<a href="schedule">Schedule</a>
-										</li>
-										<li>
-											<a href="applicationlist">Application list</a>
-										</li>
-										<li>
-											<a href="companyinfo">Company Info</a>
-										</li>
-									</ul>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-				
-
-						</aside>
+							<jsp:include page="sideMenu.jsp"/>
 						<!-- End Slidebar-->
 
 					</div>
