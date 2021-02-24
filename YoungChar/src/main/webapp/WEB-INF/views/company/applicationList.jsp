@@ -11,31 +11,15 @@
 
 		<!-- Preloader CSS-->
 		<style>
+			.card{
+				font-family: 'Noto Sans KR', sans-serif;
+			}
 		
 			.rn-header{
 				position: inherit !important;
 				background-color: rgb(85, 85, 85);
 			}
-		
-					#side-bar{
-				width: 300px;
-			}
-
-			.bg-wrap .user-logo .img {
-				width: 100px;
-				height: 100px;
-				border-radius: 50%;
-				margin: 0 auto;
-				margin-bottom: 10px; }
-			.bg-wrap .user-logo h3 {
-				color: black;
-				font-size: 18px; }
-
-			.img {
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center center; 
-			}	
+	
 
 			.rn-service-item {
 				width: 230px;
@@ -54,12 +38,12 @@
 			}
 
 			.rn-pagination {
-				margin-bottom: 40px;
-				text-align: center;
+				margin-left: 250px;
 			}
 
+
 			#select1{
-				width: 100px;
+				width: 120px;
 				display: inline-block;
 				float: right;
 			}
@@ -76,6 +60,7 @@
 			}
 			
 		</style>
+
 
 	</head>
 	<body class="rn-preloader">
@@ -124,11 +109,11 @@
 									  <td>@mdorton</td>
 									  <td>Admin</td>
 									  <td>
-										  <select id="select2">
-											  <option value="none">승인대기</option>
-											  <option value="none">승인완료</option>
-											  <option value="none">시승완료</option>
-											  <option value="none">시승취소</option>
+										  <select id="select2"  class="btn btn-danger">
+											  <option value="N">승인대기</option>
+											  <option value="A">승인완료</option>
+											  <option value="Y">시승완료</option>
+											  <option value="C">시승취소</option>
 										  </select>
 
 
@@ -141,7 +126,7 @@
 									  <td>Deo</td>
 									  <td>@johndeo</td>
 									  <td>User</td>
-									  <td>USA</td>
+									  <td>EK</td>
 									</tr>
 									<tr>
 									  <th scope="row">3</th>
@@ -174,32 +159,15 @@
 						  						<!-- Post Pagination-->
 						  </div>
 
-						<nav class="rn-pagination">
-							<ul>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-left"></i>
-									</a>
-								</li>
-								<li>
-									<a class="rn-active" href="#">1</a>
-								</li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">4</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-right"></i>
-									</a>
-								</li>
-							</ul>
-						</nav>
+							<nav class="rn-pagination">
+										<ul class="pagination pagination-light">
+	                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+	                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+	                    <li class="page-item"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
+	                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+	                  </ul>
+							</nav>
 						  
 
 		
@@ -207,40 +175,7 @@
 					<div id="side-bar">
 
 						<!-- Sidebar-->
-						<aside class="rn-widget-area rn-left-sidebar" id="secondary">
-		
-							<!-- Widget Item-->
-							
-							<div class="rn-widget">
-								<div class="img bg-wrap text-center">
-									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}/resources/assets/images/dog.PNG);"></div>
-										<h3>company name</h3>
-									</div>
-								</div>
-							</div>
-								
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Categories</h2>
-								<div class="rn-widget-content">
-									<ul>
-										<li>
-											<a href="dashboard">Dash board</a>
-										</li>
-										<li>
-											<a href="schedule">Schedule</a>
-										</li>
-										<li>
-											<a href="applicationlist">Application list</a>
-										</li>
-										<li>
-											<a href="companyinfo">Company Info</a>
-										</li>
-									</ul>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-						</aside>
+						<jsp:include page="sideMenu.jsp"/>
 						<!-- End Slidebar-->
 
 					</div>

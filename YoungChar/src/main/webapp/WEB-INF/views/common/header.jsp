@@ -36,7 +36,9 @@
 		<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
 		<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 		
-				    <!-- Google font-->
+		<!-- Google font-->
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/fontawesome.css">

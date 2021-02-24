@@ -11,10 +11,18 @@
 
 	<title>Review View</title>
 	<style>
-	#board-area{ margin-bottom:100px;}
-	#board-content{ padding-bottom:150px;}
-	#date-area{font-size: 12px; line-height: 12px}
-	#date-area>p{margin: 0}
+		.card{
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+	
+		#board-area{ margin-bottom:100px;}
+		#board-content{ padding-bottom:150px;}
+		#date-area{font-size: 12px; line-height: 12px}
+		#date-area>p{margin: 0}
+	
+		.icofont-ui-rating{
+	    color: #f8d62b;
+			}
 	</style>
 
 </head>
@@ -66,8 +74,7 @@
 										<h4>차종: 아이오닉 </h4>
 									</div>
 									<div class="col-sm-3">
-										<h4>별점: <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-											</h4>
+										<h4>별점:<i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></h4>
 									</div>
 								  </div>
 								</div>
