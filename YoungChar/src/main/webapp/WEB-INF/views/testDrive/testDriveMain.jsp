@@ -16,233 +16,24 @@
 		All CSS Codes Loaded
 		Ex: bootstrap, fontawesome, style, etc.
 		-->
-		<link rel="stylesheet" href="assets/libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/libs/fontawesome/css/fontawesome-all.min.css">
-		<link rel="stylesheet" href="assets/libs/linearicons/linearicons.css">
-		<link rel="stylesheet" href="assets/css/rentnow-icons.css">
-		<link rel="stylesheet" href="assets/libs/flatpickr/flatpickr.min.css">
-		<link rel="stylesheet" href="assets/css/magnific-popup.css">
-		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/fontawesome/css/fontawesome-all.min.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/linearicons/linearicons.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/css/rentnow-icons.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 
 		<!-- Google Map JS-->
 		<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
 	</head>
-	<body class="rn-preloader">
-		<div id="preloader"></div>
-		<div id="preloader-overlayer"></div>
+	
 
 		<!-- Header-->
-		<header class="rn-header">
-
-			<!-- Topbar-->
-			<div class="rn-topbar">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-12 col-sm-5 col-lg-3">
-
-							<!-- Tobar Social-->
-							<ul class="rn-social">
-								<li>
-									<a href="#">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-google-plus-g"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
-
-						</div>
-						<div class="col-12 col-sm-7 col-lg-9">
-
-							<!-- Topbar Contact with Icon-->
-							<div class="rn-icon-contents">
-								<div class="rn-phone rn-icon-content">
-									<div class="rn-icon">
-										<i class="lnr lnr-phone"></i>
-									</div>
-									<div class="rn-info">
-										<ul>
-											<li>(954)-944-1250</li>
-											<li>(954)-944-1251</li>
-										</ul>
-									</div>
-								</div>
-								<div class="rn-email rn-icon-content">
-									<div class="rn-icon">
-										<i class="lnr lnr-envelope"></i>
-									</div>
-									<div class="rn-info">
-										<ul>
-											<li>support@example.coms</li>
-											<li>sale@example.com</li>
-										</ul>
-									</div>
-								</div>
-								<div class="rn-address rn-icon-content">
-									<div class="rn-icon">
-										<i class="lnr lnr-map-marker"></i>
-									</div>
-									<div class="rn-info">
-										<ul>
-											<li>1425 Pointe Lane, Miami</li>
-											<li>Florida – 33169, USA</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Topbar-->
-
-
-			<!-- Menubar-->
-			<div class="rn-menubar">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-4">
-							<!-- Logo-->
-							<a class="brand-name" href="index.html">
-								<img class="img-fluid" src="assets/images/logo.svg" alt="Logo">
-							</a>
-						</div>
-						<div class="col-8">
-							<nav class="rn-navbar-container">
-
-								<!-- Navbar Toggle Button for Only Tablet and Phone-->
-								<button class="rn-navbar-toggler" id="rn-navbar-toggler">
-									<span class="rn-navbar-toggler-bar"></span>
-									<span class="rn-navbar-toggler-bar"></span>
-									<span class="rn-navbar-toggler-bar"></span>
-								</button>
-
-								<!-- Main Nav Menu-->
-								<ul class="rn-navbar">
-									<li>
-										<a href="index.html">Home</a>
-									</li>
-									<li>
-										<a href="#">Cars 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="cars.html">Car List</a>
-											</li>
-											<li>
-												<a href="car-search.html">Car Search</a>
-											</li>
-											<li>
-												<a href="car-single.html">Car Single</a>
-											</li>
-											<li>
-												<a href="checkout.html">Checkout</a>
-											</li>
-											<li>
-												<a href="cart.html">Cart</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">Pages 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="about.html">About Us</a>
-											</li>
-											<li>
-												<a href="fullwidth.html">Fullwidth Page</a>
-											</li>
-											<li>
-												<a href="right-sidebar.html">Right Sidebar Page</a>
-											</li>
-											<li>
-												<a href="left-sidebar.html">Left Sidebar Page</a>
-											</li>
-											<li>
-												<a href="faq.html">FAQ</a>
-											</li>
-											<li>
-												<a href="404.html">404 Error</a>
-											</li>
-											<li>
-												<a href="#">Gallery 
-													<i class="lnr lnr-chevron-right"></i>
-												</a>
-												<ul>
-													<li>
-														<a href="gallery-col-2.html">2 Columns</a>
-													</li>
-													<li>
-														<a href="gallery-col-3.html">3 Columns</a>
-													</li>
-													<li>
-														<a href="gallery-col-4.html">4 Columns</a>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-									<li class="active">
-										<a href="service.html">Service</a>
-									</li>
-									<li>
-										<a href="#">Blog 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="blog.html">Blog List</a>
-											</li>
-											<li>
-												<a href="blog-grid.html">Blog Grid</a>
-											</li>
-											<li>
-												<a href="blog-grid-sidebar.html">Blog Grid - Sidebar</a>
-											</li>
-											<li>
-												<a href="blog-single.html">Single Post</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a href="contact.html">Contact</a>
-									</li>
-								</ul>
-
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Menubar-->
-
-		</header>
-		<!-- End Header-->
+		<jsp:include page="../common/header.jsp"></jsp:include>
 
 		<!-- Page Title-->
-		<div class="rn-page-title">
+		<div class="rn-page-title" margin="">
 			<div class="rn-pt-overlayer"></div>
 			<div class="container">
 				<div class="row">
@@ -277,7 +68,7 @@
 					<div class="col-lg-6 col-md-6">
 
 						<!-- Service Item-->
-						<div class="rn-service-item">
+						<div class="rn-service-item"  OnClick="location.href ='reservation'" style="cursor:pointer;">
 							<div class="rn-service-icon">
 								<i class="lnr lnr-calendar-full"></i>
 							</div>
@@ -294,7 +85,7 @@
 					<div class="col-lg-6 col-md-6">
 
 						<!-- Service Item-->
-						<div class="rn-service-item">
+						<div class="rn-service-item"  OnClick="location.href ='myReservation'" style="cursor:pointer;">
 							<div class="rn-service-icon">
 								<i class="lnr lnr-user"></i>
 							</div>
@@ -351,7 +142,7 @@
 										<blockquote class="rn-testimonial-item">
 											<div class="rn-testimonial-author">
 												<div class="rn-testimonial-author-thumb">
-													<img src="assets/images/author-1.jpg" alt="John Doe" srcset="assets/images/author-1.jpg 1x, assets/images/author-1@2x.jpg 2x"/>
+													<img src="${contextPath}/resources/assets/images/author-1.jpg" alt="John Doe" srcset="${contextPath}/resources/assets/images/author-1.jpg 1x, ${contextPath}/resources/assets/images/author-1@2x.jpg 2x"/>
 												</div>
 												<div class="rn-testimonial-author-info"><strong>안나공주</strong>
 													<p>Anna princess</p>
@@ -379,7 +170,7 @@
 										<blockquote class="rn-testimonial-item">
 											<div class="rn-testimonial-author">
 												<div class="rn-testimonial-author-thumb">
-													<img src="assets/images/author-2.jpg" alt="John Doe" srcset="assets/images/author-2.jpg 1x, assets/images/author-2@2x.jpg 2x"/>
+													<img src="${contextPath}/resources/assets/images/author-2.jpg" alt="John Doe" srcset="${contextPath}/resources/assets/images/author-2.jpg 1x, ${contextPath}/resources/assets/images/author-2@2x.jpg 2x"/>
 												</div>
 												<div class="rn-testimonial-author-info"><strong>페페</strong>
 													<p>Elsa PePe</p>
@@ -407,7 +198,7 @@
 										<blockquote class="rn-testimonial-item">
 											<div class="rn-testimonial-author">
 												<div class="rn-testimonial-author-thumb">
-													<img src="assets/images/author-3.jpg" alt="John Doe" srcset="assets/images/author-3.jpg 1x, assets/images/author-3@2x.jpg 2x"/>
+													<img src="${contextPath}/resources/assets/images/author-3.jpg" alt="John Doe" srcset="${contextPath}/resources/assets/images/author-3.jpg 1x, ${contextPath}/resources/assets/images/author-3@2x.jpg 2x"/>
 												</div>
 												<div class="rn-testimonial-author-info"><strong>주얼리알파고</strong>
 													<p>Alphago </p>
@@ -456,7 +247,7 @@
 								<h2 class="rn-widget-title">About Us</h2>
 								<div class="rn-widget-content">
 									<a class="brand-name" href="index.html">
-										<img src="assets/images/logo.svg" alt="Logo">
+										<img src="${contextPath}/resources/assets/images/logo.svg" alt="Logo">
 									</a>
 									<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
 									<ul class="rn-widget-social">
@@ -601,7 +392,7 @@
 						<div class="col-md-6 text-right">
 							<span class="rn-pyament-methods">
 								<span>We Accept</span>
-								<img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
+								<img src="${contextPath}/resources/assets/images/payments.png" alt="payments" srcset="${contextPath}/resources/assets/images/payments.png 1x, ${contextPath}/resources/assets/images/payments@2x.png 2x">
 							</span>
 						</div>
 					</div>
@@ -616,12 +407,12 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
-		<script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-		<script src="assets/js/starrr.min.js"></script>
-		<script src="assets/js/jquery.magnific-popup.min.js"></script>
-		<script src="assets/js/scripts.js"></script>
+		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
+		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 	</body>
 </html>

@@ -147,8 +147,8 @@
 					<div class="row align-items-center">
 						<div class="col-4">
 							<!-- Logo-->
-							<a class="brand-name" href="index.html">
-								<img class="img-fluid" src="${contextPath}/resources/assets/images/logo.svg" alt="Logo">
+							<a class="brand-name" href="${contextPath}">
+								<img class="img-fluid" src="${contextPath}/resources/assets/images/0char_logo(200).png" alt="Logo">
 							</a>
 						</div>
 						<div class="col-8">
@@ -164,7 +164,7 @@
 								<!-- Main Nav Menu-->
 								<ul class="rn-navbar">
 									<li class="active">
-										<a href="index.jsp">Home</a>
+										<a href="${contextPath }">Home</a>
 									</li>
 									<li>
 										<a href="#">충전소
@@ -214,7 +214,20 @@
 										<a href="${contextPath}/news/newsMain">뉴스</a>
 									</li>
 									<li>
-										<a href="contact.html">시승예약</a>
+										<a href="${contextPath}/testDrive/main">시승예약
+											<i class="lnr lnr-chevron-down"></i>
+										</a>
+										<ul>
+											<li>
+												<a href="${contextPath}/testDrive/main">메인</a>
+											</li>
+											<li>
+												<a href="${contextPath}/testDrive/reservation">예약하기</a>
+											</li>
+											<li>
+												<a href="${contextPath}/testDrive/myReservation">내 예약</a>
+											</li>
+										</ul>
 									</li>
 									
 								</ul>
