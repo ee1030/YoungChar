@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>시승 예약</title>
+		<title>Fullwidth | RentNow - Responsive Car Rental Template</title>
 		<style>
 			.select1{
 				width: 100%;
@@ -27,230 +27,22 @@
 		All CSS Codes Loaded
 		Ex: bootstrap, fontawesome, style, etc.
 		-->
-		<link rel="stylesheet" href="assets/libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/libs/fontawesome/css/fontawesome-all.min.css">
-		<link rel="stylesheet" href="assets/libs/linearicons/linearicons.css">
-		<link rel="stylesheet" href="assets/css/rentnow-icons.css">
-		<link rel="stylesheet" href="assets/libs/flatpickr/flatpickr.min.css">
-		<link rel="stylesheet" href="assets/css/magnific-popup.css">
-		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/fontawesome/css/fontawesome-all.min.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/linearicons/linearicons.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/css/rentnow-icons.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
+		<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 
 		<!-- Google Map JS-->
-		<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
+		<!-- <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script> -->
+		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	</head>
-	<body class="rn-preloader">
-		<div id="preloader"></div>
-		<div id="preloader-overlayer"></div>
+	
 
 		<!-- Header-->
-		<header class="rn-header">
-
-			<!-- Topbar-->
-			<div class="rn-topbar">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-12 col-sm-5 col-lg-3">
-
-							<!-- Tobar Social-->
-							<ul class="rn-social">
-								<li>
-									<a href="#">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-google-plus-g"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
-
-						</div>
-						<div class="col-12 col-sm-7 col-lg-9">
-
-							<!-- Topbar Contact with Icon-->
-							<div class="rn-icon-contents">
-								<div class="rn-phone rn-icon-content">
-									<div class="rn-icon">
-										<i class="lnr lnr-phone"></i>
-									</div>
-									<div class="rn-info">
-										<ul>
-											<li>(954)-944-1250</li>
-											<li>(954)-944-1251</li>
-										</ul>
-									</div>
-								</div>
-								<div class="rn-email rn-icon-content">
-									<div class="rn-icon">
-										<i class="lnr lnr-envelope"></i>
-									</div>
-									<div class="rn-info">
-										<ul>
-											<li>support@example.coms</li>
-											<li>sale@example.com</li>
-										</ul>
-									</div>
-								</div>
-								<div class="rn-address rn-icon-content">
-									<div class="rn-icon">
-										<i class="lnr lnr-map-marker"></i>
-									</div>
-									<div class="rn-info">
-										<ul>
-											<li>1425 Pointe Lane, Miami</li>
-											<li>Florida – 33169, USA</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Topbar-->
-
-
-			<!-- Menubar-->
-			<div class="rn-menubar">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-4">
-							<!-- Logo-->
-							<a class="brand-name" href="index.html">
-								<img class="img-fluid" src="assets/images/logo.svg" alt="Logo">
-							</a>
-						</div>
-						<div class="col-8">
-							<nav class="rn-navbar-container">
-
-								<!-- Navbar Toggle Button for Only Tablet and Phone-->
-								<button class="rn-navbar-toggler" id="rn-navbar-toggler">
-									<span class="rn-navbar-toggler-bar"></span>
-									<span class="rn-navbar-toggler-bar"></span>
-									<span class="rn-navbar-toggler-bar"></span>
-								</button>
-
-								<!-- Main Nav Menu-->
-								<ul class="rn-navbar">
-									<li>
-										<a href="index.html">Home</a>
-									</li>
-									<li>
-										<a href="#">Cars 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="cars.html">Car List</a>
-											</li>
-											<li class="active">
-												<a href="car-search.html">Car Search</a>
-											</li>
-											<li>
-												<a href="car-single.html">Car Single</a>
-											</li>
-											<li>
-												<a href="checkout.html">Checkout</a>
-											</li>
-											<li>
-												<a href="cart.html">Cart</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">Pages 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="about.html">About Us</a>
-											</li>
-											<li>
-												<a href="fullwidth.html">Fullwidth Page</a>
-											</li>
-											<li>
-												<a href="right-sidebar.html">Right Sidebar Page</a>
-											</li>
-											<li>
-												<a href="left-sidebar.html">Left Sidebar Page</a>
-											</li>
-											<li>
-												<a href="faq.html">FAQ</a>
-											</li>
-											<li>
-												<a href="404.html">404 Error</a>
-											</li>
-											<li>
-												<a href="#">Gallery 
-													<i class="lnr lnr-chevron-right"></i>
-												</a>
-												<ul>
-													<li>
-														<a href="gallery-col-2.html">2 Columns</a>
-													</li>
-													<li>
-														<a href="gallery-col-3.html">3 Columns</a>
-													</li>
-													<li>
-														<a href="gallery-col-4.html">4 Columns</a>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a href="service.html">Service</a>
-									</li>
-									<li>
-										<a href="#">Blog 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="blog.html">Blog List</a>
-											</li>
-											<li>
-												<a href="blog-grid.html">Blog Grid</a>
-											</li>
-											<li>
-												<a href="blog-grid-sidebar.html">Blog Grid - Sidebar</a>
-											</li>
-											<li>
-												<a href="blog-single.html">Single Post</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a href="contact.html">Contact</a>
-									</li>
-								</ul>
-
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Menubar-->
-
-		</header>
-		<!-- End Header-->
+		<jsp:include page="../common/header.jsp"></jsp:include>
 
 		<!-- Page Title-->
 		<div class="rn-page-title">
@@ -269,21 +61,25 @@
 		<!-- End Page Title-->
 
 		<br><br><br>
-		<div class="row justify-content-md-center">
+		
+		<!-- 선택안했을때 바 -->
+		<div class="row justify-content-md-center selectBar1" >
 			<div class="col-lg-10 select1"> 모델 선택</div>
 		</div>	
+		<!-- end 선택안했을때 바 -->
 		<br>
 
 		<!-- Car Search Form-->
-		<div class="rn-search-form-big rn-section">
+		<div class="rn-search-form-big rn-section selectBar s2">
 			<div class="container">
 				<div class="row">
+
 					<div class="col-lg-12">
 						<div class="rn-big-search-form rn-big-search-form-dark">
 							<form action="car-search.html">
 								<div class="text-center">
 									<h1> 
-										시승 모델 선택
+										모델 선택
 									</h1>
 								</div>
 								<div class="text-center">
@@ -301,7 +97,7 @@
 			</div>
 		</div>
 		<!-- End Car Search Form-->
-
+		<div class="selectBar">
 		<!-- Car Results-->
 		<div class="rn-section rn-car-search-results">
 			<div class="container">
@@ -368,6 +164,7 @@
 			</div>
 		</div>	
 						<!-- End Car Search Filters-->
+
 		<!-- Cars-->
 		<section class="rn-section rn-car-list">
 			<div class="container">
@@ -381,7 +178,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-1.jpg" alt="Black Sedan" srcset="assets/images/car-1.jpg 1x, assets/images/car-1@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-1.jpg" alt="Black Sedan" srcset="${contextPath}/resources/assets/images/car-1.jpg 1x, ${contextPath}/resources/assets/images/car-1@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -419,7 +216,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-2.jpg" alt="Toyota Etios" srcset="assets/images/car-2.jpg 1x, assets/images/car-2@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-2.jpg" alt="Toyota Etios" srcset="${contextPath}/resources/assets/images/car-2.jpg 1x, ${contextPath}/resources/assets/images/car-2@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -457,7 +254,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-3.jpg" alt="Mercedes AMG E63" srcset="assets/images/car-3.jpg 1x, assets/images/car-3@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-3.jpg" alt="Mercedes AMG E63" srcset="${contextPath}/resources/assets/images/car-3.jpg 1x, ${contextPath}/resources/assets/images/car-3@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -496,7 +293,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-4.jpg" alt="Red Sporty Car" srcset="assets/images/car-4.jpg 1x, assets/images/car-4@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-4.jpg" alt="Red Sporty Car" srcset="${contextPath}/resources/assets/images/car-4.jpg 1x, ${contextPath}/resources/assets/images/car-4@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -534,7 +331,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-5.jpg" alt="Toyta Corolla" srcset="assets/images/car-5.jpg 1x, assets/images/car-5@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-5.jpg" alt="Toyta Corolla" srcset="${contextPath}/resources/assets/images/car-5.jpg 1x, ${contextPath}/resources/assets/images/car-5@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -572,7 +369,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-6.jpg" alt="Toyota Avalon" srcset="assets/images/car-6.jpg 1x, assets/images/car-6@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-6.jpg" alt="Toyota Avalon" srcset="${contextPath}/resources/assets/images/car-6.jpg 1x, ${contextPath}/resources/assets/images/car-6@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -610,7 +407,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-7.jpg" alt="BMW X5" srcset="assets/images/car-7.jpg 1x, assets/images/car-7@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-7.jpg" alt="BMW X5" srcset="${contextPath}/resources/assets/images/car-7.jpg 1x, ${contextPath}/resources/assets/images/car-7@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -648,7 +445,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-8.jpg" alt="Audi A8" srcset="assets/images/car-8.jpg 1x, assets/images/car-8@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-8.jpg" alt="Audi A8" srcset="${contextPath}/resources/assets/images/car-8.jpg 1x, ${contextPath}/resources/assets/images/car-8@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -686,7 +483,7 @@
 							</div>
 							<div class="rn-car-item-thumb">
 								<a href="car-single.html">
-									<img class="img-fluid" src="assets/images/car-9.jpg" alt="Toyta Corolla" srcset="assets/images/car-9.jpg 1x, assets/images/car-9@2x.jpg 2x"/>
+									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-9.jpg" alt="Toyta Corolla" srcset="${contextPath}/resources/assets/images/car-9.jpg 1x, ${contextPath}/resources/assets/images/car-9@2x.jpg 2x"/>
 								</a>
 							</div>
 							<div class="rn-car-item-info">
@@ -752,16 +549,17 @@
 				</div>
 			</div>
 		</section>
+	</div>
 		<!-- End Cars-->
 
 
-		<div class="row justify-content-md-center">
-			<div class="col-lg-10 select1"> 시승 센터 선택</div>
+		<div class="row justify-content-md-center selectBar1">
+			<div class="col-lg-10 select1">센터 선택</div>
 		</div>	
 		<br>
 
 		<!--  Search Form-->
-		<div class="rn-search-form-big rn-section">
+		<div class="rn-search-form-big rn-section selectBar s2">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -791,7 +589,7 @@
 
 
 		<!-- 시승 센터 위치-->
-		<section class="rn-section rn-car-list">
+		<section class="rn-section rn-car-list selectBar">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-10">
@@ -819,15 +617,15 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 
-		<div class="row justify-content-md-center">
+		<div class="row justify-content-md-center selectBar1">
 			<div class="col-lg-10 select1"> 날짜 선택</div>
 		</div>	
 		<br>
 
 		<!--  Search Form-->
-		<div class="rn-search-form-big rn-section">
+		<div class="rn-search-form-big rn-section selectBar s2">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -855,7 +653,7 @@
 		<!-- End Search Form-->
 
 
-		<section class="rn-section rn-car-list">
+		<section class="rn-section rn-car-list selectBar">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-10">
@@ -865,12 +663,13 @@
 				</div>
 			</div>
 		</div>
-
+		</section>
+		<br><br><br><br>
 		<div class="row justify-content-md-center">
 			<button class="col-lg-1 btn btn-main  btn-shadow btn-block" >완료</button>
 		</div>
 
-		<br>
+		<br><br>
 
 
 		<!-- Site Footer-->
@@ -887,7 +686,7 @@
 								<h2 class="rn-widget-title">About Us</h2>
 								<div class="rn-widget-content">
 									<a class="brand-name" href="index.html">
-										<img src="assets/images/logo.svg" alt="Logo">
+										<img src="${contextPath}/resources/assets/images/logo.svg" alt="Logo">
 									</a>
 									<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
 									<ul class="rn-widget-social">
@@ -1032,7 +831,7 @@
 						<div class="col-md-6 text-right">
 							<span class="rn-pyament-methods">
 								<span>We Accept</span>
-								<img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
+								<img src="${contextPath}/resources/assets/images/payments.png" alt="payments" srcset="${contextPath}/resources/assets/images/payments.png 1x, ${contextPath}/resources/assets/images/payments@2x.png 2x">
 							</span>
 						</div>
 					</div>
@@ -1047,12 +846,33 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/popper.min.js"></script>
-		<script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
-		<script src="assets/libs/flatpickr/flatpickr.min.js"></script>
-		<script src="assets/js/starrr.min.js"></script>
-		<script src="assets/js/jquery.magnific-popup.min.js"></script>
-		<script src="assets/js/scripts.js"></script>
+		<script>
+			 $(document).ready(function(){
+			  $(".selectBar").hide();
+			 });
+
+			$(".selectBar1").on("click", function(){
+				
+					$(this).nextUntil(".selectBar1").slideDown();
+					$(this).hide();
+				
+			});
+
+			$(".s2").on("click",function(){
+				if($(this).prev().prev().css('display')=='none'){
+					$(this).prev().prev().slideDown();
+					$(this).slideUp();
+					$(this).next().slideUp();
+
+				}
+			});
+		</script>
+		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
+		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 	</body>
 </html>

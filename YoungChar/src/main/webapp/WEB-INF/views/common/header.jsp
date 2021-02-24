@@ -36,7 +36,34 @@
 		<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
 		<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 		
-
+				    <!-- Google font-->
+		<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/fontawesome.css">
+	    <!-- ico-font-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/icofont.css">
+		<!-- Themify icon-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/themify.css">
+		<!-- Flag icon-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/flag-icon.css">
+		<!-- Feather icon-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/feather-icon.css">
+		<!-- Plugins css start-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/scrollbar.css">
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/animate.css">
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/chartist.css">
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/owlcarousel.css">
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/prism.css">
+		<!-- Plugins css Ends-->
+		<!-- Bootstrap css-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/bootstrap.css">
+		<!-- App css-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/style2.css">
+		<link id="color" rel="stylesheet" href="${contextPath}/resources/assets/css/color-1.css" media="screen">
+		<!-- Responsive css-->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
+		
+		
 		<!-- Google Map JS-->
 </head>
 <body>
@@ -147,8 +174,8 @@
 					<div class="row align-items-center">
 						<div class="col-4">
 							<!-- Logo-->
-							<a class="brand-name" href="index.html">
-								<img class="img-fluid" src="${contextPath}/resources/assets/images/logo.svg" alt="Logo">
+							<a class="brand-name" href="${contextPath}">
+								<img class="img-fluid" src="${contextPath}/resources/assets/images/0char_logo(200).png" alt="Logo">
 							</a>
 						</div>
 						<div class="col-8">
@@ -164,7 +191,7 @@
 								<!-- Main Nav Menu-->
 								<ul class="rn-navbar">
 									<li class="active">
-										<a href="index.jsp">Home</a>
+										<a href="${contextPath }">Home</a>
 									</li>
 									<li>
 										<a href="#">충전소
@@ -214,7 +241,20 @@
 										<a href="${contextPath}/news/newsMain">뉴스</a>
 									</li>
 									<li>
-										<a href="contact.html">시승예약</a>
+										<a href="${contextPath}/testDrive/main">시승예약
+											<i class="lnr lnr-chevron-down"></i>
+										</a>
+										<ul>
+											<li>
+												<a href="${contextPath}/testDrive/main">메인</a>
+											</li>
+											<li>
+												<a href="${contextPath}/testDrive/reservation">예약하기</a>
+											</li>
+											<li>
+												<a href="${contextPath}/testDrive/myReservation">내 예약</a>
+											</li>
+										</ul>
 									</li>
 									
 								</ul>
