@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>News Main</title>
+<title>뉴스 메인</title>
+
 <!-- Preloader CSS-->
 <style>
 #preloader:after, #preloader:before {
@@ -79,7 +80,8 @@
 }
 
 @
--webkit-keyframes rotation {from { -webkit-transform:rotate(0);
+-webkit-keyframes rotation {
+	from {-webkit-transform: rotate(0);
 	transform: rotate(0)
 }
 
@@ -90,7 +92,8 @@ to {
 
 }
 @
-keyframes rotation {from { -webkit-transform:rotate(0);
+keyframes rotation {
+	from {-webkit-transform: rotate(0);
 	transform: rotate(0)
 }
 
@@ -101,13 +104,121 @@ to {
 }
 </style>
 
+<!-- Preloader CSS-->
+<style>
+#preloader:after, #preloader:before {
+	content: "";
+	display: block;
+	left: -1px;
+	top: -1px
+}
 
+#preloader-overlayer, #preloader:after, #preloader:before {
+	position: absolute;
+	height: 100%;
+	width: 100%
+}
+
+#preloader-overlayer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #112E3B;
+	z-index: 999
+}
+
+#preloader {
+	height: 40px;
+	width: 40px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -20px;
+	margin-left: -20px;
+	z-index: 9999
+}
+
+#preloader:before {
+	-webkit-animation: rotation 1s linear infinite;
+	animation: rotation 1s linear infinite;
+	border: 2px solid #42DB0C;
+	border-top: 2px solid transparent;
+	border-radius: 100%
+}
+
+#preloader:after {
+	border: 1px solid rgba(255, 255, 255, .1);
+	border-radius: 100%
+}
+
+@media only screen and (min-width:768px) {
+	#preloader {
+		height: 60px;
+		width: 60px;
+		margin-top: -30px;
+		margin-left: -30px
+	}
+	#preloader:before {
+		left: -2px;
+		top: -2px;
+		border-width: 2px
+	}
+}
+
+@media only screen and (min-width:1200px) {
+	#preloader {
+		height: 80px;
+		width: 80px;
+		margin-top: -40px;
+		margin-left: -40px
+	}
+}
+
+@
+-webkit-keyframes rotation {
+	from {-webkit-transform: rotate(0);
+	transform: rotate(0)
+}
+
+to {
+	-webkit-transform: rotate(359deg);
+	transform: rotate(359deg)
+}
+
+}
+@
+keyframes rotation {
+	from {-webkit-transform: rotate(0);
+	transform: rotate(0)
+}
+
+to {
+	-webkit-transform: rotate(359deg);
+	transform: rotate(359deg)
+}
+}
+</style>
+
+<!--
+		All CSS Codes Loaded
+		Ex: bootstrap, fontawesome, style, etc.
+		-->
+<link rel="stylesheet" href="${contextPath}/resources/assets/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/assets/libs/fontawesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/assets/libs/linearicons/linearicons.css">
+<link rel="stylesheet" href="${contextPath}/resources/assets/css/rentnow-icons.css">
+<link rel="stylesheet" href="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
+
+<!-- Google Map JS-->
+<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
 </head>
+<body>
+	<!-- Header-->
+	<jsp:include page="../common/header.jsp"></jsp:include>
 
 
-<body class="rn-preloader">
-	<div id="preloader"></div>
-	<div id="preloader-overlayer"></div>
 
 	<!-- Page Title-->
 	<div class="rn-page-title">
@@ -117,7 +228,7 @@ to {
 				<div class="col-lg-12">
 					<div class="rn-page-title-inner">
 						<h1>News &amp; Updates</h1>
-						<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
+						<p>새로운 뉴스와 소식을 이곳에서 접하세요!!</p>
 					</div>
 				</div>
 			</div>
@@ -129,9 +240,9 @@ to {
 	<div class="rn-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 rn-post-list">
+				<div class="col-lg-8 rn-post-list rn-grid-post-col-2">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
@@ -163,7 +274,7 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
@@ -195,12 +306,12 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-3.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-3.jpg 1x, assets/images/blog-item-sm-3@2x.jpg 2x" />
+									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -227,12 +338,12 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-4.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-4.jpg 1x, assets/images/blog-item-sm-4@2x.jpg 2x" />
+									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -259,12 +370,12 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-5.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-5.jpg 1x, assets/images/blog-item-sm-5@2x.jpg 2x" />
+									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -291,12 +402,12 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-6.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-6.jpg 1x, assets/images/blog-item-sm-6@2x.jpg 2x" />
+									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -323,12 +434,12 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-7.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-7.jpg 1x, assets/images/blog-item-sm-7@2x.jpg 2x" />
+									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -355,140 +466,12 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-8.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-8.jpg 1x, assets/images/blog-item-sm-8@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-4">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-9.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-9.jpg 1x, assets/images/blog-item-sm-9@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-4">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-10.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-10.jpg 1x, assets/images/blog-item-sm-10@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-4">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-11.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-11.jpg 1x, assets/images/blog-item-sm-11@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-4">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-12.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-12.jpg 1x, assets/images/blog-item-sm-12@2x.jpg 2x" />
+									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -530,6 +513,128 @@ to {
 							</a></li>
 						</ul>
 					</nav>
+				</div>
+				<div class="col-lg-4">
+
+					<!-- Sidebar-->
+					<aside class="rn-widget-area" id="secondary">
+
+						<!-- Widget Item-->
+						<div class="rn-widget">
+							<div class="rn-widget-content">
+								<a href="#"> <img class="img-fluid" src="assets/images/banner.png" alt="banner" srcset="assets/images/banner.png 1x, assets/images/banner@2x.png 2x">
+								</a>
+							</div>
+						</div>
+						<!-- End Widget Item-->
+
+
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">Categories</h2>
+							<div class="rn-widget-content">
+								<ul>
+									<li><a href="#">Lifestyle</a></li>
+									<li><a href="#">Travel</a></li>
+									<li><a href="#">Fashion</a></li>
+									<li><a href="#">Music</a></li>
+									<li><a href="#">Branding</a></li>
+								</ul>
+							</div>
+						</section>
+						<!-- End Widget Item-->
+
+
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">Recent Posts</h2>
+							<div class="rn-widget-content">
+								<ul class="rn-recent-posts">
+									<li>
+										<!-- Extra Small Post-->
+										<div class="rn-recent-post-item">
+											<div class="rn-recent-post-item-thumb">
+												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-1.jpg 1x, assets/images/blog-item-xs-1@2x.jpg 2x" />
+												</a>
+											</div>
+											<div class="rn-recent-post-item-info">
+												<div class="rn-recent-post-item-meta">
+													<span class="rn-recent-post-item-categories">In <a href="#">News</a>
+													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
+													</span>
+												</div>
+												<div class="rn-recent-post-item-title">
+													<h3>
+														<a href="#">A standard blog post with image</a>
+													</h3>
+												</div>
+											</div>
+										</div> <!-- End Extra Small Post-->
+
+									</li>
+									<li>
+										<!-- Extra Small Post-->
+										<div class="rn-recent-post-item">
+											<div class="rn-recent-post-item-thumb">
+												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-2.jpg 1x, assets/images/blog-item-xs-2@2x.jpg 2x" />
+												</a>
+											</div>
+											<div class="rn-recent-post-item-info">
+												<div class="rn-recent-post-item-meta">
+													<span class="rn-recent-post-item-categories">In <a href="#">News</a>
+													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
+													</span>
+												</div>
+												<div class="rn-recent-post-item-title">
+													<h3>
+														<a href="#">A standard blog post with image</a>
+													</h3>
+												</div>
+											</div>
+										</div> <!-- End Extra Small Post-->
+
+									</li>
+									<li>
+										<!-- Extra Small Post-->
+										<div class="rn-recent-post-item">
+											<div class="rn-recent-post-item-thumb">
+												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-3.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-3.jpg 1x, assets/images/blog-item-xs-3@2x.jpg 2x" />
+												</a>
+											</div>
+											<div class="rn-recent-post-item-info">
+												<div class="rn-recent-post-item-meta">
+													<span class="rn-recent-post-item-categories">In <a href="#">News</a>
+													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
+													</span>
+												</div>
+												<div class="rn-recent-post-item-title">
+													<h3>
+														<a href="#">A standard blog post with image</a>
+													</h3>
+												</div>
+											</div>
+										</div> <!-- End Extra Small Post-->
+
+									</li>
+								</ul>
+							</div>
+						</section>
+						<!-- End Widget Item-->
+
+
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">Tags</h2>
+							<div class="rn-widget-content">
+								<div class="tags">
+									<a href="#">video</a> <a href="#">audio</a> <a href="#">images</a> <a href="#">javascript</a> <a href="#">php</a> <a href="#">wordpress</a> <a href="#">travel</a> <a href="#">music</a> <a href="#">python</a> <a href="#">ui/ux</a> <a href="#">cars</a>
+								</div>
+							</div>
+						</section>
+						<!-- End Widget Item-->
+
+					</aside>
+					<!-- End Sidebar-->
 
 				</div>
 			</div>
@@ -682,5 +787,4 @@ to {
 	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 </body>
-
 </html>
