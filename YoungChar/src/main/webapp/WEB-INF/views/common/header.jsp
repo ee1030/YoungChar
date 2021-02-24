@@ -128,7 +128,7 @@
 												<a href="${contextPath}/member/signUp">회원가입</a>
 											</li>
 											<li>
-												<a href="${contextPath}/admin">관리자</a>
+												<a href="${contextPath}/admin/dashboard">관리자</a>
 											</li>
 										</ul>
 								</div>
@@ -211,23 +211,7 @@
 										<a href="service.html">Service</a>
 									</li>
 									<li>
-										<a href="#">뉴스
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="blog.html">Blog List</a>
-											</li>
-											<li>
-												<a href="blog-grid.html">Blog Grid</a>
-											</li>
-											<li>
-												<a href="blog-grid-sidebar.html">Blog Grid - Sidebar</a>
-											</li>
-											<li>
-												<a href="blog-single.html">Single Post</a>
-											</li>
-										</ul>
+										<a href="${contextPath}/news/newsMain">뉴스</a>
 									</li>
 									<li>
 										<a href="contact.html">시승예약</a>
