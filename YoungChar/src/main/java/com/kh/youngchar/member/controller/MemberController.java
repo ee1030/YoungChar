@@ -15,11 +15,18 @@ public class MemberController {
 	private MemberService service;
 	
 	
+	// 로그인 화면전환 Controller
 	@RequestMapping("login")
 	public String loginForm() {
 		
 		return "member/login";
 	}
 	
+	// 회원가입 화면전환 Controller
+	@RequestMapping("signUp")
+	public String signUpForm() {
+		
+		return "member/signUp";
+	}
 	
 }
