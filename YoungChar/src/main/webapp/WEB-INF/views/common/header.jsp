@@ -157,6 +157,9 @@
 											<li>
 												<a href="${contextPath}/admin/dashboard">관리자</a>
 											</li>
+											<li>
+												<a href="${contextPath}/company/dashboard">업체</a>
+											</li>
 										</ul>
 								</div>
 							</div>
@@ -253,6 +256,9 @@
 											</li>
 											<li>
 												<a href="${contextPath}/testDrive/myReservation">내 예약</a>
+											</li>
+											<li>
+												<a href="${contextPath}/company/reviewlist">시승후기</a>
 											</li>
 										</ul>
 									</li>
