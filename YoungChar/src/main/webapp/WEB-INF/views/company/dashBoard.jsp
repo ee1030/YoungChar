@@ -21,9 +21,9 @@
 				background-color: rgb(85, 85, 85);
 			}
 
-						#side-bar{
-							width: 300px;
-						}
+				#side-bar{
+					width: 300px;
+				}
 			
 			.bg-wrap .user-logo .img {
 				width: 100px;
