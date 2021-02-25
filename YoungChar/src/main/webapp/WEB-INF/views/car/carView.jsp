@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
-<!-- Google font-->
+	<!-- Google font-->
 			<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
@@ -33,9 +32,11 @@
 			<link id="color" rel="stylesheet" href="${contextPath}/resources/assets/css/color-1.css" media="screen">
 			<!-- Responsive css-->
 			<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
+	
+
 			
 <body>
-	<%-- <jsp:include page="../common/header.jsp" /> --%>
+ 	<%-- <jsp:include page="../common/header.jsp" /> --%>
 
 	<div class="container-fluid">
 		<!-- Page Title-->
@@ -60,7 +61,7 @@
 						<div class="card-body">
 							<div class="product-slider owl-carousel owl-theme" id="sync1">
 								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/01.jpg" alt="">
+									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
 								</div>
 								<div class="item">
 									<img src="${contextPath}/resources/assets/images/ecommerce/02.jpg" alt="">
@@ -228,8 +229,8 @@
 										<div class="media">
 											<i data-feather="truck"></i>
 											<div class="media-body">
-												<h5>Free Shipping</h5>
-												<p>Free Shipping World Wide</p>
+												<h5>탑승인원</h5>
+												<p>4인</p>
 											</div>
 										</div>
 									</li>
@@ -300,14 +301,46 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+	
+		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+
+	    <!-- latest jquery-->
+    <script src="${contextPath}/resources/assets/js/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="${contextPath}/resources/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- feather icon js-->
+    <script src="${contextPath}/resources/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="${contextPath}/resources/assets/js/icons/feather-icon/feather-icon.js"></script>
+    
+    <!-- Sidebar jquery-->
+    <script src="${contextPath}/resources/assets/js/config.js"></script>
+    <!-- Theme js-->
+    <script src="${contextPath}/resources/assets/js/script.js"></script>
+    <script src="${contextPath}/resources/assets/js/theme-customizer/customizer.js"></script>
+    <!-- login js-->
+    
+    <!-- 없읍 -->
+    
+    <!-- scrollbar js-->
+    <script src="${contextPath}/resources/assets/js/scrollbar/simplebar.js"></script>
+    <script src="${contextPath}/resources/assets/js/scrollbar/custom.js"></script>
+    <!-- Plugins JS start-->
+    <script src="${contextPath}/resources/assets/js/sidebar-menu.js"></script>
+    <script src="${contextPath}/resources/assets/js/rating/jquery.barrating.js"></script>
+    <script src="${contextPath}/resources/assets/js/rating/rating-script.js"></script>
+    
+    <script src="${contextPath}/resources/assets/js/owlcarousel/owl.carousel.js"></script> 
+    <script src="${contextPath}/resources/assets/js/ecommerce.js"></script>
+    <script src="${contextPath}/resources/assets/js/tooltip-init.js"></script>
+    <!-- Plugins JS Ends-->
+  
+    <!-- Plugin used-->
 
 </body>
 </html>
