@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
@@ -79,15 +79,7 @@
 							<div class="card">
 							  <div class="card-header">
 								<div id="head">
-										<!-- 게시판 명 얻어오기 -->
-									<h1>
-									<%-- 	${bList[0].boardName } --%>
-										<c:choose>
-											<c:when test="${pInfo.boardType == 1 }">자유게시판	</c:when>
-											<c:when test="${pInfo.boardType == 2 }">정보게시판	</c:when>
-										</c:choose>
-										
-									</h1>
+									
 								
 								</div>
 							 </div>
@@ -196,7 +188,16 @@
 						<aside class="rn-widget-area rn-left-sidebar" id="secondary">
 
 							<div style="height: 100px;">
-								<h1>정보 게시판</h1>
+									<!-- 게시판 명 얻어오기 -->
+									<h1>
+									<%-- 	${bList[0].boardName } --%>
+										<c:choose>
+											<c:when test="${pInfo.boardType == 2 }">자유게시판	</c:when>
+											<c:when test="${pInfo.boardType == 3 }">잡담게시판	</c:when>
+										</c:choose>
+											
+										
+									</h1>
 
 							</div>
 
