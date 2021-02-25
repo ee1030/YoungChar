@@ -43,11 +43,11 @@
               <div><a class="logo" href="#"><img class="img-fluid for-dark" src="${contextPath}/resources/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
               <div class="login-main"> 
                 <form class="theme-form">
-                  <h4>Sign in to account</h4>
+                  <h4>회원으로 접속</h4>
                   <p>Enter your email & password to login</p>
                   <div class="form-group">
-                    <label class="col-form-label">Email Address</label>
-                    <input class="form-control" type="text" required="" placeholder="Test@gmail.com">
+                    <label class="col-form-label">ID</label>
+                    <input class="form-control" type="text" required="" placeholder="abcd1234">
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Password</label>
@@ -57,15 +57,15 @@
                   <div class="form-group mb-0">
                     <div class="checkbox p-0">
                       <input id="checkbox1" type="checkbox">
-                      <label class="text-muted" for="checkbox1">Remember password</label>
-                    </div><a class="link" href="forget-password.html">Forgot password?</a>
-                    <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+                      <label class="text-muted" for="checkbox1">아이디 저장</label>
+                    </div><a class="link" href="forget-password.html">아이디/비밀번호 찾기</a>
+                    <button class="btn btn-primary btn-block" type="submit">로그인</button>
                   </div>
                   <h6 class="text-muted mt-4 or">Or Sign in with</h6>
                   <div class="social mt-4">
                     <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
                   </div>
-                  <p class="mt-4 mb-0">Don't have account?<a class="ms-2" href="sign-up.html">Create Account</a></p>
+                  <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="sign-up.html">회원가입 하기</a></p>
                 </form>
               </div>
             </div>
