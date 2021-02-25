@@ -16,10 +16,6 @@
 			font-family: 'Noto Sans KR', sans-serif;
 			}
 	
-		.rn-pagination {
-			margin-bottom: 40px;
-			text-align: center;
-		}
 
 		#head {
 			display: inline-block;
@@ -28,7 +24,7 @@
 		}
 
 		#search-form{
-			width: 400px;
+			width: 500px;
 			margin:0 auto;
 		}
 
@@ -43,6 +39,16 @@
 		.icofont-ui-rating{
     color: #f8d62b;
 		}
+		
+		.pagination {
+		    width: 400px !important;
+ 			  margin-left: auto !important;
+        margin-right: auto !important;
+		}
+		
+
+
+
 		
 	</style>
 
@@ -99,6 +105,11 @@
 									</div>
 									<br>
 									<div class="input-group m-0">
+													<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
+					<option value="tit">글제목</option>
+					<option value="con">내용</option>
+					<option value="titcont">제목+내용</option>
+				</select> 
 										<input id="search-bar" class="form-control-plaintext" type="search" placeholder="검색어를 입력해주세요.">
 										<span class="btn btn-success input-group-text">Search</span>
 									</div>
@@ -186,32 +197,15 @@
 
 
 				<!-- Post Pagination-->
-				<nav class="rn-pagination">
-					<ul>
-						<li>
-							<a href="#">
-								<i class="fas fa-angle-left"></i>
-							</a>
-						</li>
-						<li>
-							<a class="rn-active" href="#">1</a>
-						</li>
-						<li>
-							<a href="#">2</a>
-						</li>
-						<li>
-							<a href="#">3</a>
-						</li>
-						<li>
-							<a href="#">4</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fas fa-angle-right"></i>
-							</a>
-						</li>
-					</ul>
-				</nav>
+							<nav class="rn-pagination">
+										<ul class="pagination pagination-light">
+	                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+	                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+	                    <li class="page-item"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
+	                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+	                  </ul>
+							</nav>
 
 			</div>
 		</div>

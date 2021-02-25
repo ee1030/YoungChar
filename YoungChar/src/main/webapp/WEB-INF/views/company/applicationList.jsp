@@ -37,8 +37,10 @@
 				line-height: 60px;
 			}
 
-			.rn-pagination {
-				margin-left: 250px;
+			.pagination {
+			    width: 400px !important;
+	 			  margin-left: auto !important;
+	        margin-right: auto !important;
 			}
 
 
