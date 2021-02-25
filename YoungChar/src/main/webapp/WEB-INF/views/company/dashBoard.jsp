@@ -14,35 +14,16 @@
 <title>Dash board</title>
 
 <!-- Preloader CSS-->
-<style>
+		<style>
+			.card{
+			font-family: 'Noto Sans KR', sans-serif;
+			}
 		
 			.rn-header{
 				position: inherit !important;
 				background-color: rgb(85, 85, 85);
 			}
 
-				#side-bar{
-					width: 300px;
-				}
-			
-			.bg-wrap .user-logo .img {
-				width: 100px;
-				height: 100px;
-				border-radius: 50%;
-				margin: 0 auto;
-				margin-bottom: 10px;
-			}
-			
-			.bg-wrap .user-logo h3 {
-				color: black;
-				font-size: 18px;
-			}
-			
-			.img {
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center center;
-			}
 			
 			.rn-service-item {
 				width: 230px;
@@ -90,6 +71,8 @@
 						</div>
 
 					</div>
+					             
+
 
 					<!-- Service Item-->
 					<div class="rn-service-item">
@@ -137,7 +120,7 @@
 										<table class="table table-bordernone">
 											<thead>
 												<tr>
-													<th class="f-22">Today</th>
+													<th class="f-22"><h2>Today</h2></th>
 													<th>이름</th>
 													<th>전화번호</th>
 													<th>차량</th>
@@ -184,42 +167,7 @@
 				</div>
 					<div id="side-bar">
 						<!-- Sidebar-->
-						<aside class="rn-widget-area rn-left-sidebar" id="secondary">
-		
-							<!-- Widget Item-->
-							
-							<div class="rn-widget">
-								<div class="img bg-wrap text-center">
-									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}/resources/assets/images/dog.PNG);"></div>
-										<h3>company name</h3>
-									</div>
-								</div>
-							</div>
-								
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Categories</h2>
-								<div class="rn-widget-content">
-									<ul>
-										<li>
-											<a href="dashboard">Dash board</a>
-										</li>
-										<li>
-											<a href="schedule">Schedule</a>
-										</li>
-										<li>
-											<a href="applicationlist">Application list</a>
-										</li>
-										<li>
-											<a href="companyinfo">Company Info</a>
-										</li>
-									</ul>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-				
-
-						</aside>
+						<jsp:include page="sideMenu.jsp"/>
 						<!-- End Slidebar-->
 
 					</div>
@@ -243,5 +191,7 @@
 	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+
+
 </body>
 </html>
