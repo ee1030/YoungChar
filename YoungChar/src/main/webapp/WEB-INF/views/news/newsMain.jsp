@@ -622,17 +622,6 @@ to {
 						<!-- End Widget Item-->
 
 
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">Tags</h2>
-							<div class="rn-widget-content">
-								<div class="tags">
-									<a href="#">video</a> <a href="#">audio</a> <a href="#">images</a> <a href="#">javascript</a> <a href="#">php</a> <a href="#">wordpress</a> <a href="#">travel</a> <a href="#">music</a> <a href="#">python</a> <a href="#">ui/ux</a> <a href="#">cars</a>
-								</div>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
 					</aside>
 					<!-- End Sidebar-->
 

@@ -199,26 +199,7 @@
 										<a href="${contextPath }">Home</a>
 									</li>
 									<li>
-										<a href="#">충전소
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="cars.html">Car List</a>
-											</li>
-											<li>
-												<a href="car-search.html">Car Search</a>
-											</li>
-											<li>
-												<a href="car-single.html">Car Single</a>
-											</li>
-											<li>
-												<a href="checkout.html">Checkout</a>
-											</li>
-											<li>
-												<a href="cart.html">Cart</a>
-											</li>
-										</ul>
+										<a href="${contextPath}/chargerLocation/location">충전소</a>
 									</li>
 									<li>
 										<a href="#">Cars 
