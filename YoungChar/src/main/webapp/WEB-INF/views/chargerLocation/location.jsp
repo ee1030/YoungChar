@@ -1,15 +1,202 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>충전소 위치</title>
+<title>충전소 위치</title>
 
-				<!--
+<style>
+.map_wrap, .map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	font-size: 12px;
+}
+
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+	color: #000;
+	text-decoration: none;
+}
+
+.map_wrap {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	overflow-y: auto;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+	list-style: none;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
+</style>
+
+<!--
 		All CSS Codes Loaded
 		Ex: bootstrap, fontawesome, style, etc.
 		-->
@@ -23,217 +210,419 @@
 
 <!-- Google Map JS-->
 <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
-	</head>
-	<body>
-<!-- Header-->
+</head>
+<body>
+	<!-- Header-->
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
-		<!-- Page Title-->
-		<div class="rn-page-title">
-			<div class="rn-pt-overlayer"></div>
+	<!-- Page Title-->
+	<div class="rn-page-title">
+		<div class="rn-pt-overlayer"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="rn-page-title-inner">
+						<h1>Fullwidth</h1>
+						<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Page Title-->
+
+	<!-- Page Content-->
+	<div class="rn-section">
+		<div class="container pb-15">
+			<div class="row">
+				<div class="map_wrap">
+					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+
+					<div id="menu_wrap" class="bg_white">
+						<div class="option">
+							<div>
+								<form onsubmit="searchPlaces(); return false;">
+									키워드 : <input type="text" value="" id="keyword" size="15">
+									<button type="submit">검색하기</button>
+								</form>
+							</div>
+						</div>
+						<hr>
+						<ul id="placesList"></ul>
+						<div id="pagination"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Page Content-->
+
+	<!-- Site Footer-->
+	<footer class="rn-footer">
+
+		<!-- Footer Widgets-->
+		<div class="rn-footer-widgets">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="rn-page-title-inner">
-							<h1>Fullwidth</h1>
-							<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
-						</div>
+					<div class="col-md-4">
+
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">About Us</h2>
+							<div class="rn-widget-content">
+								<a class="brand-name" href="index.html"> <img src="assets/images/logo.svg" alt="Logo">
+								</a>
+								<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
+								<ul class="rn-widget-social">
+									<li><a href="#"> <i class="fab fa-facebook-f"></i>
+									</a></li>
+									<li><a href="#"> <i class="fab fa-twitter"></i>
+									</a></li>
+									<li><a href="#"> <i class="fab fa-instagram"></i>
+									</a></li>
+									<li><a href="#"> <i class="fab fa-linkedin-in"></i>
+									</a></li>
+								</ul>
+							</div>
+						</section>
+						<!-- End Widget Item-->
+
 					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Page Title-->
+					<div class="col-md-5">
 
-		<!-- Page Content-->
-		<div class="rn-section">
-			<div class="container pb-15">
-				<div class="row">
-					<div class="col-lg-12">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies erat non augue pretium mollis. Nunc ut mauris volutpat, imperdiet nunc et, mattis erat. Sed id pretium est. Suspendisse magna diam, ultrices ac arcu ut, aliquam tincidunt est. In nisl nulla, dapibus id ante eget, interdum ultricies magna. Maecenas lectus urna, pulvinar consequat lobortis sed, sodales a libero. Pellentesque ac magna tellus. Phasellus nisl lorem, convallis vel cursus porttitor, ullamcorper nec dui.</p>
-						<p>Aenean at nibh massa. Mauris magna sapien, sollicitudin eget finibus eu, aliquet at lectus. Cras cursus eget libero id blandit. Fusce quis ligula id tellus euismod posuere. Nunc nunc ex, ultrices ac pellentesque eu, ultricies nec justo. Aenean dolor neque, tristique in lectus at, ornare bibendum ligula. Curabitur scelerisque, ligula sit amet aliquet finibus, diam erat pharetra dolor, ac vulputate nunc ex vel ante. Etiam nec efficitur sem. Suspendisse nisl velit, rutrum nec magna at, cursus egestas nunc. Maecenas laoreet quam sit amet erat pretium, vel lobortis nunc fermentum. Cras ullamcorper mi nec vehicula sagittis. Mauris ut neque orci. Nunc non ornare neque, vel vestibulum libero.</p>
-						<p>Duis gravida ante sed mi mattis hendrerit. Nullam efficitur ligula eget feugiat vehicula. Aliquam quis dui scelerisque, tempus velit posuere, sodales justo. Cras in faucibus ante. Suspendisse eget viverra nunc. Nam luctus risus diam, efficitur bibendum mauris feugiat a. Sed efficitur sit amet sapien quis porta. Cras nec nisl erat. Integer rutrum augue non pharetra placerat. Duis quis condimentum velit. Morbi placerat nec ipsum eget aliquam.</p>
-						<p>Curabitur hendrerit gravida risus, consectetur sollicitudin mauris. Praesent fringilla consequat velit, at eleifend lectus tempor at. Donec auctor pretium tempus. Donec sit amet est nec nulla sagittis malesuada. Aenean ac felis urna. Aliquam ipsum ligula, rutrum id consectetur eu, dapibus sit amet quam. Donec varius malesuada turpis. Phasellus volutpat non dolor vel lacinia. Pellentesque ultrices ut libero vel pellentesque. Curabitur in quam porta, elementum lorem nec, euismod arcu. Mauris laoreet ipsum eros, id ornare nibh varius et. Duis bibendum a purus a euismod. Sed a pretium sem, nec sollicitudin urna.</p>
-						<p>Nulla lacinia turpis non justo congue, eu tincidunt dolor pulvinar. Duis laoreet sed sem quis eleifend. Phasellus sed cursus tortor. Morbi rhoncus mi non vulputate imperdiet. Aenean sem mi, rhoncus vel rhoncus ut, sollicitudin convallis enim. Nunc malesuada pretium felis vel scelerisque. Sed vulputate, augue dictum venenatis sagittis, urna leo condimentum orci, id pellentesque ipsum tortor at dolor. Integer lobortis nulla ullamcorper commodo ullamcorper. Aliquam erat volutpat. Mauris vehicula nibh vel mauris efficitur, eu sollicitudin felis ornare. Sed nec laoreet est. Vivamus fringilla quam ex, id ultricies risus tincidunt et. In tincidunt felis tortor, et sodales magna accumsan et. Proin sit amet erat ut magna tempor posuere. Nunc eleifend dictum nisl, non condimentum purus pellentesque quis. Praesent pharetra volutpat leo, eget accumsan nisl porttitor eu.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Page Content-->
-
-		<!-- Site Footer-->
-		<footer class="rn-footer">
-
-			<!-- Footer Widgets-->
-			<div class="rn-footer-widgets">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">About Us</h2>
-								<div class="rn-widget-content">
-									<a class="brand-name" href="index.html">
-										<img src="assets/images/logo.svg" alt="Logo">
-									</a>
-									<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
-									<ul class="rn-widget-social">
-										<li>
-											<a href="#">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-twitter"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-instagram"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-linkedin-in"></i>
-											</a>
-										</li>
-									</ul>
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">Quick Links</h2>
+							<div class="rn-widget-content">
+								<div class="row rn-quick-links">
+									<div class="col-6">
+										<ul>
+											<li><a href="#">About Us</a></li>
+											<li><a href="#">Contact Us</a></li>
+											<li><a href="#">Support</a></li>
+											<li><a href="#">View Booking</a></li>
+											<li><a href="#">Affiliate Programme</a></li>
+											<li><a href="#">Marketplace</a></li>
+										</ul>
+									</div>
+									<div class="col-6">
+										<ul>
+											<li><a href="#">Site Map</a></li>
+											<li><a href="#">Careers</a></li>
+											<li><a href="#">Press</a></li>
+											<li><a href="#">Get a Receipt</a></li>
+											<li><a href="#">Community</a></li>
+										</ul>
+									</div>
 								</div>
-							</section>
-							<!-- End Widget Item-->
+							</div>
+						</section>
+						<!-- End Widget Item-->
 
-						</div>
-						<div class="col-md-5">
+					</div>
+					<div class="col-md-3">
 
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Quick Links</h2>
-								<div class="rn-widget-content">
-									<div class="row rn-quick-links">
-										<div class="col-6">
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">Contact Us</h2>
+							<div class="rn-widget-content">
+								<div class="rn-icon-contents">
+									<div class="rn-phone rn-icon-content">
+										<div class="rn-icon">
+											<i class="lnr lnr-phone"></i>
+										</div>
+										<div class="rn-info">
 											<ul>
-												<li>
-													<a href="#">About Us</a>
-												</li>
-												<li>
-													<a href="#">Contact Us</a>
-												</li>
-												<li>
-													<a href="#">Support</a>
-												</li>
-												<li>
-													<a href="#">View Booking</a>
-												</li>
-												<li>
-													<a href="#">Affiliate Programme</a>
-												</li>
-												<li>
-													<a href="#">Marketplace</a>
-												</li>
+												<li>(954)-944-1250</li>
+												<li>(954)-944-1251</li>
 											</ul>
 										</div>
-										<div class="col-6">
+									</div>
+									<div class="rn-email rn-icon-content">
+										<div class="rn-icon">
+											<i class="lnr lnr-envelope"></i>
+										</div>
+										<div class="rn-info">
 											<ul>
-												<li>
-													<a href="#">Site Map</a>
-												</li>
-												<li>
-													<a href="#">Careers</a>
-												</li>
-												<li>
-													<a href="#">Press</a>
-												</li>
-												<li>
-													<a href="#">Get a Receipt</a>
-												</li>
-												<li>
-													<a href="#">Community</a>
-												</li>
+												<li>support@example.coms</li>
+												<li>sale@example.com</li>
+											</ul>
+										</div>
+									</div>
+									<div class="rn-address rn-icon-content">
+										<div class="rn-icon">
+											<i class="lnr lnr-map-marker"></i>
+										</div>
+										<div class="rn-info">
+											<ul>
+												<li>1425 Pointe Lane, Miami</li>
+												<li>Florida – 33169, USA</li>
 											</ul>
 										</div>
 									</div>
 								</div>
-							</section>
-							<!-- End Widget Item-->
+							</div>
+						</section>
+						<!-- End Widget Item-->
 
-						</div>
-						<div class="col-md-3">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Contact Us</h2>
-								<div class="rn-widget-content">
-									<div class="rn-icon-contents">
-										<div class="rn-phone rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-phone"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>(954)-944-1250</li>
-													<li>(954)-944-1251</li>
-												</ul>
-											</div>
-										</div>
-										<div class="rn-email rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-envelope"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>support@example.coms</li>
-													<li>sale@example.com</li>
-												</ul>
-											</div>
-										</div>
-										<div class="rn-address rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-map-marker"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>1425 Pointe Lane, Miami</li>
-													<li>Florida – 33169, USA</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
 					</div>
 				</div>
 			</div>
-			<!-- End Footer Widgets-->
+		</div>
+		<!-- End Footer Widgets-->
 
-			<!-- Footer Copyright-->
-			<div class="rn-footer-copyright">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-md-6">
-							<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
-						</div>
-						<div class="col-md-6 text-right">
-							<span class="rn-pyament-methods">
-								<span>We Accept</span>
-								<img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
-							</span>
-						</div>
+		<!-- Footer Copyright-->
+		<div class="rn-footer-copyright">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
+					</div>
+					<div class="col-md-6 text-right">
+						<span class="rn-pyament-methods"> <span>We Accept</span> <img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
+						</span>
 					</div>
 				</div>
 			</div>
-			<!-- End Footer Copyright-->
+		</div>
+		<!-- End Footer Copyright-->
 
-		</footer>
-		<!-- End Site Footer-->
+	</footer>
+	<!-- End Site Footer-->
 
-			<!--
+	<!--
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb85ab0038528150e89f65206a612195&libraries=services"></script>
+	<script>
+		// 마커를 담을 배열입니다
+		var markers = [];
+
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 장소 검색 객체를 생성합니다
+		var ps = new kakao.maps.services.Places();
+
+		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+			zIndex : 1
+		});
+
+		// 키워드로 장소를 검색합니다
+		searchPlaces();
+
+		// 키워드 검색을 요청하는 함수입니다
+		function searchPlaces() {
+
+			var keyword = document.getElementById('keyword').value;
+
+			if (!keyword.replace(/^\s+|\s+$/g, '')) {
+				alert('키워드를 입력해주세요!');
+				return false;
+			}
+
+			// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+			ps.keywordSearch(keyword, placesSearchCB);
+		}
+
+		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+		function placesSearchCB(data, status, pagination) {
+			if (status === kakao.maps.services.Status.OK) {
+
+				// 정상적으로 검색이 완료됐으면
+				// 검색 목록과 마커를 표출합니다
+				displayPlaces(data);
+
+				// 페이지 번호를 표출합니다
+				displayPagination(pagination);
+
+			} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+				alert('검색 결과가 존재하지 않습니다.');
+				return;
+
+			} else if (status === kakao.maps.services.Status.ERROR) {
+
+				alert('검색 결과 중 오류가 발생했습니다.');
+				return;
+
+			}
+		}
+
+		// 검색 결과 목록과 마커를 표출하는 함수입니다
+		function displayPlaces(places) {
+
+			var listEl = document.getElementById('placesList'), menuEl = document
+					.getElementById('menu_wrap'), fragment = document
+					.createDocumentFragment(), bounds = new kakao.maps.LatLngBounds(), listStr = '';
+
+			// 검색 결과 목록에 추가된 항목들을 제거합니다
+			removeAllChildNods(listEl);
+
+			// 지도에 표시되고 있는 마커를 제거합니다
+			removeMarker();
+
+			for (var i = 0; i < places.length; i++) {
+
+				// 마커를 생성하고 지도에 표시합니다
+				var placePosition = new kakao.maps.LatLng(places[i].y,
+						places[i].x), marker = addMarker(placePosition, i), itemEl = getListItem(
+						i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+				// LatLngBounds 객체에 좌표를 추가합니다
+				bounds.extend(placePosition);
+
+				// 마커와 검색결과 항목에 mouseover 했을때
+				// 해당 장소에 인포윈도우에 장소명을 표시합니다
+				// mouseout 했을 때는 인포윈도우를 닫습니다
+				(function(marker, title) {
+					kakao.maps.event.addListener(marker, 'mouseover',
+							function() {
+								displayInfowindow(marker, title);
+							});
+
+					kakao.maps.event.addListener(marker, 'mouseout',
+							function() {
+								infowindow.close();
+							});
+
+					itemEl.onmouseover = function() {
+						displayInfowindow(marker, title);
+					};
+
+					itemEl.onmouseout = function() {
+						infowindow.close();
+					};
+				})(marker, places[i].place_name);
+
+				fragment.appendChild(itemEl);
+			}
+
+			// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+			listEl.appendChild(fragment);
+			menuEl.scrollTop = 0;
+
+			// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+			map.setBounds(bounds);
+		}
+
+		// 검색결과 항목을 Element로 반환하는 함수입니다
+		function getListItem(index, places) {
+
+			var el = document.createElement('li'), itemStr = '<span class="markerbg marker_'
+					+ (index + 1)
+					+ '"></span>'
+					+ '<div class="info">'
+					+ '   <h5>' + places.place_name + '</h5>';
+
+			if (places.road_address_name) {
+				itemStr += '    <span>' + places.road_address_name + '</span>'
+						+ '   <span class="jibun gray">' + places.address_name
+						+ '</span>';
+			} else {
+				itemStr += '    <span>' + places.address_name + '</span>';
+			}
+
+			itemStr += '  <span class="tel">' + places.phone + '</span>'
+					+ '</div>';
+
+			el.innerHTML = itemStr;
+			el.className = 'item';
+
+			return el;
+		}
+
+		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+		function addMarker(position, idx, title) {
+			var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+			imageSize = new kakao.maps.Size(36, 37), // 마커 이미지의 크기
+			imgOptions = {
+				spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+				spriteOrigin : new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+				offset : new kakao.maps.Point(13, 37)
+			// 마커 좌표에 일치시킬 이미지 내에서의 좌표
+			}, markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
+					imgOptions), marker = new kakao.maps.Marker({
+				position : position, // 마커의 위치
+				image : markerImage
+			});
+
+			marker.setMap(map); // 지도 위에 마커를 표출합니다
+			markers.push(marker); // 배열에 생성된 마커를 추가합니다
+
+			return marker;
+		}
+
+		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+		function removeMarker() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+
+		// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+		function displayPagination(pagination) {
+			var paginationEl = document.getElementById('pagination'), fragment = document
+					.createDocumentFragment(), i;
+
+			// 기존에 추가된 페이지번호를 삭제합니다
+			while (paginationEl.hasChildNodes()) {
+				paginationEl.removeChild(paginationEl.lastChild);
+			}
+
+			for (i = 1; i <= pagination.last; i++) {
+				var el = document.createElement('a');
+				el.href = "#";
+				el.innerHTML = i;
+
+				if (i === pagination.current) {
+					el.className = 'on';
+				} else {
+					el.onclick = (function(i) {
+						return function() {
+							pagination.gotoPage(i);
+						}
+					})(i);
+				}
+
+				fragment.appendChild(el);
+			}
+			paginationEl.appendChild(fragment);
+		}
+
+		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+		// 인포윈도우에 장소명을 표시합니다
+		function displayInfowindow(marker, title) {
+			var content = '<div style="padding:5px;z-index:1;">' + title
+					+ '</div>';
+
+			infowindow.setContent(content);
+			infowindow.open(map, marker);
+		}
+
+		// 검색결과 목록의 자식 Element를 제거하는 함수입니다
+		function removeAllChildNods(el) {
+			while (el.hasChildNodes()) {
+				el.removeChild(el.lastChild);
+			}
+		}
+	</script>
+
+
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
@@ -241,5 +630,5 @@
 	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
-	</body>
+</body>
 </html>
