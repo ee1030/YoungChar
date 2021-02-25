@@ -97,6 +97,7 @@
 									</div>
 								  </div>
 								<!-- End Invoice Mid-->
+								<hr>
 								<div>
 								  <div class="table-responsive invoice-table" id="table">
 								  </div>
@@ -115,7 +116,7 @@
 
 								</div>
 								<!-- End InvoiceBot-->
-				
+									<hr>
 									<div>
 										<div class="float-right">
 										
