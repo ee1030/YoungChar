@@ -406,6 +406,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	margin-left : 140px;
 }
 
+/* 우편번호 */
+.address{
+    height:40px;
+    width:180px;
+    margin-right : 30px;
+}
+
+
 
     </style>
 </head>
@@ -477,6 +485,19 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <span class="toolT" data-tooltip-text="어느 부분이 잘못됨 알려줌">잘못 입력시</span>
                     </div>  
                 </div>
+
+								<!-- 이름 -->
+                <div>
+                    <div class="lb">
+                        <label for="memberName">회원 이름</label> <br>
+                    </div>
+                    <div class="ip">
+                        <input type="tex" class="inputTag"  id="memberName" name="memberName"   required>
+                    </div>
+                    <div>
+                        <span class="toolT" data-tooltip-text="어느 부분이 잘못됨 알려줌">잘못 입력시</span>
+                    </div>  
+                </div>
                 
                 <!-- 닉네임 -->
                 <div>
@@ -535,21 +556,43 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <span id="checkPhone" >&nbsp;</span>
                     </div> 
                 </div>
+                
+                 <!-- 주소 API  -->
+                	
+           <div class="row mb-3 form-row">
+						<div class="col-md-3 lb">
+							<label for="postcodify_search_button" style="font-weight:normal;font-size: 13px;">우편번호</label>
+						</div>
+						<div class="col-md-3 display-ib ip">
+							<input type="text" name="post" class="form-control postcodify_postcode5 inputTag address">
+						</div>
+						<div class="col-md-3 display-ib">
+							<button type="button" class="btn_class btn-info" id="postcodify_search_button" >검색</button>
+						</div>
+					</div>
 
-                <!-- 성별 -->
-                <div>
-                    <div class="lb">
-                        <label for="gender">성별</label>
-                    </div>
-                    <div class="ip">
-                        <select class="inputTag gender" id="gender" name="gender" required>
-                            <option>성별</option>
-                            <option>여자</option>
-                            <option>남자</option>
-                            <option>선택안함</option>
-                        </select>
-                    </div>
-                </div>
+					<div class="row mb-3 form-row">
+						<div class="col-md-3 lb">
+							<label for="address1" style="font-weight:normal;font-size: 13px;">도로명 주소</label>
+						</div>
+						<div class="col-md-9 ip">
+							<input type="text" class="form-control postcodify_address inputTag" name="address1" id="address1">
+						</div>
+					</div>
+
+					<div class="row mb-3 form-row">
+						<div class="col-md-3 lb">
+							<label for="address2" style="font-weight:normal;font-size: 13px;">상세주소</label>
+						</div>
+						<div class="col-md-9 ip">
+							<input type="text" class="form-control postcodify_details inputTag" name="address2" id="address2">
+						</div>
+						<div>
+                        <br>
+                    </div> 
+					</div>
+
+                
 
                 <br><br>
                 <div class="submit">

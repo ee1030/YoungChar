@@ -28,5 +28,12 @@ public class MemberController {
 		
 		return "member/signUp";
 	}
+
+	// 마이페이지 화면전환 Controller
+	@RequestMapping("mypage")
+	public String mypageForm() {
+		
+		return "member/mypage";
+	}
 	
 }
