@@ -54,5 +54,9 @@ public class CompanyController {
 	public String reviewList() {
 		return "company/reviewList";
 	}
+	@RequestMapping("carView")
+	public String carView() {
+		return "company/carManagement";
+	}
 
 }
