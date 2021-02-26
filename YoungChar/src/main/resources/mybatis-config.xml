@@ -8,6 +8,9 @@
 	
 	<typeAliases>
 			<typeAlias type="com.kh.youngchar.member.model.vo.MemberFile" alias="MemberFile" />
+			  <typeAlias type="com.kh.youngchar.board.model.vo.Board" alias="Board"/>
+      <typeAlias type="com.kh.youngchar.board.model.vo.Attachment" alias="Attachment"/>
+      <typeAlias type="com.kh.youngchar.board.model.vo.Reply" alias="Reply"/>
 	
 	</typeAliases>
 	
@@ -15,5 +18,7 @@
 	<mappers>
 		<mapper resource="/mappers/admin-mapper.xml" />
 		<mapper resource="/mappers/company-mapper.xml" />
+			<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/reply-mapper.xml"/>
 	</mappers>
 </configuration>
