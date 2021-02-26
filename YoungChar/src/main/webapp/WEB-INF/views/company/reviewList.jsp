@@ -124,7 +124,7 @@
 										<th class="td" scope="col">No</th>
 										<th class="td" scope="col">별점</th>
 										<th class="td" scope="col">브랜드</th>
-										<th class="td" scope="col">대리점</th>
+										<th class="td" scope="col">센터</th>
 										<th colspan="3" scope="col">제목</th>
 										<th class="td" scope="col">글쓴이</th>
 										<th class="td" scope="col">작성일시</th>

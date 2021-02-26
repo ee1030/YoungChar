@@ -68,7 +68,7 @@
 										<h4>브랜드: 현대 </h4>
 									</div>
 									<div class="col-sm-3">
-										<h4>업체: OO지점 </h4>
+										<h4>센터: OO지점 </h4>
 									</div>
 									<div class="col-sm-3">
 										<h4>차종: 아이오닉 </h4>

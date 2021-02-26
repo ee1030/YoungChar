@@ -23,7 +23,9 @@
 				height: 100px;
 				border-radius: 50%;
 				margin: 0 auto;
-				margin-bottom: 10px; }
+				margin-bottom: 10px; 
+				border : 1px solid gray;
+				}
 			.bg-wrap .user-logo h3 {
 				color: black;
 				font-size: 18px; }
@@ -49,11 +51,12 @@
 							<div class="rn-widget">
 								<div class="img bg-wrap text-center">
 									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}/resources/assets/images/dog.PNG);"></div>
-										<h3>company name</h3>
+										<div class="img" style="background-image: url(${contextPath}${memberFile.memImgPath}/${memberFile.memImgName});"></div>
+										<h3>${memberFile.categoryNm}&nbsp;${memberFile.cooName}</h3>
 									</div>
 								</div>
 							</div>
+							<br>
 								
 							<section class="rn-widget">
 								<h2 class="rn-widget-title">Categories</h2>
@@ -63,7 +66,7 @@
 											<a href="dashboard">Dash board</a>
 										</li>
 										<li>
-											<a href="schedule">Schedule</a>
+											<a href="#">Schedule</a>
 										</li>
 										<li>
 											<a href="applicationlist">Application list</a>
@@ -72,7 +75,7 @@
 											<a href="companyinfo">Company Info</a>
 										</li>
 										<li>
-											<a href="">Cars</a>
+											<a href="#">Cars</a>
 										</li>
 									</ul>
 								</div>

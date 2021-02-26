@@ -1,5 +1,7 @@
 package com.kh.youngchar.company.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +17,20 @@ import com.kh.youngchar.member.model.vo.MemberFile;
 public class CompanyController {
 	
 	@Autowired
-	CompanyService service;
+	private CompanyService service;
+	
+	private Logger logger = LoggerFactory.getLogger(CompanyController.class);
 	
 	@RequestMapping("dashboard")
 	public String dashBoard(Model model) {
 		
-		MemberFile memberFile = service.getMemberFile(1);
+		MemberFile memberFile = service.getMemberFile(2);
+		// 파라미터 memNo 으로 수정 필요
 		
 		if(memberFile != null) {
 			model.addAttribute("memberFile", memberFile);
+			
 		}
-		
 		
 		return "company/dashBoard";
 	}
