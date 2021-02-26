@@ -8,16 +8,11 @@ public class MemberFile {
 	private int memImgLevel;
 	private int memNo;
 	
+	// 사이드메뉴에 필요해서 넣음
+	private String cooName; 
+	private String categoryNm;
+	
 	public MemberFile() {}
-
-	public MemberFile(int memImgNo, String memImgPath, String memImgName, int memImgLevel, int memNo) {
-		super();
-		this.memImgNo = memImgNo;
-		this.memImgPath = memImgPath;
-		this.memImgName = memImgName;
-		this.memImgLevel = memImgLevel;
-		this.memNo = memNo;
-	}
 
 	public int getMemImgNo() {
 		return memImgNo;
@@ -59,12 +54,30 @@ public class MemberFile {
 		this.memNo = memNo;
 	}
 
+	public String getCooName() {
+		return cooName;
+	}
+
+	public void setCooName(String cooName) {
+		this.cooName = cooName;
+	}
+
+	public String getCategoryNm() {
+		return categoryNm;
+	}
+
+	public void setCategoryNm(String categoryNm) {
+		this.categoryNm = categoryNm;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberFile [memImgNo=" + memImgNo + ", memImgPath=" + memImgPath + ", memImgName=" + memImgName
-				+ ", memImgLevel=" + memImgLevel + ", memNo=" + memNo + "]";
+				+ ", memImgLevel=" + memImgLevel + ", memNo=" + memNo + ", cooName=" + cooName + ", categoryNm="
+				+ categoryNm + "]";
 	}
-	
+
+
 	
 
 }

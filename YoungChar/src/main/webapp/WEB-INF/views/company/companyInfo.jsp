@@ -112,8 +112,8 @@
 							  <div class="card-header">
 									<div class="img bg-wrap text-center">
 										<div class="user-logo">
-											<div class="img" style="background-image: url(${contextPath}/resources/assets/images/dog.PNG);"></div>
-											<h4 class="card-title mb-0">Company name</h4>
+											<div class="img" style="background-image: url(${contextPath}${memberFile.memImgPath}/${memberFile.memImgName});"></div>
+											<h4 class="card-title mb-0">${memberFile.categoryNm}&nbsp;${memberFile.cooName}</h4>
 											<h6 class="card-title mb-0">110-80-11111</h6>
 										</div>
 									</div>

@@ -7,10 +7,13 @@
 	</settings>
 	
 	<typeAliases>
+			<typeAlias type="com.kh.youngchar.member.model.vo.MemberFile" alias="MemberFile" />
+	
 	</typeAliases>
 	
 	
 	<mappers>
 		<mapper resource="/mappers/admin-mapper.xml" />
+		<mapper resource="/mappers/company-mapper.xml" />
 	</mappers>
 </configuration>
