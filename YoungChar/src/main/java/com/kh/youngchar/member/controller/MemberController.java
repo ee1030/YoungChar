@@ -36,4 +36,11 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
+	// 업체 회원가입 화면전환 Controller
+	@RequestMapping("cooSignUp")
+	public String cooSignUp() {
+		
+		return "member/cooSignUp";
+	}
+	
 }
