@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
+    <title>업체 회원가입</title>
     <style>
         *, *:before, *:after {
   -moz-box-sizing: border-box;
@@ -58,7 +58,6 @@ select {
   margin-bottom: 15px;
   margin-top: 15px;
 }
-
 
 input[type="radio"],
 input[type="checkbox"] {
@@ -181,39 +180,33 @@ label.light {
 .img-fluid{
 	justify-content: center;
 }
-a{
-	text-decoration: none;
-	color: black;
-}
 
 #content1{
 	text-align: center;
-}
-
-#contentImg1:hover{
-	cursor: pointer;
+	
 }
 
 #contentImg1{
-	border: 1px solid gray;
+	border: 1px solid black;
 	border-radius: 50%;
 	width : 150px;
 	height: 150px;
 }
+
 
     </style>
 </head>
 <body>
    
 
-      <form action="SignUpAction" method="post">
-      
+      <form action="cooSignUpAction" method="post">
       <img class="img-fluid" src="${contextPath}/resources/assets/images/0char_logo(200).png" alt="Logo">
+      
         <h1>회원가입</h1>
         
         <fieldset>
           <legend><span class="number">1</span>기본 정보</legend>
-					<div id="content1">
+          <div id="content1">
 					<h3>프로필 등록</h3>
           <img id="contentImg1">
           </div>
@@ -229,21 +222,8 @@ a{
           <label for="memberPwd2">비밀번호 확인:</label>
           <input type="password" id="memberPwd2" name="memberPwd2">
           
-          <label for="memberNm">회원명:</label>
-          <input type="text" id="memberNm" name="memberNm">
           
-          <label for="nickName">닉네임:</label>
-          <input type="text" id="nickName" name="nickName">
           
-          <label for="phone">전화번호:</label>
-          <input type="tel" id="phone" name="phone" placeholder="' - ' 제외하고 입력">
-          
-          <label for="postcodify_search_button">주소:</label>
-          <input type="text" name="post" class="form-control postcodify_postcode5 inputTag address" style="width: 50%;" placeholder="우편번호">
-          <button type="button" class="sendBtn" id="postcodify_search_button" >검색</button>
-          <input type="text" class="form-control postcodify_address inputTag" name="address1" id="address1" placeholder="도로명 주소">
-          <input type="text" class="form-control postcodify_details inputTag" name="address2" id="address2" placeholder="상세 주소">
-
 
 
         </fieldset>
@@ -256,31 +236,54 @@ a{
           <label for="memberEmail">인증번호 입력:</label>
           <input type="email" id="memberEmail" name="memberEmail">
         </fieldset>
+        
+        <fieldset>
+        	<legend><span class="number">3</span>업체 정보</legend>
+        	<label for="cooName">업체 명:</label>
+          <input type="text" id="cooName" name="cooName">
+       		
+        	<label for="cooAgency">대리점 명:</label>
+          <input type="text" id="cooAgency" name="cooAgency">
+          
+        
+        <label for="job">브랜드 카테고리:</label>
+        <select id="job" name="user_job">
+            <option value="frontend_developer">테슬라</option>
+            <option value="php_developor">현대</option>
+            <option value="python_developer">기아</option>
+            <option value="rails_developer">포르쉐</option>
+            <option value="web_designer">BMW</option>
+            <option value="WordPress_developer">벤츠</option>
+            <option value="Android_developer">아우디</option>
+        </select>
+        
+        
+       		
+       		<label for="phone">업체 번호:</label>
+          <input type="tel" id="phone" name="phone" placeholder="' - ' 제외하고 입력">
+
+       		<label for="postcodify_search_button">주소:</label>
+          <input type="text" name="post" class="form-control postcodify_postcode5 inputTag address" style="width: 50%;" placeholder="우편번호">
+          <button type="button" class="sendBtn" id="postcodify_search_button" >검색</button>
+          <input type="text" class="form-control postcodify_address inputTag" name="address1" id="address1" placeholder="도로명 주소">
+          <input type="text" class="form-control postcodify_details inputTag" name="address2" id="address2" placeholder="상세 주소">
+       		
+       		<label for="cooNumber">사업자번호:</label>
+          <input type="text" id="cooNumber" name="cooNumber" placeholder="' - ' 제외하고 입력">
+       		
+       		<label for="cooLicense">사업자 등록증:</label>
+          <input type="file" id="cooLicense" name="cooLicense" placeholder="' - ' 제외하고 입력">
+       		
+       		
+       		
+        </fieldset>
 
 
         
         <button type="submit" class="signUp">회원가입</button>
-        <h3><a href="${contextPath}/member/cooSignUp">업체 회원가입으로 이동</a></h3>
+        
       </form>
       
-      
-      
-      
-     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      
-      <script>
-		   // 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
-				$(function(){
-					$("#img0").hide(); // #fileArea 요소를 숨김.		
-					
-					$("#content1").on("click", function(){ // 이미지 영역이 클릭 되었을 때
-						// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
-						$("#img0").click();
-					});
-					
-				});
-      
-      </script>
     </body>
 </html>
 

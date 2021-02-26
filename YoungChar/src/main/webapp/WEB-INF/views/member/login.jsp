@@ -58,7 +58,7 @@
                     <div class="checkbox p-0">
                       <input id="checkbox1" type="checkbox">
                       <label class="text-muted" for="checkbox1">아이디 저장</label>
-                    </div><a class="link" href="forget-password.html">아이디/비밀번호 찾기</a>
+                    </div><a class="link" href="#">아이디/비밀번호 찾기</a>
                     <button class="btn btn-primary btn-block" type="submit">로그인</button>
                   </div>
                   <h6 class="text-muted mt-4 or">Or Sign in with</h6>
