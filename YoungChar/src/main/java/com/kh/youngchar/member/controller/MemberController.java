@@ -1,5 +1,6 @@
 package com.kh.youngchar.member.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -9,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.member.model.service.MemberService;
+import com.kh.youngchar.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/member/*")
@@ -25,6 +30,10 @@ public class MemberController {
 
 	@Autowired 
 	private JavaMailSender mailSender;
+	
+	private String swalIcon;
+	private String swalTitle;
+	private String swalText;
 	 
 
 	// 로그인 화면전환 Controller
@@ -118,6 +127,40 @@ public class MemberController {
 		}
 
 		return key;
+	}
+	
+	
+	// ---------------------------------------------------
+	// 일반 회원가입  Controller
+	// ---------------------------------------------------
+	@RequestMapping("SignUpAction")
+	public String SignUpAction(@ModelAttribute Member member,
+						       @RequestParam(value="images", required=false) List<MultipartFile> images,
+						       HttpServletRequest request,
+						       RedirectAttributes ra) {
+		
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/memberFile");
+		
+		
+		int result = service.SignUpAction(member,images, savePath);
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원가입 성공";
+			swalText = "회원가입을 환영합니다.";
+		}else {
+			
+			swalIcon = "error";
+			swalTitle = "회원가입 실패";
+			swalText = "회원가입 과정에서 문제가 발생했습니다.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		ra.addFlashAttribute("swalText", swalText);
+		
+		return "redirect:/";
 	}
 	
 }

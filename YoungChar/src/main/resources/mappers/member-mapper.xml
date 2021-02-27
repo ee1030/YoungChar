@@ -27,6 +27,7 @@
 		AND SIGN_STATUS = 'N'
 	</select>
 	
+	<!-- 닉네임 중복체크 -->
 	<select id="nickDupCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEM_NICKNAME = #{memberNickName}
@@ -35,12 +36,32 @@
 	
 	
 	<!-- 회원 가입 -->
-	<insert id="signUp" parameterType="Member">
+	<insert id="SignUpAction" parameterType="Member">
 	INSERT INTO MEMBER
-	VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName}, #{memberPhone},
-						#{memberEmail}, #{memberAddress}, #{memberInterest}, DEFAULT, DEFAULT, DEFAULT)
+	VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberNm}, #{nickName},
+						#{memberEmail},  #{phone}, #{memberAddr}, DEFAULT, DEFAULT, DEFAULT)
 	
 	</insert>
+	
+	<select id="memNo" resultType="_int">
+		SELECT SEQ_MNO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 프로필 저장 -->
+		<insert id="insertMemberFile" parameterType="list">
+		INSERT INTO MEMBER_FILE
+		SELECT SEQ_MFNO.NEXTVAL, A.* FROM (
+			
+			<foreach collection="list" item="item" separator="UNION ALL">
+				SELECT #{item.memImgPath} MEM_IMG_PATH,
+							 #{item.memImgName} MEM_IMG_NAME,
+							 #{item.memImgLevel} MEM_IMG_LEVEL,
+							 #{item.memNo} MEM_NO
+				FROM DUAL
+			</foreach>
+			
+			)A
+		</insert>
 	
 	
 	<!-- 회원 정보 수정 -->
