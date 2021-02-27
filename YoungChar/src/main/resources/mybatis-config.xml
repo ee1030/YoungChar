@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 			<typeAlias type="com.kh.youngchar.member.model.vo.MemberFile" alias="MemberFile" />
+			<typeAlias type="com.kh.youngchar.member.model.vo.Member" alias="Member" />
 	
 	</typeAliases>
 	
@@ -15,5 +16,6 @@
 	<mappers>
 		<mapper resource="/mappers/admin-mapper.xml" />
 		<mapper resource="/mappers/company-mapper.xml" />
+		<mapper resource="/mappers/member-mapper.xml" />
 	</mappers>
 </configuration>
