@@ -196,7 +196,7 @@ a{
 }
 
 #contentImg1{
-	border: 1px solid #5fcf80;
+	border: 2px solid #5fcf80;
 	border-radius: 50%;
 	width : 150px;
 	height: 150px;
@@ -215,7 +215,7 @@ a{
         
         <fieldset>
           <legend><span class="number">1</span>기본 정보</legend>
-					<div id="content1">
+					<div id="content1" class="content1">
 					<h3>프로필 등록</h3>
           <img id="contentImg1">
           </div>
@@ -308,6 +308,41 @@ a{
 					});
 					
 				});
+		   
+				  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+				  function LoadImg(value, num) {
+					  // value.files : 파일이 업로드되어 있으면 true
+					  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+					  
+						if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
+							
+							var reader = new FileReader();
+			       	// 자바스크립트 FileReader
+			      	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
+			      	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
+			      	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+			      	
+			      	reader.readAsDataURL(value.files[0]);
+			        // FileReader.readAsDataURL()
+			      	// 지정된의 내용을 읽기 시작합니다. 
+			      	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.	
+			      	
+			      	reader.onload = function(e){
+			        	// FileReader.onload
+								// load 이벤트의 핸들러. 
+								// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
+			      		
+								// 읽어들인 내용(이미지 파일)을 화면에 출력
+								
+								$(".content1").eq(num).children("img").attr("src", e.target.result);
+								// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
+								
+			      	}
+						}
+					}
+		   
+		   
+		   
 		   
 		   
 		   
@@ -421,7 +456,7 @@ a{
 					if (!regExp.test($(this).val())) { 
 						$("#checkNickName").text("세 글자 이상을 입력하세요").css("color", "red").attr("data-tooltip-text", "3~12글자 사이의 영문,한글,숫자");
 						$nickName.css("border", "1px solid red");
-						signUpCheck.name = false;
+						signUpCheck.nickName = false;
 					} else {
 						/* $("#checkNickName").text("올바른 닉네임입니다").css("color", "green");
 						$nickName.css("border", "1px solid #5fcf80");
@@ -435,12 +470,12 @@ a{
 								if(result == 0){	
 									$("#checkNickName").text("사용 가능한 닉네임입니다").css("color", "green");
 									$nickName.css("border", "1px solid #5fcf80");
-									signUpCheck.name = true;
+									signUpCheck.nickName = true;
 									
 								}else{
 									$("#checkNickName").text("이미 사용중인 닉네임 입니다.").css("color", "red").attr("data-tooltip-text", "다른 닉네임명을 입력하세요");
 									$nickName.css("border", "1px solid red");
-									signUpCheck.id = false;
+									signUpCheck.nickName = false;
 								}
 								
 							},
