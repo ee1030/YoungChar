@@ -7,7 +7,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="icon" href="${contextPath}/resources/assets/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon.png" type="image/x-icon">
     <title>login</title>
@@ -35,6 +35,17 @@
     
 </head>
 <body>
+
+<c:if test="${!empty swalTitle}">
+		<script>
+			swal({icon : "${swalIcon}",
+				 title : "${swalTitle}",
+				 text : "${swalText}"});
+		</script>
+		<%-- <c:remove var="swalIcon"/>
+		<c:remove var="swalTitle"/>
+		<c:remove var="swalText"/> --%>
+	</c:if>
 <div class="container-fluid p-0">
       <div class="row m-0">
         <div class="col-12 p-0">    
@@ -47,7 +58,7 @@
                   <p>Enter your id & password to login</p>
                   <div class="form-group">
                     <label class="col-form-label">ID</label>
-                    <input class="form-control" type="text" name="memberId" id="memberId" required="" placeholder="abcd1234" autofocus>
+                    <input class="form-control" type="text" name="memberId" id="memberId" required="" placeholder="abcd1234" value="${cookie.saveId.value}" autofocus>
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Password</label>
