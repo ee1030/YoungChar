@@ -202,23 +202,7 @@
 										<a href="${contextPath}/chargerLocation/location">충전소</a>
 									</li>
 									<li>
-										<a href="#">Cars 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="${contextPath }/car/list">SEARCH CAR</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/1">REVIEW</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/2">INFORMATION</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/3">FREE CHAT</a>
-											</li>
-										</ul>
+										<a href="${contextPath}/chargerCompany/introduction">충전기 설치 업체</a>
 									</li>
 									<li>
 										<a href="service.html">Service</a>
