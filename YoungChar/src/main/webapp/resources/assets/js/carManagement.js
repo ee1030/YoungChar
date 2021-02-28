@@ -1,9 +1,9 @@
 
  
- $(".rn-car-item.added").on("mouseover", function(){
+ $(".rn-car-item").on("mouseover", function(){
 			$(this).children().css("display", "inline-block");
 		});
 		
-				$(".rn-car-item.added").on("mouseout", function(){
+				$(".rn-car-item").on("mouseout", function(){
 			$(this).children("span").css("display", "none");
 		});

@@ -14,9 +14,9 @@
 	</resultMap>
 	
 	
-	
+	<!-- 차량 추가 검색 -->
 	<select id="carSearchList" parameterType="string" resultMap="testCars_rm">
-		SELECT  CAR_NAME, CAR_MODEL, FILE_NO, FILE_PATH, FILE_NAME
+		SELECT  CAR_NAME, CAR_MODEL, FILE_NO, FILE_PATH, FILE_NAME, CAR_NO
 		FROM CAR_INFO
 		JOIN TEST_DRIVE_CAR USING(CAR_NO)
 		JOIN C_ATTACHMENT USING(CAR_NO)
@@ -24,7 +24,10 @@
 		OR CAR_MODEL LIKE '%' || #{carName}  || '%'
 	</select>	
 	
-	
-
+	<!-- 차량 추가 -->
+	<insert id="addCar" parameterType="map">
+		INSERT INTO TEST_DRIVE_CAR
+		VALUES(SEQ_TDC_NO.NEXTVAL, #{carNo}, #{memNo})
+	</insert>
 </mapper>
 

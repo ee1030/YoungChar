@@ -62,8 +62,11 @@
             background-color: #00D231
          }
          
-         .rn-car-item-review{
+         .rn-car-item-review.delete{
             display:none;
+         }
+         .rn-car-item-review{
+         		cursor: pointer;
          }
          
          #text{
@@ -135,7 +138,7 @@
 					
 					      <!-- Cars-->
 					         <div class="container">
-					            <div class="row">
+					            <div class="row" id="addedCarList">
 						            <div  class="col-lg-12">
 						              <h3 class="titleName">시승 가능 차량</h2>
 						            </div>
@@ -150,17 +153,17 @@
 					                     <!-- Car Item-->
 					                     <div class="col-lg-3 col-md-2">
 					                     <div class="rn-car-item added">
-					                        <span class="rn-car-item-review">
+					                        <span class="rn-car-item-review delete">
 					                           x
 					                        </span>
 					                        <div class="rn-car-item-thumb">
-					                           <a href="car-single.html">
+					                          
 					                              <img class="img-fluid" src="${contextPath}/resources/assets/images/tesla_model3.jpg" alt="Black Sedan" srcset="${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x"/>
-					                           </a>
+					                           
 					                        </div>
 					                        <div class="rn-car-item-info">
 					                           <h3>
-					                              <a href="car-single.html">Toyota Etios</a>
+					                              Toyota Etios
 					                           </h3>
 					                        </div>
 					                     </div>
@@ -259,9 +262,49 @@
    <script src="${contextPath}/resources/assets/js/scripts.js"></script>
    <script src="${contextPath}/resources/assets/js/carManagement.js"></script>
    <script>
-   
+   	/*<div class="col-lg-12">
+					                        <h3 id="text">등록된 차량이 없습니다.</h3>
+					                     </div>*/
+   	//추가된 차량불러오기
+   function carList(){
+   		$.ajax({
+   		type : "post",
+   		url : "carList",
+   		success(cList){
+   			if(cList != null){
+   				$.each(result, function(index, value){
+					console.log(result);
+				 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
+					var rn = $("<div>").addClass("rn-car-item");
+					var span = $("<span>").addClass("rn-car-item-review plus").text("X");
+					var thumb = $("<div>").addClass("rn-car-item-thumb");
+					var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+					thumb.append(img);
+					rn.append(span);
+					rn.append(thumb);
+
+					var info = $("<div>").addClass("rn-car-item-info");
+					var h3 = $("<h3>").text(value.carName);
+					var carNo = $("<span>").css("display","none").text(value.carNo);
+					info.append(carNo);
+					info.append(h3);
+					rn.append(info);
+					col.append(rn);
+					addedCar.append(col); 
+					});
+   			}else{
+   				var div = $("<div>").addClass("col-lg-12");
+   				var h3 = $("<h3>").attr("id","text").text("등록된 차량이 없습니다.");
+   				div.append(h3);
+   				$("#addedCarList").append(div);
+   			}
+   		}
+   	});
+	}
       // 차량추가 검색버튼 입력시
       $("#searchBtn").on("click", function(){
+					var addedCar = $("#addedCar").html("");
+    	  	
           var carName = $("#carSearch").val();
          
           $.ajax({
@@ -271,23 +314,22 @@
              success(result){
             	 if(result != null){
 					
-					var addedCar = $("#addedCar");
 					console.log(result);
 					$.each(result, function(index, value){
 							console.log(result);
-						 	var col =$("<div>").addClass("col-lg-3 col-md-2");
+						 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
 							var rn = $("<div>").addClass("rn-car-item");
+							var span = $("<span>").addClass("rn-car-item-review plus").text("+");
 							var thumb = $("<div>").addClass("rn-car-item-thumb");
-							var carhtml = $("<a>").attr("href","car-single.html");
 							var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
-							carhtml.append(img);
-							thumb.append(carhtml);
+							thumb.append(img);
+							rn.append(span);
 							rn.append(thumb);
 		
 							var info = $("<div>").addClass("rn-car-item-info");
-							var h3 = $("<h3>");
-							var carNm = $("<a>").text(value.carName);
-							h3.append(carNm);
+							var h3 = $("<h3>").text(value.carName);
+							var carNo = $("<span>").css("display","none").text(value.carNo);
+							info.append(carNo);
 							info.append(h3);
 							rn.append(info);
 							col.append(rn);
@@ -303,6 +345,30 @@
           });
           
       });
+      
+      
+     //차량추가 
+     $(document).on("click", ".rn-car-item-review.plus", function(){
+    	 var carNo = $(this).next().next().children("span").text();
+			 var addedCarList = $("#addedCarList");
+    	 console.log(carNo);
+    	 $.ajax({
+    		 url : "addCar",
+    		 data : "carNo",
+    		 success(result){
+    			 if(result > 0){
+    				$(".carNo"+carNo).remove();
+    				carList();
+    			 }
+    		 },
+    		 error(){
+    			 console.log("차량 추가 실패");
+    			 
+    		 }
+    		 
+    	 });
+     });
+     
    </script>
 
 </body>
