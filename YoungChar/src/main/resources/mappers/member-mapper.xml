@@ -62,6 +62,17 @@
 			
 			)A
 		</insert>
+		
+		
+	<!-- 로그인  -->
+	<select id="loginAction" parameterType="Member" resultMap="member_rm">
+		SELECT * FROM MEMBER
+		WHERE MEM_ID = #{memberId}
+		<!-- AND MEMBER_PWD = #{memberPwd} -->
+		AND SIGN_STATUS = 'N'
+	</select>
+	
+	
 	
 	
 	<!-- 회원 정보 수정 -->
