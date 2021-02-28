@@ -63,19 +63,19 @@
 								<div class="rn-widget-content">
 									<ul>
 										<li>
-											<a href="dashboard">Dash board</a>
+											<a href="${contextPath}/company/dashboard">Dash board</a>
 										</li>
 										<li>
-											<a href="#">Schedule</a>
+											<a href="${contextPath}/company/#">Schedule</a>
 										</li>
 										<li>
-											<a href="applicationlist">Application list</a>
+											<a href="${contextPath}/company/applicationlist">Application list</a>
 										</li>
 										<li>
-											<a href="companyinfo">Company Info</a>
+											<a href="${contextPath}/company/companyinfo">Company Info</a>
 										</li>
 										<li>
-											<a href="#">Cars</a>
+											<a href="${contextPath}/carCompany/carView">Cars</a>
 										</li>
 									</ul>
 								</div>

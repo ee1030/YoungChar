@@ -59,4 +59,5 @@ public class CompanyController {
 		return "company/companyInfo";
 	}
 
+
 }
