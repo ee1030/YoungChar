@@ -150,12 +150,26 @@
 								</div>
 								<div class="mem">
 										<ul>
-											<li>
-												<a href="${contextPath}/member/login">로그인</a>
-											</li>
-											<li>
-												<a href="${contextPath}/member/signUp">회원가입</a>
-											</li>
+										
+										<c:choose>
+											<c:when test="${empty sessionScope.loginMember }">
+												<li>
+													<a href="${contextPath}/member/login">로그인</a>
+												</li>
+												<li>
+													<a href="${contextPath}/member/signUp">회원가입</a>
+												</li>
+											</c:when>
+											
+											<c:otherwise>
+												<li class="nav-item">
+				                	<a class="nav-link" href="${contextPath}/member/mypage">${loginMember.nickName}</a>
+				                	
+				                </li>
+				                <li class="nav-item"><a class="nav-link" href="${contextPath}/member/logout">Logout</a></li>
+											</c:otherwise>
+										</c:choose>
+										
 											<li>
 												<a href="${contextPath}/admin/dashboard">관리자</a>
 											</li>

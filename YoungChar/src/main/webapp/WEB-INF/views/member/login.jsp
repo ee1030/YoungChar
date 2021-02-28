@@ -42,21 +42,25 @@
             <div>
               <div><a class="logo" href="#"><img class="img-fluid for-dark" src="${contextPath}/resources/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
               <div class="login-main"> 
-                <form class="theme-form">
-                  <h4>회원으로 접속</h4>
-                  <p>Enter your email & password to login</p>
+                <form class="theme-form" action="loginAction" method="post">
+                  <h4>로그인</h4>
+                  <p>Enter your id & password to login</p>
                   <div class="form-group">
                     <label class="col-form-label">ID</label>
-                    <input class="form-control" type="text" required="" placeholder="abcd1234">
+                    <input class="form-control" type="text" name="memberId" id="memberId" required="" placeholder="abcd1234" autofocus>
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Password</label>
-                    <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+                    <input class="form-control" type="password" name="memberPwd" id="memberPwd" required="" placeholder="*********">
                     <div class="show-hide"><span class="show">                         </span></div>
                   </div>
                   <div class="form-group mb-0">
                     <div class="checkbox p-0">
-                      <input id="checkbox1" type="checkbox">
+                      <input id="checkbox1" type="checkbox" name="saveId"
+                      	<c:if test="${!empty cookie.saveId.value}">
+													checked
+												</c:if>
+                      >
                       <label class="text-muted" for="checkbox1">아이디 저장</label>
                     </div><a class="link" href="#">아이디/비밀번호 찾기</a>
                     <button class="btn btn-primary btn-block" type="submit">로그인</button>
@@ -65,7 +69,7 @@
                   <div class="social mt-4">
                     <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
                   </div>
-                  <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="sign-up.html">회원가입 하기</a></p>
+                  <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="signUpAction">회원가입 하기</a></p>
                 </form>
               </div>
             </div>

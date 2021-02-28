@@ -55,6 +55,16 @@ public class MemberDAO {
 	public int memNo() {
 		return sqlSession.selectOne("memberMapper.memNo");
 	}
+
+
+
+	//---------------------------------------------------
+	//				로그인 DAO
+	//---------------------------------------------------
+	public Member loginAction(Member inputMember) {
+		return sqlSession.selectOne("memberMapper.loginAction", inputMember);
+		
+	}
 	
 	
 	

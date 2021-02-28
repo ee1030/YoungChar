@@ -25,6 +25,12 @@ public interface MemberService {
 	//---------------------------------------------------
 	int SignUpAction(Member member, List<MultipartFile> images, String savePath);
 
+	
+	//---------------------------------------------------
+	//				로그인 Service
+	//---------------------------------------------------
+	Member loginAction(Member inputMember);
+
 
 
 }

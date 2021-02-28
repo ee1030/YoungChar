@@ -133,6 +133,34 @@ public class MemberServiceImpl implements MemberService{
 		
 		return date + str + ext;
 	}
+
+
+	// 로그인 Service 구현
+	@Override
+	public Member loginAction(Member inputMember) {
+		
+		Member loginMember = dao.loginAction(inputMember);
+		
+		if(loginMember != null) {
+			// 비밀번호가 같을 때
+			if(enc.matches(inputMember.getMemberPwd(), 	// 입력받은 평문 비밀번호
+								loginMember.getMemberPwd())) { // DB에 저장된 암호화 비밀번호
+				
+				// DB에서 조회된 회원 정보를 반환하면 되지만 
+				// 비밀번호는 null 값으로 변경해서 내보냄.
+				loginMember.setMemberPwd(null);
+				
+				
+			}else { 	// 비밀번호가 다를 때 
+				
+				// 로그인이 실패한 모양을 만들어 줌
+				loginMember = null;
+			}
+		}
+		
+		
+		return loginMember;
+	}
 	
 	
 	
