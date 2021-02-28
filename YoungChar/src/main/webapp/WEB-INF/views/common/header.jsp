@@ -241,7 +241,7 @@
 												<a href="${contextPath}/testDrive/myReservation">내 예약</a>
 											</li>
 											<li>
-												<a href="${contextPath}/company/reviewlist">시승후기</a>
+												<a href="${contextPath}/driveReview/reviewlist">시승후기</a>
 											</li>
 										</ul>
 									</li>
@@ -257,5 +257,7 @@
 
 		</header>
 		<!-- End Header-->
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>
