@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="companyCarMapper">
+	
+	<resultMap type="TestCars" id="testCars_rm">
+		<id property="testDrivecCarNo" column="TEST_DRIVE_CAR_NO"/>
+		<result property="carNo" column="CAR_NO"/>
+		<result property="carName" column="CAR_NAME"/>
+		<result property="carModel" column="CAR_MODEL"/>
+		<result property="fileNo" column="FILE_NO"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="memNo2" column="MEM_NO2"/>
+	</resultMap>
+	
+	
+	
+	<select id="carSearchList" parameterType="string" resultMap="testCars_rm">
+		SELECT  CAR_NAME, CAR_MODEL, FILE_NO, FILE_PATH, FILE_NAME
+		FROM CAR_INFO
+		JOIN TEST_DRIVE_CAR USING(CAR_NO)
+		JOIN C_ATTACHMENT USING(CAR_NO)
+		WHERE CAR_NAME LIKE '%' || #{carName}  || '%'
+		OR CAR_MODEL LIKE '%' || #{carName}  || '%'
+	</select>	
+	
+	
+
+</mapper>
+
