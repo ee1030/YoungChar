@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -178,25 +179,20 @@ public class MemberController {
 		
 		Member loginMember = service.loginAction(inputMember);
 		
-String url = null;	// 로그인 성공 또는 실패 시의 요청 경로를 저장할 변수
+		String url = null;
 		
 		if(loginMember != null) {	// 로그인 성공 시
 			model.addAttribute("loginMember", loginMember);
 			
-			// 쿠키 생성
 			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
 			
-			// 쿠키 유지 시간 지정
 			if(saveId != null) { // 아이디 저장이 체크 되었을 경우
 				// 한달동안 유지되는 쿠키 설정
 				cookie.setMaxAge(60 * 60 * 24 * 30); // 초 단위로 지정
 			}else {
 				cookie.setMaxAge(0);
-				// - 쿠키를 생성하지 않겠다
-				// - 기존에 있던 쿠키도 없애겠다.
 			}
 				
-			// 생성된 쿠키 객체를 응답 객체에 담아서 내보냄
 			response.addCookie(cookie);
 			url = "/";
 			
@@ -208,6 +204,18 @@ String url = null;	// 로그인 성공 또는 실패 시의 요청 경로를 저
 		}
 		
 		return "redirect:" + url;
+	}
+	
+	
+	// ---------------------------------------------------
+	// 로그아웃  Controller
+	// ---------------------------------------------------
+	@RequestMapping("logout")
+	public String logout(SessionStatus status) {
+		
+		status.setComplete();
+		
+		return "redirect:/";
 	}
 	
 	
