@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	
+	<resultMap type="Member" id="member_rm">
+		<id property="memberNo" column="MEM_NO"/>
+		
+   		<result property="memberId" column="MEM_ID"/>
+  		<result property="memberPwd" column="MEM_PWD"/>
+  		<result property="memberNm" column="MEM_NAME"/>
+  		<result property="nickName" column="MEM_NICKNAME"/>
+  		<result property="memberEmail" column="MEM_EMAIL"/>
+  		<result property="phone" column="MEM_PHONE"/>
+  		<result property="memberAddr" column="MEM_ADDRESS"/>
+  		<result property="memberGrade" column="MEM_GRADE"/>
+  		<result property="memberStatus" column="SIGN_STATUS"/>
+  		<result property="signDt" column="SIGN_DT"/>
+	</resultMap> 
+	
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_ID = #{memberId}
+		AND SIGN_STATUS = 'N'
+	</select>
+	
+	<!-- 닉네임 중복체크 -->
+	<select id="nickDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_NICKNAME = #{memberNickName}
+		AND SIGN_STATUS = 'N'
+	</select>
+	
+	
+	<!-- 회원 가입 -->
+	<insert id="SignUpAction" parameterType="Member">
+	INSERT INTO MEMBER
+	VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberNm}, #{nickName},
+						#{memberEmail},  #{phone}, #{memberAddr}, DEFAULT, DEFAULT, DEFAULT)
+	
+	</insert>
+	
+	<select id="memNo" resultType="_int">
+		SELECT SEQ_MNO.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 프로필 저장 -->
+		<insert id="insertMemberFile" parameterType="list">
+		INSERT INTO MEMBER_FILE
+		SELECT SEQ_MFNO.NEXTVAL, A.* FROM (
+			
+			<foreach collection="list" item="item" separator="UNION ALL">
+				SELECT #{item.memImgPath} MEM_IMG_PATH,
+							 #{item.memImgName} MEM_IMG_NAME,
+							 #{item.memImgLevel} MEM_IMG_LEVEL,
+							 #{item.memNo} MEM_NO
+				FROM DUAL
+			</foreach>
+			
+			)A
+		</insert>
+	
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateAction" parameterType="Member">
+		UPDATE MEMBER SET
+			MEMBER_EMAIL = #{memberEmail},
+			MEMBER_PHONE = #{memberPhone},
+			MEMBER_ADDR = #{memberAddress},
+			MEMBER_INTEREST = #{memberInterest}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 비밀번호 조회 -->
+	<select id="selectPwd" parameterType="_int" resultType="string">
+		SELECT MEMBER_PWD FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd" parameterType="map">
+		UPDATE MEMBER SET
+		MEMBER_PWD = #{newPwd}		<!-- map에 지정된 데이터의 key값을 직접 작성 -->
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<update id="updateStatus" parameterType="_int">
+		UPDATE MEMBER SET
+		MEMBER_STATUS = 'N'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+</mapper>

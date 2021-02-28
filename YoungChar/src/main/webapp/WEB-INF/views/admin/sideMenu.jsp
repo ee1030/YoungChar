@@ -50,7 +50,7 @@
 								<div class="img bg-wrap text-center">
 									<div class="user-logo">
 										<div class="img" style="background-image: url(${contextPath}/resources/assets/images/dog.PNG);"></div>
-										<h3>company name</h3>
+										<h3>관리자</h3>
 									</div>
 								</div>
 							</div>

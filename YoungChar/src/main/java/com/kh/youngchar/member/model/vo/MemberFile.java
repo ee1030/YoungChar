@@ -13,6 +13,18 @@ public class MemberFile {
 	private String categoryNm;
 	
 	public MemberFile() {}
+	
+	
+	// 일반 회원가입 프사용 생성자
+	public MemberFile(String memImgPath, String memImgName, int memImgLevel, int memNo) {
+		super();
+		this.memImgPath = memImgPath;
+		this.memImgName = memImgName;
+		this.memImgLevel = memImgLevel;
+		this.memNo = memNo;
+	}
+
+
 
 	public int getMemImgNo() {
 		return memImgNo;
