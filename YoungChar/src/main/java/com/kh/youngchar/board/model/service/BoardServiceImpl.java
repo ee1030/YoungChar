@@ -20,7 +20,7 @@ import com.kh.youngchar.board.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.board.model.exception.UpdateAttachmentFailException;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
-import com.kh.youngchar.board.model.vo.PageInfo;
+import com.kh.youngchar.board.model.vo.PageInfo2;
 
 @Service // Service임을 알려줌 + bean 등록 
 public class BoardServiceImpl implements BoardService{
@@ -29,17 +29,17 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO dao;
 
 	@Override
-	public PageInfo getPageInfo(int type, int cp) {
+	public PageInfo2 getPageInfo(int type, int cp) {
 //		전체 게시글 수 조회
 		int listCount = dao.getListCount(type);
 		
-		return new PageInfo(cp, listCount, type);
+		return new PageInfo2(cp, listCount, type);
 	}
 
 	
 //	게시글 목록 조회 Service 구현
 	@Override
-	public List<Board> selectList(PageInfo pInfo) {
+	public List<Board> selectList(PageInfo2 pInfo) {
 		
 		return dao.selectList(pInfo);
 	}

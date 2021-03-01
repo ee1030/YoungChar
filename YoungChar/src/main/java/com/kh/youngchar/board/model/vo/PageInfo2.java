@@ -3,7 +3,7 @@ package com.kh.youngchar.board.model.vo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PageInfo {
+public class PageInfo2 {
 	private int currentPage; 	// 현재 페이지 번호를 표시할 변수
 	private int listCount; 		// 전체 게시글 수
 	private int limit = 10; 			// 한 페이지에 보여질 게시글 수
@@ -15,9 +15,9 @@ public class PageInfo {
 	
 	private int boardType; 		// 게시글 타입
 	
-	public PageInfo() {}
+	public PageInfo2() {}
 	
-	public PageInfo(int currentPage, int listCount, int boardType) {
+	public PageInfo2(int currentPage, int listCount, int boardType) {
 		this.currentPage = currentPage;
 		this.listCount = listCount;
 		this.boardType = boardType;
@@ -35,7 +35,7 @@ public class PageInfo {
 		this.boardType = boardType;
 	}
 
-	public PageInfo(int currentPage, int listCount, int limit, int pagingBarSize, int boardType) {
+	public PageInfo2(int currentPage, int listCount, int limit, int pagingBarSize, int boardType) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;

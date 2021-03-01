@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
-import com.kh.youngchar.board.model.vo.PageInfo;
+import com.kh.youngchar.board.model.vo.PageInfo2;
 
 public interface BoardService {
 
@@ -17,13 +17,13 @@ public interface BoardService {
 	 * @param cp
 	 * @return pInfo
 	 */
-	public abstract PageInfo getPageInfo(int type, int cp);
+	public abstract PageInfo2 getPageInfo(int type, int cp);
 
 	/** 게시글 목록 조회 Service
 	 * @param pInfo
 	 * @return bList
 	 */
-	public abstract List<Board> selectList(PageInfo pInfo);
+	public abstract List<Board> selectList(PageInfo2 pInfo);
 
 	/** 썸네일 목록 조회 Service
 	 * @param bList

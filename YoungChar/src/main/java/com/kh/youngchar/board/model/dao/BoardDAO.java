@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
-import com.kh.youngchar.board.model.vo.PageInfo;
+import com.kh.youngchar.board.model.vo.PageInfo2;
 
 @Repository // 저장소 (DB) 연결 객체임을 알려줌 + bean 등록
 public class BoardDAO {
@@ -32,7 +32,7 @@ public class BoardDAO {
 	 * @param pInfo
 	 * @return bList
 	 */
-	public List<Board> selectList(PageInfo pInfo) {
+	public List<Board> selectList(PageInfo2 pInfo) {
 		
 //		RowBounds 객체 : offset과 limit를 이용하여 조회 내용 중 일부 행만 조회하는 마이바티스 객체 
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();

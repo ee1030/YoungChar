@@ -14,7 +14,7 @@
 
 			<typeAlias type="com.kh.youngchar.member.model.vo.Member" alias="Member" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.DriveReview" alias="DriveReview" />
-			<typeAlias type="com.kh.youngchar.company.model.vo.Reply" alias="Reply" />
+			<typeAlias type="com.kh.youngchar.company.model.vo.Reply" alias="ReviewReply" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.TestCars" alias="TestCars" />
 
 	
@@ -24,7 +24,7 @@
 	<mappers>
 		<mapper resource="/mappers/admin-mapper.xml" />
 
-		<mapper resource="/mappers/company-mapper.xml" />
+		<!-- <mapper resource="/mappers/company-mapper.xml" /> -->
 			<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/reply-mapper.xml"/>
 

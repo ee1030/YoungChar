@@ -27,7 +27,7 @@
 		<result property="readCount" column="READ_COUNT"/>
 	</resultMap>
 	
-	  <resultMap type="Reply" id="reply_rm">
+	  <resultMap type="ReviewReply" id="reply_rm">
       <id property="replyNo" column="REPLY_NO"/>
       <result property="replyContent" column="REPLY_CONTENT"/>
       <result property="replyCreateDt" column="REPLY_CREATE_DT"/>
