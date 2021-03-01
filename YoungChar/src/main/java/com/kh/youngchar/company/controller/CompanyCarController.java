@@ -22,11 +22,16 @@ import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
 @Controller
+//@SessionAttributes({"loginMember"})
 @RequestMapping("/carCompany/*")
 public class CompanyCarController {
 	
 	@Autowired
 	private CompanyCarService service;
+	
+	private String swalIcon = null;
+	private String swalTitle = null;
+	private String swalText = null;
 	
 	// 사이드바에서 화면 이동하는 Controller
 	@RequestMapping("carView")
@@ -37,18 +42,21 @@ public class CompanyCarController {
 	// 차량 추가 검색 Controller
 	@ResponseBody
 	@RequestMapping("carSearch")
-	public List<TestCars> carSearch(String carName) {
+	public List<TestCars> carSearch(@RequestParam String carName1) {
 		
-		List<TestCars> cars = service.carSearch(carName);
+		System.out.println(carName1);
+		List<TestCars> cars = service.carSearch(carName1);
 		
 		return cars;
 	}
 	
-	//차량 목록 Controller
+	//차량 목록 조회 Controller
 	@ResponseBody
-	public List<TestCars> carList(Member loginMember){
+	@RequestMapping("carList")
+	public List<TestCars> carList(@ModelAttribute("loginMember") Member loginMember){
 		
-		List<TestCars> cList = service.carList(loginMember);
+		int memNo = loginMember.getMemberNo();
+		List<TestCars> cList = service.carList(memNo);
 		
 		return cList;
 	}
@@ -56,14 +64,24 @@ public class CompanyCarController {
 	//차량 추가 Controller
 	@ResponseBody
 	@RequestMapping("addCar")
-	public int addCar(@RequestParam int carNo,
-					  @ModelAttribute("loginMember") Member loginMember) {
+	public int addCar(//@ModelAttribute("loginMember") Member loginMember,
+					  @RequestParam int carNo,
+					  Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		System.out.println("carNo : " + carNo);
 		map.put("carNo", carNo);
-		map.put("loginMember", loginMember);
-		int result = service.addCar(map);
+		//map.put("loginMember", loginMember);
+		int result = 0;
+		int exist = service.carListEx(map);
+		System.out.println("exist : " +exist);
+		
+		if(exist > 0) { //이미 추가되있을때(실패) 1
+			result = 0;
+			
+		}else {
+			result = service.addCar(map);
+		}
 		
 		return result;
 	}

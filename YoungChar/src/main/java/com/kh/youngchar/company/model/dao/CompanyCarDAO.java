@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.company.model.vo.TestCars;
+import com.kh.youngchar.member.model.vo.Member;
 
 @Repository
 public class CompanyCarDAO {
@@ -31,6 +32,22 @@ public class CompanyCarDAO {
 	public int addCar(Map<String, Object> map) {
 		
 		return sqlSession.insert("companyCarMapper.addCar", map);
+	}
+
+	/** 추가하려는 차량이 db에 존재하는지 확인하는 DAO
+	 * @param map
+	 * @return exist
+	 */
+	public int carListEx(Map<String, Object> map) {
+		return sqlSession.selectOne("companyCarMapper.carListEx", map);
+	}
+
+	/** 차량 목록 조회 DAO
+	 * @param memNo
+	 * @return
+	 */
+	public List<TestCars> carList(int memNo) {
+		return sqlSession.selectList("companyCarMapper.carList", memNo);
 	}
 
 }

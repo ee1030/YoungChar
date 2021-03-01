@@ -265,15 +265,23 @@
    	/*<div class="col-lg-12">
 					                        <h3 id="text">등록된 차량이 없습니다.</h3>
 					                     </div>*/
-   	//추가된 차량불러오기
+					                     
+	   $(document).ready(function(){
+		   carList();
+	   });
+   	//차량 목록 조회
    function carList(){
+   		
+			var addedCarList = $("#addedCarList");
+			addedCarList.remove();
+			
    		$.ajax({
    		type : "post",
    		url : "carList",
    		success(cList){
    			if(cList != null){
-   				$.each(result, function(index, value){
-					console.log(result);
+   				$.each(cList, function(index, value){
+					console.log(cList);
 				 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
 					var rn = $("<div>").addClass("rn-car-item");
 					var span = $("<span>").addClass("rn-car-item-review plus").text("X");
@@ -290,7 +298,7 @@
 					info.append(h3);
 					rn.append(info);
 					col.append(rn);
-					addedCar.append(col); 
+					addedCarList.append(col); 
 					});
    			}else{
    				var div = $("<div>").addClass("col-lg-12");
@@ -301,16 +309,16 @@
    		}
    	});
 	}
-      // 차량추가 검색버튼 입력시
+      // 차량추가 검색
       $("#searchBtn").on("click", function(){
 					var addedCar = $("#addedCar").html("");
     	  	
           var carName = $("#carSearch").val();
-         
+         	console.log(carName);
           $.ajax({
         	   type: "post",
              url : "carSearch",
-             data : "carName",
+             data : {"carName1" : carName},
              success(result){
             	 if(result != null){
 					
@@ -353,12 +361,17 @@
 			 var addedCarList = $("#addedCarList");
     	 console.log(carNo);
     	 $.ajax({
+    		 type : "post",
     		 url : "addCar",
-    		 data : "carNo",
+    		 data : {"carNo": carNo},
     		 success(result){
-    			 if(result > 0){
+    			 console.log(result);
+    			 if(result > 0){ //추가 성공 시
+    				 
     				$(".carNo"+carNo).remove();
     				carList();
+    			 }else{
+    				 alert("이미 추가한 자동차입니다.");
     			 }
     		 },
     		 error(){

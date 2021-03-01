@@ -17,19 +17,22 @@ public class CompanyCarService {
 	@Autowired
 	private CompanyCarDAO dao;
 	
+	/** 차량 목록 조회 Service
+	 * @param memNo
+	 * @return cList
+	 */
+	public List<TestCars> carList(int memNo) {
+		return dao.carList(memNo);
+	}
+	
 	/** 차량 추가 검색 Service
 	 * @param carName
 	 * @return cars
 	 */
 	public List<TestCars> carSearch(String carName) {
-		
 		return dao.carSearch(carName);
 	}
 
-	public List<TestCars> carList(Member loginMember) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/** 차량 추가 Service
 	 * @param map
@@ -39,6 +42,14 @@ public class CompanyCarService {
 	public int addCar(Map<String, Object> map) {
 		
 		return dao.addCar(map);
+	}
+
+	/** 추가하려는 차량이 db에 존재하는지 확인하는 Service
+	 * @param map
+	 * @return exist
+	 */
+	public int carListEx(Map<String, Object> map) {
+		return dao.carListEx(map);
 	}
 
 }
