@@ -25,7 +25,7 @@ import com.google.gson.Gson;
 import com.kh.youngchar.board.model.service.BoardService;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
-import com.kh.youngchar.board.model.vo.PageInfo;
+import com.kh.youngchar.board.model.vo.PageInfo2;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Controller // 컨트롤러임을 알려줌 + bean 등록
@@ -56,7 +56,7 @@ public class BoardController {
 //		System.out.println("cp : " + cp);
 		
 //		1) 페이징 처리를 위한 객체 PageInfo 생성
-		PageInfo pInfo = service.getPageInfo(type, cp);
+		PageInfo2 pInfo = service.getPageInfo(type, cp);
 		
 //		System.out.println(pInfo);
 		
