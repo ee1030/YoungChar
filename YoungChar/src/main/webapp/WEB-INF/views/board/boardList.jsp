@@ -16,7 +16,7 @@
 
 
 
-<!-- Google font-->
+<%-- <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
@@ -41,7 +41,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/style2.css">
 <link id="color" rel="stylesheet" href="${contextPath}/resources/assets/css/color-1.css" media="screen">
 <!-- Responsive css-->
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css"> --%>
 
 </head>
 
@@ -60,8 +60,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="rn-page-title-inner">
-						<h1>Left Sidebar</h1>
-						<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
+						<h1></h1>
+						<p></p>
 					</div>
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 								<div id="head"></div>
 							</div>
 							<div class="table-responsive">
-								<table class="table table-hover">
+								<table class="table table-hover" id="list-table">
 									<thead>
 										<tr>
 											<th scope="col">No</th>
@@ -445,6 +445,29 @@
 
 	</footer>
 	<!-- End Site Footer-->
+	
+		<script>
+		// 게시글 상세보기 기능 (jquery를 통해 작업)
+		$("#list-table td").on("click", function(){
+			
+			var boardNo = $(this).parent().children().eq(0).text();
+										// td     tr 				td   		첫번째(게시글 번호)
+										
+			// 게시글 상세조회 요청 주소 조합
+			
+			// 게시글 목록 : /spring/board/list/1
+			// 상세조회 : /spring/board/1/500
+			// 절대 경로
+			//var boardViewURL = "${contextPath}/board/${pInfo.boardType}/" + boardNo;
+												// 		spring /	board	/					1				/500
+			
+			// 상대경로 
+			var boardViewURL = "../${pInfo.boardType}/" + boardNo;
+			
+			location.href = boardViewURL;
+		});
+		
+	</script>
 
 	<!--
 		All JavaScripts Codes Loaded
