@@ -8,6 +8,7 @@ public class DriveReview {
 	private int boardNo;
 	private int csat;
 	private String categoryNm;
+	private int categoryCd;
 	private String cooName;
 	private String carName;
 	private String boardTitle;
@@ -17,6 +18,9 @@ public class DriveReview {
 	private Timestamp boardCreateDt;
 	private int replyCount;
 	private int readCount;
+	private int rsrvtNo;
+	private String memImgPath;
+	private String memImgName;
 	
 	public DriveReview() {}
 
@@ -42,6 +46,14 @@ public class DriveReview {
 
 	public void setCategoryNm(String categoryNm) {
 		this.categoryNm = categoryNm;
+	}
+
+	public int getCategoryCd() {
+		return categoryCd;
+	}
+
+	public void setCategoryCd(int categoryCd) {
+		this.categoryCd = categoryCd;
 	}
 
 	public String getCooName() {
@@ -116,18 +128,40 @@ public class DriveReview {
 		this.readCount = readCount;
 	}
 
+	public int getRsrvtNo() {
+		return rsrvtNo;
+	}
+
+	public void setRsrvtNo(int rsrvtNo) {
+		this.rsrvtNo = rsrvtNo;
+	}
+
+	public String getMemImgPath() {
+		return memImgPath;
+	}
+
+	public void setMemImgPath(String memImgPath) {
+		this.memImgPath = memImgPath;
+	}
+
+	public String getMemImgName() {
+		return memImgName;
+	}
+
+	public void setMemImgName(String memImgName) {
+		this.memImgName = memImgName;
+	}
+
 	@Override
 	public String toString() {
-		return "DriveReview [boardNo=" + boardNo + ", csat=" + csat + ", categoryNm=" + categoryNm + ", cooName="
-				+ cooName + ", carName=" + carName + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", memNo=" + memNo + ", memNickname=" + memNickname + ", boardCreateDt=" + boardCreateDt
-				+ ", replyCount=" + replyCount + ", readCount=" + readCount + "]";
+		return "DriveReview [boardNo=" + boardNo + ", csat=" + csat + ", categoryNm=" + categoryNm + ", categoryCd="
+				+ categoryCd + ", cooName=" + cooName + ", carName=" + carName + ", boardTitle=" + boardTitle
+				+ ", boardContent=" + boardContent + ", memNo=" + memNo + ", memNickname=" + memNickname
+				+ ", boardCreateDt=" + boardCreateDt + ", replyCount=" + replyCount + ", readCount=" + readCount
+				+ ", rsrvtNo=" + rsrvtNo + ", memImgPath=" + memImgPath + ", memImgName=" + memImgName + "]";
 	}
 
 
-	
-	
-	
 	
 	
 }

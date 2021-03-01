@@ -12,6 +12,8 @@ public class Reply {
 	private String memNickname;			// 댓글 작성 회원 닉네임
 	private int parentReplyNo;			// 부모 댓글 번호
 	private int replyDepth;				// 댓글 깊이
+	private String memImgPath;
+	private String memImgName;
 
 	public Reply() {}
 
@@ -87,13 +89,31 @@ public class Reply {
 		this.replyDepth = replyDepth;
 	}
 
+	public String getMemImgPath() {
+		return memImgPath;
+	}
+
+	public void setMemImgPath(String memImgPath) {
+		this.memImgPath = memImgPath;
+	}
+
+	public String getMemImgName() {
+		return memImgName;
+	}
+
+	public void setMemImgName(String memImgName) {
+		this.memImgName = memImgName;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDt=" + replyCreateDt
 				+ ", replyStatus=" + replyStatus + ", boardNo=" + boardNo + ", replyWriter=" + replyWriter
 				+ ", memNickname=" + memNickname + ", parentReplyNo=" + parentReplyNo + ", replyDepth=" + replyDepth
-				+ "]";
+				+ ", memImgPath=" + memImgPath + ", memImgName=" + memImgName + "]";
 	}
+
+
 	
 	
 

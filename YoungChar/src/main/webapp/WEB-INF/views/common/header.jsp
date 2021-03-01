@@ -69,6 +69,13 @@
 		
 </head>
 <body>
+	<c:if test="${!empty swalTitle}">
+		<script>
+			swal({icon : "${swalIcon}",
+				 title : "${swalTitle}",
+				 text : "${swalText}"});
+		</script>
+	</c:if>
 
 <div id="preloader"></div>
 		<div id="preloader-overlayer"></div>

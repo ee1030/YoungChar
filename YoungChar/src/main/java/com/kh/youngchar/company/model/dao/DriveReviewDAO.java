@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
@@ -39,9 +40,6 @@ public class DriveReviewDAO {
 		return sqlSession.selectOne("driveReviewMapper.selectBoard", boardNo);
 	}
 
-	public MemberFile getMemberProfile(int memNo) {
-		return sqlSession.selectOne("driveReviewMapper.getMemberProfile", memNo);
-	}
 
 	public int increaseReadCount(int boardNo) {
 		return sqlSession.update("driveReviewMapper.increaseReadCount", boardNo);
@@ -49,6 +47,22 @@ public class DriveReviewDAO {
 
 	public List<Reply> selectReplyList(int boardNo) {
 		return sqlSession.selectList("driveReviewMapper.selectReplyList", boardNo);
+	}
+
+	public DriveReview selectReservation(int rsrvtNo) {
+		return sqlSession.selectOne("driveReviewMapper.selectReservation", rsrvtNo);
+	}
+
+	public int selectNextNo() {
+		return sqlSession.selectOne("driveReviewMapper.selectNextNo");
+	}
+
+	public int insertBoard(DriveReview board) {
+		return sqlSession.insert("driveReviewMapper.insertBoard", board);
+	}
+
+	public int insertAttachmentList(List<Attachment> uploadImages) {
+		return sqlSession.insert("driveReviewMapper.insertAttachmentList", uploadImages);
 	}
 
 }

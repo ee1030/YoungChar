@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +25,15 @@
 		.icofont-ui-rating{
 	    color: #f8d62b;
 			}
+		
+		.white-star{
+    	color: #b5b5b5;
+		}
+		
+		.img-60{
+			height: 60px;
+		}
+			
 	</style>
 
 </head>
@@ -55,38 +66,45 @@
 	<section class="rn-section">
 		<div class="container">
 			<h2>R E V I E W</h2>
-			<hr>
+			<br>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
 							<div class="invoice">
 							  <div>
-								<div>
-								  <div class="row">
-									<div class="col-sm-3">
-										<h4>브랜드: 현대 </h4>
-									</div>
-									<div class="col-sm-3">
-										<h4>센터: OO지점 </h4>
-									</div>
-									<div class="col-sm-3">
-										<h4>차종: 아이오닉 </h4>
-									</div>
-									<div class="col-sm-3">
-										<h4>별점:<i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></h4>
-									</div>
-								  </div>
-								</div>
-								<hr>
 								<!-- End InvoiceTop-->
 								<div class="row">
 									<div class="col-md-10">
+										  <h3 class="media-heading">${board.boardTitle}</h3>
+										  <br>
 									  <div class="media">
-										<div class="media-left"><img class="media-object rounded-circle img-60" src="assets/images/user/1.jpg" alt=""></div>
+										<div class="media-left">
+										
+										<c:choose>
+											<c:when test="${!empty board.memImgPath}">
+												<img class="media-object rounded-circle img-60" src="${contextPath}${board.memImgPath}/${board.memImgName}">
+											</c:when>
+											<c:otherwise>
+												<img class="media-object rounded-circle img-60" src="${contextPath}/resources/memberFile/user-basic.png">
+											</c:otherwise>
+										</c:choose>
+										
+										</div>
 										<div class="media-body m-l-20">
-										  <h4 class="media-heading">Johan Deo</h4>
-										  <p>JohanDeo@gmail.com</p>
+										  <h5 class="media-heading">${board.memNickname} </h5>
+										  <p>조회 ${board.readCount}  댓글 ${board.replyCount}  작성일 
+													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yyyy-MM-dd HH:mm"/>
+													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd HH:mm"/> 
+													<c:choose>
+														<c:when test="${createDate != now}">
+															${createDate }
+														</c:when>
+														<c:otherwise>
+															<fmt:formatDate value="${board.boardCreateDt }" pattern="HH:mm"/>
+														</c:otherwise>
+													</c:choose>
+											</p>
 										</div>
 									  </div>
 									</div>
@@ -96,56 +114,57 @@
 									  </div>
 									</div>
 								  </div>
+								  <div>
+								  <br>
+								  <hr>
+								  <div class="row">
+										<div class="col-sm-3">
+											<h5>브랜드: ${board.categoryNm} </h5>
+										</div>
+										<div class="col-sm-3">
+											<h5>센터: ${board.cooName} </h5>
+										</div>
+										<div class="col-sm-3">
+											<h5>차명: ${board.carName} </h5>
+										</div>
+										<div class="col-sm-3">
+											<h5>별점: 
+													<c:forEach begin="1" end="${board.csat}">
+														<i class="icofont icofont-ui-rating"></i>
+													</c:forEach>
+													<c:forEach begin="1" end="${5 - board.csat}">
+														<i class="icofont icofont-ui-rating white-star"></i>
+													</c:forEach>
+											</h5>
+										</div>
+								  </div>
+								</div>
 								<!-- End Invoice Mid-->
-								<hr>
 								<div>
 								  <div class="table-responsive invoice-table" id="table">
 								  </div>
 								  <!-- End Table-->
 									<div id="board-content">
-										<%-- ${board.boardContent} --%>
-									
-										<%-- JSTL을 이용한 개행문자 처리 --%>
-										
-										<% pageContext.setAttribute("newLine", "\n"); %>
-										${fn:replace(board.boardContent, newLine, "<br>")}
-										<!-- el/jstl은 컴파일 후 java 코드로 변환되는데 이스케이프 문자를 인식하지 못한다.
-										스크립틀릿은 java 이므로 java 변수를 생성해서 jstl을 사용해준다.
-										 -->
+									   ${board.boardContent}
 									</div>
-
 								</div>
 								<!-- End InvoiceBot-->
-									<hr>
 									<div>
 										<div class="float-right">
-										
-											<%-- 북마크나 주소로 인한 직접 접근 시 목록으로 버튼 경로 지정 --%>
+
 											<c:if test="${empty sessionScope.returnListURL}">
-												<c:set var="returnListURL" value="../list/${board.boardCode}" scope="session"/>
+												<c:set var="returnListURL" value="../reviewlist" scope="session"/>
 											</c:if>
 											<a class="btn btn-light" href="${sessionScope.returnListURL}">목록으로</a>
-					       							<!-- ex)기존주소: /spring/1/505 , 상대 경로 시 현재 위치인 505부터 변경됨.-->
-						                	<c:url var="updateUrl" value="${board.boardNo}/update" />
-						                	
-						                	<!-- 로그인된 회원이 글 작성자인 경우 -->
-											<c:if test="${(loginMember != null) && (board.memberId == loginMember.memberId)}">
-												<a href="${updateUrl}" class="btn btn-light">수정</a>
-												<button id="deleteBtn" class="btn btn-light">삭제</button> 
-											</c:if>
+
 										</div>
 									</div>
 								</div>
 					
 								
 							  </div>
-							  <div class="col-sm-12 text-center mt-3">
-							
-								
+							  <div>
 								<jsp:include page="reply.jsp"/>
-								
-									
-
 							  </div>
 							  <!-- End Invoice-->
 							  <!-- End Invoice Holder-->
