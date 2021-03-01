@@ -150,12 +150,26 @@
 								</div>
 								<div class="mem">
 										<ul>
-											<li>
-												<a href="${contextPath}/member/login">로그인</a>
-											</li>
-											<li>
-												<a href="${contextPath}/member/signUp">회원가입</a>
-											</li>
+										
+										<c:choose>
+											<c:when test="${empty sessionScope.loginMember }">
+												<li>
+													<a href="${contextPath}/member/login">로그인</a>
+												</li>
+												<li>
+													<a href="${contextPath}/member/signUp">회원가입</a>
+												</li>
+											</c:when>
+											
+											<c:otherwise>
+												<li class="nav-item">
+				                	<a class="nav-link" href="${contextPath}/member/mypage">${loginMember.nickName}</a>
+				                	
+				                </li>
+				                <li class="nav-item"><a class="nav-link" href="${contextPath}/member/logout">Logout</a></li>
+											</c:otherwise>
+										</c:choose>
+										
 											<li>
 												<a href="${contextPath}/admin/dashboard">관리자</a>
 											</li>
@@ -202,23 +216,7 @@
 										<a href="${contextPath}/chargerLocation/location">충전소</a>
 									</li>
 									<li>
-										<a href="#">Cars 
-											<i class="lnr lnr-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="${contextPath }/car/list">SEARCH CAR</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/1">REVIEW</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/2">INFORMATION</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/3">FREE CHAT</a>
-											</li>
-										</ul>
+										<a href="${contextPath}/chargerCompany/introduction">충전기 설치 업체</a>
 									</li>
 									<li>
 										<a href="service.html">Service</a>
@@ -241,7 +239,7 @@
 												<a href="${contextPath}/testDrive/myReservation">내 예약</a>
 											</li>
 											<li>
-												<a href="${contextPath}/company/reviewlist">시승후기</a>
+												<a href="${contextPath}/driveReview/reviewlist">시승후기</a>
 											</li>
 										</ul>
 									</li>
@@ -257,7 +255,7 @@
 
 		</header>
 		<!-- End Header-->
-		
+
 	<!-- 곻통 스크립트 경로 -->	
 	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
@@ -267,5 +265,8 @@
 	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 	
+
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 </body>
 </html>

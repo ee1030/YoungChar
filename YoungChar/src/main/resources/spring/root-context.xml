@@ -95,5 +95,24 @@
 		104857600byte == 100MB
 		20971520 byte == 20MB
 	-->
+	
+	<!-- 이메일 발송 bean 설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+			<property name="host" value="smtp.gmail.com" />
+			<property name="port" value="587" />
+			<property name="defaultEncoding" value="utf-8"/>
+			<property name="username" value="jihoprac@gmail.com" />
+			<property name="password" value="qkr3158!" />
+		
+			<!-- email 요청시는 SMTP -->
+			<property name="javaMailProperties">
+				<props>
+					<prop key="mail.transport.protocol">smtp</prop>
+          <prop key="mail.smtp.auth">true</prop>
+          <prop key="mail.smtp.starttls.enable">true</prop>
+          <prop key="mail.debug">true</prop>
+				</props>
+		    </property>
+		</bean>
 		
 </beans>
