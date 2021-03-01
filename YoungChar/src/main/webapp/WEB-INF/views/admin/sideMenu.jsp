@@ -39,12 +39,14 @@
 /* 서브메뉴(ul) 스타일 지정 */
 #main-menu>li>ul {
 	/* 서브메뉴를 투명하게 */
-	opacity: 0;
+	/* opacity: 0; */
+	display : none;
 }
 
 /* 서브메뉴에 있는 a태그 숨기기 */
 #main-menu ul>li>a {
-	opacity: 0;
+	display : none;
+	/* opacity: 0; */
 	/* opacity: (투명)0 ~ 1(불투명)  */
 }
 
@@ -57,7 +59,8 @@
 #main-menu>li:hover ul, #main-menu>li:hover ul a {
 	/* 마우스가 올라간 메인메뉴의 후손 중
                                     ul 태그가 있고 그 ul의 후손중 a태그를 선택 */
-	opacity: 1;
+	/* opacity: 1; */
+	display : inline-block;
 }
 
 #main-menu li:hover ul li {
@@ -101,17 +104,28 @@
 			<div class="rn-widget-content">
 				<ul id="main-menu">
 					<li><a href="dashboard">대시보드</a></li>
-					<li><a href="#">회원 관리</a>
+					<li><a href="">회원 관리</a>
 						<ul>
-							<li><a href="#">일반회원 관리</a></li>
-							<li><a href="#">신규 업체 승인</a></li>
-							<li><a href="#">기존 업체 관리</a></li>
+							<li><a href="${contextPath}/admin/memberManagement">일반회원 관리</a></li>
+							<li><a href="${contextPath}/admin/newCompanyManagement">신규 업체 승인</a></li>
+							<li><a href="${contextPath}/admin/allCompanyManagement">기존 업체 관리</a></li>
 						</ul>
 					</li>
-					<li><a href="#">게시판 관리</a></li>
-					<li><a href="#">댓글 관리</a></li>
-					<li><a href="#">신고관리</a></li>
-					<li><a href="#">DB 관리</a></li>
+					<li><a href="${contextPath}/admin/allBoardManagement">게시판 관리</a>
+						<ul>
+							<li><a href="${contextPath}/admin/reviewBoardManagement">리뷰 게시판</a></li>
+							<li><a href="${contextPath}/admin/infoBoardManagement">정보 게시판</a></li>
+							<li><a href="${contextPath}/admin/freeBoardManagement">잡담 게시판</a></li>
+						</ul>
+					</li>
+					<li><a href="${contextPath}/admin/replyManagement">댓글 관리</a></li>
+					<li><a href="#">신고관리</a>
+						<ul>
+							<li><a href="${contextPath}/admin/reportBoardManagement">신고 게시글</a></li>
+							<li><a href="${contextPath}/admin/reportReplyManagement">신고 댓글</a></li>
+						</ul>
+					</li>
+					<li><a href="${contextPath}/admin/carDBManagement">DB 관리</a></li>
 				</ul>
 			</div>
 		</section>
