@@ -87,8 +87,9 @@
 											<th colspan="2" scope="col">제목</th>
 											<th scope="col">작성자</th>
 											<th scope="col">작성일</th>
-											<th scope="col">댓글</th>
+											
 											<th scope="col">조회수</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -103,8 +104,8 @@
 
 												<tr>
 													<td>${board.boardNo}</td>
-													<td>${board.categoryName}</td>
-													<td class="boardTitle">
+													<%-- <td>${board.categoryName}</td> --%>
+													<td colspan="2" class="boardTitle">
 														<!----------------- 썸네일 부분 -----------------> <c:forEach items="${thList}" var="th">
 															<c:if test="${th.parentBoardNo  == board.boardNo}">
 																<img src="${contextPath}${th.filePath}/${th.fileName}">
@@ -114,7 +115,6 @@
 													</td>
 
 													<td>${board.memberId}</td>
-													<td>${board.readCount}</td>
 													<td>
 														<%-- 날짜 출력 모양 지정 --%> <fmt:formatDate var="createDate" value="${board.boardCreateDate }" pattern="yyyy-MM-dd" /> <fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> <c:choose>
 															<c:when test="${createDate != now}">
@@ -125,6 +125,7 @@
 															</c:otherwise>
 														</c:choose>
 													</td>
+													<td>${board.readCount}</td>
 
 												</tr>
 											</c:forEach>
@@ -134,13 +135,14 @@
 							</div>
 							<hr>
 							<%-- 로그인이 되어있는 경우 --%>
-							<c:if test="${!empty loginMember }">
+							<c:if test="${empty loginMember }">
 								<a class="btn btn-success float-right" href="../${pInfo.boardType}/insert">글쓰기</a>
 							</c:if>
 
 							<!--------------------------------- pagination  --------------------------->
 							<div class="my-4">
-								<ul class="pagination">
+							<nav class="rn-pagination rn-pagination-center">
+								<ul >
 
 									<%-- 주소 조합 작업 --%>
 									<c:url var="pageUrl" value="${pInfo.boardType}?" />
@@ -168,14 +170,41 @@
 
 									<c:if test="${pInfo.currentPage > pInfo.pageSize}">
 										<li>
-											<!-- 첫 페이지로 이동(<<) --> <a class="page-link" href="${firstPage}">&lt;&lt;</a>
+											<!-- 첫 페이지로 이동(<<) --> <a  href="${firstPage}"><i class="fas fa-angle-right"></i></a>
 										</li>
 
 										<li>
-											<!-- 이전 페이지로 이동 (<) --> <a class="page-link" href="${prevPage}">&lt;</a>
+											<!-- 이전 페이지로 이동 (<) --> <a  href="${prevPage}">	<i class="fas fa-angle-left"></i></a>
 										</li>
 									</c:if>
 
+									<%--<!-- Post Pagination-->
+						<nav class="rn-pagination rn-pagination-center">
+							<ul>
+								<li>
+									<a href="#">
+										<i class="fas fa-angle-left"></i>
+									</a>
+								</li>
+								<li>
+									<a class="rn-active" href="#">1</a>
+								</li>
+								<li>
+									<a href="#">2</a>
+								</li>
+								<li>
+									<a href="#">3</a>
+								</li>
+								<li>
+									<a href="#">4</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fas fa-angle-right"></i>
+									</a>
+								</li>
+							</ul>
+						</nav> --%>
 
 
 									<!-- 페이지 목록 -->
@@ -195,14 +224,15 @@
 									<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
 									<c:if test="${next <= pInfo.maxPage}">
 										<li>
-											<!-- 다음 페이지로 이동 (>) --> <a class="page-link" href="${nextPage}">&gt;</a>
+											<!-- 다음 페이지로 이동 (>) --> <a  href="${nextPage}"><i class="fas fa-angle-right"></i></a>
 										</li>
 
 										<li>
-											<!-- 마지막 페이지로 이동(>>) --> <a class="page-link" href="${lastPage}">&gt;&gt;</a>
+											<!-- 마지막 페이지로 이동(>>) --> <a  href="${lastPage}"><i class="fas fa-angle-right"></i></a>
 										</li>
 									</c:if>
 								</ul>
+								</nav>
 							</div>
 
 						</div>
@@ -218,7 +248,7 @@
 							<h1>
 								<%-- 	${bList[0].boardName } --%>
 								<c:choose>
-									<c:when test="${pInfo.boardType == 2 }">자유게시판	</c:when>
+									<c:when test="${pInfo.boardType == 2 }">정보게시판	</c:when>
 									<c:when test="${pInfo.boardType == 3 }">잡담게시판	</c:when>
 								</c:choose>
 

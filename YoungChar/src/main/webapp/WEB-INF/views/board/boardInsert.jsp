@@ -6,32 +6,58 @@
 <meta charset="UTF-8">
 <title>게시글 등록</title>
 <style>
-    .insert-label {
+     .insert-label {
       display: inline-block;
       width: 80px;
       line-height: 40px
-    }
+    } 
 </style>
 
-<!-- summernote 사용 시 필요한 css 파일 추가 -->
-<link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
+
+ <!-- summernote 사용 시 필요한 css 파일 추가 -->
+  <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">  
 
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"/>
+ 	  <jsp:include page="../common/header.jsp"></jsp:include> 
 	
 	<!-- summmernote 사용 시 필요한 js 파일 추가 -->
 	<script src = "${contextPath}/resources/summernote/js/summernote-lite.js"></script>
 	<script src = "${contextPath}/resources/summernote/js/summernote-ko-KR.js"></script>
 	<script src = "${contextPath}/resources/summernote/js/mySummernote.js"></script>
 	
+<%-- 	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
+	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/scripts.js"></script> --%>
 	
-	<div class="container">
+	<!-- Page Title-->
+
+
+	<div class="rn-page-title">
+		<div class="rn-pt-overlayer"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="rn-page-title-inner">
+						<h1></h1>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Page Title-->
+	
+	<div class="container" style="margin-top:100px">
 
 		<div class="container pb-5 mb-5">
 
 			<h3>게시글 등록</h3>
-			<hr>
+			<br>
 			<!-- 파일 업로드 시 enctype="multipart/form-data" 지정 -->
 			<!-- 
 				- enctype : form 태그 데이터가 서버로 제출 될 때 인코딩 되는 방법을 지정. (POST 방식일 때만 사용 가능)
@@ -72,7 +98,7 @@
 					</h5>
 				</div>  
 
-				<hr>
+				<br>
 
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">썸네일</label>
@@ -97,7 +123,7 @@
 				</div>
 
 
-				<hr class="mb-4">
+				<br class="mb-4">
 
 				<div class="text-center">
 					<button type="submit" class="btn btn-success">등록</button>

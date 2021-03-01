@@ -154,7 +154,7 @@ public class BoardController {
 	@RequestMapping("{type}/insert")
 	public String insertView(@PathVariable("type") int type) {
 		
-		return "board/boardInsert" + type;
+		return "board/boardInsert";
 //		boardInsert1.jsp == 기존 방식 
 //		boardInsert2.jsp == summernote 적용 방식 
 	}
