@@ -8,18 +8,29 @@
 	
 	<typeAliases>
 			<typeAlias type="com.kh.youngchar.member.model.vo.MemberFile" alias="MemberFile" />
+		 <typeAlias type="com.kh.youngchar.board.model.vo.Board" alias="Board"/>
+      <typeAlias type="com.kh.youngchar.board.model.vo.Attachment" alias="Attachment"/>
+      <typeAlias type="com.kh.youngchar.board.model.vo.Reply" alias="Reply"/>
+
 			<typeAlias type="com.kh.youngchar.member.model.vo.Member" alias="Member" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.DriveReview" alias="DriveReview" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.Reply" alias="Reply" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.TestCars" alias="TestCars" />
+
 	
 	</typeAliases>
 	
 	
 	<mappers>
 		<mapper resource="/mappers/admin-mapper.xml" />
+
+		<mapper resource="/mappers/company-mapper.xml" />
+			<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/reply-mapper.xml"/>
+
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/driveReview-mapper.xml" />
 		<mapper resource="/mappers/companyCar-mapper.xml" />
+
 	</mappers>
 </configuration>
