@@ -46,6 +46,22 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	
+	<div class="rn-page-title">
+		<div class="rn-pt-overlayer"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="rn-page-title-inner">
+						<h1></h1>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	<div class="container" id="content-main">
 
 		<div>
@@ -132,7 +148,7 @@
 			<hr>
 
 			<!-- 댓글 부분 -->
-		<%-- 	<jsp:include page="reply.jsp"/> --%>
+			<jsp:include page="reply.jsp"/>
 			
 		</div>
 	</div>
