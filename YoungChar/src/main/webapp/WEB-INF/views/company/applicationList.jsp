@@ -101,6 +101,7 @@
 									  <th scope="col">차량</th>
 									  <th scope="col">예약일시</th>
 									  <th scope="col">예약상태</th>
+									  <th scope="col">예약처리</th>
 									</tr>
 								  </thead>
 								  <tbody>
@@ -110,8 +111,10 @@
 									  <td>Orton</td>
 									  <td>@mdorton</td>
 									  <td>Admin</td>
+									  <td><span class="badge badge-primary">승인대기</span></td>
 									  <td>
-										  <select id="select2"  class="btn btn-danger">
+										  <select id="select2">
+												<option value="none">--선택--</option>
 											  <option value="N">승인대기</option>
 											  <option value="A">승인완료</option>
 											  <option value="Y">시승완료</option>
@@ -128,6 +131,7 @@
 									  <td>Deo</td>
 									  <td>@johndeo</td>
 									  <td>User</td>
+									  <td><span class="badge badge-warning text-dark">승인완료</span></td>
 									  <td>EK</td>
 									</tr>
 									<tr>
@@ -136,6 +140,7 @@
 									  <td>the Bird</td>
 									  <td>@twitter</td>
 									  <td>admin</td>
+									  <td><span class="badge badge-success">시승완료</span></td>
 									  <td>UK</td>
 									</tr>
 									<tr>
@@ -144,15 +149,8 @@
 									  <td>Ottandy</td>
 									  <td>@mdothe</td>
 									  <td>user</td>
+									  <td><span class="badge badge-danger">시승취소</span></td>
 									  <td>AUS</td>
-									</tr>
-									<tr>
-									  <th scope="row">5</th>
-									  <td>Ram Jacob</td>
-									  <td>Thornton</td>
-									  <td>@twitter</td>
-									  <td>admin</td>
-									  <td>IND</td>
 									</tr>
 								  </tbody>
 								</table>

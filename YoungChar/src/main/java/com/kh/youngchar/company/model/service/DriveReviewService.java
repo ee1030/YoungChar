@@ -3,6 +3,9 @@ package com.kh.youngchar.company.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
@@ -20,8 +23,14 @@ public interface DriveReviewService{
 
 	List<DriveReview> selectList(PageInfo pInfo);
 
-	Map<String, Object> driveReview(int boardNo);
+	DriveReview driveReview(int boardNo);
 
 	List<Reply> selectReplyList(int boardNo);
+
+	DriveReview selectReservation(int rsrvtNo);
+
+	int insertBoard(DriveReview board, String savePath);
+
+	Attachment insertImage(MultipartFile uploadFile, String savePath);
 
 }

@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="driveReviewMapper">
-	
-	<resultMap type="MemberFile" id="memberFile_rm">
-		<id property="memImgNo" column="MEM_IMG_NO"/>
-		<result property="memImgPath" column="MEM_IMG_PATH"/>
-		<result property="memImgName" column="MEM_IMG_NAME"/>
-		<result property="memImgLevel" column="MEM_IMG_LEVEL"/>
-		<result property="memNo" column="MEM_NO"/>
-		<result property="cooName" column="COO_NAME"/>
-		<result property="categoryNm" column="CATEGORY_NM"/>
-	</resultMap>
-	
-	<resultMap type="DriveReview" id="driveReview_rm">
-		<id property="boardNo" column="BOARD_NO"/>
-		<result property="csat" column="CSAT"/>
-		<result property="categoryNm" column="CATEGORY_NM"/>
-		<result property="cooName" column="COO_NAME"/>
-		<result property="carName" column="CAR_NAME"/>
-		<result property="boardTitle" column="BOARD_TITLE"/>
-		<result property="boardContent" column="BOARD_CONTENT"/>
-		<result property="memNickname" column="MEM_NICKNAME"/>
-		<result property="memNo" column="MEM_NO"/>
-		<result property="boardCreateDt" column="BOARD_CREATE_DT"/>
-		<result property="replyCount" column="REPLY_COUNT"/>
-		<result property="readCount" column="READ_COUNT"/>
-	</resultMap>
-	
-	  <resultMap type="ReviewReply" id="reply_rm">
+   
+   <resultMap type="MemberFile" id="memberFile_rm">
+      <id property="memImgNo" column="MEM_IMG_NO"/>
+      <result property="memImgPath" column="MEM_IMG_PATH"/>
+      <result property="memImgName" column="MEM_IMG_NAME"/>
+      <result property="memImgLevel" column="MEM_IMG_LEVEL"/>
+      <result property="memNo" column="MEM_NO"/>
+      <result property="cooName" column="COO_NAME"/>
+      <result property="categoryNm" column="CATEGORY_NM"/>
+   </resultMap>
+   
+   <resultMap type="DriveReview" id="driveReview_rm">
+      <id property="boardNo" column="BOARD_NO"/>
+      <result property="csat" column="CSAT"/>
+      <result property="categoryNm" column="CATEGORY_NM"/>
+      <result property="categoryCd" column="CATEGORY_CD"/>
+      <result property="cooName" column="COO_NAME"/>
+      <result property="carName" column="CAR_NAME"/>
+      <result property="boardTitle" column="BOARD_TITLE"/>
+      <result property="boardContent" column="BOARD_CONTENT"/>
+      <result property="boardCreateDt" column="BOARD_CREATE_DT"/>
+      <result property="replyCount" column="REPLY_COUNT"/>
+      <result property="readCount" column="READ_COUNT"/>
+      <result property="memNickname" column="MEM_NICKNAME"/>
+      <result property="memNo" column="MEM_NO"/>
+      <result property="memImgPath" column="MEM_IMG_PATH"/>
+      <result property="memImgName" column="MEM_IMG_NAME"/>
+   </resultMap>
+   
+     <resultMap type="ReviewReply" id="reply_rm">
       <id property="replyNo" column="REPLY_NO"/>
       <result property="replyContent" column="REPLY_CONTENT"/>
       <result property="replyCreateDt" column="REPLY_CREATE_DT"/>
@@ -37,68 +40,109 @@
       <result property="memNickname" column="MEM_NICKNAME"/>
       <result property="parentReplyNo" column="PARENT_REPLY_NO"/>
       <result property="replyDepth" column="REPLY_DEPTH"/>
+      <result property="memImgPath" column="MEM_IMG_PATH"/>
+      <result property="memImgName" column="MEM_IMG_NAME"/>
    </resultMap>
-	
-	
-	<select id="getCompanyProfile" parameterType="_int" resultMap="memberFile_rm">
-		SELECT COO_NAME, CATEGORY_NM, MEM_IMG_NO, MEM_IMG_PATH, MEM_IMG_NAME
-		FROM MEMBER
-		JOIN COO_MEMBER USING (MEM_NO)
-		JOIN CATEGORY USING (CATEGORY_CD)
-		JOIN MEMBER_FILE USING (MEM_NO)
-		WHERE MEM_NO = #{memberNo}
-		AND MEM_IMG_LEVEL = 0
-	</select>	
-	
-	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM BOARD
-		WHERE BOARD_STATUS = 'Y' AND BOARD_CD = 4
-	</select>
-	
-	<select id="selectList" resultMap="driveReview_rm">
-		SELECT *
-		FROM(SELECT BOARD_NO, CSAT, CATEGORY_NM, COO_NAME, CAR_NAME, BOARD_TITLE, MEM_NICKNAME, BOARD_CREATE_DT,  REPLY_COUNT, READ_COUNT
-	        FROM V_DRIVE_REVIEW
-	        JOIN MEMBER USING(MEM_NO)
-	        JOIN DRIVE_REVIEW USING(BOARD_NO)
-	        JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
-	        JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
-	        JOIN CAR_INFO USING(CAR_NO)
-	        JOIN COO_MEMBER M ON(MEM_NO2 = M.MEM_NO)
-	        JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD))
-		ORDER BY BOARD_NO DESC
-	</select>
-	
-	<select id="selectBoard" parameterType="_int" resultMap="driveReview_rm">
-		SELECT MEM_NO, MEM_NICKNAME, BOARD_TITLE, BOARD_CONTENT, BOARD_CREATE_DT, READ_COUNT, REPLY_COUNT 
-		FROM V_DRIVE_REVIEW
-		JOIN MEMBER USING(MEM_NO)
-		WHERE BOARD_NO = #{boardNo}
-	</select>
-	
-	<select id="getMemberProfile" parameterType="_int" resultMap="memberFile_rm">
-		SELECT MEM_IMG_PATH, MEM_IMG_NAME
-		FROM MEMBER_FILE 
-		WHERE MEM_IMG_LEVEL = 0 AND MEM_NO = #{memNo}
-	</select>
-	
-	<update id="increaseReadCount" parameterType="_int">
-		UPDATE BOARD SET
-		READ_COUNT = READ_COUNT + 1
-		WHERE BOARD_NO = #{boardNo}
-	</update>
+   
+   
+   <select id="getCompanyProfile" parameterType="_int" resultMap="memberFile_rm">
+      SELECT COO_NAME, CATEGORY_NM, MEM_IMG_NO, MEM_IMG_PATH, MEM_IMG_NAME
+      FROM MEMBER
+      JOIN COO_MEMBER USING (MEM_NO)
+      JOIN CATEGORY USING (CATEGORY_CD)
+      JOIN MEMBER_FILE USING (MEM_NO)
+      WHERE MEM_NO = #{memberNo}
+      AND MEM_IMG_LEVEL = 0
+   </select>   
+   
+   <select id="getListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM BOARD
+      WHERE BOARD_STATUS = 'Y' AND BOARD_CD = 4
+   </select>
+   
+   <select id="selectList" resultMap="driveReview_rm">
+      SELECT *
+      FROM(SELECT BOARD_NO, CSAT, CATEGORY_NM, COO_NAME, CAR_NAME, BOARD_TITLE, MEM_NICKNAME, BOARD_CREATE_DT,  REPLY_COUNT, READ_COUNT
+           FROM V_DRIVE_REVIEW
+           JOIN MEMBER USING(MEM_NO)
+           JOIN DRIVE_REVIEW USING(BOARD_NO)
+           JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
+           JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+           JOIN CAR_INFO USING(CAR_NO)
+           JOIN COO_MEMBER M ON(MEM_NO2 = M.MEM_NO)
+           JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD))
+      ORDER BY BOARD_NO DESC
+   </select>
+   
+   <select id="selectBoard" parameterType="_int" resultMap="driveReview_rm">
+			SELECT CATEGORY_NM, COO_NAME, CAR_NAME, CSAT, BOARD_TITLE, BOARD_CONTENT, 
+			           BOARD_CREATE_DT, READ_COUNT, REPLY_COUNT, BOARD_CREATE_DT, 
+			           MEM_NICKNAME, MEM_IMG_PATH, MEM_IMG_NAME
+			FROM V_DRIVE_REVIEW
+			JOIN MEMBER U USING(MEM_NO)
+			LEFT OUTER JOIN MEMBER_FILE USING(MEM_NO)
+			JOIN DRIVE_REVIEW USING(BOARD_NO)
+			JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
+			JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+			JOIN CAR_INFO USING(CAR_NO)
+			JOIN COO_MEMBER M ON(MEM_NO2 = M.MEM_NO)
+			JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD)
+			WHERE BOARD_NO = #{boardNo}
+			AND (MEM_IMG_LEVEL IS NULL OR MEM_IMG_LEVEL=0)
+   </select>
+  
+   
+   <update id="increaseReadCount" parameterType="_int">
+      UPDATE BOARD SET
+      READ_COUNT = READ_COUNT + 1
+      WHERE BOARD_NO = #{boardNo}
+   </update>
 
    <select id="selectReplyList" parameterType="_int" resultMap="reply_rm">
-	   	SELECT * FROM V_REPLY
-			WHERE BOARD_NO = #{boardNo}
-			AND PARENT_REPLY_NO IN ( SELECT REPLY_NO FROM V_REPLY
-			                                         WHERE REPLY_DEPTH = 0
-			                                         AND BOARD_NO = #{boardNo} )
-			ORDER BY PARENT_REPLY_NO DESC,  
-			        CASE WHEN PARENT_REPLY_NO = REPLY_NO  THEN 99999999
-			        ELSE  REPLY_NO END DESC
+         SELECT REPLY_NO, REPLY_CONTENT, REPLY_CREATE_DT, MEM_NO, 
+                MEM_NICKNAME, BOARD_NO, PARENT_REPLY_NO, REPLY_DEPTH, MEM_IMG_PATH, MEM_IMG_NAME
+         FROM V_REPLY 
+         LEFT OUTER JOIN MEMBER_FILE USING(MEM_NO)
+         WHERE BOARD_NO = ${boardNo}
+         AND (MEM_IMG_LEVEL IS NULL OR MEM_IMG_LEVEL=0)
+         AND PARENT_REPLY_NO IN ( SELECT REPLY_NO FROM V_REPLY
+                                                  WHERE REPLY_DEPTH = 0
+                                                  AND BOARD_NO = ${boardNo} )
+         ORDER BY PARENT_REPLY_NO DESC,  
+                 CASE WHEN PARENT_REPLY_NO = REPLY_NO  THEN 99999999
+                 ELSE  REPLY_NO END DESC
    </select>
+   
+   <select id="selectReservation" parameterType="_int" resultMap="driveReview_rm">
+			SELECT CATEGORY_NM, COO_NAME, CAR_NAME, C.CATEGORY_CD, M.MEM_NO
+			FROM TES_DR_RESERVATION R
+			JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+			JOIN COO_MEMBER M ON(M.MEM_NO = MEM_NO2)
+			JOIN CAR_INFO USING(CAR_NO)
+			JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD)
+			WHERE RESERVATION_NO = #{rsrvtNo}
+   </select>
+   
+   <select id="selectNextNo" resultType="_int">
+   		SELECT SEQ_BNO.NEXTVAL FROM DUAL
+   </select>
+   
+   <insert id="insertBoard" parameterType="DriveReview">
+	    INSERT INTO BOARD
+			VALUES (#{boardNo}, #{boardTitle}, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 4, #{categoryCd}, #{memNo})
+   </insert>
 
+	<insert id="insertAttachmentList" parameterType="list">
+		INSERT INTO ATTACHMENT
+		SELECT SEQ_FNO.NEXTVAL, A.* FROM ( 
+			<foreach collection="list" item="item" separator=" UNION ALL ">
+				SELECT #{item.filePath} FILE_PATH,
+							 #{item.fileName} FILE_NAME,
+							 #{item.fileLevel} FILE_LEVEL,
+							 #{item.parentBoardNo} PARENT_BOARD_NO
+				FROM DUAL
+			</foreach>
+		)A 
+	</insert>
 </mapper>
-
