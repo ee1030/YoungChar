@@ -20,12 +20,13 @@ import com.kh.youngchar.board.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.company.controller.DriveReviewController;
 import com.kh.youngchar.company.model.dao.DriveReviewDAO;
+import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
-/** 업체 페이지 및 시승후기 관련 ServiceImpl
+/** 시승후기 관련 ServiceImpl
  * @author jeonga
  *
  */
@@ -36,11 +37,6 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 	private DriveReviewDAO dao;
 	private Logger logger = LoggerFactory.getLogger(DriveReviewController.class);
 
-
-	@Override
-	public MemberFile getCompanyProfile(int memberNo) {
-		return dao.getCompanyProfile(memberNo);
-	}
 
 	@Override
 	public PageInfo getPageInfo(int cp) {
@@ -90,7 +86,8 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		if(boardNo> 0) {
 			board.setBoardNo(boardNo);
 			
-			result = dao.insertBoard(board);
+			dao.insertBoard(board);
+			result = dao.insertDriveReview(board);
 			
 			if(result > 0) {
 				
@@ -179,5 +176,6 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		
 		return date + str + ext;
 	}
+
 
 }

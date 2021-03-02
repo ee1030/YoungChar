@@ -198,6 +198,18 @@
 		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+		
+		<script>
+		
+		$(document).ready(function(){
+			
+			$("#select2").on("change", function(){
+				alert(this.value);
+			})
+			
+		});
+		
+		</script>
 
 	</body>
 </html>
