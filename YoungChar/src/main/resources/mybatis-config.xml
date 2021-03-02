@@ -17,6 +17,8 @@
 			<typeAlias type="com.kh.youngchar.company.model.vo.Reply" alias="ReviewReply" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.TestCars" alias="TestCars" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.Application" alias="Application" />
+			<typeAlias type="com.kh.youngchar.chargerCompany.model.vo.ChargerCompany" alias="ChargerCompany" />
+			<typeAlias type="com.kh.youngchar.chargerCompany.model.vo.CompanyImage" alias="CompanyImage" />
 
 	
 	</typeAliases>
@@ -33,6 +35,7 @@
 		<mapper resource="/mappers/company-mapper.xml" />
 		<mapper resource="/mappers/driveReview-mapper.xml" />
 		<mapper resource="/mappers/companyCar-mapper.xml" />
+		<mapper resource="/mappers/chargerCompany-mapper.xml" />
 
 	</mappers>
 </configuration>

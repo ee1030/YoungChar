@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +106,7 @@ to {
 }
 </style>
 
-		<!--
+<!--
 		All CSS Codes Loaded
 		Ex: bootstrap, fontawesome, style, etc.
 		-->
@@ -117,10 +120,10 @@ to {
 
 <!-- Google Map JS-->
 <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
-	</head>
-	<body>
+</head>
+<body>
 
-		<!-- Header-->
+	<!-- Header-->
 	<jsp:include page="../common/header.jsp"></jsp:include>
 </head>
 <body>
@@ -145,334 +148,148 @@ to {
 	<section class="rn-section rn-car-list">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-6">
 
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-1.jpg" alt="Black Sedan" srcset="assets/images/car-1.jpg 1x, assets/images/car-1@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Black Sedan</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
+				<c:if test="${!empty cList }">
+					<c:forEach var="chargerCompany" items="${cList}" varStatus="vs">
+						<div class="col-lg-4 col-md-6">
+
+							<!-- Item-->
+							<div class="rn-car-item">
+								<div class="rn-car-item-thumb">
+									<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-1.jpg" alt="Black Sedan" srcset="assets/images/car-1.jpg 1x, assets/images/car-1@2x.jpg 2x" />
 									</a>
 								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
-				</div>
-				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-2.jpg" alt="Toyota Etios" srcset="assets/images/car-2.jpg 1x, assets/images/car-2@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Toyota Etios</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
+								<div class="rn-car-item-info">
+									<h3>
+										<a href="car-single.html">${chargerCompany.companyName}</a>
+									</h3>
+									<p>업체 간단한 소개 글 등등..</p>
+									<div class="rn-car-list-n-price">
+										<ul>
+											<li>항목1</li>
+											<li>항목2</li>
+											<li>항목3</li>
+										</ul>
+										<div class="rn-car-price-wrap">
+											<a class="rn-car-price" href="car-single.html"><span class="rn-car-price-from">Go</span> </a>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
+							<!-- End Item-->
 
-				</div>
+						</div>
+					</c:forEach>
+				</c:if>
+
+
+
+				<!-- 
 				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-3.jpg" alt="Mercedes AMG E63" srcset="assets/images/car-3.jpg 1x, assets/images/car-3@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Mercedes AMG E63</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
 				</div>
+				
+				<div class="col-lg-4 col-md-6">
+				</div>
+				
+				
 				<div class="col-lg-12 d-none d-lg-block">
 					<a href="#"> <img class="img-fluid mb-50" src="assets/images/big-banner.png" alt="banner" srcset="assets/images/big-banner.png 1x, assets/images/big-banner@2x.png 2x">
 					</a>
 				</div>
+				
+				
 				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-4.jpg" alt="Red Sporty Car" srcset="assets/images/car-4.jpg 1x, assets/images/car-4@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Red Sporty Car</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
 				</div>
+				
 				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-5.jpg" alt="Toyta Corolla" srcset="assets/images/car-5.jpg 1x, assets/images/car-5@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Toyta Corolla</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
 				</div>
+				
 				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-6.jpg" alt="Toyota Avalon" srcset="assets/images/car-6.jpg 1x, assets/images/car-6@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Toyota Avalon</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
 				</div>
+				
+				
+				<div class="col-lg-12 d-none d-lg-block">
+					<a href="#"> <img class="img-fluid mb-50" src="assets/images/big-banner.png" alt="banner" srcset="assets/images/big-banner.png 1x, assets/images/big-banner@2x.png 2x">
+					</a>
+				</div>
+				
+				
 				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-7.jpg" alt="BMW X5" srcset="assets/images/car-7.jpg 1x, assets/images/car-7@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">BMW X5</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
 				</div>
+				
 				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-8.jpg" alt="Audi A8" srcset="assets/images/car-8.jpg 1x, assets/images/car-8@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Audi A8</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
 				</div>
-				<div class="col-lg-4 col-md-6">
-
-					<!-- Car Item-->
-					<div class="rn-car-item">
-						<div class="rn-car-item-review">
-							<div class="fas fa-star"></div>
-							5.0
-						</div>
-						<div class="rn-car-item-thumb">
-							<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-9.jpg" alt="Toyta Corolla" srcset="assets/images/car-9.jpg 1x, assets/images/car-9@2x.jpg 2x" />
-							</a>
-						</div>
-						<div class="rn-car-item-info">
-							<h3>
-								<a href="car-single.html">Toyta Corolla</a>
-							</h3>
-							<p>Mauris semper nisl a massa convallis</p>
-							<div class="rn-car-list-n-price">
-								<ul>
-									<li>Aliqua venandi mutat</li>
-									<li>Plerisque nostrum</li>
-									<li>Intellegimus percurri</li>
-								</ul>
-								<div class="rn-car-price-wrap">
-									<a class="rn-car-price" href="car-single.html"> <span class="rn-car-price-from">From</span> <span class="rn-car-price-format"> <span class="rn-car-price-amount">$900</span> <span class="rn-car-price-per">/day</span>
-									</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Car Item-->
-
+				
+				<div class="col-lg-4 col-md-6">	
 				</div>
+				
+			-->
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 
-					<!-- Cars Pagination-->
-					<nav class="rn-pagination rn-pagination-center">
-						<ul>
-							<li><a href="#"> <i class="fas fa-angle-left"></i>
-							</a></li>
-							<li><a class="rn-active" href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#"> <i class="fas fa-angle-right"></i>
-							</a></li>
+					<div class="my-4">
+						<ul class="pagination">
+
+							<!-- 화살표에 들어갈 주소를 변수로 생성 -->
+							<c:set var="firstPage" value="${pageUrl}cp=1" />
+							<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
+
+							<%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다--%>
+							<%-- 
+					<fmt:parseNumber>   : 숫자 형태를 지정하여 변수 선언 
+					integerOnly="true"  : 정수로만 숫자 표현 (소수점 버림)
+				--%>
+
+							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+							<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
+
+
+							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+							<c:set var="nextPage" value="${pageUrl}cp=${next}" />
+
+
+
+							<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+								<li>
+									<!-- 첫 페이지로 이동(<<) --> <a class="page-link" href="${firstPage}">&lt;&lt;</a>
+								</li>
+
+								<li>
+									<!-- 이전 페이지로 이동 (<) --> <a class="page-link" href="${prevPage}">&lt;</a>
+								</li>
+							</c:if>
+
+
+
+							<!-- 페이지 목록 -->
+							<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+								<c:choose>
+									<c:when test="${pInfo.currentPage == page }">
+										<li><a class="page-link">${page}</a></li>
+									</c:when>
+
+									<c:otherwise>
+										<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+
+							<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+							<c:if test="${next <= pInfo.maxPage}">
+								<li>
+									<!-- 다음 페이지로 이동 (>) --> <a class="page-link" href="${nextPage}">&gt;</a>
+								</li>
+
+								<li>
+									<!-- 마지막 페이지로 이동(>>) --> <a class="page-link" href="${lastPage}">&gt;&gt;</a>
+								</li>
+							</c:if>
 						</ul>
-					</nav>
-					<!-- End Cars Pagination-->
+					</div>
 
 				</div>
 			</div>
