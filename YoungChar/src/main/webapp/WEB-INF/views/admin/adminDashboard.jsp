@@ -212,7 +212,9 @@
 			data.addColumn('string', 'DataName');
 			data.addColumn('number', 'Value');
 			
-			
+			/* <c:forEach var="chartData" items="${cList}" >
+				data.addRows(${chartData.})
+			</c:forEach> */
 
 			var options = {
 				title : '브랜드 비율'

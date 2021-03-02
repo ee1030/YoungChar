@@ -3,6 +3,7 @@ package com.kh.youngchar.admin.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.youngchar.admin.model.service.AdminService;
-import com.kh.youngchar.admin.model.vo.ChartData;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Controller
@@ -31,7 +31,9 @@ public class AdminController {
 		int testDrive = service.getTestDrive();
 		
 		List<Member> mList = service.getNewMemList();
-		List<ChartData> cList = service.getChartData();
+		List<Map<String, Integer>> cList = service.getChartData();
+		
+		System.out.println(cList);
 		
 		model.addAttribute("newMember", newMember);
 		model.addAttribute("newCompany", newCompany);
@@ -39,6 +41,7 @@ public class AdminController {
 		model.addAttribute("testDrive", testDrive);
 		
 		model.addAttribute("mList", mList);
+		model.addAttribute("cList", cList);
 		
 		return "admin/adminDashboard";
 	}
