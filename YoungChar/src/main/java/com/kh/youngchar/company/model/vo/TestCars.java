@@ -9,8 +9,20 @@ public class TestCars {
 	private String filePath;
 	private String fileName;
 	private int memNo2;
+	private String brand;
 	
 	public TestCars() {}
+
+	
+	public String getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
 
 	public int getTestDrivecCarNo() {
 		return testDrivecCarNo;
@@ -76,12 +88,17 @@ public class TestCars {
 		this.memNo2 = memNo2;
 	}
 
+
 	@Override
 	public String toString() {
 		return "TestCars [testDrivecCarNo=" + testDrivecCarNo + ", carNo=" + carNo + ", carName=" + carName
 				+ ", carModel=" + carModel + ", fileNo=" + fileNo + ", filePath=" + filePath + ", fileName=" + fileName
-				+ ", memNo2=" + memNo2 + "]";
+				+ ", memNo2=" + memNo2 + ", brand=" + brand + "]";
 	}
+
+
+	
+	
 
 	 
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.testDrive.model.service.TestDriveService;
 import com.kh.youngchar.testDrive.model.vo.TestDrReservation;
@@ -32,10 +34,14 @@ public class TestDriveController {
 	@RequestMapping("reservation")
 	public String reservationView(Model model) {
 		
-		//모델선택
+		//모델가져오기
 		List<TestDrReservation> cList = service.selectCarList();
+		Gson gson = new Gson();
+		String cListJSON = gson.toJson(cList);
 		
-		model.addAllAttributes(cList);
+		System.out.println(cList);
+		model.addAttribute("cList",cList);
+		model.addAttribute("cListJSON", cListJSON);
 		
 		return "testDrive/testDriveReservation";
 	}
