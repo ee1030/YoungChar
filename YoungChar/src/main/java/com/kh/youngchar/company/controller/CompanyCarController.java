@@ -77,15 +77,23 @@ public class CompanyCarController {
 		map.put("memNo", memNo);
 		
 		int result = 0;
-		int exist = service.carListEx(map);
-		System.out.println("exist : " +exist);
 		
-		if(exist > 0) { //이미 추가되있을때(실패) 1
-			result = 0;
+		int ex = service.ex(map);
+		if(ex >0) { //이미 추가됨 (상태값 변경)
+			String exist = service.carListEx(map);
+			
+			if(exist.equals("N")) { //상태 N일때
+				result = service.updateStatus(map);
+				
+			}else { //상태 Y일때 이미 있음 알림
+				result = 0;
+			}
 			
 		}else {
 			result = service.addCar(map);
 		}
+		
+		
 		
 		return result;
 	}

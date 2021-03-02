@@ -25,12 +25,19 @@ public class CompanyCarDAO {
 		return sqlSession.selectList("companyCarMapper.carSearchList", carName);
 	}
 
-
+	/** 차량 있나 검색
+	 * @param map
+	 * @return result
+	 */
+	public int ex(Map<String, Object> map) {
+		return sqlSession.selectOne("companyCarMapper.ex", map);
+	}
+	
 	/** 추가하려는 차량이 db에 존재하는지 확인하는 DAO
 	 * @param map
 	 * @return exist
 	 */
-	public int carListEx(Map<String, Object> map) {
+	public String carListEx(Map<String, Object> map) {
 		return sqlSession.selectOne("companyCarMapper.carListEx", map);
 	}
 
@@ -54,9 +61,21 @@ public class CompanyCarDAO {
 	
 	/** 차량 삭제 DAO
 	 * @param map
-	 * @return
+	 * @return result
 	 */
 	public int deleteCar(Map<String, Object> map) {
 		return sqlSession.update("companyCarMapper.deleteCar", map);
 	}
+
+
+	/** 차량 상태 변경
+	 * @param map
+	 * @return result
+	 */
+	public int updateStatus(Map<String, Object> map) {
+		return sqlSession.update("companyCarMapper.updateStatus", map);
+	}
+
+
+	
 }
