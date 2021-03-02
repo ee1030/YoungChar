@@ -31,6 +31,12 @@ public interface MemberService {
 	//---------------------------------------------------
 	Member loginAction(Member inputMember);
 
+	
+	//---------------------------------------------------
+	//				업체 회원가입 Service
+	//---------------------------------------------------
+	int cooSignUpAction(Member member, List<MultipartFile> images, String savePath);
+
 
 
 }

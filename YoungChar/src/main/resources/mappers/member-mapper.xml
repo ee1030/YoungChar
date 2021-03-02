@@ -38,7 +38,7 @@
 	<!-- 회원 가입 -->
 	<insert id="SignUpAction" parameterType="Member">
 	INSERT INTO MEMBER
-	VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberNm}, #{nickName},
+	VALUES(#{memberNo}, #{memberId}, #{memberPwd}, #{memberNm}, #{nickName},
 						#{memberEmail},  #{phone}, #{memberAddr}, DEFAULT, DEFAULT, DEFAULT)
 	
 	</insert>
@@ -73,6 +73,26 @@
 	</select>
 	
 	
+	<!-- 다음 회원번호 -->
+	<select id="nextMem" resultType="_int">
+		SELECT SEQ_MNO.NEXTVAL FROM DUAL
+	</select>
+	
+	
+	<!-- 업체 회원가입 공통부분 -->
+	<insert id="cooSignUpAction" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(#{memberNo}, #{memberId}, #{memberPwd}, #{memberNm}, 'NULL',
+						#{memberEmail},  #{phone}, #{memberAddr}, 'C', 'Y', DEFAULT)
+	
+	</insert>
+	
+	
+	<!-- COO_MEMBER 테이블 추가(업체 나머지 부분 insert) -->
+	<insert id="cooMemberInsert" parameterType="Member">
+		INSERT INTO COO_MEMBER
+		VALUES(#{memberNo}, #{cooName}, #{cooNumber}, #{brandCategory})
+	</insert>
 	
 	
 	<!-- 회원 정보 수정 -->
