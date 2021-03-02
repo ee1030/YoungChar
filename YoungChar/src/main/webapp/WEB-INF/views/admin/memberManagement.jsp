@@ -58,6 +58,7 @@
 .btn-success {
 	display: inline-block;
 }
+
 </style>
 
 
@@ -98,103 +99,52 @@
 											<th scope="col">회원번호</th>
 											<th scope="col">회원아이디</th>
 											<th scope="col">이름</th>
-											<th scope="col">최근 접속일</th>
+											<th scope="col">회원등급</th>
 											<th scope="col">가입일</th>
 											<th scope="col">회원상태</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>test01</td>
-											<td>김갑돌</td>
-											<td>2021-03-01</td>
-											<td>2021-03-01</td>
-											<td>가입</td>
-										</tr>
-
+										<c:forEach var="member" items="${mList}">
+											<tr>
+												<th><input type="checkbox" name="chkid" class="chk" /></th>
+												<th scope="row">${member.memberNo }</th>
+												<td>${member.memberId }</td>
+												<td>${member.memberNm }</td>
+												<td><c:choose>
+														<c:when test="${member.memberGrade ==  'A'}">
+															관리자
+														</c:when>
+														<c:when test="${member.memberGrade ==  'C'}">
+															업체회원
+														</c:when>
+														<c:otherwise>
+															일반회원
+														</c:otherwise>
+													</c:choose></td>
+												<td>
+													<%-- 날짜 출력 모양 지정 --%> 
+													<fmt:formatDate var="signDate" value="${member.signDt }" pattern="yyyy-MM-dd" /> 
+													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> 
+													<c:choose>
+														<c:when test="${signDate != now}">
+															${signDate }
+														</c:when>
+														<c:otherwise>
+															<fmt:formatDate value="${member.signDt }" pattern="HH:mm" />
+														</c:otherwise>
+													</c:choose>
+												</td>
+												<td><c:choose>
+														<c:when test="${member.memberStatus == 'N' }">
+															가입
+														</c:when>
+														<c:otherwise>
+															탈퇴
+														</c:otherwise>
+													</c:choose></td>
+											</tr>
+										</c:forEach>
 
 									</tbody>
 								</table>
@@ -210,18 +160,47 @@
 				<div class="col-lg-12">
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
-						<button class="btn btn-danger">선택 탈퇴</button>
-						<button class="btn btn-success">선택 복구</button>
+						<button class="btn btn-danger" id="secesseion">선택 탈퇴</button>
+						<button class="btn btn-success" id="restore">선택 복구</button>
 						<ul>
-							<li><a href="#"> <i class="fas fa-angle-left"></i>
-							</a></li>
-							<li><a class="rn-active" href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#"> <i class="fas fa-angle-right"></i>
-							</a></li>
+						
+							
+							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+							<c:set var="prevPage" value="?cp=${prev}" />
+
+
+							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+							<c:set var="nextPage" value="?cp=${next}" />
+							
+							<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+								<li>
+									<!-- 이전 페이지로 이동 (<) --> 
+									<a  href="${prevPage}">	<i class="fas fa-angle-left"></i></a>
+								</li>
+							</c:if>
+							
+							<!-- 페이지 목록 -->
+							<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+								<c:choose>
+									<c:when test="${pInfo.currentPage == page }">
+										<li><a class="page-link rn-active">${page}</a></li>
+									</c:when>
+
+									<c:otherwise>
+										<li><a class="page-link" href="?cp=${page}">${page}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+									
+							<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+							<c:if test="${next <= pInfo.maxPage}">
+								<li>
+									<!-- 다음 페이지로 이동 (>) --> 
+									<a  href="${nextPage}"><i class="fas fa-angle-right"></i></a>
+								</li>
+							</c:if>
 						</ul>
 					</nav>
 					<!-- End Cars Pagination-->
@@ -253,6 +232,19 @@
 				$('.chk').prop('checked', this.checked);
 			});
 		});
+		
+		
+		
+		$("#secession").on("click", function({
+			var chkList = new Array();
+			
+			$("checkbox[name=chkid]:checked").each(function(){
+				chkList.push($(this).prev());
+			});
+			
+			console.log(chkList);
+		});
+		
 	</script>
 
 

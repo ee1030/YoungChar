@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.youngchar.admin.model.dao.AdminDAO;
+import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Service
@@ -49,5 +50,18 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Map<String, Integer>> getChartData() {
 		return dao.getChartData();
+	}
+
+	// 회원관리 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getPageInfo(int cp) {
+		int listCount = dao.getListCount();
+		return new PageInfo(cp, listCount);
+	}
+
+	// 전체 회원 목록 조회 Service 구현
+	@Override
+	public List<Member> selectMemberList(PageInfo pInfo) {
+		return dao.selectMemberList(pInfo);
 	}
 }
