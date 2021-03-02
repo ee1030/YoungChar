@@ -65,6 +65,35 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.loginAction", inputMember);
 		
 	}
+
+	
+	//---------------------------------------------------
+	//				다음 회원번호 DAO
+	//---------------------------------------------------
+	public int nextMemNo() {
+		return sqlSession.selectOne("memberMapper.nextMem");
+		
+	}
+
+
+	//---------------------------------------------------
+	//				업체 회원가입 공통부분 DAO
+	//---------------------------------------------------
+	public int cooSignUpAction(Member member) {
+		return sqlSession.insert("memberMapper.cooSignUpAction", member);
+		
+	}
+
+
+	//---------------------------------------------------
+	//				업체 회원가입 업체 테이블 삽입 DAO
+	//---------------------------------------------------
+	public int cooMemberInsert(Member member) {
+		return sqlSession.insert("memberMapper.cooMemberInsert", member);
+		
+	}
+
+
 	
 	
 	

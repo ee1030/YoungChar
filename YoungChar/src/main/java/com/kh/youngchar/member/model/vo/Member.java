@@ -18,8 +18,21 @@ public class Member {
 	
 	//-----------업체---------------
 	
+	private String cooName;
 	private String cooNumber;
 	private String brandCategory;
+	
+	
+	public String getCooName() {
+		return cooName;
+	}
+
+
+	public void setCooName(String cooName) {
+		this.cooName = cooName;
+	}
+
+
 	
 	
 	public Member() {	}

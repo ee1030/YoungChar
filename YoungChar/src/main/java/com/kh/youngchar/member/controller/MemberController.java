@@ -94,7 +94,7 @@ public class MemberController {
 	}
 
 	// ---------------------------------------------------
-	// 일반 회원가입 이메일 발송 Controller (AJAX)
+	// 회원가입 이메일 발송 Controller (AJAX)
 	// ---------------------------------------------------
 	@RequestMapping("normalSignUpMail")
 	@ResponseBody
@@ -149,6 +149,40 @@ public class MemberController {
 		
 		
 		int result = service.SignUpAction(member,images, savePath);
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원가입 성공";
+			swalText = "회원가입을 환영합니다.";
+		}else {
+			
+			swalIcon = "error";
+			swalTitle = "회원가입 실패";
+			swalText = "회원가입 과정에서 문제가 발생했습니다.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		ra.addFlashAttribute("swalText", swalText);
+		
+		return "redirect:/";
+	}
+	
+	
+	// ---------------------------------------------------
+	// 업체 회원가입  Controller
+	// ---------------------------------------------------
+	@RequestMapping("cooSignUpAction")
+	public String cooSignUpAction(@ModelAttribute Member member,
+			@RequestParam(value="images", required=false) List<MultipartFile> images,
+			HttpServletRequest request,
+			RedirectAttributes ra) {
+		
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/memberFile");
+		
+		
+		int result = service.cooSignUpAction(member,images, savePath);
 		
 		if(result > 0) {
 			swalIcon = "success";
