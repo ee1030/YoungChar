@@ -44,11 +44,19 @@ public class CompanyCarService {
 		return dao.addCar(map);
 	}
 
+	/** 차량 있나 검색
+	 * @param map
+	 * @return result
+	 */
+	public int ex(Map<String, Object> map) {
+		return dao.ex(map);
+	}
+	
 	/** 추가하려는 차량이 db에 존재하는지 확인하는 Service
 	 * @param map
 	 * @return exist
 	 */
-	public int carListEx(Map<String, Object> map) {
+	public String carListEx(Map<String, Object> map) {
 		return dao.carListEx(map);
 	}
 
@@ -60,5 +68,15 @@ public class CompanyCarService {
 	public int deleteCar(Map<String, Object> map) {
 		return dao.deleteCar(map);
 	}
+
+	/** 차량 상태변경
+	 * @param map
+	 * @return result
+	 */
+	public int updateStatus(Map<String, Object> map) {
+		return dao.updateStatus(map);
+	}
+
+	
 
 }

@@ -172,38 +172,7 @@
 					<div class="col-lg-4 col-md-6">
 
 						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-1.jpg" alt="Black Sedan" srcset="${contextPath}/resources/assets/images/car-1.jpg 1x, ${contextPath}/resources/assets/images/car-1@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">Black Sedan</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$900</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<!-- End Car Item-->
 
 					</div>
