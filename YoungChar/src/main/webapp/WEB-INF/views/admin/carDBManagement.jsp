@@ -109,7 +109,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -119,7 +119,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -129,7 +129,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -139,7 +139,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -149,7 +149,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -159,7 +159,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -169,7 +169,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -179,7 +179,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -189,7 +189,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 										<tr>
@@ -199,7 +199,7 @@
 											<td>횬다이</td>
 											<td>
 												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>												
+												<button class="btn btn-danger btn-sm">삭제</button>
 											</td>
 										</tr>
 
@@ -218,7 +218,7 @@
 				<div class="col-lg-12">
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
-						<button class="btn btn-success">차량 등록</button>
+						<button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">차량 등록</button>
 						<button class="btn btn-danger">차량 삭제</button>
 						<ul>
 							<li><a href="#"> <i class="fas fa-angle-left"></i>
@@ -239,21 +239,22 @@
 		<!-- End Page Content-->
 	</section>
 
-	<!-- Site Footer-->
-
-	<!-- End Site Footer-->
-
-	<!--
-		All JavaScripts Codes Loaded
-		Ex: jquery, bootstrap, etc.
-		-->
-	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
-	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-success">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script>
 		$(document).ready(function() {
