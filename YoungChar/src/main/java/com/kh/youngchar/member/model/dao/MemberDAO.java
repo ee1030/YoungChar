@@ -94,6 +94,11 @@ public class MemberDAO {
 	}
 
 
+	public MemberFile selectFile(int memNo) {
+		return sqlSession.selectOne("companyMapper.selectFile", memNo);
+	}
+
+
 	
 	
 	
