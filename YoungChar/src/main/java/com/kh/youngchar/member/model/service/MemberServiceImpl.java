@@ -55,17 +55,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int SignUpAction(Member member, List<MultipartFile> images, String savePath) {
 		int result = 0;
-		int memNo = 0;
-		
+		int memberNo = dao.nextMemNo();
 		String encPwd = enc.encode(member.getMemberPwd());
 		
 		member.setMemberPwd(encPwd);
+		member.setMemberNo(memberNo);
 		
 		result = dao.SignUpAction(member);
 		
 		if(result > 0) {
-			memNo = dao.memNo();
-			
+			int memNo = memberNo;
 			List<MemberFile> uploadImages = new ArrayList<MemberFile>();
 			
 			String memImgPath = "/resources/memberFile";
@@ -85,9 +84,10 @@ public class MemberServiceImpl implements MemberService{
 			if(!uploadImages.isEmpty()) {
 				
 				result = dao.insertMemberFile(uploadImages);
-				
+
+				System.out.println(result);
+				System.out.println(uploadImages.size());
 				if(result == uploadImages.size()) {
-					
 					int size = uploadImages.size();
 					
 					for(int i=0 ; i<size ; i++) {
@@ -160,6 +160,78 @@ public class MemberServiceImpl implements MemberService{
 		
 		
 		return loginMember;
+	}
+
+
+	
+	// 업체 회원가입 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int cooSignUpAction(Member member, List<MultipartFile> images, String savePath) {
+		int result = 0;
+		int memberNo = 0;
+		
+		memberNo = dao.nextMemNo();
+		
+		String encPwd = enc.encode(member.getMemberPwd());
+		
+		member.setMemberPwd(encPwd);
+		member.setMemberNo(memberNo);
+		
+		result = dao.cooSignUpAction(member);
+		
+		if(result > 0) {
+			result = 0;
+			int memNo = memberNo;
+			// COO_MEMBER 테이블 추가
+			result = dao.cooMemberInsert(member);
+			
+			List<MemberFile> uploadImages = new ArrayList<MemberFile>();
+			
+			String memImgPath = "/resources/memberFile";
+			
+			for(int i=0 ; i<images.size() ; i++) {
+				
+				if( !images.get(i).getOriginalFilename().equals("") ) {
+					String memImgName = rename(images.get(i).getOriginalFilename());
+					MemberFile mf = new MemberFile(memImgPath, memImgName, i, memNo);
+					
+					uploadImages.add(mf);
+				}
+				
+			}
+			
+			if(!uploadImages.isEmpty()) {
+				
+				result = dao.insertMemberFile(uploadImages);
+				
+				if(result == uploadImages.size()) {
+					
+					int size = uploadImages.size();
+					
+					for(int i=0 ; i<size ; i++) {
+						try {
+							images.get(uploadImages.get(i).getMemImgLevel())
+							.transferTo(new File(savePath + "/" + uploadImages.get(i).getMemImgName()));
+							
+						}catch (Exception e) {
+							e.printStackTrace();
+							
+							throw new InsertAttachmentFailException("파일 서버 저장 실패");
+						}
+						
+					}
+					
+					
+				}else {// 파일 정보를 DB에 삽입하는데 실패했을 때
+					throw new InsertAttachmentFailException("파일 정보 DB 삽입 실패");
+				}
+				
+			}
+		}
+		
+		
+		return result;
 	}
 	
 	
