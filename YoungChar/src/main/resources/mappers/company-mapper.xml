@@ -42,4 +42,9 @@
 			ORDER BY RESERVATION_NO DESC
    </select>
    
+   <select id="selectFile" parameterType="_int" resultMap="memberFile_rm">
+   	SELECT * FROM MEMBER_FILE
+   	WHERE MEM_NO = #{memNo}
+   </select>
+   
 </mapper>

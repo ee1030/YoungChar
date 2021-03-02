@@ -72,6 +72,7 @@
 		AND SIGN_STATUS = 'N'
 	</select>
 	
+
 	
 	<!-- 다음 회원번호 -->
 	<select id="nextMem" resultType="_int">
