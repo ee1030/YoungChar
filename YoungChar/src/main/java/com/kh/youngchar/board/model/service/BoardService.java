@@ -21,9 +21,10 @@ public interface BoardService {
 
 	/** 게시글 목록 조회 Service
 	 * @param pInfo
+	 * @param type 
 	 * @return bList
 	 */
-	public abstract List<Board> selectList(PageInfo2 pInfo);
+	public abstract List<Board> selectList(PageInfo2 pInfo, int type);
 
 	/** 썸네일 목록 조회 Service
 	 * @param bList
@@ -73,6 +74,8 @@ public interface BoardService {
 	 * @return
 	 */
 	public abstract List<String> selectDBFileList();
+
+	
 
 
 
