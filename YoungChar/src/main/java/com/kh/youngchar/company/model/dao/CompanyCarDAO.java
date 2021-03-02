@@ -57,6 +57,6 @@ public class CompanyCarDAO {
 	 * @return
 	 */
 	public int deleteCar(Map<String, Object> map) {
-		return sqlSession.delete("companyCarMapper.deleteCar", map);
+		return sqlSession.update("companyCarMapper.deleteCar", map);
 	}
 }

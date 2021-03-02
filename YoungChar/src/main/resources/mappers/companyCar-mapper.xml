@@ -19,6 +19,7 @@
 		FROM CAR_INFO
 		JOIN TEST_DRIVE_CAR USING(CAR_NO)
 		WHERE MEM_NO2 = #{memNo}
+		AND CAR_STATUS = 'Y'
 		ORDER BY CAR_NAME
 	</select>	
 	
@@ -50,15 +51,16 @@
 	<!-- 차량 추가 -->
 	<insert id="addCar" parameterType="map">
 		INSERT INTO TEST_DRIVE_CAR
-		VALUES(SEQ_TDC_NO.NEXTVAL, #{carNo}, #{memNo})
+		VALUES(SEQ_TDC_NO.NEXTVAL, #{carNo}, #{memNo}, default)
 	</insert>
 	
 	<!-- 차량 삭제 -->
-	<delete id="deleteCar" parameterType="map">
-		DELETE FROM TEST_DRIVE_CAR 
+	<update id="deleteCar" parameterType="map">
+		UPDATE TEST_DRIVE_CAR 
+		SET CAR_STATUS = 'N'
 		WHERE MEM_NO2 = #{memNo}
 		AND CAR_NO = #{carNo}
-	</delete>
+	</update>
 	
 </mapper>
 
