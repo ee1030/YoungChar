@@ -62,14 +62,19 @@
             background-color: #00D231
          }
          
-         .rn-car-item-review{
+          .rn-car-item-review{
             display:none;
+         } 
+         .rn-car-item-review{
+         		cursor: pointer;
          }
          
          #text{
             text-align: center;
             line-height : 45px;
          }
+         
+         
          
 </style>
 
@@ -135,44 +140,11 @@
 					
 					      <!-- Cars-->
 					         <div class="container">
-					            <div class="row">
 						            <div  class="col-lg-12">
 						              <h3 class="titleName">시승 가능 차량</h2>
 						            </div>
-					               <%-- <c:choose>
-					                  <c:when test="${empty carItem.carNo}">
-					                     <div class="col-lg-12">
-					                        <h3 id="text">등록된 차량이 없습니다.</h3>
-					                     </div>
-					                  </c:when>
-					                  
-					                  <c:otherwise> --%>
-					                     <!-- Car Item-->
-					                     <div class="col-lg-3 col-md-2">
-					                     <div class="rn-car-item added">
-					                        <span class="rn-car-item-review">
-					                           x
-					                        </span>
-					                        <div class="rn-car-item-thumb">
-					                           <a href="car-single.html">
-					                              <img class="img-fluid" src="${contextPath}/resources/assets/images/tesla_model3.jpg" alt="Black Sedan" srcset="${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x"/>
-					                           </a>
-					                        </div>
-					                        <div class="rn-car-item-info">
-					                           <h3>
-					                              <a href="car-single.html">Toyota Etios</a>
-					                           </h3>
-					                        </div>
-					                     </div>
-					                  </div>
-					                  <!-- End Car Item-->
-					                     
-					                 <%--  </c:otherwise>
-					                  
-					               
-					               </c:choose> --%>
-					                  
-					                  
+					            <div class="row" id="addedCarList">
+					              <!-- 차량 추가 -->
 					                     
 					            </div>
 					            <!-- end row -->
@@ -180,60 +152,19 @@
 					         
 					         
 					         <!-- 등록된 자동차 검색창 영역 -->
-					         <c:choose>
-					            <c:when test="${!empty carItem.carNo}">
-					               <div class="row justify-content-md-center" id="carList">
+					         	
+					               <!-- <div class="row justify-content-md-center" id="carSearchInput">
 					                <div class="col-lg-4">
 					                     <input type="text" placeholder="모델명을 입력하세요." id="carListSearch">
 					                  </div>
 					                <div class="col-lg-1">
 					                     <button id="carListBtn" class="btn-main btn btn-shadow">검색</button>
 					                  </div>
-					              </div>
-					           </c:when>
-					           </c:choose>
+					              </div> -->
+					           
 					        <!-- 등록된 자동차 검색창 영역 끝 -->
 					         
-					           <c:choose>
-					            <c:when test="${!empty carItem.carNo}">
-					                  <div class="row">
-					                  
-					                     <div class="col-lg-12">
-					
-					                        <!-- Cars Pagination-->
-					                        <nav class="rn-pagination rn-pagination-center">
-					                           <ul>
-					                              <li>
-					                                 <a href="#">
-					                                    <i class="fas fa-angle-left"></i>
-					                                 </a>
-					                              </li>
-					                              <li>
-					                                 <a class="rn-active" href="#">1</a>
-					                              </li>
-					                              <li>
-					                                 <a href="#">2</a>
-					                              </li>
-					                              <li>
-					                                 <a href="#">3</a>
-					                              </li>
-					                              <li>
-					                                 <a href="#">4</a>
-					                              </li>
-					                              <li>
-					                                 <a href="#">
-					                                    <i class="fas fa-angle-right"></i>
-					                                 </a>
-					                              </li>
-					                           </ul>
-					                        </nav>
-					                        <!-- End Cars Pagination-->
-					
-					               
-					                     </div>
-					                  </div>
-					               </c:when>
-					               </c:choose>
+					           
 					         </div>
 								</div>
 							</div>
@@ -257,37 +188,89 @@
    <script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
    <script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
    <script src="${contextPath}/resources/assets/js/scripts.js"></script>
-   <script src="${contextPath}/resources/assets/js/carManagement.js"></script>
-   <script>
-   
-      // 차량추가 검색버튼 입력시
+   <%-- <script src="${contextPath}/resources/assets/js/carManagement.js"></script> --%>
+   <script> 
+   	$(document).on("mouseover", ".rn-car-item", function(){
+  			$(this).children("span").css("display", "inline-block");
+  	});
+  		
+  	 $(document).on("mouseout", ".rn-car-item", function(){
+  			$(this).children("span").css("display", "none");
+  		});
+					                     
+	   $(document).ready(function(){
+		   carList();
+	   });
+					                     
+   	//차량 목록 조회
+   function carList(){
+   		
+			var addedCarList = $("#addedCarList");
+			addedCarList.html("");
+			
+   		$.ajax({
+   		type : "post",
+   		url : "carList",
+   		success(cList){
+   			if(cList != null){
+   				$.each(cList, function(index, value){
+					console.log(cList);
+				 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
+					var rn = $("<div>").addClass("rn-car-item");
+					var span = $("<span>").addClass("rn-car-item-review delete").text("X");
+					var thumb = $("<div>").addClass("rn-car-item-thumb");
+					var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+					thumb.append(img);
+					rn.append(span);
+					rn.append(thumb);
+
+					var info = $("<div>").addClass("rn-car-item-info");
+					var h3 = $("<h3>").text(value.carName);
+					var carNo = $("<span>").css("display","none").text(value.carNo);
+					info.append(carNo);
+					info.append(h3);
+					rn.append(info);
+					col.append(rn);
+					addedCarList.append(col); 
+					});
+   			}else{
+   				var div = $("<div>").addClass("col-lg-12");
+   				var h3 = $("<h3>").attr("id","text").text("등록된 차량이 없습니다.");
+   				div.append(h3);
+   				$("#addedCarList").append(div);
+   			}
+   		}
+   	});
+	}
+      // 차량추가 검색
       $("#searchBtn").on("click", function(){
+					var addedCar = $("#addedCar").html("");
+    	  	
           var carName = $("#carSearch").val();
-         
+         	console.log(carName);
           $.ajax({
         	   type: "post",
              url : "carSearch",
-             data : "carName",
+             data : {"carName1" : carName},
              success(result){
             	 if(result != null){
 					
-					var addedCar = $("#addedCar");
 					console.log(result);
 					$.each(result, function(index, value){
 							console.log(result);
-						 	var col =$("<div>").addClass("col-lg-3 col-md-2");
+						 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
 							var rn = $("<div>").addClass("rn-car-item");
+							var span = $("<span>").addClass("rn-car-item-review plus").text("+");
 							var thumb = $("<div>").addClass("rn-car-item-thumb");
-							var carhtml = $("<a>").attr("href","car-single.html");
 							var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
-							carhtml.append(img);
-							thumb.append(carhtml);
+							thumb.append(img);
+							rn.append(span);
 							rn.append(thumb);
 		
 							var info = $("<div>").addClass("rn-car-item-info");
-							var h3 = $("<h3>");
-							var carNm = $("<a>").text(value.carName);
-							h3.append(carNm);
+							var h3 = $("<h3>").text(value.carName);
+							var carNo = $("<span>").css("display","none").text(value.carNo);
+							info.append(carNo);
 							info.append(h3);
 							rn.append(info);
 							col.append(rn);
@@ -303,6 +286,63 @@
           });
           
       });
+      
+      
+     //차량추가 
+     $(document).on("click", ".plus", function(){
+    	 var carNo = $(this).next().next().children("span").text();
+			 var addedCarList = $("#addedCarList");
+    	 console.log(carNo);
+    	 $.ajax({
+    		 type : "post",
+    		 url : "addCar",
+    		 data : {"carNo": carNo},
+    		 success(result){
+    			 console.log(result);
+    			 if(result > 0){ //추가 성공 시
+    				 
+    				$(".carNo"+carNo).remove();
+    				carList();
+    			 }else{
+    				 alert("이미 추가한 자동차입니다.");
+    			 }
+    		 },
+    		 error(){
+    			 console.log("차량 추가 실패");
+    			 
+    		 }
+    		 
+    	 });
+     });
+     
+   //차량 삭제
+     $(document).on("click", ".delete", function(){
+    	 var carNo = $(this).next().next().children("span").text();
+    	 var carNm = $(this).next().next().children("h3").text();
+			 var addedCarList = $("#addedCarList");
+    	 console.log(carNo);
+    	 $.ajax({
+    		 type : "post",
+    		 url : "deleteCar",
+    		 data : {"carNo": carNo},
+    		 success(result){
+    			 console.log(result);
+    			 if(result > 0){ //삭제 성공 시
+    				 
+    				$(".carNo"+carNo).remove();
+    				carList();
+    				alert(carNm+"삭제되었습니다.")
+    			 }else{
+    				 alert("삭제 실패");
+    			 }
+    		 },
+    		 error(){
+    			 console.log("차량 삭제 실패");
+    			 
+    		 }
+    		 
+    	 });
+     });
    </script>
 
 </body>
