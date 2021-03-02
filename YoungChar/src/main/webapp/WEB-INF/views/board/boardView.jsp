@@ -66,7 +66,8 @@
 
 		<div>
 			<h1>${board.boardName }</h1>
-			<hr>
+			<br>
+			<br>
 			<div id="board-area">
 
 				<!-- Category -->
@@ -75,7 +76,8 @@
 				<!-- Title -->
 				<h3 class="mt-4">${board.boardTitle }</h3>
 	
-				<hr>
+				<br>
+				<br>
 
 				<!-- Writer -->
 				<div class="lead">
@@ -88,27 +90,31 @@
 					
 				</div>
 
-				<hr>
+				<br>
+				<br>
 
 				
 				<!-- 이미지 부분 -->
-				<c:if test="${!empty attachmentList }">
+				<%-- <c:if test="${!empty attachmentList }">
 
 					<div class="carousel slide m-3" id="carousel-325626">
 
 						<div class="carousel-inner boardImgArea">
 							<c:forEach var="at" items="${attachmentList}" varStatus="vs">
 								<c:set var="src" value="${contextPath}${at.filePath}/${at.fileName}" />
-																				<%--/spring/resources/uploadImages/2102111123232.jpg --%>
 								<div class="carousel-item <c:if test="${vs.index == 0}"> active</c:if>">
 									<img class="d-block w-100 boardImg" src="${src}" /> <input type="hidden" value="${at.fileNo}">
 								</div>
 							</c:forEach>
 						</div>
 
-						<a class="carousel-control-prev" href="#carousel-325626" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"> <span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+						<!-- <a class="carousel-control-prev" href="#carousel-325626" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span> 
+						<span class="sr-only">Previous</span>
+						</a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"> 
+						<span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a> -->
 					</div>
-				</c:if>
+				</c:if> --%>
 
 
 				<!-- Content -->
@@ -123,7 +129,8 @@
 				<%-- el jstl은 컴파일시 자바코드로 변환  --%>
 				</div>
 
-				<hr>
+				<br>
+				<br>
 				
 				<div>
 					<div class="float-right">
@@ -145,7 +152,7 @@
 				</div>
 			</div>
 
-			<hr>
+			
 
 			<!-- 댓글 부분 -->
 			<jsp:include page="reply.jsp"/>

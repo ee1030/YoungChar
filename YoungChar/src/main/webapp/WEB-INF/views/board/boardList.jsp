@@ -87,9 +87,9 @@
 											<th colspan="2" scope="col">제목</th>
 											<th scope="col">작성자</th>
 											<th scope="col">작성일</th>
-											
+
 											<th scope="col">조회수</th>
-											
+
 										</tr>
 									</thead>
 									<tbody>
@@ -108,7 +108,7 @@
 													<td colspan="2" class="boardTitle">
 														<!----------------- 썸네일 부분 -----------------> <c:forEach items="${thList}" var="th">
 															<c:if test="${th.parentBoardNo  == board.boardNo}">
-																<img src="${contextPath}${th.filePath}/${th.fileName}">
+																<img style="width: 50px; height: 50px;" src="${contextPath}${th.filePath}/${th.fileName}">
 																<%--/spring/resources/uploadImages/123123.jpg --%>
 															</c:if>
 														</c:forEach> ${board.boardTitle}
@@ -118,8 +118,8 @@
 													<td>
 														<%-- 날짜 출력 모양 지정 --%> <fmt:formatDate var="createDate" value="${board.boardCreateDate }" pattern="yyyy-MM-dd" /> <fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> <c:choose>
 															<c:when test="${createDate != now}">
-											${createDate }
-										</c:when>
+																${createDate }
+															</c:when>
 															<c:otherwise>
 																<fmt:formatDate value="${board.boardCreateDate }" pattern="HH:mm" />
 															</c:otherwise>
@@ -133,112 +133,88 @@
 									</tbody>
 								</table>
 							</div>
-							<hr>
+
 							<%-- 로그인이 되어있는 경우 --%>
-							<c:if test="${empty loginMember }">
-								<a class="btn btn-success float-right" href="../${pInfo.boardType}/insert">글쓰기</a>
+							<c:if test="${!empty loginMember }">
+								<a class="btn btn-success " style="width: 100px; margin-top: 10px; " href="../${pInfo.boardType}/insert">글쓰기</a>
 							</c:if>
 
 							<!--------------------------------- pagination  --------------------------->
 							<div class="my-4">
-							<nav class="rn-pagination rn-pagination-center">
-								<ul >
+								<nav class="rn-pagination rn-pagination-center">
+									<ul>
 
-									<%-- 주소 조합 작업 --%>
-									<c:url var="pageUrl" value="${pInfo.boardType}?" />
+										<%-- 주소 조합 작업 --%>
+										<c:url var="pageUrl" value="${pInfo.boardType}?" />
 
-									<!-- 화살표에 들어갈 주소를 변수로 생성 -->
-									<c:set var="firstPage" value="${pageUrl}cp=1" />
-									<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
+										<!-- 화살표에 들어갈 주소를 변수로 생성 -->
+										<c:set var="firstPage" value="${pageUrl}cp=1" />
+										<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
 
-									<%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다--%>
-									<%-- 
+										<%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다--%>
+										<%-- 
 										<fmt:parseNumber>   : 숫자 형태를 지정하여 변수 선언 
 										integerOnly="true"  : 정수로만 숫자 표현 (소수점 버림)
 									--%>
 
-									<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
-									<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
-									<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
+										<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+										<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+										<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
 
 
-									<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) / 10 }" integerOnly="true" />
-									<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
-									<c:set var="nextPage" value="${pageUrl}cp=${next}" />
+										<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) / 10 }" integerOnly="true" />
+										<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+										<c:set var="nextPage" value="${pageUrl}cp=${next}" />
 
 
 
-									<c:if test="${pInfo.currentPage > pInfo.pageSize}">
-										<li>
-											<!-- 첫 페이지로 이동(<<) --> <a  href="${firstPage}"><i class="fas fa-angle-right"></i></a>
-										</li>
+										<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+											<li>
+												<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i class="fas fa-angle-right">..</i></a>
+											</li>
 
-										<li>
-											<!-- 이전 페이지로 이동 (<) --> <a  href="${prevPage}">	<i class="fas fa-angle-left"></i></a>
-										</li>
-									</c:if>
+											<li>
+												<!-- 이전 페이지로 이동 (<) --> <a href="${prevPage}"> <i class="fas fa-angle-left"></i></a>
+											</li>
+										</c:if>
 
-									<%--<!-- Post Pagination-->
-						<nav class="rn-pagination rn-pagination-center">
-							<ul>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-left"></i>
-									</a>
-								</li>
-								<li>
-									<a class="rn-active" href="#">1</a>
-								</li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">4</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-right"></i>
-									</a>
-								</li>
-							</ul>
-						</nav> --%>
+										<!-- 페이지 목록 -->
+										<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+											<c:choose>
+												<c:when test="${pInfo.currentPage == page }">
+													<li><a class="page-link">${page}</a></li>
+												</c:when>
+
+												<c:otherwise>
+													<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 
 
-									<!-- 페이지 목록 -->
-									<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
-										<c:choose>
-											<c:when test="${pInfo.currentPage == page }">
-												<li><a class="page-link">${page}</a></li>
-											</c:when>
+										<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+										<c:if test="${next <= pInfo.maxPage}">
+											<li>
+												<!-- 다음 페이지로 이동 (>) --> <a href="${nextPage}"><i class="fas fa-angle-right"></i></a>
+											</li>
 
-											<c:otherwise>
-												<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-
-
-									<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
-									<c:if test="${next <= pInfo.maxPage}">
-										<li>
-											<!-- 다음 페이지로 이동 (>) --> <a  href="${nextPage}"><i class="fas fa-angle-right"></i></a>
-										</li>
-
-										<li>
-											<!-- 마지막 페이지로 이동(>>) --> <a  href="${lastPage}"><i class="fas fa-angle-right"></i></a>
-										</li>
-									</c:if>
-								</ul>
+											<li>
+												<!-- 마지막 페이지로 이동(>>) --> <a href="${lastPage}"><i class="fas fa-angle-right"></i></a>
+											</li>
+										</c:if>
+									</ul>
 								</nav>
 							</div>
+
+							<!--------------------------------- pagination  --------------------------->
 
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4">
+
+
+
+				<div class="col-lg-3">
 
 					<!-- Sidebar-->
 					<aside class="rn-widget-area rn-left-sidebar" id="secondary">
@@ -268,25 +244,39 @@
 
 
 						<!-- Widget Item-->
+						<c:if test="${pInfo.boardType != 3 }">
+									
+								
 						<section class="rn-widget">
 							<h2 class="rn-widget-title">Categories</h2>
 							<div class="rn-widget-content">
 								<ul>
-									<li><a href="#">Tesla</a></li>
-									<li><a href="#">BYD</a></li>
-									<li><a href="#">Rimac</a></li>
-									<li><a href="#">르노 닛산</a></li>
-									<li><a href="#">Volkswagen</a></li>
+									<li><a href="#">테슬라</a></li>
+									<li><a href="#">현대자동차</a></li>
+									<li><a href="#">기아</a></li>
+									<li><a href="#">벤츠</a></li>
+									<li><a href="#">BMW</a></li>
+									<li><a href="#">아우디</a></li>
+									<li><a href="#">포르쉐</a></li>
+									<li><a href="#">르노</a></li>
 								</ul>
 							</div>
 						</section>
+						</c:if>
 
 						<section class="rn-widget">
 							<h2 class="rn-widget-title">게시판 이동</h2>
 							<div class="rn-widget-content">
 								<ul>
-									<li><a href="#">리뷰 게시판</a></li>
-									<li><a href="#">잡담 게시판</a></li>
+							
+								<c:if test="${pInfo.boardType == 2 }">
+									<li><a href="${contextPath }/board/list/1">리뷰 게시판</a></li>
+									<li><a href="${contextPath }/board/list/3">잡담 게시판</a></li>
+								</c:if>
+								<c:if test="${pInfo.boardType == 3 }">
+									<li><a href="${contextPath }/board/list/1">리뷰 게시판</a></li>
+									<li><a href="${contextPath }/board/list/2">정보 게시판</a></li>
+								</c:if>
 
 
 								</ul>
@@ -445,28 +435,27 @@
 
 	</footer>
 	<!-- End Site Footer-->
-	
-		<script>
+
+	<script>
 		// 게시글 상세보기 기능 (jquery를 통해 작업)
-		$("#list-table td").on("click", function(){
-			
+		$("#list-table td").on("click", function() {
+
 			var boardNo = $(this).parent().children().eq(0).text();
-										// td     tr 				td   		첫번째(게시글 번호)
-										
+			// td     tr 				td   		첫번째(게시글 번호)
+
 			// 게시글 상세조회 요청 주소 조합
-			
+
 			// 게시글 목록 : /spring/board/list/1
 			// 상세조회 : /spring/board/1/500
 			// 절대 경로
 			//var boardViewURL = "${contextPath}/board/${pInfo.boardType}/" + boardNo;
-												// 		spring /	board	/					1				/500
-			
+			// 		spring /	board	/					1				/500
+
 			// 상대경로 
 			var boardViewURL = "../${pInfo.boardType}/" + boardNo;
-			
+
 			location.href = boardViewURL;
 		});
-		
 	</script>
 
 	<!--

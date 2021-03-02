@@ -70,12 +70,14 @@
 				<div class="mb-2">
 					<label class="input-group-addon mr-3 insert-label">카테고리</label> 
 					<select	class="custom-select" id="category" name="categoryName" style="width: 150px;">
-						<option value="10">운동</option>
-						<option value="20">영화</option>
-						<option value="30">음악</option>
-						<option value="40">요리</option>
-						<option value="50">게임</option>
-						<option value="60">기타</option>
+						<option value="1">테슬라</option>
+						<option value="2">현대자동차</option>
+						<option value="3">기아</option>
+						<option value="4">벤츠</option>
+						<option value="5">BMW</option>
+						<option value="6">아우디</option>
+						<option value="7">포르쉐</option>
+						<option value="8">르노</option>
 					</select>
 				</div>
 				<div class="form-inline mb-2">

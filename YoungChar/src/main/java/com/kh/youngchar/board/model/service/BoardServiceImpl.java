@@ -39,9 +39,9 @@ public class BoardServiceImpl implements BoardService{
 	
 //	게시글 목록 조회 Service 구현
 	@Override
-	public List<Board> selectList(PageInfo2 pInfo) {
+	public List<Board> selectList(PageInfo2 pInfo, int type) {
 		
-		return dao.selectList(pInfo);
+		return dao.selectList(pInfo, type);
 	}
 	
 //	썸네일 목록 조회 Service 구현
@@ -112,7 +112,7 @@ public class BoardServiceImpl implements BoardService{
 //			추후 summernote api 사용을 염두하여 게시판 타입별로 
 //			크로스 사이트 스크립팅 방지 처리를 선택적으로 진행
 			
-			if((int)map.get("boardType") == 1) { // 자유 게시판
+			if((int)map.get("boardType") == 0) { // 자유 게시판
 				
 				String boardTitle = (String)map.get("boardTitle"); 
 				String boardContent = (String)map.get("boardContent");
@@ -143,7 +143,7 @@ public class BoardServiceImpl implements BoardService{
 //				DB에 저장할 웹상 접근 주소 ( filePath)
 				String filePath = null;
 						
-				if((int)map.get("boardType") == 1) {
+				if((int)map.get("boardType") == 0) {
 					
 					filePath = "/resources/uploadImages";
 					
@@ -182,7 +182,7 @@ public class BoardServiceImpl implements BoardService{
 //				게시판 타입이 2번 (summernote를 이용한 게시글 작성 ) 일 경우 
 //				boardContent 내부에 업로드된 이미지 정보 (filePath, fileName)이 들어있다.
 //				-> boardContent에서 <img> 태그만을 골라내어 img 태그의 src 속성 값을 추출 후 filePath, fileName을 얻어낸다.
-				if((int)map.get("boardType") == 2) {
+				if((int)map.get("boardType") == 1 || (int)map.get("boardType") == 2 || (int)map.get("boardType") == 3) {
 					Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");//img 태그 src 추출 정규표현식
 					
 					// SummerNote에 작성된 내용 중 img태그의 src속성의 값을 검사하여 매칭되는 값을 Matcher객체에 저장함.
@@ -242,7 +242,7 @@ public class BoardServiceImpl implements BoardService{
 						
 						int size = 0;
 						
-						if((int)map.get("boardType") == 1) {
+						if((int)map.get("boardType") == 0) {
 							size = uploadImages.size();
 						}else if(!images.get(0).getOriginalFilename().equals("")){
 //							이미지의 0번 인덱스가 비어있지 않을때
@@ -510,6 +510,9 @@ public class BoardServiceImpl implements BoardService{
 		
 		return dao.selectDBFileList();
 	}
+
+
+
 
 
 

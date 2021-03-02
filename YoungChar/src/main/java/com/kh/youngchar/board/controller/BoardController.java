@@ -1,5 +1,6 @@
 package com.kh.youngchar.board.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.HashMap;
@@ -47,21 +48,22 @@ public class BoardController {
 //	@PathVariable : @RequestMapping에 작성된 URL 경로에 있는 특정 값을 
 //					변수로 사용할 수 있게하는 어노테이션 
 //	게시글 목록 조회 Controller
-	@RequestMapping("list/{type}")
-	public String boardList(@PathVariable("type") int type , 
+	@RequestMapping("list/{type}" )
+	public String boardList(@PathVariable("type") int type ,
 						@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 						Model model) {
 		
-//		System.out.println("type : " + type);
-//		System.out.println("cp : " + cp);
 		
 //		1) 페이징 처리를 위한 객체 PageInfo 생성
 		PageInfo2 pInfo = service.getPageInfo(type, cp);
 		
-//		System.out.println(pInfo);
 		
 //		2) 게시글 목록 조회
-		List<Board> bList = service.selectList(pInfo);
+		List<Board> bList = new ArrayList<Board>();
+		
+		
+			bList = service.selectList(pInfo , type);
+		
 		
 //		for(Board b : bList) {
 //			System.out.println(b);
@@ -173,7 +175,7 @@ public class BoardController {
 //		System.out.println("loginMember : " + loginMember);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("memberNo", loginMember.getMemberNo());
+		map.put("memberNo", loginMember.getMemberNo());
 		map.put("boardTitle", board.getBoardTitle());
 		map.put("boardContent", board.getBoardContent());
 		map.put("categoryCode", board.getCategoryName());
@@ -192,7 +194,7 @@ public class BoardController {
 //		-> HttpServletRequest 객체는 Controller에서만 사용 가능하다.
 		String savePath = null;
 		
-		if(type == 1) {
+		if(type == 0) {
 			savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
 		} else {
 			savePath = request.getSession().getServletContext().getRealPath("resources/infoImages");
