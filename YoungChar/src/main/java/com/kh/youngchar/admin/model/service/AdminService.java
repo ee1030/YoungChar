@@ -1,8 +1,8 @@
 package com.kh.youngchar.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
-import com.kh.youngchar.admin.model.vo.ChartData;
 import com.kh.youngchar.member.model.vo.Member;
 
 public interface AdminService {
@@ -36,6 +36,6 @@ public interface AdminService {
 	/** 대시보드 차트 데이터 조회 Service
 	 * @return cList
 	 */
-	public abstract List<ChartData> getChartData();
+	public abstract List<Map<String, Integer>> getChartData();
 
 }

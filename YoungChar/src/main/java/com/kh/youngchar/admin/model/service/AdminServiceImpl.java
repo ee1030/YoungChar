@@ -1,12 +1,12 @@
 package com.kh.youngchar.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.youngchar.admin.model.dao.AdminDAO;
-import com.kh.youngchar.admin.model.vo.ChartData;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Service
@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
 
 	// 대시보드 차트 데이터 조회 Service 구현
 	@Override
-	public List<ChartData> getChartData() {
+	public List<Map<String, Integer>> getChartData() {
 		return dao.getChartData();
 	}
 }

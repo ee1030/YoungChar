@@ -1,12 +1,12 @@
 package com.kh.youngchar.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.youngchar.admin.model.vo.ChartData;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Repository
@@ -53,7 +53,7 @@ public class AdminDAO {
 	/** 대시보드 차트 데이터 조회 DAO
 	 * @return
 	 */
-	public List<ChartData> getChartData() {
+	public List<Map<String, Integer>> getChartData() {
 		return sqlSession.selectList("adminMapper.getChartData");
 	}
 }
