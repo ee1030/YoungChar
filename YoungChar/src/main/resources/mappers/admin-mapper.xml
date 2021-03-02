@@ -47,7 +47,7 @@
 	</select>
 	
 	<select id="getChartData" resultType="map">
-		SELECT CATEGORY_NM, COUNT(*)
+		SELECT CATEGORY_NM DataName, COUNT(*) value
 		FROM TES_DR_RESERVATION
 			JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
 			JOIN CAR_INFO USING(CAR_NO)
