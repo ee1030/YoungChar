@@ -208,13 +208,13 @@
 
 		function drawChart() {
 
-			var data = google.visualization.DataTable();
+			var data = new google.visualization.DataTable();
 			data.addColumn('string', 'DataName');
 			data.addColumn('number', 'Value');
 			
-			/* <c:forEach var="chartData" items="${cList}" >
-				data.addRows(${chartData.})
-			</c:forEach> */
+			<c:forEach var="chartData" items="${cList}" >
+				data.addRow(['${chartData.DATANAME}', ${chartData.VALUE}]);
+			</c:forEach>
 
 			var options = {
 				title : '브랜드 비율'
