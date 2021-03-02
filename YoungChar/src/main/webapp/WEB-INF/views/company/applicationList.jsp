@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -45,9 +48,12 @@
 
 
 			#select1{
-				width: 120px;
-				display: inline-block;
-				float: right;
+				width: 160px;
+			}
+			
+			.dropdown-basic {
+			    display: inline-block;
+			    float: right;
 			}
 
 			#select2{
@@ -59,6 +65,11 @@
 				display: inline-block;
 				font-size: 21px;
 				font-weight: bold;
+			}
+			
+			.dropdown-content{
+				top: 30px !important;
+				cursor: pointer;
 			}
 			
 		</style>
@@ -83,13 +94,18 @@
 							<div class="card">
 							  <div class="card-header">
 								<div id="head">시승 신청 내역</div>
-									<select id="select1">
-										<option value="none">--선택--</option>
-										<option value="N">승인대기</option>
-										<option value="A">승인완료</option>
-										<option value="Y">시승완료</option>
-										<option value="C">시승취소</option>
-									</select>
+                  <div class="dropdown-basic">
+                    <div class="dropdown">
+                      <button id="select1" class="btn btn-light" type="button">선택<span><i class="icofont icofont-arrow-down"></i></span></button>
+	                      <div class="dropdown-content">
+		                      <a id="all" class="select-status">전체</a>
+		                      <a id="n" class="select-status">승인대기</a>
+		                      <a id="a" class="select-status">승인완료</a>
+		                      <a id="c" class="select-status">시승취소</a>
+		                      <a id="y" class="select-status">시승완료</a>
+	                      </div>
+                    </div>
+                  </div>
 							 </div>
 							  <div class="table-responsive">
 								<table class="table table-hover">
@@ -106,68 +122,110 @@
 								  </thead>
 								  <tbody>
 									<tr>
-									  <th scope="row">1</th>
-									  <td>Alexander</td>
-									  <td>Orton</td>
-									  <td>@mdorton</td>
-									  <td>Admin</td>
-									  <td><span class="badge badge-primary">승인대기</span></td>
-									  <td>
-										  <select id="select2">
-												<option value="none">--선택--</option>
-											  <option value="N">승인대기</option>
-											  <option value="A">승인완료</option>
-											  <option value="Y">시승완료</option>
-											  <option value="C">시승취소</option>
-										  </select>
-
-
-
-									  </td>
-									</tr>
-									<tr>
-									  <th scope="row">2</th>
-									  <td>John Deo</td>
-									  <td>Deo</td>
-									  <td>@johndeo</td>
-									  <td>User</td>
-									  <td><span class="badge badge-warning text-dark">승인완료</span></td>
-									  <td>EK</td>
-									</tr>
-									<tr>
-									  <th scope="row">3</th>
-									  <td>Randy Orton</td>
-									  <td>the Bird</td>
-									  <td>@twitter</td>
-									  <td>admin</td>
-									  <td><span class="badge badge-success">시승완료</span></td>
-									  <td>UK</td>
-									</tr>
-									<tr>
-									  <th scope="row">4</th>
-									  <td>Randy Mark</td>
-									  <td>Ottandy</td>
-									  <td>@mdothe</td>
-									  <td>user</td>
-									  <td><span class="badge badge-danger">시승취소</span></td>
-									  <td>AUS</td>
-									</tr>
+										<c:if test="${empty list}">
+											<tr>
+												<td colspan="7">금일 시승 신청건이 없습니다.</td>
+											</tr>
+										</c:if>
+										<c:if test="${!empty list}">
+											<c:forEach var="apl" items="${list}" varStatus="vs">
+											<tr>
+												<td>${apl.rsrvtNo}</td>
+												<td>${apl.memNm}</td>
+									  		<td>${apl.memPhone}</td>
+									  		<td>${apl.carName}</td>
+												<fmt:formatDate var="testDriveDt" value="${apl.testDriveDt}" pattern="HH:mm"/>
+									  		<td>${testDriveDt}</td>
+									  		<td id="statusBox">
+									  			<c:choose>
+									  				<c:when test="${apl.approvalStatus == 'N'}">
+									  					<span class="badge badge-primary">승인대기</span>
+									  				</c:when>
+									  				<c:when test="${apl.approvalStatus == 'A'}">
+															<span class="badge badge-warning text-dark">승인완료</span>
+									  				</c:when>
+									  				<c:when test="${apl.approvalStatus == 'C'}">
+									  					<span class="badge badge-danger">시승취소</span>
+									  				</c:when>
+									  				<c:when test="${apl.approvalStatus == 'Y'}">
+									  					<span class="badge badge-success">시승완료</span>
+									  				</c:when>
+									  			</c:choose>
+									  		</td>
+												<td>
+										  		<select class="select" id="select2">
+														<option value="none">--선택--</option>
+													  <option value="N">승인대기</option>
+													  <option value="A">승인완료</option>
+													  <option value="Y">시승완료</option>
+													  <option value="C">시승취소</option>
+										  		</select>
+										  	</td>
+											</tr>
+										</c:forEach>
+										</c:if>
 								  </tbody>
 								</table>
 							  </div>
 							</div>
-						  						<!-- Post Pagination-->
 						  </div>
 
-							<nav class="rn-pagination">
-										<ul class="pagination pagination-light">
-	                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
-	                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-	                  </ul>
-							</nav>
+						<!-- Post Pagination-->
+									<nav class="rn-pagination">
+												<ul class="pagination pagination-light">
+												
+												<c:set var="firstPage" value="?cp=1"/>
+												<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
+												
+												
+												<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }"  integerOnly="true" />
+												<fmt:parseNumber var="prev" value="${ c1 * 5 }"  integerOnly="true" />
+												<c:set var="prevPage" value="?cp=${prev}" />
+							
+												<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
+												<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
+												<c:set var="nextPage" value="?cp=${next}" />
+													
+													
+												<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+												<li class="page-item"> <!-- 첫 페이지로 이동(<<) -->
+													<a class="page-link" href="${firstPage}">&lt;&lt;</a>
+												</li>
+												
+												<li class="page-item"> <!-- 이전 페이지로 이동 (<) -->
+													<a class="page-link" href="${prevPage}">&lt;</a>
+												</li>
+												</c:if>	
+													
+												
+												<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}" >
+													<c:choose>
+														<c:when test="${pInfo.currentPage == page }">
+															<li class="page-item disabled">
+																<a class="page-link">${page}</a>
+															</li>
+														</c:when>
+													
+														<c:otherwise>
+															<li  class="page-item">	
+																<a class="page-link" href="?cp=${page}">${page}</a>
+															</li>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+												
+												
+												<c:if test="${next <= pInfo.maxPage}">
+													<li class="page-item"> <!-- 다음 페이지로 이동 (>) -->
+														<a class="page-link" href="${nextPage}">&gt;</a>
+													</li>
+													
+													<li class="page-item"> <!-- 마지막 페이지로 이동(>>) -->
+														<a class="page-link" href="${lastPage}">&gt;&gt;</a>
+													</li>
+												</c:if>
+											</ul>
+									</nav>
 						  
 
 		
@@ -191,21 +249,67 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
-		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
-		
+
 		<script>
+		
 		
 		$(document).ready(function(){
 			
-			$("#select2").on("change", function(){
-				alert(this.value);
+			$(".select").on("change", function(e){
+		
+				var rsrvtNo = $(this).parent().parent().children().eq(0).text();
+				var approvalStatus =  this.value;
+				var statusBox = $(this).parent().parent().children().eq(5);
+				
+				var N = $("<span>").addClass("badge badge-primary").text("승인대기");
+				var A = $("<span>").addClass("badge badge-warning text-dark").text("승인완료");
+				var C = $("<span>").addClass("badge badge-danger").text("시승취소");
+				var Y = $("<span>").addClass("badge badge-success").text("시승완료");
+				
+				$.ajax({
+					url : "${contextPath}/company/updateAplStatus",
+					data: {"rsrvtNo" : rsrvtNo,
+						     "approvalStatus" : approvalStatus},
+					type: "post",
+					success : function(result){
+						if(result > 0){
+							
+						statusBox.html("");
+							
+					    switch (approvalStatus){
+					      case "N" :
+					          statusBox.append(N);
+					          break;
+					      case "A" :
+					          statusBox.append(A);
+					          break;
+					      case "Y" :
+					          statusBox.append(Y);
+					          break;
+					      case "C" :
+					          statusBox.append(C);
+				            break;
+					    }
+					    $(e.target).children("option").eq(0).prop("selected", true);
+							
+						}
+					}, error : function(){
+						console.log("에이젝스 연결실패")
+					}
+					
+				});
+				
 			})
+			
+			
+				$(".select-status").on("click", function(e){
+					
+					var status = $(this).attr('id');
+					
+					var URL = status;
+					
+					location.href = URL;
+				})
 			
 		});
 		

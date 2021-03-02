@@ -20,7 +20,6 @@ import com.kh.youngchar.board.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.company.controller.DriveReviewController;
 import com.kh.youngchar.company.model.dao.DriveReviewDAO;
-import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
