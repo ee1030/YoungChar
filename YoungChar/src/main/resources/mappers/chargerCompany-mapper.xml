@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chargerCompanyMapper">
+
+	<resultMap type="ChargerCompany" id="chargerCompany_rm">
+		<id property="companyNo" column="COMP_NO" />
+
+		<result property="companyName" column="COMP_NM" />
+		<result property="phone" column="PHONE" />
+		<result property="fax" column="FAX" />
+		<result property="email" column="EMAIL" />
+		<result property="link" column="LINK" />
+		<result property="companyContent" column="COMP_CONTENT" />
+		<result property="memberNo" column="MEM_NO" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+	
+	<resultMap type="CompanyImage" id="companyImage_rm">
+		<id property="fileNo" column="FILE_NO" />
+
+		<result property="filePath" column="FILE_PATH" />
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileLevel" column="FILE_LEVEL" />
+		<result property="companyNo" column="COMP_NO" />
+
+	</resultMap>
+	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM V_CHARGER_COMPANY
+		WHERE STATUS = 'Y'
+	</select>
+
+	<select id="selectList" resultMap="chargerCompany_rm">
+		SELECT COMP_NO, COMP_NM, PHONE, FAX, EMAIL, LINK, COMP_CONTENT 
+		FROM V_CHARGER_COMPANY
+		WHERE STATUS = 'Y'
+		ORDER BY COMP_NO DESC
+	</select>
+
+</mapper>
