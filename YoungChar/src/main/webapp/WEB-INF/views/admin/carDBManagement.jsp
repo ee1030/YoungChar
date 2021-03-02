@@ -58,6 +58,47 @@
 .btn-success {
 	display: inline-block;
 }
+
+select {
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>");
+  background-color:#3498DB;
+  background-repeat:no-repeat;
+  background-position: right 10px top 15px;
+  background-size: 16px 16px;
+  color:white;
+  padding:12px;
+  width:auto;
+  font-family:arial,tahoma;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  text-align:center;
+  text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-radius:3px;
+  -webkit-border-radius:3px;
+  -webkit-appearance: none;
+  border:0;
+  outline:0;
+  -webkit-transition:0.3s ease all;
+	   -moz-transition:0.3s ease all;
+	    -ms-transition:0.3s ease all;
+	     -o-transition:0.3s ease all;
+	        transition:0.3s ease all;
+}
+
+
+#categoryCode {
+  background-color:#2ECC71;
+}
+
+#categoryCode:hover {
+  background-color:#27AE60;
+}
+
+select:focus, select:active {
+  border:0;
+  outline:0;
+}
 </style>
 
 
@@ -244,13 +285,70 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="exampleModalLabel">차량 등록</h5>
 					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">...</div>
+				<div class="modal-body">
+					<form class="form-signin" method="POST" action="#">
+						<label for="carName">차량이름</label>
+						<input type="text" class="form-control" id="carName" name="carName" placeholder="차량이름">
+						<br>
+						<label for="carModel">모델명</label>
+						<input type="text" class="form-control" id="carModel" name="carModel" placeholder="모델명">
+						<br>
+						<label for="drivingSystem">구동방식</label>
+						<input type="text" class="form-control" id="drivingSystem" name="drivingSystem" placeholder="구동방식">
+						<br>
+						<label for="personnel">탑승인원</label>
+						<input type="text" class="form-control" id="personnel" name="personnel" placeholder="탑승인원">
+						<br>
+						<label for="carName">연비</label>
+						<input type="text" class="form-control" id="consumpt" name="consumpt" placeholder="연비">
+						<br>
+						<label for="carName">최소가격</label>
+						<input type="text" class="form-control" id="minPrice" name="minPrice" placeholder="최소가격">
+						<br>
+						<label for="carName">최대가격</label>
+						<input type="text" class="form-control" id="maxPrice" name="maxPrice" placeholder="최대가격">
+						<br>
+						<label for="carName">연료</label>
+						<input type="text" class="form-control" id="fuel" name="fuel" placeholder="연료">
+						<br>
+						<label for="carName">1회 충전 주행거리</label>
+						<input type="text" class="form-control" id="mileAge" name="mileAge" placeholder="1회 충전 주행거리">
+						<br>
+						<label for="carName">에너지용량</label>
+						<input type="text" class="form-control" id="capacity" name="capacity" placeholder="에너지용량">
+						<br>
+						<label for="carName">모터 최대출력</label>
+						<input type="text" class="form-control" id="maxPower" name="maxPower" placeholder="모터 최대출력">
+						<br>
+						<label for="carName">모터 최대토크</label>
+						<input type="text" class="form-control" id="maxTorque" name="maxTorque" placeholder="모터 최대토크">
+						<br>
+						<label for="carName">최고속도</label>
+						<input type="text" class="form-control" id="maxSpeed" name="maxSpeed" placeholder="최고속도">
+						<br>
+						<label for="carName">가속성능</label>
+						<input type="text" class="form-control" id="performance" name="performance" placeholder="가속성능">
+						<br>
+						<label for="categoryCode">브랜드</label> 
+						<select id="categoryCode">
+							<option selected="selected">테슬라</option>
+							<option>현대</option>
+							<option>기아</option>
+							<option>혼다</option>
+						</select> 
+						<br>
+						<label for="carName">이미지</label>
+						<input type="file" class="form-control" id="carImg" name="carImg">
+						<br>
+						
+					</form>
+				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success">Save changes</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-success">차량 등록</button>
 				</div>
 			</div>
 		</div>
