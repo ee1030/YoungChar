@@ -1,22 +1,29 @@
 package com.kh.youngchar.company.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.company.model.service.DriveReviewService;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
@@ -33,39 +40,77 @@ public class DriveReviewController {
 	@Autowired
 	private DriveReviewService service;
 	
+	private String swalIcon = null;
+	private String swalTitle = null;
 	private Logger logger = LoggerFactory.getLogger(DriveReviewController.class);
 	
-	@RequestMapping("insertreview")
-	public String insertReview() {
+	@RequestMapping("insertreview/{rsrvtNo}")
+	public String insertReview(@PathVariable("rsrvtNo") int rsrvtNo,
+							   Model model) {
+		
+		DriveReview board = service.selectReservation(rsrvtNo);
+		board.setRsrvtNo(rsrvtNo);
+		model.addAttribute("board", board);
+		
 		return "company/insertReview";
 	}
-	@RequestMapping("{boardNo}/{categoryNm}/{cooName}/{carName}/{csat}")
+	
+	@RequestMapping("insertreview/insertAction")
+	public String insertAction(@ModelAttribute DriveReview board,
+			 					HttpServletRequest request,
+			 					RedirectAttributes ra) {
+
+		String savePath = request.getSession().getServletContext().getRealPath("resources/reviewImages");
+
+		int result = service.insertBoard(board, savePath);
+		
+		String url = null;
+		if(result > 0) {
+			
+            url = "redirect:http://localhost:8080/youngchar/driveReview/review/"+result;
+			
+			System.out.println(url);
+			
+			// 새로 작성한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
+			request.getSession().setAttribute("returnListURL", "../reviewlist/");
+		}else {
+			swalIcon = "error";
+			swalTitle = "게시글 삽입 실패";
+			url = "redirect:insertreview";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		return url;
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertImage")
+	public String insertImage(HttpServletRequest request,
+							  @RequestParam("uploadFile") MultipartFile uploadFile){
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/reviewImages");
+		Attachment at = service.insertImage(uploadFile, savePath);
+		
+		return new Gson().toJson(at);
+	}
+	
+	@RequestMapping("review/{boardNo}")
 	public String reviewView(@PathVariable("boardNo") int boardNo,
-							 @PathVariable("categoryNm") String categoryNm,
-							 @PathVariable("cooName") String cooName,
-							 @PathVariable("carName") String carName,
-							 @PathVariable("csat") int csat,
 							 Model model,
 							 @RequestHeader(value="referer", required = false) String referer,
 							 RedirectAttributes ra) {
 
-		
-		Map<String, Object> map = service.driveReview(boardNo);
-
-		DriveReview board = (DriveReview)map.get("board");
+		DriveReview board = service.driveReview(boardNo);
 		
 		String url = null;
 		
 		if(board != null) {
 		
 			board.setBoardNo(boardNo);
-			board.setCategoryNm(categoryNm);
-			board.setCooName(cooName);
-			board.setCarName(carName);
-			board.setCsat(csat);
 			
 			model.addAttribute("board", board);
-			model.addAttribute("mFile", map.get("mFile"));
 		
 			url = "company/reviewView";
 			
@@ -107,6 +152,7 @@ public class DriveReviewController {
 		List<Reply> rList = service.selectReplyList(boardNo);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm").create();
+		
 		
 		return gson.toJson(rList);
 	}

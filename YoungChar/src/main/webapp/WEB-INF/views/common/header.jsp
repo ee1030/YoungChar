@@ -64,11 +64,18 @@
 		<link id="color" rel="stylesheet" href="${contextPath}/resources/assets/css/color-1.css" media="screen">
 		<!-- Responsive css-->
 		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
-		
-		
 		<!-- Google Map JS-->
+		
+		
 </head>
 <body>
+	<c:if test="${!empty swalTitle}">
+		<script>
+			swal({icon : "${swalIcon}",
+				 title : "${swalTitle}",
+				 text : "${swalText}"});
+		</script>
+	</c:if>
 
 <div id="preloader"></div>
 		<div id="preloader-overlayer"></div>
@@ -213,11 +220,40 @@
 										<a href="${contextPath }">Home</a>
 									</li>
 									<li>
+									<a href="#">Charging 
+											<i class="lnr lnr-chevron-down"></i>
+										</a>
+										<ul>
+										<li>
 										<a href="${contextPath}/chargerLocation/location">충전소</a>
-									</li>
-									<li>
+										</li>
+										
+										<li>
 										<a href="${contextPath}/chargerCompany/introduction">충전기 설치 업체</a>
+										</li>
+										</ul>
 									</li>
+									
+										<li>
+										<a href="#">Cars 
+											<i class="lnr lnr-chevron-down"></i>
+										</a>
+										<ul>
+											<li>
+												<a href="${contextPath }/car/list">SEARCH CAR</a>
+											</li>
+											<li>
+												<a href="${contextPath}/board/list/1">REVIEW</a>
+											</li>
+											<li>
+												<a href="${contextPath}/board/list/2">INFORMATION</a>
+											</li>
+											<li>
+												<a href="${contextPath}/board/list/3">FREE CHAT</a>
+											</li>
+										</ul>
+									</li>
+									
 									<li>
 										<a href="service.html">Service</a>
 									</li>
@@ -255,7 +291,18 @@
 
 		</header>
 		<!-- End Header-->
-		
+
+	<!-- 곻통 스크립트 경로 -->	
+	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
+	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+	
+
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 </body>
 </html>
