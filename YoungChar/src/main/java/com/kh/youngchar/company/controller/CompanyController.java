@@ -1,5 +1,7 @@
 package com.kh.youngchar.company.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.kh.youngchar.company.model.service.DriveReviewService;
+import com.kh.youngchar.company.model.service.CompanyService;
+import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
@@ -23,7 +26,7 @@ import com.kh.youngchar.member.model.vo.MemberFile;
 public class CompanyController {
 	
 	@Autowired
-	private DriveReviewService service;
+	private CompanyService service;
 	
 	private Logger logger = LoggerFactory.getLogger(CompanyController.class);
 	
@@ -40,7 +43,17 @@ public class CompanyController {
 		return "company/dashBoard";
 	}
 	@RequestMapping("applicationlist")
-	public String applicationList() {
+	public String applicationList(@ModelAttribute("loginMember") Member loginMember,
+								  Model model) {
+		
+		List<Application> list = service.selectAplList(loginMember.getMemberNo());
+		
+		if(list != null) {
+			model.addAttribute("list", list);
+		}
+		
+		System.out.println(list);
+		
 		return "company/applicationList";
 	}
 	@RequestMapping("companyinfo")

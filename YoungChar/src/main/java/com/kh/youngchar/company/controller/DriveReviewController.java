@@ -67,9 +67,7 @@ public class DriveReviewController {
 		String url = null;
 		if(result > 0) {
 			
-            url = "redirect:http://localhost:8080/youngchar/driveReview/review/"+result;
-			
-			System.out.println(url);
+            url = "redirect:../review/" + result;
 			
 			// 새로 작성한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
 			request.getSession().setAttribute("returnListURL", "../reviewlist/");
@@ -78,7 +76,6 @@ public class DriveReviewController {
 			swalTitle = "게시글 삽입 실패";
 			url = "redirect:insertreview";
 		}
-		
 		ra.addFlashAttribute("swalIcon", swalIcon);
 		ra.addFlashAttribute("swalTitle", swalTitle);
 		
@@ -101,7 +98,7 @@ public class DriveReviewController {
 							 Model model,
 							 @RequestHeader(value="referer", required = false) String referer,
 							 RedirectAttributes ra) {
-
+		
 		DriveReview board = service.driveReview(boardNo);
 		
 		String url = null;

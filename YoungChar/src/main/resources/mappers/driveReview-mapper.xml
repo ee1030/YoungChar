@@ -2,16 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="driveReviewMapper">
    
-   <resultMap type="MemberFile" id="memberFile_rm">
-      <id property="memImgNo" column="MEM_IMG_NO"/>
-      <result property="memImgPath" column="MEM_IMG_PATH"/>
-      <result property="memImgName" column="MEM_IMG_NAME"/>
-      <result property="memImgLevel" column="MEM_IMG_LEVEL"/>
-      <result property="memNo" column="MEM_NO"/>
-      <result property="cooName" column="COO_NAME"/>
-      <result property="categoryNm" column="CATEGORY_NM"/>
-   </resultMap>
-   
    <resultMap type="DriveReview" id="driveReview_rm">
       <id property="boardNo" column="BOARD_NO"/>
       <result property="csat" column="CSAT"/>
@@ -28,6 +18,7 @@
       <result property="memNo" column="MEM_NO"/>
       <result property="memImgPath" column="MEM_IMG_PATH"/>
       <result property="memImgName" column="MEM_IMG_NAME"/>
+      <result property="rsrvtNo" column="RESERVATION_NO"/>
    </resultMap>
    
      <resultMap type="ReviewReply" id="reply_rm">
@@ -43,17 +34,6 @@
       <result property="memImgPath" column="MEM_IMG_PATH"/>
       <result property="memImgName" column="MEM_IMG_NAME"/>
    </resultMap>
-   
-   
-   <select id="getCompanyProfile" parameterType="_int" resultMap="memberFile_rm">
-      SELECT COO_NAME, CATEGORY_NM, MEM_IMG_NO, MEM_IMG_PATH, MEM_IMG_NAME
-      FROM MEMBER
-      JOIN COO_MEMBER USING (MEM_NO)
-      JOIN CATEGORY USING (CATEGORY_CD)
-      JOIN MEMBER_FILE USING (MEM_NO)
-      WHERE MEM_NO = #{memberNo}
-      AND MEM_IMG_LEVEL = 0
-   </select>   
    
    <select id="getListCount" resultType="_int">
       SELECT COUNT(*)
@@ -132,6 +112,11 @@
 	    INSERT INTO BOARD
 			VALUES (#{boardNo}, #{boardTitle}, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 4, #{categoryCd}, #{memNo})
    </insert>
+
+   <insert id="insertDriveReview" parameterType="DriveReview">
+			INSERT INTO DRIVE_REVIEW
+			VALUES (#{boardNo}, #{csat}, #{rsrvtNo})   
+	 </insert>
 
 	<insert id="insertAttachmentList" parameterType="list">
 		INSERT INTO ATTACHMENT
