@@ -293,7 +293,8 @@
 		<!-- End Header-->
 
 	<!-- 곻통 스크립트 경로 -->	
-	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+	<%-- <script src="${contextPath}/resources/assets/js/jquery.min.js"></script> --%>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
@@ -302,7 +303,6 @@
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 	
 
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </body>
 </html>
