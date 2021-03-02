@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.board.model.vo.Attachment;
+import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
@@ -16,8 +17,6 @@ import com.kh.youngchar.member.model.vo.MemberFile;
  *
  */
 public interface DriveReviewService{
-
-	MemberFile getCompanyProfile(int memberNo);
 
 	PageInfo getPageInfo(int cp);
 
@@ -32,5 +31,6 @@ public interface DriveReviewService{
 	int insertBoard(DriveReview board, String savePath);
 
 	Attachment insertImage(MultipartFile uploadFile, String savePath);
+
 
 }

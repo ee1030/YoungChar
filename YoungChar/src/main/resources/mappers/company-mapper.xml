@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="companyMapper">
+   
+   <resultMap type="MemberFile" id="memberFile_rm">
+      <id property="memImgNo" column="MEM_IMG_NO"/>
+      <result property="memImgPath" column="MEM_IMG_PATH"/>
+      <result property="memImgName" column="MEM_IMG_NAME"/>
+      <result property="memImgLevel" column="MEM_IMG_LEVEL"/>
+      <result property="memNo" column="MEM_NO"/>
+      <result property="cooName" column="COO_NAME"/>
+      <result property="categoryNm" column="CATEGORY_NM"/>
+   </resultMap>
+   
+   <resultMap type="Application" id="application_rm">
+      <id property="rsrvtNo" column="RESERVATION_NO"/>
+      <result property="memNm" column="MEM_NAME"/>
+      <result property="memPhone" column="MEM_PHONE"/>
+      <result property="carName" column="CAR_NAME"/>
+      <result property="testDriveDt" column="TEST_DRIVE_DATE"/>
+      <result property="approvalStatus" column="APPROVAL_STATUS"/>
+   </resultMap>
+  
+   
+   <select id="getCompanyProfile" parameterType="_int" resultMap="memberFile_rm">
+      SELECT COO_NAME, CATEGORY_NM, MEM_IMG_NO, MEM_IMG_PATH, MEM_IMG_NAME
+      FROM MEMBER
+      JOIN COO_MEMBER USING (MEM_NO)
+      JOIN CATEGORY USING (CATEGORY_CD)
+      JOIN MEMBER_FILE USING (MEM_NO)
+      WHERE MEM_NO = #{memberNo}
+      AND MEM_IMG_LEVEL = 0
+   </select>   
+   
+   <select id="selectAplList" parameterType="_int" resultMap="application_rm">
+	    SELECT RESERVATION_NO, MEM_NAME, MEM_PHONE, CAR_NAME, TEST_DRIVE_DATE, APPROVAL_STATUS
+			FROM TES_DR_RESERVATION
+			JOIN MEMBER USING(MEM_NO)
+			JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+			JOIN CAR_INFO USING(CAR_NO)
+			WHERE MEM_NO2 = 2
+			ORDER BY RESERVATION_NO DESC
+   </select>
+   
+</mapper>
