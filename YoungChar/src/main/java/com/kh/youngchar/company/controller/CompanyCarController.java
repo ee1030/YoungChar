@@ -22,7 +22,7 @@ import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
 @Controller
-//@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember"})
 @RequestMapping("/carCompany/*")
 public class CompanyCarController {
 	
@@ -39,17 +39,6 @@ public class CompanyCarController {
 	      return "company/carManagement";
 	}
 	
-	// 차량 추가 검색 Controller
-	@ResponseBody
-	@RequestMapping("carSearch")
-	public List<TestCars> carSearch(@RequestParam String carName1) {
-		
-		System.out.println(carName1);
-		List<TestCars> cars = service.carSearch(carName1);
-		
-		return cars;
-	}
-	
 	//차량 목록 조회 Controller
 	@ResponseBody
 	@RequestMapping("carList")
@@ -61,17 +50,32 @@ public class CompanyCarController {
 		return cList;
 	}
 	
+	//시승 가능 차량 추가 검색 Controller
+	@ResponseBody
+	@RequestMapping("carSearch")
+	public List<TestCars> carSearch(@RequestParam String carName1) {
+		
+		System.out.println(carName1);
+		List<TestCars> cars = service.carSearch(carName1);
+		
+		return cars;
+	}
+	
+	
 	//차량 추가 Controller
 	@ResponseBody
 	@RequestMapping("addCar")
-	public int addCar(//@ModelAttribute("loginMember") Member loginMember,
+	public int addCar(@ModelAttribute("loginMember") Member loginMember,
 					  @RequestParam int carNo,
 					  Model model) {
 		
+		int memNo = loginMember.getMemberNo();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("carNo : " + carNo);
+		//System.out.println("carNo : " + carNo);
 		map.put("carNo", carNo);
-		//map.put("loginMember", loginMember);
+		map.put("memNo", memNo);
+		
 		int result = 0;
 		int exist = service.carListEx(map);
 		System.out.println("exist : " +exist);
@@ -86,5 +90,23 @@ public class CompanyCarController {
 		return result;
 	}
 	
+	
+	//차량 삭제 Controller
+	@ResponseBody
+	@RequestMapping("deleteCar")
+	public int deleteCar(@ModelAttribute("loginMember") Member loginMember,
+					  @RequestParam int carNo,
+					  Model model) {
+		
+		int memNo = loginMember.getMemberNo();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 
+		map.put("carNo", carNo);
+		map.put("memNo", memNo);
+		
+		int result = service.deleteCar(map);
+		
+		return result;
+	}
 }

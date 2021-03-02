@@ -52,4 +52,13 @@ public class CompanyCarService {
 		return dao.carListEx(map);
 	}
 
+	/** 차량 삭제 Service
+	 * @param map
+	 * @return result
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteCar(Map<String, Object> map) {
+		return dao.deleteCar(map);
+	}
+
 }
