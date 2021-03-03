@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,7 +171,7 @@ to {
 											<li>항목3</li>
 										</ul>
 										<div class="rn-car-price-wrap">
-											<a class="rn-car-price" href="car-single.html"><span class="rn-car-price-from">Go</span> </a>
+											<a class="rn-car-price" href="../chargerCompany/${chargerCompany.companyNo}"><span class="rn-car-price-from">Go</span> </a>
 										</div>
 									</div>
 								</div>
@@ -180,6 +180,14 @@ to {
 
 						</div>
 					</c:forEach>
+				</c:if>
+
+
+
+
+				<%-- 로그인이 되어있는 경우 --%>
+				<c:if test="${!empty loginMember}">
+					<a class="btn btn-success float-right" href="../chargerCompany/insertChargerCompany">등록하기</a>
 				</c:if>
 
 

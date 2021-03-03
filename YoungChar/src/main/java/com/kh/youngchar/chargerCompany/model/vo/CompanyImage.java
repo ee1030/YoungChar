@@ -10,9 +10,8 @@ public class CompanyImage {
 	
 	public CompanyImage() {}
 
-	public CompanyImage(int fileNo, String filePath, String fileName, int fileLevel, int companyNo) {
+	public CompanyImage(String filePath, String fileName, int fileLevel, int companyNo) {
 		super();
-		this.fileNo = fileNo;
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.fileLevel = fileLevel;

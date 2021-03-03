@@ -14,7 +14,7 @@
 		<result property="memberNo" column="MEM_NO" />
 		<result property="status" column="STATUS" />
 	</resultMap>
-	
+
 	<resultMap type="CompanyImage" id="companyImage_rm">
 		<id property="fileNo" column="FILE_NO" />
 
@@ -24,17 +24,76 @@
 		<result property="companyNo" column="COMP_NO" />
 
 	</resultMap>
-	
+
+
+	<!-- 업체 게시글 수 조회 -->
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*) FROM V_CHARGER_COMPANY
+		SELECT COUNT(*) FROM
+		V_CHARGER_COMPANY
 		WHERE STATUS = 'Y'
 	</select>
 
-	<select id="selectList" resultMap="chargerCompany_rm">
-		SELECT COMP_NO, COMP_NM, PHONE, FAX, EMAIL, LINK, COMP_CONTENT 
+
+	<!-- 업체 게시글 목록 조회 -->
+	<select id="selectList"  parameterType="_int" resultMap="chargerCompany_rm">
+		SELECT COMP_NO, COMP_NM,
+		PHONE, FAX, EMAIL, LINK, COMP_CONTENT
 		FROM V_CHARGER_COMPANY
-		WHERE STATUS = 'Y'
+		WHERE
+		STATUS = 'Y'
 		ORDER BY COMP_NO DESC
 	</select>
+
+
+	<!-- 업체 게시글 상세 조회 -->
+	<select id="selectCompany" parameterType="ChargerCompany"
+		resultMap="chargerCompany_rm">
+		SELECT COMP_NO, COMP_NM, PHONE, FAX, EMAIL, LINK,
+		COMP_CONTENT
+		FROM V_CHARGER_COMPANY
+		WHERE STATUS = 'Y'
+		AND COMP_NO =
+		#{companyNo}
+	</select>
+
+
+	<!-- 업체 게시글 이미지 조회 -->
+	<select id="selectChargerCompanyList" parameterType="_int"
+		resultMap="companyImage_rm">
+		SELECT * FROM COMPANY_IMAGE
+		WHERE COMP_NO = #{companyNo}
+		ORDER BY FILE_LEVEL
+	</select>
+
+
+	<!-- 다음 업체게시글 번호 조회 -->
+	<select id="selectNextNo" resultType="_int">
+		SELECT SEQ_CCP_NO.NEXTVAL
+		FROM DUAL
+	</select>
+
+
+	<!-- 업체 게시글 삽입 -->
+	<insert id="insertCompany" parameterType="map">
+		INSERT INTO
+		CHARGER_COMPANY VALUES
+		(#{companyNo}, #{companyName}, #{phone}, #{fax}, #{email}, #{link}, #{companyContent}, #{memberNo}, DEFAULT)
+	</insert>
+	
+	
+	<!-- 파일 정보 삽입 (List 이용) -->
+	<insert id="insertchargerCompanyImagesList" parameterType="List">
+		INSERT INTO COMPANY_IMAGE
+		SELECT SEQ_CNO.NEXTVAL, A.* FROM(
+
+		<foreach collection="list" item="item" separator="UNION ALL">
+			SELECT #{item.filePath} FILE_PATH,
+			#{item.fileName} FILE_NAME,
+			#{item.fileLevel} FILE_LEVEL,
+			#{item.companyNo} COMP_NO
+			FROM DUAL
+		</foreach>
+		)A
+	</insert>
 
 </mapper>
