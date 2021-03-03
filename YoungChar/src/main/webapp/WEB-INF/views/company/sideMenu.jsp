@@ -35,6 +35,10 @@
 				background-repeat: no-repeat;
 				background-position: center center; 
 			}	
+			
+			.rn-topbar, .rn-menubar{
+				padding: 0px;
+			}
 		
 		</style>
 		
@@ -69,7 +73,7 @@
 											<a href="${contextPath}/company/#">Schedule</a>
 										</li>
 										<li>
-											<a href="${contextPath}/company/applicationlist">Application list</a>
+											<a href="${contextPath}/company/applicationlist/all">Application list</a>
 										</li>
 										<li>
 											<a href="${contextPath}/company/companyinfo">Company Info</a>

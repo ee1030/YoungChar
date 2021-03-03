@@ -15,7 +15,7 @@ import com.kh.youngchar.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/admin/*")
-public class AdminController {
+public class AdminController { 
 	
 	@Autowired
 	private AdminService service;

@@ -149,9 +149,9 @@
 									</div>
 								</div>
 								<!-- End InvoiceBot-->
+									<hr>
 									<div>
 										<div class="float-right">
-
 											<c:if test="${empty sessionScope.returnListURL}">
 												<c:set var="returnListURL" value="../reviewlist" scope="session"/>
 											</c:if>

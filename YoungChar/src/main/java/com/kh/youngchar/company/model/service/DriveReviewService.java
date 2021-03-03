@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.board.model.vo.Attachment;
-import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
