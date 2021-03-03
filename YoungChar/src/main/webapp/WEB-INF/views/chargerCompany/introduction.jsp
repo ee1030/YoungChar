@@ -156,7 +156,12 @@ to {
 							<!-- Item-->
 							<div class="rn-car-item">
 								<div class="rn-car-item-thumb">
-									<a href="car-single.html"> <img class="img-fluid" src="assets/images/car-1.jpg" alt="Black Sedan" srcset="assets/images/car-1.jpg 1x, assets/images/car-1@2x.jpg 2x" />
+									<a href="car-single.html">
+									<c:forEach items="${thList}" var="th">
+										<c:if test="${th.companyNo  == chargerCompany.companyNo}">
+											<img src="${contextPath}${th.filePath}/${th.fileName}">
+										</c:if>
+									</c:forEach>
 									</a>
 								</div>
 								<div class="rn-car-item-info">

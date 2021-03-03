@@ -35,6 +35,11 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 	}
 
 	
+	@Override
+	public List<CompanyImage> selectThumbnailList(List<ChargerCompany> cList) {
+		return dao.selectThumbnailList(cList);
+	}
+	
 	
 	
 	@Override
@@ -225,6 +230,8 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 
 		return date + str + ext;
 	}
+
+	
 
 
 }
