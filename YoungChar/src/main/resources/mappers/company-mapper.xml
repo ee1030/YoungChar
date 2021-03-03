@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="companyMapper">
 
-   <resultMap type="MemberFile" id="memberFile_rm">
-      <id property="memImgNo" column="MEM_IMG_NO"/>
-      <result property="memImgPath" column="MEM_IMG_PATH"/>
-      <result property="memImgName" column="MEM_IMG_NAME"/>
-      <result property="memImgLevel" column="MEM_IMG_LEVEL"/>
-      <result property="memNo" column="MEM_NO"/>
+   <resultMap type="Company" id="company_rm">
+      <id property="memNo" column="MEM_NO"/>
+      <result property="memId" column="MEM_ID"/>
       <result property="cooName" column="COO_NAME"/>
       <result property="categoryNm" column="CATEGORY_NM"/>
+      <result property="cooNo" column="COO_NUM"/>
+      <result property="memImgPath" column="MEM_IMG_PATH"/>
+      <result property="memImgName" column="MEM_IMG_NAME"/>
    </resultMap>
    
    <resultMap type="Application" id="application_rm">
@@ -19,6 +19,14 @@
       <result property="carName" column="CAR_NAME"/>
       <result property="testDriveDt" column="TEST_DRIVE_DATE"/>
       <result property="approvalStatus" column="APPROVAL_STATUS"/>
+   </resultMap>
+   
+   <resultMap type="MemberFile" id="memberFile_rm">
+      <id property="memImgNo" column="MEM_IMG_NO"/>
+      <result property="memImgPath" column="MEM_IMG_PATH"/>
+      <result property="memImgName" column="MEM_IMG_NAME"/>
+      <result property="memNo" column="MEM_IMG_LEVEL"/>
+   
    </resultMap>
    
    <select id="getListCount1" parameterType="_int" resultType="_int">
@@ -37,14 +45,14 @@
    </select>
   
    
-   <select id="getCompanyProfile" parameterType="_int" resultMap="memberFile_rm">
-      SELECT COO_NAME, CATEGORY_NM, MEM_IMG_NO, MEM_IMG_PATH, MEM_IMG_NAME
-      FROM MEMBER
-      JOIN COO_MEMBER USING (MEM_NO)
-      JOIN CATEGORY USING (CATEGORY_CD)
-      JOIN MEMBER_FILE USING (MEM_NO)
-      WHERE MEM_NO = #{memberNo}
-      AND MEM_IMG_LEVEL = 0
+   <select id="getCompanyProfile" parameterType="_int" resultMap="company_rm">
+			SELECT MEM_NO, MEM_ID, COO_NAME, CATEGORY_NM, COO_NUM, MEM_IMG_PATH, MEM_IMG_NAME
+			FROM MEMBER
+			LEFT OUTER JOIN MEMBER_FILE USING (MEM_NO)
+			JOIN COO_MEMBER USING (MEM_NO)
+			JOIN CATEGORY USING (CATEGORY_CD)
+			WHERE MEM_NO = #{memberNo}
+			AND (MEM_IMG_LEVEL IS NULL OR MEM_IMG_LEVEL=0)
    </select>   
    
    <select id="selectAplList1" parameterType="_int" resultMap="application_rm">
@@ -75,8 +83,30 @@
    </update>
    
    <select id="selectFile" parameterType="_int" resultMap="memberFile_rm">
-   	SELECT * FROM MEMBER_FILE
-   	WHERE MEM_NO = #{memNo}
+	   	SELECT * FROM MEMBER_FILE
+	   	WHERE MEM_NO = #{memNo}
+   </select>
+   
+   <select id="selectPwd" parameterType="_int" resultType="string">
+   		SELECT MEM_PWD
+			FROM MEMBER
+			WHERE MEM_NO = #{memNo}
+   </select>
+   
+   <update id="updateMember" parameterType="Member">
+	    UPDATE MEMBER SET
+			MEM_PWD = #{memberPwd},
+			MEM_EMAIL = #{memberEmail},
+			MEM_PHONE = #{phone},
+			MEM_ADDRESS = #{memberAddr}
+			WHERE MEM_NO = #{memberNo}
+   </update>
+   
+   <select id="selectAplCount" parameterType="_int" resultType="_int">
+	    SELECT COUNT(*) 
+			FROM TEST_DRIVE_CAR
+			WHERE MEM_NO2 = #{memberNo}
+			AND (CAR_STATUS = 'Y' OR CAR_STATUS = 'N')
    </select>
    
 </mapper>

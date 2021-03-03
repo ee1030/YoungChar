@@ -130,4 +130,17 @@
 			</foreach>
 		)A 
 	</insert>
+	
+	<select id="selectReport" parameterType="Report" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPORT
+		WHERE MEM_NO = #{memNo}
+		AND REPORT_BOARD_NO = #{reportBoardNo}
+	</select>
+	
+	<update id="insertReport" parameterType="Report">
+		INSERT INTO REPORT
+		VALUES(SEQ_PNO.NEXTVAL, SYSDATE, 'N', #{reportType}, #{reportBoardNo}, #{reportContent}, #{memNo})
+	</update>
+	
 </mapper>

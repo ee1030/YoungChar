@@ -19,6 +19,7 @@
 			<typeAlias type="com.kh.youngchar.company.model.vo.TestCars" alias="TestCars" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.Application" alias="Application" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.Report" alias="Report" />
+			<typeAlias type="com.kh.youngchar.company.model.vo.Company" alias="Company" />
 			
 			<typeAlias type="com.kh.youngchar.chargerCompany.model.vo.ChargerCompany" alias="ChargerCompany" />
 			<typeAlias type="com.kh.youngchar.chargerCompany.model.vo.CompanyImage" alias="CompanyImage" />

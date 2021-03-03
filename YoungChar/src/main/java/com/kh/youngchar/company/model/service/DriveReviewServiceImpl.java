@@ -23,6 +23,7 @@ import com.kh.youngchar.company.model.dao.DriveReviewDAO;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
+import com.kh.youngchar.company.model.vo.Report;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
 /** 시승후기 관련 ServiceImpl
@@ -174,6 +175,23 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		
 		return date + str + ext;
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int reportBoard(Report report) {
+		
+		int result = 1;
+		result = dao.selectReport(report);
+		
+		if(result == 0) {
+			
+			result = dao.insertReport(report);
+		}else {
+			result = 0;
+		}
+		
+		return result;
 	}
 
 

@@ -47,9 +47,8 @@
 		}
 		
 		.pagination {
-		    width: 400px !important;
- 			  margin-left: auto !important;
-        margin-right: auto !important;
+ 			  display: inherit !important;
+ 			  text-align: center;
 		}
 		
 
