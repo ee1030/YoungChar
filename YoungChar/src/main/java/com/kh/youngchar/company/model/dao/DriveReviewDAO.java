@@ -12,6 +12,7 @@ import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
+import com.kh.youngchar.company.model.vo.Report;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
 @Repository
@@ -64,6 +65,14 @@ public class DriveReviewDAO {
 
 	public int insertAttachmentList(List<Attachment> uploadImages) {
 		return sqlSession.insert("driveReviewMapper.insertAttachmentList", uploadImages);
+	}
+
+	public int selectReport(Report report) {
+		return sqlSession.selectOne("driveReviewMapper.selectReport", report);
+	}
+
+	public int insertReport(Report report) {
+		return sqlSession.insert("driveReviewMapper.insertReport", report);
 	}
 
 

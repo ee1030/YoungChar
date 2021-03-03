@@ -55,8 +55,9 @@
 							<div class="rn-widget">
 								<div class="img bg-wrap text-center">
 									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}${memberFile.memImgPath}/${memberFile.memImgName});"></div>
-										<h3>${memberFile.categoryNm}&nbsp;${memberFile.cooName}</h3>
+										<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+										<h3>${company.categoryNm}&nbsp;${company.cooName}</h3>
+										<h6 class="card-title mb-0">${company.memId}</h6>
 									</div>
 								</div>
 							</div>

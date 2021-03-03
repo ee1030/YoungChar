@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.company.model.service.CompanyService;
 import com.kh.youngchar.company.model.vo.Application;
+import com.kh.youngchar.company.model.vo.Company;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
@@ -28,11 +31,15 @@ import com.kh.youngchar.member.model.vo.MemberFile;
  */
 @Controller
 @RequestMapping("/company/*")
-@SessionAttributes({"memberFile", "loginMember"})
+@SessionAttributes({"company", "loginMember"})
 public class CompanyController {
 	
 	@Autowired
 	private CompanyService service;
+	
+	private String swalIcon;
+	private String swalTitle;
+	private String swalText;
 	
 	private Logger logger = LoggerFactory.getLogger(CompanyController.class);
 	
@@ -40,10 +47,10 @@ public class CompanyController {
 	public String dashBoard(Model model,
 							@ModelAttribute("loginMember") Member loginMember) {
 		
-		MemberFile memberFile = service.getCompanyProfile(loginMember.getMemberNo());
+		Company company = service.getCompanyProfile(loginMember.getMemberNo());
 		
-		if(memberFile != null) {
-			model.addAttribute("memberFile", memberFile);
+		if(company != null) {
+			model.addAttribute("company", company);
 		}
 		
 		return "company/dashBoard";
@@ -98,6 +105,66 @@ public class CompanyController {
 	@RequestMapping("companyinfo")
 	public String companyInfo() {
 		return "company/companyInfo";
+	}
+	
+	@RequestMapping("updateAction")
+	public String updateMember(@ModelAttribute Member updateMember,
+							 @RequestParam(value="newPwd", required = false, defaultValue = "null") String newPwd,
+							 Model model, RedirectAttributes ra,
+							 @ModelAttribute(name="loginMember", binding=false) Member loginMember) {
+								
+		updateMember.setMemberNo(loginMember.getMemberNo());
+
+		int result = service.updateMember(updateMember, newPwd);
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원 정보가 변경되었습니다.";
+			
+			loginMember.setMemberEmail(updateMember.getMemberEmail());
+			loginMember.setPhone(updateMember.getPhone());
+			loginMember.setMemberAddr(updateMember.getMemberAddr());
+			
+			model.addAttribute("loginMember", loginMember);
+		}
+		else {
+			swalIcon = "error";
+			swalTitle = "현재 비밀번호를 확인해주세요.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		return "redirect:companyinfo";
+	}
+	
+	@RequestMapping("secession")
+	public String updateMemberStatus(@ModelAttribute Member member,
+									 @ModelAttribute(name="loginMember", binding=false) Member loginMember,
+									 RedirectAttributes ra,
+									 SessionStatus status) {
+		
+		member.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.updateMemberStatus(member);
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원 탈퇴가 완료되었습니다.";
+			status.setComplete();
+		}else if(result == 0) {
+			swalIcon = "error";
+			swalTitle = "현재 비밀번호를 확인해주세요.";
+		}else{
+			swalIcon = "error";
+			swalTitle = "처리되지 않은 시승건이 존재합니다. 확인해주세요.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		return "redirect:companyinfo"; 
+		
 	}
 
 

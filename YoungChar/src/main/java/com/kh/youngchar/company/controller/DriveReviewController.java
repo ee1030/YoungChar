@@ -25,6 +25,7 @@ import com.kh.youngchar.company.model.service.DriveReviewService;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
+import com.kh.youngchar.company.model.vo.Report;
 
 /** 시승후기 관련 Controller
  * @author jeonga
@@ -39,6 +40,7 @@ public class DriveReviewController {
 	
 	private String swalIcon = null;
 	private String swalTitle = null;
+	private String swalText = null;
 	private Logger logger = LoggerFactory.getLogger(DriveReviewController.class);
 	
 	@RequestMapping("insertreview/{rsrvtNo}")
@@ -149,6 +151,29 @@ public class DriveReviewController {
 		
 		
 		return gson.toJson(rList);
+	}
+	
+	@RequestMapping("reportBoard")
+	public String reportBoard(RedirectAttributes ra,
+							  @ModelAttribute Report report,
+							  HttpServletRequest request) {
+		
+		int result = service.reportBoard(report);
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "신고가 완료되었습니다.";
+			swalText = "관리자 확인 후 조치 예정입니다.";
+		}else {
+			swalIcon = "error";
+			swalTitle = "이미 신고한 게시글입니다.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		ra.addFlashAttribute("swalText", swalText);
+		
+		return "redirect:review/" + report.getReportBoardNo();
 	}
 
 }

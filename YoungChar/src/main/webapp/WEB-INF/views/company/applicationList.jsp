@@ -41,10 +41,10 @@
 			}
 
 			.pagination {
-			    width: 400px !important;
-	 			  margin-left: auto !important;
-	        margin-right: auto !important;
+	 			  display: inherit !important;
+	 			  text-align: center;
 			}
+			
 
 
 			#select1{
@@ -304,9 +304,7 @@
 			
 				$(".select-status").on("click", function(e){
 					
-					var status = $(this).attr('id');
-					
-					var URL = status;
+					var URL = $(this).attr('id');
 					
 					location.href = URL;
 				})

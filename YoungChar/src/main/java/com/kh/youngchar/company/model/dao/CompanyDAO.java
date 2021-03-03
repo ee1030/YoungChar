@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.company.model.vo.Application;
+import com.kh.youngchar.company.model.vo.Company;
 import com.kh.youngchar.company.model.vo.PageInfo;
+import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
 /** 업체페이지 DAO
@@ -22,7 +24,7 @@ public class CompanyDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public MemberFile getCompanyProfile(int memberNo) {
+	public Company getCompanyProfile(int memberNo) {
 		return sqlSession.selectOne("companyMapper.getCompanyProfile", memberNo);
 	}
 
@@ -63,6 +65,26 @@ public class CompanyDAO {
 		}
 		
 		return listCount;
+	}
+
+
+	public String selectPwd(int memberNo) {
+		return sqlSession.selectOne("companyMapper.selectPwd", memberNo);
+	}
+
+
+	public int updateMember(Member updateMember) {
+		return sqlSession.update("companyMapper.updateMember", updateMember);
+	}
+
+
+	public int updateMemberStatus(int memberNo) {
+		return sqlSession.update("companyMapper.updateMemberStatus", memberNo);
+	}
+
+
+	public int selectAplCount(int memberNo) {
+		return sqlSession.selectOne("companyMapper.selectAplCount", memberNo);
 	}
 
 

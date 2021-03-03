@@ -187,23 +187,23 @@
 					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-						<input type="hidden" name="boardNo" value="${board.boardNo}">
-						<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
+						<input type="hidden" name="reportBoardNo" value="${board.boardNo}">
+						<input type="hidden" name="memNo" value="${loginMember.memberNo}">
 						
-						<input id="report1" name="report" type="radio" value="report1" class="radio_animated">
+						<input id="report1" name="reportType" type="radio" value="1" class="radio_animated">
 						<label for="report1">허위 사실 유포</label>
 						<br><br>
-						<input id="report2" name="report" type="radio" value="report2" class="radio_animated">
+						<input id="report2" name="reportType" type="radio" value="2" class="radio_animated">
 						<label for="report2">비속어 / 폭언 / 불쾌감 조성</label>
 						<br><br>
-						<input id="report3" name="report" type="radio" value="report3" class="radio_animated">
+						<input id="report3" name="reportType" type="radio" value="3" class="radio_animated">
 						<label for="report3">게시판 목적에 맞지 않는 글</label>
 						<br><br>
-						<input id="report4" name="report" type="radio" value="report4" class="radio_animated">
+						<input id="report4" name="reportType" type="radio" value="4" class="radio_animated">
 						<label for="report4">기타</label>
 						<br><br>
 						<label for="reason">요청 사유</label>
-						<input type="text" class="form-control" id="reason" name="reason" placeholder="기타 항목 선택 시 필수로 작성하셔야합니다.">
+						<input type="text" class="form-control" id="reportContent" name="reportContent" placeholder="기타 항목 선택 시 필수로 작성하셔야합니다.">
 						<br><br>
 				</div>
 				<div class="modal-footer">
@@ -222,9 +222,9 @@
 	function validate() {
 		
 		
-		if ($('input[name="report"]:checked').val() == "report4" && $("#reason").val().trim().length == 0) {
+		if ($('input[name="reportType"]:checked').val() == "4" && $("#reportContent").val().trim().length == 0) {
 			alert("신고 내용을 입력해 주세요.");
-			$("#reason").focus();
+			$("#reportContent").focus();
 			return false;
 		}
 
