@@ -66,6 +66,9 @@
 		<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
 		<!-- Google Map JS-->
 		
+		<!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		
 		
 </head>
 <body>
