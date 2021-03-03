@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.chargerCompany.model.service.ChargerCompanyService;
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
+import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -41,6 +42,15 @@ public class ChargerCompanyController {
 		PageInfo pInfo = service.getPageInfo(cp);
 
 		List<ChargerCompany> cList = service.selectList(pInfo);
+		
+		if (cList != null && !cList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<CompanyImage> thumbnailList = service.selectThumbnailList(cList);
+
+			if (thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+
+		}
 
 		model.addAttribute("cList", cList);
 		model.addAttribute("pInfo", pInfo);

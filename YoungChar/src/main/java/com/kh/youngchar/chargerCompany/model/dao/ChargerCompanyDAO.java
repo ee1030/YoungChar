@@ -38,6 +38,12 @@ public class ChargerCompanyDAO {
 		return sqlSession.selectList("chargerCompanyMapper.selectList", rowBounds);
 	}
 	
+	
+	public List<CompanyImage> selectThumbnailList(List<ChargerCompany> cList) {
+		return sqlSession.selectList("chargerCompanyMapper.selectThumbnailList", cList);
+	}
+
+	
 
 	/** 업체 게시글 조회
 	 * @param temp
@@ -77,6 +83,8 @@ public class ChargerCompanyDAO {
 	public int insertchargerCompanyImagesList(List<CompanyImage> chargerCompanyImages) {
 		return sqlSession.insert("chargerCompanyMapper.insertchargerCompanyImagesList", chargerCompanyImages);
 	}
+
+
 
 
 }

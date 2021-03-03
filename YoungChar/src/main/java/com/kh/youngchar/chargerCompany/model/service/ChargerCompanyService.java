@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
+import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 
 @Service
@@ -16,11 +17,14 @@ public interface ChargerCompanyService {
 
 	List<ChargerCompany> selectList(PageInfo pInfo);
 
+	List<CompanyImage> selectThumbnailList(List<ChargerCompany> cList);
+	
 	ChargerCompany selectCompany(int companyNo);
 
 	List<ChargerCompany> selectChargerCompanyList(int companyNo);
 
 	int insertCompany(Map<String, Object> map, List<MultipartFile> images, String savePath);
+
 
 
 
