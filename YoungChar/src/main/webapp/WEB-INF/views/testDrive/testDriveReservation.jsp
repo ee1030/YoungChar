@@ -12,6 +12,7 @@
 
 		<title>Fullwidth | RentNow - Responsive Car Rental Template</title>
 		<style>
+	
 			.select1{
 				width: 100%;
 				height: 100px;
@@ -21,27 +22,21 @@
 				font-size: 25px;
 			}
 			
+			.carSelect{
+				border : 1px solid #green !important;
+				
+			}
 			
 
 		</style>
 		<!-- Preloader CSS-->
 		<style>#preloader:after,#preloader:before{content:"";display:block;left:-1px;top:-1px}#preloader-overlayer,#preloader:after,#preloader:before{position:absolute;height:100%;width:100%}#preloader-overlayer{position:fixed;top:0;left:0;background-color:#112E3B;z-index:999}#preloader{height:40px;width:40px;position:fixed;top:50%;left:50%;margin-top:-20px;margin-left:-20px;z-index:9999}#preloader:before{-webkit-animation:rotation 1s linear infinite;animation:rotation 1s linear infinite;border:2px solid #42DB0C;border-top:2px solid transparent;border-radius:100%}#preloader:after{border:1px solid rgba(255,255,255,.1);border-radius:100%}@media only screen and (min-width:768px){#preloader{height:60px;width:60px;margin-top:-30px;margin-left:-30px}#preloader:before{left:-2px;top:-2px;border-width:2px}}@media only screen and (min-width:1200px){#preloader{height:80px;width:80px;margin-top:-40px;margin-left:-40px}}@-webkit-keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}</style>
 		
-		<!--
-		All CSS Codes Loaded
-		Ex: bootstrap, fontawesome, style, etc.
-		-->
-		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/fontawesome/css/fontawesome-all.min.css">
-		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/linearicons/linearicons.css">
-		<link rel="stylesheet" href="${contextPath}/resources/assets/css/rentnow-icons.css">
-		<link rel="stylesheet" href="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.css">
-		<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
-		<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
-
+		
 		<!-- Google Map JS-->
 		<!-- <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script> -->
 		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3211eab2bbc7c19d299e85e631e4b68&libraries=services,clusterer,drawing"></script>
 	</head>
 	
 
@@ -114,9 +109,9 @@
 								<label>Brand :</label>
 								<select name='brand'>
 									<option value="Any" selected>Any</option>
-									<c:forEach var="car" items="${cList}">
-										<option value="${car.brand}">${car.brand}</option>
-									</c:forEach>
+											<c:forEach var="car" items="${cList}">
+												<option value="${car.brand}">${car.brand}</option>
+											</c:forEach>
 								</select>
 							</div>
 						</div>
@@ -132,27 +127,27 @@
 		<section class="rn-section rn-car-list">
 			<div class="container">
 				<div class="row" id="carList">
-					
-				  <!-- 반복문으로 차동차 목록 가져오기 -->
-					<c:forEach var="car" items="${cList}">
-							<div class="col-lg-4 col-md-6">
-							<!-- Car Item-->
-							<div class="rn-car-item">
-								<div class="rn-car-item-thumb">
-										<!-- 이미지 디비에서 불러오기 -->
-									<img class="img-fluid" alt="자동차 이미지" srcset="/youngchar/resources/assets/images/tesla_model3.jpg 1x, /youngchar/resources/assets/images/tesla_model3.jpg 2x">
-								</div>
-								
-								<div class="rn-car-item-info">
-									<span style="display: none;">${car.carNo}</span>
-									<h3>${car.carName}</h3>
-								</div>
-								
-							</div>
-							<!-- End Car Item-->
-							</div>
-				</c:forEach>
-
+				
+						  <!-- 반복문으로 차동차 목록 가져오기 -->
+							<c:forEach var="car" items="${cList}">
+									<div class="col-lg-4 col-md-6">
+									<!-- Car Item-->
+									<div class="rn-car-item">
+										<div class="rn-car-item-thumb">
+												<!-- 이미지 디비에서 불러오기 -->
+											<img class="img-fluid" alt="자동차 이미지" srcset="/youngchar/resources/assets/images/tesla_model3.jpg 1x, /youngchar/resources/assets/images/tesla_model3.jpg 2x">
+										</div>
+										
+										<div class="rn-car-item-info">
+											<span style="display: none;">${car.carNo}</span>
+											<h3>${car.carName}</h3>
+										</div>
+										
+									</div>
+									<!-- End Car Item-->
+									</div>
+						</c:forEach>
+				
 
 				</div>
 				
@@ -256,7 +251,7 @@
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-10">
-						지도
+						<div id="map" style="width:500px;height:400px;"></div>
 					</div>
 				</div>
 			</div>
@@ -490,8 +485,11 @@
 		Ex: jquery, bootstrap, etc.
 		-->
 		<script>
-				
+		
+			             
+   
 			
+		//-------------------------------------------------------------
 			 $(document).ready(function(){
 			  $(".selectBar").hide();
 			 });
@@ -555,13 +553,94 @@
 					 }
 				 
 			});
+			var company = {};
+			var cList = [];
 			
 			//차 선택시 바에 이름 가져오기-----------------------------------------------------------------------------
 			$(document).on("click",".rn-car-item", function(){
-				carName = $(this).children().next().children("h3").text();
+				$(this).addClass("carSelect")
+				var carName = $(this).children().next().children("h3").text();
+				var carNo = $(this).children().next().children("span").text();
 				$(".carNameArea").text(carName);
+				
+				console.log("carNo : "+carNo);
+				//ajax로 차 등록되어있는 업체 가져오기.
+				$.ajax({
+					url: "getAddr",
+					data : {"carNo": carNo},
+					success(companyList){
+						console.log(companyList);
+						$.each(companyList, function(index, value){
+							company.carNo = value.carNo;
+							company.cooName = value.cooName;
+							company.memPhone = value.memPhone;
+							company.brand = value.brand;
+							company.memberAddr = value.memberAddr;
+							company.memberNo = value.memberNo;
+							
+							cList[i] = company;
+						});
+						console.log(cAddrList);
+					},
+					error(){
+						console.log("업체 불러오기 실패");
+					}
+					
+				})
 			});
 			
+			
+			
+			//지도-------------------------------------------------------------
+			
+				
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new kakao.maps.LatLng(37.662751484268725, 127.03392645537824), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };  
+			
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+			
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch('서울 도봉구 방학로 125-1', function(result, status) {
+			
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+			
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords
+			        });
+								
+			       	marker.setMap(map);
+			       	
+			   		  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+			       	var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			       	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+			
+			     	// 인포윈도우를 생성합니다
+			       	var infowindow = new kakao.maps.InfoWindow({
+			       	    content : iwContent,
+			       	    removable : iwRemoveable
+			       	});
+			
+			       	// 마커에 클릭이벤트를 등록합니다
+			       	kakao.maps.event.addListener(marker, 'click', function() {
+			       	      // 마커 위에 인포윈도우를 표시합니다
+			       	      infowindow.open(map, marker);  
+			       	});
+			     
+			     } 
+		}); 
+
 			
 		</script>
 		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>

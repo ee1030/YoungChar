@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.youngchar.company.model.vo.TestCars;
+import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.testDrive.model.dao.TestDriveDAO;
+import com.kh.youngchar.testDrive.model.vo.CompanyMember;
 import com.kh.youngchar.testDrive.model.vo.TestDrReservation;
 
 @Service
@@ -17,9 +20,17 @@ public class TestDriveService {
 	/** 자동차 목록 불러오기
 	 * @return cList
 	 */
-	public List<TestDrReservation> selectCarList() {
+	public List<TestCars> selectCarList() {
 		
 		return dao.selectCarList();
+	}
+
+	/** 대리점 목록 불러오기
+	 * @param carNo
+	 * @return companyList
+	 */
+	public List<CompanyMember> selectCompanyList(int carNo) {
+		return dao.selectCompanyList(carNo);
 	}
 	
 	

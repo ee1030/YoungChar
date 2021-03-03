@@ -18,6 +18,8 @@ public class TestDrReservation {
 	private String filePath;
 	private String fileName;
 	private int memNo2;
+	private String cooName; // 지점명
+	private String memAdress; //대리점 위치
 	
 	public TestDrReservation() {
 		// TODO Auto-generated constructor stub
@@ -33,6 +35,30 @@ public class TestDrReservation {
 		this.memNo = memNo;
 		this.testDriveDate = testDriveDate;
 		this.approvalStatus = approvalStatus;
+	}
+
+
+
+	public String getCooName() {
+		return cooName;
+	}
+
+
+
+	public void setCooName(String cooName) {
+		this.cooName = cooName;
+	}
+
+
+
+	public String getMemAdress() {
+		return memAdress;
+	}
+
+
+
+	public void setMemAdress(String memAdress) {
+		this.memAdress = memAdress;
 	}
 
 
@@ -151,9 +177,13 @@ public class TestDrReservation {
 	public String toString() {
 		return "TestDrReservation [reservationNo=" + reservationNo + ", testDriveCarNo=" + testDriveCarNo + ", memNo="
 				+ memNo + ", testDriveDate=" + testDriveDate + ", approvalStatus=" + approvalStatus + ", carNo=" + carNo
-				+ ", carName=" + carName + ", carModel=" + carModel + ", fileNo=" + fileNo + ", filePath=" + filePath
-				+ ", fileName=" + fileName + ", memNo2=" + memNo2 + ", brand=" + brand + "]";
+				+ ", carName=" + carName + ", carModel=" + carModel + ", brand=" + brand + ", fileNo=" + fileNo
+				+ ", filePath=" + filePath + ", fileName=" + fileName + ", memNo2=" + memNo2 + ", cooName=" + cooName
+				+ ", memAdress=" + memAdress + "]";
 	}
+
+
+
 
 	
 	
