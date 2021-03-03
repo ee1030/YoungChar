@@ -17,6 +17,13 @@
 	
 
 }
+li {
+
+	cursor: pointer;
+}
+/* #list-view #bno{
+	color : green;
+} */
 
 </style>
 
@@ -63,7 +70,7 @@
 					<div class="col-lg-12">
 						<div class="rn-page-title-inner">
 							<h1>News &amp; Updates</h1>
-							<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
+					4		<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
 						</div>
 					</div>
 				</div>
@@ -92,49 +99,40 @@
 			</div>
 			
 		</div>
-					
-					<div class="col-lg-12 rn-post-list">
 
-						<div class="col-md-2" style="float: left;">
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Categories</h2>
-								<div class="rn-widget-content">
-									<ul>
-										<li>
-											<a href="#">Tesla</a>
-										</li>
-										<li>
-											<a href="#">BYD</a>
-										</li>
-										<li>
-											<a href="#">Rimac</a>
-										</li>
-										<li>
-											<a href="#">르노-닛산</a>
-										</li>
-										<li>
-											<a href="#">Volkswagen</a>
-										</li>
-									</ul>
+			<div class="col-lg-12 rn-post-list">
 
-								</div>
-							</section>
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">게시판 이동</h2>
-								<div class="rn-widget-content">
-									<ul>
-										<li>
-											<a href="#">리뷰 게시판</a>
-										</li>
-										<li>
-											<a href="#">잡담 게시판</a>
-										</li>
-									
-										
-									</ul>
-								</div>
-							</section>
+				<div class="col-md-2" style="float: left;">
+					<section class="rn-widget">
+						<h2 class="rn-widget-title">Categories</h2>
+						<div class="rn-widget-content" id="categoryName">
+							<ul>
+								<li>테슬라</li>
+								<li>현대자동차</li>
+								<li>기아</li>
+								<li>벤츠</li>
+								<li>BMW</li>
+								<li>아우디</li>
+								<li>포르쉐</li>
+								<li>르노</li>
+							</ul>
+
 						</div>
+					</section>
+					<section class="rn-widget">
+						<h2 class="rn-widget-title">게시판 이동</h2>
+						<div class="rn-widget-content">
+							<ul>
+								<c:if test="${pInfo.boardType == 1 }">
+									<li><a href="${contextPath }/board/list/2">정보 게시판</a></li>
+									<li><a href="${contextPath }/board/list/3">잡담 게시판</a></li>
+								</c:if>
+
+
+							</ul>
+						</div>
+					</section>
+				</div>
 
 
 				<div class="row">
@@ -143,26 +141,27 @@
 							<div class="col-md-4">
 
 								<!-- Blog Post Item (Small Size)-->
-								<div class="rn-post-item rn-post-size-sm">
+								<div class="rn-post-item rn-post-size-sm" id="list-view">
 									<div class="rn-post-item-thumb">
-										<a href="#"> <img class="img-fluid" src="${contextPath}/resources/updateImages/" />
-										</a>
+										<c:forEach items="${thList}" var="th">
+											<c:if test="${th.parentBoardNo  == board.boardNo}">
+												<img style="height: 250px" src="${contextPath}${th.filePath}/${th.fileName}">
+											</c:if>
+										</c:forEach>
 									</div>
 									<div class="rn-post-item-header">
 										<div class="rn-post-date">
 											<div class="rn-post-date-inner">
-											<span class="rn-post-item-categories"> ${board.boardNo } </span>
-												<%-- 날짜 출력 모양 지정 --%> 
-												<fmt:formatDate var="createDate" value="${board.boardCreateDate }" pattern="yy-MM-dd" /> 
-												<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> 
+												No. <span class="rn-post-item-categories" id="bno"> ${board.boardNo } </span>
+												<fmt:formatDate var="createDate" value="${board.boardCreateDate }" pattern="yy-MM-dd" />
+												<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" />
 												<div class="rn-post-date-m-y">${createDate }</div>
 											</div>
 										</div>
 										<div class="rn-post-item-title-meta">
 											<div class="rn-post-item-title-meta-inner">
 												<div class="rn-post-item-meta">
-													<span class="rn-post-item-author">${board.memberId } </span> <span class="rn-post-item-categories">${board.categoryName } <br>
-													</span> <span class="rn-post-item-categories">views ${board.readCount } </span> 
+													<span class="rn-post-item-author">${board.memberId } </span> <span class="rn-post-item-categories">${board.categoryName } </span> <span class="rn-post-item-categories">views ${board.readCount } </span>
 												</div>
 												<span>
 													<p>${board.boardTitle}</p>
@@ -171,6 +170,7 @@
 										</div>
 									</div>
 								</div>
+								
 								<!-- End Blog Post Item (Small Size)-->
 
 							</div>
@@ -180,41 +180,80 @@
 
 					</c:if>
 
+					<%-- 로그인이 되어있는 경우 --%>
+					<c:if test="${!empty loginMember }">
+						<a class="btn btn-success " style="width: 100px; margin-top: 10px;" href="../${pInfo.boardType}/insert">글쓰기</a>
+					</c:if>
 
-			
-				
 
-				<!-- Post Pagination-->
+
+
+					<!-- Post Pagination-->
+					<div class="my-4">
 						<nav class="rn-pagination rn-pagination-center">
 							<ul>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-left"></i>
-									</a>
-								</li>
-								<li>
-									<a class="rn-active" href="#">1</a>
-								</li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">4</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-right"></i>
-									</a>
-								</li>
+
+								<%-- 주소 조합 작업 --%>
+								<c:url var="pageUrl" value="${pInfo.boardType}?" />
+
+								<!-- 화살표에 들어갈 주소를 변수로 생성 -->
+								<c:set var="firstPage" value="${pageUrl}cp=1" />
+								<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
+
+
+
+								<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+								<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+								<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
+
+
+								<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) /10 }" integerOnly="true" />
+								<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+								<c:set var="nextPage" value="${pageUrl}cp=${next}" />
+
+
+
+								<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+									<li>
+										<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i class="fas fa-angle-right">..</i></a>
+									</li>
+
+									<li>
+										<!-- 이전 페이지로 이동 (<) --> <a href="${prevPage}"> <i class="fas fa-angle-left"></i></a>
+									</li>
+								</c:if>
+
+								<!-- 페이지 목록 -->
+								<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+									<c:choose>
+										<c:when test="${pInfo.currentPage == page }">
+											<li><a class="page-link">${page}</a></li>
+										</c:when>
+
+										<c:otherwise>
+											<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+
+
+								<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+								<c:if test="${next <= pInfo.maxPage}">
+									<li>
+										<!-- 다음 페이지로 이동 (>) --> <a href="${nextPage}"><i class="fas fa-angle-right"></i></a>
+									</li>
+
+									<li>
+										<!-- 마지막 페이지로 이동(>>) --> <a href="${lastPage}"><i class="fas fa-angle-right"></i></a>
+									</li>
+								</c:if>
 							</ul>
 						</nav>
-
 					</div>
+
 				</div>
 			</div>
+		</div>
 		</div>
 		<!-- End Page Content-->
 
@@ -387,6 +426,46 @@
 
 		</footer>
 		<!-- End Site Footer-->
+		<script>
+		// 게시글 상세보기 기능 
+		$("#list-view div").on("click", function() {
+
+			var boardNo = $('div > span').eq(0).text();
+			
+			var boardViewURL = "../${pInfo.boardType}/" + boardNo;
+
+			location.href = boardViewURL;
+		});
+		
+		$("#categoryName li").on('click',function(){
+			
+			var category = $(this).text();
+			
+			console.log(category);
+			
+			var categoryName = 0;
+			
+			
+			
+			switch(category){
+			case "테슬라" : categoryName = 1; break;
+			case "현대자동차" : categoryName = 2; break;
+			case "기아" : categoryName = 3 ; break;
+			case "벤츠" : categoryName = 4; break;
+			case "BMW" : categoryName = 5; break;
+			case "아우디" : categoryName = 6; break;
+			case "포르쉐" : categoryName = 7; break;
+			case "르노" : categoryName = 8; break;
+			
+			}
+			
+			console.log(categoryName);
+			
+			var selectCategoryURL = "${pInfo.boardType}/" + categoryName;
+			location.href = selectCategoryURL;
+			
+		});
+	</script>
 
 		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>

@@ -13,6 +13,7 @@ public class TestDrReservation {
 	private int carNo;
 	private String carName;
 	private String carModel;
+	private String brand;
 	private int fileNo;
 	private String filePath;
 	private String fileName;
@@ -32,6 +33,18 @@ public class TestDrReservation {
 		this.memNo = memNo;
 		this.testDriveDate = testDriveDate;
 		this.approvalStatus = approvalStatus;
+	}
+
+
+
+	public String getBrand() {
+		return brand;
+	}
+
+
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 
@@ -132,13 +145,17 @@ public class TestDrReservation {
 		this.memNo2 = memNo2;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "TestDrReservation [reservationNo=" + reservationNo + ", testDriveCarNo=" + testDriveCarNo + ", memNo="
 				+ memNo + ", testDriveDate=" + testDriveDate + ", approvalStatus=" + approvalStatus + ", carNo=" + carNo
 				+ ", carName=" + carName + ", carModel=" + carModel + ", fileNo=" + fileNo + ", filePath=" + filePath
-				+ ", fileName=" + fileName + ", memNo2=" + memNo2 + "]";
+				+ ", fileName=" + fileName + ", memNo2=" + memNo2 + ", brand=" + brand + "]";
 	}
+
+	
 	
 	
 }

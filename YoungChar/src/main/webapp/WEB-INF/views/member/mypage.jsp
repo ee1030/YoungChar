@@ -1,334 +1,780 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <title>Cuba - Premium Admin Template</title>
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/fontawesome.css">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/icofont.css">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/flag-icon.css">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/photoswipe.css">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
-</head>
-<body>
-          <!-- Container-fluid starts-->
-          <div class="container-fluid">
-            <div class="user-profile">
-              <div class="row">
-                <!-- user profile first-style start-->
-                <div class="col-sm-12">
-                  <div class="card hovercard text-center">
-                    <div class="cardheader"></div>
-                    <div class="user-image">
-                      <div class="avatar"><img alt="" src="../assets/images/user/7.jpg"></div>
-                      <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div>
-                    </div>
-                    <div class="info">
-                      <div class="row">
-                        <div class="col-sm-6 col-lg-4 order-sm-1 order-xl-0">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="ttl-info text-start">
-                                <h6><i class="fa fa-envelope"></i>   Email</h6><span>Marekjecno@yahoo.com</span>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="ttl-info text-start">
-                                <h6><i class="fa fa-calendar"></i>   BOD</h6><span>02 January 1988</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4 order-sm-0 order-xl-1">
-                          <div class="user-designation">
-                            <div class="title"><a target="_blank" href="">Mark jecno</a></div>
-                            <div class="desc mt-2">designer</div>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 order-sm-2 order-xl-2">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="ttl-info text-start">
-                                <h6><i class="fa fa-phone"></i>   Contact Us</h6><span>India +91 123-456-7890</span>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="ttl-info text-start">
-                                <h6><i class="fa fa-location-arrow"></i>   Location</h6><span>B69 Near Schoool Demo Home</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="social-media">
-                        <ul class="list-inline">
-                          <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                          <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                          <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                          <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                          <li class="list-inline-item"><a href="#"><i class="fa fa-rss"></i></a></li>
-                        </ul>
-                      </div>
-                      <div class="follow">
-                        <div class="row">
-                          <div class="col-6 text-md-end border-right">
-                            <div class="follow-num counter">25869</div><span>Follower</span>
-                          </div>
-                          <div class="col-6 text-md-start">
-                            <div class="follow-num counter">659887</div><span>Following</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile first-style end-->
-                <!-- user profile second-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <p>you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                      <div class="img-container">
-                        <div class="my-gallery" id="aniimated-thumbnials" itemscope="">
-                          <figure itemprop="associatedMedia" itemscope=""><a href="../assets/images/other-images/profile-style-img3.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/other-images/profile-style-img3.png" itemprop="thumbnail" alt="gallery"></a>
-                            <figcaption itemprop="caption description">Image caption  1</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="like-comment">
-                        <ul class="list-inline">
-                          <li class="list-inline-item border-right pe-3">
-                            <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                          </li>
-                          <li class="list-inline-item ms-2">
-                            <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile second-style end-->
-                <!-- user profile third-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <p>you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                      <div class="row mt-4 pictures my-gallery" id="aniimated-thumbnials-2" itemscope="">
-                        <figure class="col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/other-images/profile-style-img3.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/other-images/profile-style-img.png" itemprop="thumbnail" alt="gallery"></a>
-                          <figcaption itemprop="caption description">Image caption  1</figcaption>
-                        </figure>
-                        <figure class="col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/other-images/profile-style-img3.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/other-images/profile-style-img.png" itemprop="thumbnail" alt="gallery"></a>
-                          <figcaption itemprop="caption description">Image caption  2</figcaption>
-                        </figure>
-                      </div>
-                      <div class="like-comment">
-                        <ul class="list-inline">
-                          <li class="list-inline-item border-right pe-3">
-                            <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                          </li>
-                          <li class="list-inline-item ms-2">
-                            <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile third-style end-->
-                <!-- user profile fourth-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source .Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source</p>
-                      <div class="like-comment mt-4">
-                        <ul class="list-inline">
-                          <li class="list-inline-item border-right pe-3">
-                            <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                          </li>
-                          <li class="list-inline-item ms-2">
-                            <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile fourth-style end-->
-                <!-- user profile fifth-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-lg-12 col-xl-4">
-                          <div class="my-gallery" id="aniimated-thumbnials-3" itemscope="">
-                            <figure itemprop="associatedMedia" itemscope=""><a href="../assets/images/blog/img.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/blog/img.png" itemprop="thumbnail" alt="gallery"></a>
-                              <figcaption itemprop="caption description">Image caption  1</figcaption>
-                            </figure>
-                          </div>
-                          <div class="like-comment mt-4 like-comment-sm-mb">
-                            <ul class="list-inline">
-                              <li class="list-inline-item border-right pe-3">
-                                <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                              </li>
-                              <li class="list-inline-item ms-2">
-                                <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-xl-6">
-                          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consecteturContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile fifth-style end-->
-                <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="pswp__bg"></div>
-                  <div class="pswp__scroll-wrap">
-                    <div class="pswp__container">
-                      <div class="pswp__item"></div>
-                      <div class="pswp__item"></div>
-                      <div class="pswp__item"></div>
-                    </div>
-                    <div class="pswp__ui pswp__ui--hidden">
-                      <div class="pswp__top-bar">
-                        <div class="pswp__counter"></div>
-                        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                        <button class="pswp__button pswp__button--share" title="Share"></button>
-                        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                        <div class="pswp__preloader">
-                          <div class="pswp__preloader__icn">
-                            <div class="pswp__preloader__cut">
-                              <div class="pswp__preloader__donut"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                        <div class="pswp__share-tooltip"></div>
-                      </div>
-                      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-                      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-                      <div class="pswp__caption">
-                        <div class="pswp__caption__center"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Company Info</title>
+
+		<!-- Preloader CSS-->
+		<style>
+				.card{
+				font-family: 'Noto Sans KR', sans-serif;
+			}
+		
+			.rn-header{
+				position: inherit !important;
+				background-color: rgb(85, 85, 85);
+			}
+			
+
+			.bg-wrap .user-logo .img {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				margin: 0 auto;
+				margin-bottom: 10px; }
+			.bg-wrap .user-logo h3 {
+				color: black;
+				font-size: 18px; }
+
+			.img {
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center center; 
+			}	
+
+			.rn-service-item {
+				width: 230px;
+				display: inline-block;
+				margin: 25px;
+			}
+
+			.card{
+				width: 850px;
+			}
+
+			.rn-widget {
+				margin-bottom: 40px;
+				font-size: 20px;
+				line-height: 60px;
+			}
+
+			.rn-pagination {
+				margin-bottom: 40px;
+				text-align: center;
+			}
+
+			#select1{
+				width: 100px;
+				display: inline-block;
+				float: right;
+			}
+
+			#select2{
+				width: 100px;
+				padding: 0px;
+			}
+
+			#head{
+				display: inline-block;
+				font-size: 21px;
+				font-weight: bold;
+			}
+
+			.left{
+				float: left;
+			}
+
+			.right{
+				float: right;
+			}
+		
+		
+		/*
+
+All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
+        
+The 'supports' rule will only run if your browser supports CSS grid.
+
+Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
+
+*/
+
+/* Base Styles */
+
+:root {
+    font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    min-height: 100vh;
+    background-color: #fafafa;
+    color: #262626;
+    padding-bottom: 3rem;
+}
+
+img {
+    display: block;
+}
+
+.container {
+    max-width: 93.5rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.btn {
+    display: inline-block;
+    font: inherit;
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: 0.5rem auto #4d90fe;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Profile Section */
+
+.profile {
+    padding: 5rem 0;
+}
+
+.profile::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.profile-image {
+    float: left;
+    width: calc(33.333% - 1rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3rem;
+}
+
+.profile-image img {
+    border-radius: 50%;
+}
+
+.profile-user-settings,
+.profile-stats,
+.profile-bio {
+    float: left;
+    width: calc(66.666% - 2rem);
+}
+
+.profile-user-settings {
+    margin-top: 1.1rem;
+}
+
+.profile-user-name {
+    display: inline-block;
+    font-size: 3.2rem;
+    font-weight: 300;
+}
+
+.profile-edit-btn {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    border: 0.1rem solid #dbdbdb;
+    border-radius: 0.3rem;
+    padding: 0 2.4rem;
+    margin-left: 2rem;
+}
+
+.profile-settings-btn {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+.profile-stats {
+    margin-top: 2.3rem;
+}
+
+.profile-stats li {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+.profile-stats li:last-of-type {
+    margin-right: 0;
+}
+
+.profile-bio {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 2.3rem;
+}
+
+.profile-real-name,
+.profile-stat-count,
+.profile-edit-btn {
+    font-weight: 600;
+}
+
+/* Gallery Section */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -1rem -1rem;
+    padding-bottom: 3rem;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1 0 22rem;
+    margin: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item-info {
+    display: none;
+}
+
+.gallery-item-info li {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.gallery-item-likes {
+    margin-right: 2.2rem;
+}
+
+.gallery-item-type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.fa-clone,
+.fa-comment {
+    transform: rotateY(180deg);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Loader */
+
+.loader {
+    width: 5rem;
+    height: 5rem;
+    border: 0.6rem solid #999;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: loader 500ms linear infinite;
+}
+
+/* Media Query */
+
+@media screen and (max-width: 40rem) {
+    .profile {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 4rem 0;
+    }
+
+    .profile::after {
+        display: none;
+    }
+
+    .profile-image,
+    .profile-user-settings,
+    .profile-bio,
+    .profile-stats {
+        float: none;
+        width: auto;
+    }
+
+    .profile-image img {
+        width: 7.7rem;
+    }
+
+    .profile-user-settings {
+        flex-basis: calc(100% - 10.7rem);
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    .profile-user-name {
+        font-size: 2.2rem;
+    }
+
+    .profile-edit-btn {
+        order: 1;
+        padding: 0;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .profile-edit-btn {
+        margin-left: 0;
+    }
+
+    .profile-bio {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+    }
+
+    .profile-edit-btn,
+    .profile-bio,
+    .profile-stats {
+        flex-basis: 100%;
+    }
+
+    .profile-stats {
+        order: 1;
+        margin-top: 1.5rem;
+    }
+
+    .profile-stats ul {
+        display: flex;
+        text-align: center;
+        padding: 1.2rem 0;
+        border-top: 0.1rem solid #dadada;
+        border-bottom: 0.1rem solid #dadada;
+    }
+
+    .profile-stats li {
+        font-size: 1.4rem;
+        flex: 1;
+        margin: 0;
+    }
+
+    .profile-stat-count {
+        display: block;
+    }
+}
+
+/* Spinner Animation */
+
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+
+The following code will only run if your browser supports CSS grid.
+
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
+
+*/
+
+@supports (display: grid) {
+    .profile {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(3, auto);
+        grid-column-gap: 3rem;
+        align-items: center;
+    }
+
+    .profile-image {
+        grid-row: 1 / -1;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+        grid-gap: 2rem;
+    }
+
+    .profile-image,
+    .profile-user-settings,
+    .profile-stats,
+    .profile-bio,
+    .gallery-item,
+    .gallery {
+        width: auto;
+        margin: 0;
+    }
+
+    @media (max-width: 40rem) {
+        .profile {
+            grid-template-columns: auto 1fr;
+            grid-row-gap: 1.5rem;
+        }
+
+        .profile-image {
+            grid-row: 1 / 2;
+        }
+
+        .profile-user-settings {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-gap: 1rem;
+        }
+
+        .profile-edit-btn,
+        .profile-stats,
+        .profile-bio {
+            grid-column: 1 / -1;
+        }
+
+        .profile-user-settings,
+        .profile-edit-btn,
+        .profile-settings-btn,
+        .profile-bio,
+        .profile-stats {
+            margin: 0;
+        }
+    }
+}
+
+#test {
+	max-height: 150px;
+	max-width: 150px;
+}
+
+		
+		</style>
+		
+
+	</head>
+	<body class="rn-preloader">
+
+		<!-- Header-->
+		<jsp:include page="../common/header.jsp"/>
+			<!-- End Header-->
 
 
-           <!-- latest jquery-->
-    <script src="../assets/js/jquery-3.5.1.min.js"></script>
-    <!-- Bootstrap js-->
-    <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <!-- feather icon js-->
-    <script src="../assets/js/icons/feather-icon/feather.min.js"></script>
-    <script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
-    <!-- scrollbar js-->
-    <script src="../assets/js/scrollbar/simplebar.js"></script>
-    <script src="../assets/js/scrollbar/custom.js"></script>
-    <!-- Sidebar jquery-->
-    <script src="../assets/js/config.js"></script>
-    <!-- Plugins JS start-->
-    <script src="../assets/js/sidebar-menu.js"></script>
-    <script src="../assets/js/counter/jquery.waypoints.min.js"></script>
-    <script src="../assets/js/counter/jquery.counterup.min.js"></script>
-    <script src="../assets/js/counter/counter-custom.js"></script>
-    <script src="../assets/js/photoswipe/photoswipe.min.js"></script>
-    <script src="../assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
-    <script src="../assets/js/photoswipe/photoswipe.js"></script>
-    <script src="../assets/js/tooltip-init.js"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
-</body>
+
+<header>
+
+	<div class="container">
+
+		<div class="profile">
+
+			<div class="profile-image">
+				<img src="${contextPath}${memFile.memImgPath}/${memFile.memImgName}" id="test" alt="">
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name">${loginMember.memberNm}</h1>
+
+				<a href="#"><button class="btn profile-edit-btn">Edit Profile</button></a>
+
+				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+
+			</div>
+
+			<div class="profile-stats">
+
+				<ul>
+					<li><span class="profile-stat-count">164</span> posts</li>
+					<li><span class="profile-stat-count">가입일 : </span> ${loginMember.signDt }</li>
+					<li><span class="profile-stat-count">206</span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 42</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1502630859934-b3b41d18206c?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 38</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1498471731312-b6d2b8280c61?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 47</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1515023115689-589c33041d3c?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 94</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 3</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 52</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 4</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 66</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 45</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 34</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 41</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="gallery-item" tabindex="0">
+
+				<img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
+
+				</div>
+
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 30</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- End of gallery -->
+
+		<div class="loader"></div>
+
+	</div>
+	<!-- End of container -->
+
+</main>
+		
+		<!-- Site Footer-->
+		<!-- End Site Footer-->
+
+		<!--
+		All JavaScripts Codes Loaded
+		Ex: jquery, bootstrap, etc.
+		-->
+		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
+		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+
+	</body>
 </html>

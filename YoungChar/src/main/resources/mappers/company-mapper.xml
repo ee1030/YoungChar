@@ -74,4 +74,9 @@
 			WHERE RESERVATION_NO = #{rsrvtNo}
    </update>
    
+   <select id="selectFile" parameterType="_int" resultMap="memberFile_rm">
+   	SELECT * FROM MEMBER_FILE
+   	WHERE MEM_NO = #{memNo}
+   </select>
+   
 </mapper>

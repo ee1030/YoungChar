@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +42,10 @@
     color: #f8d62b;
 		}
 		
+		.white-star{
+    color: #b5b5b5;
+		}
+		
 		.pagination {
 		    width: 400px !important;
  			  margin-left: auto !important;
@@ -47,7 +53,9 @@
 		}
 		
 
-
+		#list-table td:hover {
+			cursor: pointer;
+		}
 
 		
 	</style>
@@ -118,7 +126,7 @@
 
 						</div>
 						<div class="table-responsive">
-							<table class="table table-hover">
+							<table id="list-table" class="table table-hover">
 								<thead>
 									<tr>
 										<th class="td" scope="col">No</th>
@@ -133,61 +141,45 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="td">1</td>
-										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
-										<td class="td">테슬라</td>
-										<td class="td">대리점</td>
-										<td colspan="3">글제목입니다.</td>
-										<td class="td">김영차</td>
-										<td class="td">21-02-02</td>
-										<td class="td">10</td>
-										<td class="td">20</td>
-									</tr>
-									<tr>
-										<td class="td">1</td>
-										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
-										<td class="td">테슬라</td>
-										<td class="td">대리점</td>
-										<td colspan="3">글제목입니다.</td>
-										<td class="td">김영차</td>
-										<td class="td">21-02-02</td>
-										<td class="td">10</td>
-										<td class="td">20</td>
-									</tr>
-									<tr>
-										<td class="td">1</td>
-										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
-										<td class="td">테슬라</td>
-										<td class="td">대리점</td>
-										<td colspan="3">글제목입니다.</td>
-										<td class="td">김영차</td>
-										<td class="td">21-02-02</td>
-										<td class="td">10</td>
-										<td class="td">20</td>
-									</tr>
-									<tr>
-										<td class="td">1</td>
-										<td class="td"><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i><i class="icofont icofont-ui-rating"></i></td>
-										<td class="td">테슬라</td>
-										<td class="td">대리점</td>
-										<td colspan="3">글제목입니다.</td>
-										<td class="td">김영차</td>
-										<td class="td">21-02-02</td>
-										<td class="td">10</td>
-										<td class="td">20</td>
-									</tr>
-									<tr>
-										<td class="td">1</td>
-										<td class="td"><i class="icofont icofont-ui-rating"></i></td>
-										<td class="td">테슬라</td>
-										<td class="td">대리점</td>
-										<td colspan="3">글제목입니다.</td>
-										<td class="td">김영차</td>
-										<td class="td">21-02-02</td>
-										<td class="td">10</td>
-										<td class="td">20</td>
-									</tr>
+									<c:if test="${empty bList }">
+										<tr>
+											<td colspan="9">존재하는 게시글이 없습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${!empty bList }">
+										<c:forEach var="board" items="${bList}" varStatus="vs">
+											<tr>
+												<td class="td">${board.boardNo}</td>
+												<td class="td">
+													<c:forEach begin="1" end="${board.csat}">
+														<i class="icofont icofont-ui-rating"></i>
+													</c:forEach>
+													<c:forEach begin="1" end="${5 - board.csat}">
+														<i class="icofont icofont-ui-rating white-star"></i>
+													</c:forEach>
+												</td>
+												<td class="td">${board.categoryNm}</td>
+												<td class="td">${board.cooName}</td>
+												<td colspan="3">${board.boardTitle}</td>
+												<td class="td">${board.memNickname}</td>
+												<td class="td">
+													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd"/> 
+													<c:choose>
+														<c:when test="${createDate != now}">
+															${createDate }
+														</c:when>
+														<c:otherwise>
+															<fmt:formatDate value="${board.boardCreateDt }" pattern="HH:mm"/>
+														</c:otherwise>
+													</c:choose>
+												</td>
+												<td class="td">${board.replyCount}</td>
+												<td class="td">${board.readCount}</td>								
+												<td style="visibility:hidden;position:absolute;" class="td">${board.carName}</td>								
+												<td style="visibility:hidden;position:absolute;" class="td">${board.csat}</td>								
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div>
@@ -199,12 +191,58 @@
 				<!-- Post Pagination-->
 							<nav class="rn-pagination">
 										<ul class="pagination pagination-light">
-	                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
-	                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-	                  </ul>
+										
+										<c:set var="firstPage" value="?cp=1"/>
+										<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
+										
+										
+										<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }"  integerOnly="true" />
+										<fmt:parseNumber var="prev" value="${ c1 * 5 }"  integerOnly="true" />
+										<c:set var="prevPage" value="?cp=${prev}" />
+					
+										<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
+										<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
+										<c:set var="nextPage" value="?cp=${next}" />
+											
+											
+										<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+										<li class="page-item"> <!-- 첫 페이지로 이동(<<) -->
+											<a class="page-link" href="${firstPage}">&lt;&lt;</a>
+										</li>
+										
+										<li class="page-item"> <!-- 이전 페이지로 이동 (<) -->
+											<a class="page-link" href="${prevPage}">&lt;</a>
+										</li>
+										</c:if>	
+											
+										
+										<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}" >
+											<c:choose>
+												<c:when test="${pInfo.currentPage == page }">
+													<li class="page-item disabled">
+														<a class="page-link">${page}</a>
+													</li>
+												</c:when>
+											
+												<c:otherwise>
+													<li  class="page-item">	
+														<a class="page-link" href="?cp=${page}">${page}</a>
+													</li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										
+										
+										<c:if test="${next <= pInfo.maxPage}">
+											<li class="page-item"> <!-- 다음 페이지로 이동 (>) -->
+												<a class="page-link" href="${nextPage}">&gt;</a>
+											</li>
+											
+											<li class="page-item"> <!-- 마지막 페이지로 이동(>>) -->
+												<a class="page-link" href="${lastPage}">&gt;&gt;</a>
+											</li>
+										</c:if>
+									</ul>
 							</nav>
 
 			</div>
@@ -220,6 +258,23 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
+		
+		<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+		<c:set var="returnListURL" 
+				 value="${contextPath}/driveReview/reviewlist?cp=${pInfo.currentPage}"
+				 scope="session"/>
+		
+		<script>
+		$("#list-table td").on("click", function(){
+			var boardNo = $(this).parent().children().eq(0).text();
+
+			var boardViewURL = "review/" + boardNo; 
+			
+			location.href = boardViewURL;
+										
+		});
+	</script>
+		
 		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>

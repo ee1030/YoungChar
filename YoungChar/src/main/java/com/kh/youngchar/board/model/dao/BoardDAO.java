@@ -1,5 +1,6 @@
 package com.kh.youngchar.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,13 +31,22 @@ public class BoardDAO {
 
 	/** 게시글 목록 조회 DAO
 	 * @param pInfo
+	 * @param type 
 	 * @return bList
 	 */
-	public List<Board> selectList(PageInfo2 pInfo) {
+	public List<Board> selectList(PageInfo2 pInfo, int type) {
 		
-//		RowBounds 객체 : offset과 limit를 이용하여 조회 내용 중 일부 행만 조회하는 마이바티스 객체 
+//		RowBounds 객체 : offset과 limit를 이용하여 조회 내용 중 일부 행만 조회하는 마이바티스 객체
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		RowBounds rowBounds = null;
+		
+		if(type == 1) {
+			 rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
+			
+		}else {
+			
+			 rowBounds = new RowBounds(offset, pInfo.getLimit());
+		}
 		
 		return sqlSession.selectList("boardMapper.selectList", pInfo.getBoardType(), rowBounds);
 	}
@@ -137,6 +147,8 @@ public class BoardDAO {
 	public List<String> selectDBFileList() {
 		return sqlSession.selectList("boardMapper.selectDBFileList");
 	}
+
+	
 
 	
 	

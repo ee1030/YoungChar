@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.member.model.vo.Member;
+import com.kh.youngchar.member.model.vo.MemberFile;
 
 public interface MemberService {
 
@@ -36,6 +37,11 @@ public interface MemberService {
 	//				업체 회원가입 Service
 	//---------------------------------------------------
 	int cooSignUpAction(Member member, List<MultipartFile> images, String savePath);
+
+
+	MemberFile selectFile(int memNo);
+
+
 
 
 

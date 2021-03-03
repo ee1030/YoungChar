@@ -233,6 +233,16 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+
+
+	@Override
+	public MemberFile selectFile(int memNo) {
+		MemberFile mFile = dao.selectFile(memNo);
+		
+		return mFile;
+	}
+
+
 	
 	
 	

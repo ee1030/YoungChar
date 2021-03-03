@@ -107,7 +107,7 @@
 		<insert id="insertBoard" parameterType="map">
 			INSERT INTO BOARD VALUES
 			(#{boardNo}, #{boardTitle}, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT,
-			#{memberNo}, #{categoryCode}, #{boardType} )
+			#{boardType}, #{categoryCode}, #{memberNo} )
 		
 		</insert>
 
@@ -181,7 +181,6 @@
 			
 		
 		</select>
-
 
 
 

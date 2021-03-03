@@ -3,6 +3,7 @@ package com.kh.youngchar.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
 public interface AdminService {
@@ -37,5 +38,17 @@ public interface AdminService {
 	 * @return cList
 	 */
 	public abstract List<Map<String, Integer>> getChartData();
+
+	/** 회원관리 페이징 정보 조회 Service
+	 * @param cp
+	 * @return pInfo
+	 */
+	public abstract PageInfo getPageInfo(int cp);
+
+	/** 전체 회원 목록 조회 Service
+	 * @param pInfo
+	 * @return mList
+	 */
+	public abstract List<Member> selectMemberList(PageInfo pInfo);
 
 }

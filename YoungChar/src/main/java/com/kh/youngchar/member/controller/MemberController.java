@@ -24,10 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.member.model.service.MemberService;
 import com.kh.youngchar.member.model.vo.Member;
+import com.kh.youngchar.member.model.vo.MemberFile;
 
 @Controller
 @RequestMapping("/member/*")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "memFile"})
 public class MemberController {
 
 	@Autowired
@@ -50,15 +51,26 @@ public class MemberController {
 
 	// 회원가입 화면전환 Controller
 	@RequestMapping("signUp")
-	public String signUpForm() {
-
+	public String signUpForm(@ModelAttribute("loginMember") Member loginMember, Model model) {
+		
+		
+		
 		return "member/signUp";
 	}
 
 	// 마이페이지 화면전환 Controller
 	@RequestMapping("mypage")
-	public String mypageForm() {
-
+	public String mypageForm(@ModelAttribute("loginMember") Member loginMember, Model model) {
+		
+		int memNo = loginMember.getMemberNo();
+		
+		MemberFile mFile = service.selectFile(memNo);
+		
+		if(mFile != null) {
+			model.addAttribute("memFile", mFile);
+			
+		}
+		
 		return "member/mypage";
 	}
 
@@ -142,7 +154,7 @@ public class MemberController {
 	public String SignUpAction(@ModelAttribute Member member,
 						       @RequestParam(value="images", required=false) List<MultipartFile> images,
 						       HttpServletRequest request,
-						       RedirectAttributes ra) {
+						       RedirectAttributes ra, Model model) {
 		
 		
 		String savePath = request.getSession().getServletContext().getRealPath("resources/memberFile");
@@ -151,6 +163,7 @@ public class MemberController {
 		int result = service.SignUpAction(member,images, savePath);
 		
 		if(result > 0) {
+			
 			swalIcon = "success";
 			swalTitle = "회원가입 성공";
 			swalText = "회원가입을 환영합니다.";

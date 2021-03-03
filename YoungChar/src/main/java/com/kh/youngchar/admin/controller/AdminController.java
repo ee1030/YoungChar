@@ -1,7 +1,5 @@
 package com.kh.youngchar.admin.controller;
 
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.youngchar.admin.model.service.AdminService;
+import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/admin/*")
-public class AdminController {
+public class AdminController { 
 	
 	@Autowired
 	private AdminService service;
@@ -47,7 +47,16 @@ public class AdminController {
 	}
 	
 	@RequestMapping("memberManagement")
-	public String memberManagement() {
+	public String memberManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+									Model model) {
+		
+		PageInfo pInfo = service.getPageInfo(cp);
+		
+		List<Member> mList = service.selectMemberList(pInfo);
+		
+		model.addAttribute("mList", mList);
+		model.addAttribute("pInfo", pInfo);
+		
 		return "admin/memberManagement";
 	}
 	
