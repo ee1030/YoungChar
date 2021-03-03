@@ -197,7 +197,7 @@
 		<br>
 
 		<!--  Search Form-->
-		<div class="rn-search-form-big rn-section selectBar s2">
+		<div class="rn-search-form-big rn-section selectBar s2 search center">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -492,6 +492,7 @@
 		//-------------------------------------------------------------
 			 $(document).ready(function(){
 			  $(".selectBar").hide();
+			  
 			 });
 
 			$(".selectBar1").on("click", function(){
@@ -515,9 +516,11 @@
 				 //console.log(originalCarList);
 				 
 				 
-			
-				 //지도-------------------------------------------------------------------------------------------------------
+				//지도-------------------------------------------------------------------------------------------------------
 				var company = ${company}; //업체 리스트 담을 객체
+				
+				function map(company){
+				
 				
 				console.log(company);
 				//로그인한 사람 주소 가져와서 중심좌표에 넣기..?
@@ -526,48 +529,54 @@
 			        center: new kakao.maps.LatLng(37.524279537727175, 127.04819748390128), // 지도의 중심좌표
 			        level: 6 // 지도의 확대 레벨
 			    };  
+				
+				// 지도를 생성합니다    
+				var map = new kakao.maps.Map(mapContainer, mapOption); 
+				
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new kakao.maps.services.Geocoder();
+				
+				console.log(company.length);
+				var code = [];
+				//반복문으로 가져온 업체 주소 배열 좌표에 넣기
+				var index = 0;
+				for(var i = 0; i < company.length ; i++){
+					
+	        var start = company[i].memberAddr.indexOf(",") + 1;
+	        var end = company[i].memberAddr.lastIndexOf(",");
+	        company[i].memberAddr = company[i].memberAddr.substring(start,end);
+	        //console.log(company[i].memberAddr);
+				  // 주소로 좌표를 검색합니다
+						geocoder.addressSearch(company[i].memberAddr, function(result, status) {
+							
+							// 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+						    	
+						    	var Y =result[0].y;
+						    	var X = result[0].x;
+						    	 
+						       // var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+						        
+										addM(Y, X);
+										
+						     } 
+						}); 
+			   	
+				}//반복문 끝
 			
-			// 지도를 생성합니다    
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
-			
-			// 주소-좌표 변환 객체를 생성합니다
-			var geocoder = new kakao.maps.services.Geocoder();
-			
-			console.log(company.length);
-			var code = [];
-			//반복문으로 가져온 업체 주소 배열 좌표에 넣기
-			var index = 0;
-			for(var i = 0; i < company.length ; i++){
-				console.log(i);
-			  // 주소로 좌표를 검색합니다
-					geocoder.addressSearch(company[i].memberAddr, function(result, status) {
-						
-						// 정상적으로 검색이 완료됐으면 
-					     if (status === kakao.maps.services.Status.OK) {
-					    	
-					    	var Y =result[0].y;
-					    	var X = result[0].x;
-					    	 
-					       // var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-					        
-									addM(Y, X, i);
-									
-					     } 
-					}); 
-					console.log(i);
-		   	
-			}//반복문 끝
-			
-			function addM(Y, X, i){
-					console.log(i);
+			function addM(Y, X){
 				 // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
 		            map: map,
 		            position: new kakao.maps.LatLng(Y, X)
 		        });
+				 		
+		        marker.setMap(map);
 				 
 		        company = ${company}; //업체 리스트 담을 객체
-		        var iwContent = '<div style="padding:5px;">'+company[index++].cooName+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		        var iwContent = '<div style="padding:5px;">'
+		        								+ company[index].brand + '<br>'+
+		        								company[index++].cooName+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	       	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 	
 		        var infowindow = new kakao.maps.InfoWindow({
@@ -579,11 +588,17 @@
 					   	kakao.maps.event.addListener( marker, 'click', function() {
 					   		
 					   	      // 마커 위에 인포윈도우를 표시합니다
-					   	      infowindow.open(map,  marker );  
+					   	 infowindow.open(map,  marker );  
 					   	});
 			}
 			
+				
 			
+	}
+				
+				
+				
+				
 			//브랜드 카테고리 선택시 자동차 브랜드에 맞게 가져오기--------------------------------------------------------------
 			$("select[name='brand']").on("change", function(){
 				 var brandName = $(this).val();
@@ -631,6 +646,8 @@
 				var carName = $(this).children().next().children("h3").text();
 				var carNo = $(this).children().next().children("span").text();
 				$(".carNameArea").text(carName);
+				$(".center").slideDown();
+				
 				
 				console.log("carNo : "+carNo);
 				//ajax로 차 등록되어있는 업체 가져오기.
@@ -640,6 +657,7 @@
 					success(companyList){
 						company = companyList;
 						console.log(company);
+						map(company);
 					},
 					error(){
 						console.log("업체 불러오기 실패");
@@ -653,6 +671,7 @@
 			});// 차 선택 이벤트 끝
 			
 			
+			// 대리점 불러오기!
 			
 			
 
