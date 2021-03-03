@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.youngchar.admin.model.service.AdminService;
+import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -189,7 +190,16 @@ public class AdminController {
 	
 	// 모든 게시글 조회 페이지
 	@RequestMapping("allBoardManagement")
-	public String allBoardManagement() {
+	public String allBoardManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+									 Model model) {
+		
+		PageInfo pInfo = service.getAllBoardPageInfo(cp);
+		
+		List<Board> bList = service.selectAllBoardList(pInfo);
+		
+		model.addAttribute("bList", bList);
+		model.addAttribute("pInfo", pInfo);
+		
 		return "admin/allBoardManagement";
 	}
 	

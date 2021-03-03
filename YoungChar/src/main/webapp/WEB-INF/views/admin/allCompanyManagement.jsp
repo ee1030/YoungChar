@@ -171,8 +171,8 @@
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
 						<div class="btn-area">
-							<button class="btn btn-success" id="approval">선택 승인</button>
-							<button class="btn btn-danger" id="cancellation">선택 승인취소</button>
+							<button class="btn btn-success" id="delete">선택 삭제</button>
+							<button class="btn btn-danger" id="restore">선택 복구</button>
 						</div>
 						<ul>
 						

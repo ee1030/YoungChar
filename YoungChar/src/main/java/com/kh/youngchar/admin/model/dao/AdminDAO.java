@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -219,5 +220,24 @@ public class AdminDAO {
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
 		return sqlSession.selectList("adminMapper.selectSearchAllCom", sv, rowBounds);
+	}
+
+	/** 전체 게시글 수 조회 DAO
+	 * @return listCount
+	 */
+	public int getAllBoardListCount() {
+		return sqlSession.selectOne("adminMapper.getAllBoardListCount");
+	}
+
+	/** 전체 게시글 목록 조회 DAO
+	 * @param pInfo
+	 * @return bList
+	 */
+	public List<Board> selectAllBoardList(PageInfo pInfo) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectAllBoardList", null, rowBounds);
 	}
 }
