@@ -14,6 +14,9 @@
   		<result property="memberGrade" column="MEM_GRADE"/>
   		<result property="memberStatus" column="SIGN_STATUS"/>
   		<result property="signDt" column="SIGN_DT"/>
+  		<result property="cooName" column="COO_NAME"/>
+  		<result property="cooNumber" column="COO_NUM"/>
+  		<result property="brandCategory" column="CATEGORY_NM"/>
 	</resultMap>
 	
 	<!-- 신규 회원 수 조회 -->
@@ -102,6 +105,108 @@
 	<select id="selectSearchMember" parameterType="string" resultMap="member_rm">
 		SELECT * FROM MEMBER
 		WHERE MEM_ID LIKE '%' || #{sv} || '%'
+		ORDER BY MEM_NO DESC
+	</select>
+	
+	<!-- 신규 업체 승인 갯수 조회 -->
+	<select id="getNewCompanyListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_GRADE = 'C'
+		AND SIGN_STATUS = 'Y'
+	</select>
+	
+	<!-- 신규 업체 승인 목록 조회 -->
+	<select id="selectNewCompanyList" resultMap="member_rm">
+		SELECT MEM_NO, COO_NAME, MEM_PHONE, COO_NUM, SIGN_DT, CATEGORY_NM
+		FROM MEMBER
+		JOIN COO_MEMBER USING (MEM_NO)
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE SIGN_STATUS = 'Y'
+	</select>
+	
+	<!-- 선택 업체 승인 기능 -->
+	<update id="newCompanyApproval" parameterType="list">
+		UPDATE MEMBER SET
+		SIGN_STATUS = 'N'
+		WHERE MEM_GRADE = 'C'
+		AND MEM_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 신규업체 승인 검색 결과 페이징 정보 조회 -->
+	<select id="getSearchNCListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		JOIN COO_MEMBER USING (MEM_NO)
+		WHERE COO_NAME LIKE '%' || #{sv} || '%'
+		AND MEM_GRADE = 'C'
+		AND SIGN_STATUS = 'Y'
+	</select>
+	
+	<!-- 신규업체 승인 검색 목록 조회 -->
+	<select id="selectSearchNewCom" parameterType="string" resultMap="member_rm">
+		SELECT * FROM MEMBER
+		JOIN COO_MEMBER USING (MEM_NO)
+		WHERE COO_NAME LIKE '%' || #{sv} || '%'
+		AND MEM_GRADE = 'C'
+		AND SIGN_STATUS = 'Y'
+		ORDER BY MEM_NO DESC
+	</select>
+	
+	<!-- 모든 업체 갯수 조회 -->
+	<select id="getAllCompanyListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_GRADE = 'C'
+	</select>
+	
+	<!-- 모든 업체 목록 조회 -->
+	<select id="selectAllCompanyList" resultMap="member_rm">
+		SELECT MEM_NO, COO_NAME, MEM_PHONE, COO_NUM, SIGN_DT, CATEGORY_NM, SIGN_STATUS
+		FROM MEMBER
+		JOIN COO_MEMBER USING (MEM_NO)
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE MEM_GRADE = 'C'
+		ORDER BY MEM_NO DESC
+	</select>
+	
+	<!-- 모든 업체 페이지 승인 기능 -->
+	<update id="allCompanyApproval" parameterType="list">
+		UPDATE MEMBER SET
+		SIGN_STATUS = 'N'
+		WHERE MEM_GRADE = 'C'
+		AND MEM_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 모든 업체 페이지 승인 취소 기능 -->
+	<update id="allCompanyCancellation" parameterType="list">
+		UPDATE MEMBER SET
+		SIGN_STATUS = 'Y'
+		WHERE MEM_GRADE = 'C'
+		AND MEM_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 모든업체 검색 결과 페이징 정보 조회 -->
+	<select id="getSearchACListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		JOIN COO_MEMBER USING (MEM_NO)
+		WHERE COO_NAME LIKE '%' || #{sv} || '%'
+		AND MEM_GRADE = 'C'
+	</select>
+	
+	<!-- 모든업체 검색 목록 조회 -->
+	<select id="selectSearchAllCom" parameterType="string" resultMap="member_rm">
+		SELECT * FROM MEMBER
+		JOIN COO_MEMBER USING (MEM_NO)
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE COO_NAME LIKE '%' || #{sv} || '%'
+		AND MEM_GRADE = 'C'
 		ORDER BY MEM_NO DESC
 	</select>
 	

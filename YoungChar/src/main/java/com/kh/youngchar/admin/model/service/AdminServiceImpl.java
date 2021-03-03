@@ -92,4 +92,77 @@ public class AdminServiceImpl implements AdminService {
 	public List<Member> selectSearchMember(PageInfo pInfo, String sv) {
 		return dao.selectSearchMember(pInfo, sv);
 	}
+
+	// 신규 업체 승인 페이징 정보 조회 Service
+	@Override
+	public PageInfo getNewComPageInfo(int cp) {
+		int listCount = dao.getNewCompanyListCount();
+		
+		return new PageInfo(cp, listCount);
+		
+	}
+
+	// 신규 업체 승인 목록 조회 Service
+	@Override
+	public List<Member> selectNewCompanyList(PageInfo pInfo) {
+		return dao.selectNewCompanyList(pInfo);
+	}
+
+	// 선택된 신규업체 승인 Service 구현
+	@Override
+	public int newCompanyApproval(List<String> chkList) {
+		return dao.newCompanyApproval(chkList);
+	}
+
+	// 신규 업체 승인 검색 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchNewComPageInfo(int cp, String sv) {
+		int listCount = dao.getSearchNCListCount(sv);
+		return new PageInfo(cp, listCount);
+	}
+
+	// 신규 업체 승인 검색 목록 조회 Service 구현
+	@Override
+	public List<Member> selectSearchNewCom(PageInfo pInfo, String sv) {
+		return dao.selectSearchNewCom(pInfo, sv);
+	}
+
+	// 모든 업체 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getAllComPageInfo(int cp) {
+		int listCount = dao.getAllCompanyListCount();
+		
+		return new PageInfo(cp, listCount);
+	}
+
+	// 모든 업체 목록 조회 Service 구현
+	@Override
+	public List<Member> selectAllCompanyList(PageInfo pInfo) {
+		return dao.selectAllCompanyList(pInfo);
+	}
+
+	// 모든 업체 페이지 선택 승인 Service 구현
+	@Override
+	public int allCompanyApproval(List<String> chkList) {
+		return dao.allCompanyApproval(chkList);
+	}
+
+	// 모든 업체 페이지 선택 승인 취소 Service 구현
+	@Override
+	public int allCompanyCancellation(List<String> chkList) {
+		return dao.allCompanyCancellation(chkList);
+	}
+
+	// 모든 업체 검색 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchAllComPageInfo(int cp, String sv) {
+		int listCount = dao.getSearchACListCount(sv);
+		return new PageInfo(cp, listCount);
+	}
+
+	// 모든 업체 검색 목록 조회 Service 구현
+	@Override
+	public List<Member> selectSearchAllCom(PageInfo pInfo, String sv) {
+		return dao.selectSearchAllCom(pInfo, sv);
+	}
 }
