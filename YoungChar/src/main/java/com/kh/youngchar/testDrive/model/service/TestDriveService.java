@@ -25,13 +25,21 @@ public class TestDriveService {
 		return dao.selectCarList();
 	}
 
-	/** 대리점 목록 불러오기
+	/** 전국 대리점 목록 불러오기
+	 * @return company
+	 */
+	public List<CompanyMember> companyList() {
+		return dao.companyList();
+	}
+	
+	/** 선택된 대리점 목록 불러오기
 	 * @param carNo
 	 * @return companyList
 	 */
 	public List<CompanyMember> selectCompanyList(int carNo) {
 		return dao.selectCompanyList(carNo);
 	}
+
 	
 	
 }

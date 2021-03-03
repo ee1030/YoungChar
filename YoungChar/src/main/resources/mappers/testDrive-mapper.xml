@@ -52,12 +52,18 @@
 		ORDER BY CAR_NO
 	</select>	
 	
-	<!-- 대리점 목록 조회 -->
+	<!-- 전국 대리점 목록 조회 -->
+	<select id="companyList" resultMap="companyMember_rm">
+		SELECT DISTINCT(MEM_NO), CATEGORY_NM, COO_NAME , MEM_ADDRESS, MEM_PHONE
+		FROM V_CAR_COMPANY
+	</select>
+	
+	<!-- 선택된 대리점 목록 조회 -->
 	<select id="selectCompanyList" parameterType="_int" resultMap="companyMember_rm">
 		SELECT *
 		FROM V_CAR_COMPANY
 		WHERE CAR_NO = #{carNo}
-</select>
+	</select>
 
 
 </mapper>

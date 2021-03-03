@@ -23,8 +23,15 @@ public class TestDriveDAO {
 	public List<TestCars> selectCarList() {
 		return sqlSession.selectList("testDriveMapper.selectCarList");
 	}
+	
+	/**전국 대리점 목록 불러오기
+	 * @return
+	 */
+	public List<CompanyMember> companyList() {
+		return sqlSession.selectList("testDriveMapper.companyList");
+	}
 
-	/**대리점 목록 불러오기
+	/** 선택된 대리점 목록 불러오기
 	 * @param carNo
 	 * @return companyList
 	 */
