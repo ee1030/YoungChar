@@ -96,10 +96,11 @@
 										<tr>
 											<th scope="col"><input type="checkbox" id="checkAll" /></th>
 											<th scope="col">업체번호</th>
-											<th scope="col">업체이름</th>
+											<th scope="col">업체명</th>
 											<th scope="col">전화번호</th>
-											<th scope="col">주소</th>
+											<th scope="col">사업자번호</th>
 											<th scope="col">신청일자</th>
+											<th scope="col">브랜드</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -111,78 +112,7 @@
 											<td>서울시 응애구 응애동 애기빌딩 10</td>
 											<td>2021-03-02</td>
 										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-										</tr>
+										
 										
 									
 

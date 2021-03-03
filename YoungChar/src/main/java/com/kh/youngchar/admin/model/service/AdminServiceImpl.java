@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.youngchar.admin.model.dao.AdminDAO;
 import com.kh.youngchar.company.model.vo.PageInfo;
@@ -63,5 +64,32 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> selectMemberList(PageInfo pInfo) {
 		return dao.selectMemberList(pInfo);
+	}
+
+	// 선택 회원 탈퇴 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int memberSecession(List<String> chkList) {
+		return dao.memberSecession(chkList);
+	}
+	
+	// 선택 회원 복구 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int memberRestore(List<String> chkList) {
+		return dao.memberRestore(chkList);
+	}
+
+	// 회원 검색 결과 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchMemPageInfo(int cp, String sv) {
+		int listCount = dao.getSearchListCount(sv);
+		return new PageInfo(cp, listCount);
+	}
+
+	// 회원 검색 결과 조회 Service 구현
+	@Override
+	public List<Member> selectSearchMember(PageInfo pInfo, String sv) {
+		return dao.selectSearchMember(pInfo, sv);
 	}
 }
