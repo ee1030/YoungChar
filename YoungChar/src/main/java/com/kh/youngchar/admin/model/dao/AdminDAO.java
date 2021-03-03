@@ -77,4 +77,36 @@ public class AdminDAO {
 		
 		return sqlSession.selectList("adminMapper.selectMemberList", null, rowBounds);
 	}
+
+	/** 선택 회원 탈퇴 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int memberSecession(List<String> chkList) {
+		return sqlSession.update("adminMapper.memberSecession", chkList);
+	}
+	
+	/** 선택 회원 복구 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int memberRestore(List<String> chkList) {
+		return sqlSession.update("adminMapper.memberRestore", chkList);
+	}
+
+	/** 검색결과 페이징 정보 조회 DAO
+	 * @param sv
+	 * @return listCount
+	 */
+	public int getSearchListCount(String sv) {
+		return sqlSession.selectOne("adminMapper.getSearchListCount", sv);
+	}
+
+	public List<Member> selectSearchMember(PageInfo pInfo, String sv) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectSearchMember", sv, rowBounds);
+	}
 }

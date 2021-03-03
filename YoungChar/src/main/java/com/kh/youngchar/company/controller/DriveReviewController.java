@@ -71,7 +71,7 @@ public class DriveReviewController {
 		}else {
 			swalIcon = "error";
 			swalTitle = "게시글 삽입 실패";
-			url = "redirect:insertreview";
+			url = "redirect:../insertreview/" + board.getRsrvtNo();
 		}
 		ra.addFlashAttribute("swalIcon", swalIcon);
 		ra.addFlashAttribute("swalTitle", swalTitle);

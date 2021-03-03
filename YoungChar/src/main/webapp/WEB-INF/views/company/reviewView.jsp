@@ -110,7 +110,7 @@
 									</div>
 									<div class="col-md-2">
 									  <div class="text-md-end" id="project">
-										<button type="button" class="btn btn-outline-danger btn-lg">신고</button>
+										<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger btn-lg">신고</button>
 									  </div>
 									</div>
 								  </div>
@@ -176,19 +176,61 @@
 			</div>
 		<!-- End Page Content-->
 	</section>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<form class="form-signin" method="POST" action="${contextPath}/driveReview/reportBoard" onsubmit="return validate();">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">게시글 신고</h5>
+					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+						<input type="hidden" name="boardNo" value="${board.boardNo}">
+						<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
+						
+						<input id="report1" name="report" type="radio" value="report1" class="radio_animated">
+						<label for="report1">허위 사실 유포</label>
+						<br><br>
+						<input id="report2" name="report" type="radio" value="report2" class="radio_animated">
+						<label for="report2">비속어 / 폭언 / 불쾌감 조성</label>
+						<br><br>
+						<input id="report3" name="report" type="radio" value="report3" class="radio_animated">
+						<label for="report3">게시판 목적에 맞지 않는 글</label>
+						<br><br>
+						<input id="report4" name="report" type="radio" value="report4" class="radio_animated">
+						<label for="report4">기타</label>
+						<br><br>
+						<label for="reason">요청 사유</label>
+						<input type="text" class="form-control" id="reason" name="reason" placeholder="기타 항목 선택 시 필수로 작성하셔야합니다.">
+						<br><br>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-secondary">신고</button>
+				</div>
+					</form>
+			</div>
+		</div>
+	</div>
+	
 
+	
 
-	<!--
-		All JavaScripts Codes Loaded
-		Ex: jquery, bootstrap, etc.
-		-->
-		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
-		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
-		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+	<script>
+	function validate() {
+		
+		
+		if ($('input[name="report"]:checked').val() == "report4" && $("#reason").val().trim().length == 0) {
+			alert("신고 내용을 입력해 주세요.");
+			$("#reason").focus();
+			return false;
+		}
+
+	}
+	</script>
+
 
 </body>
 

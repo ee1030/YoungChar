@@ -26,7 +26,7 @@
 	<!-- 신규 업체 수 조회 -->
 	<select id="getNewCompany" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
-		WHERE SIGN_STATUS = 'N'
+		WHERE SIGN_STATUS = 'Y'
 		AND MEM_GRADE = 'C'
 		AND SIGN_DT > SYSDATE - 30
 	</select>
@@ -69,6 +69,39 @@
 	<!-- 전체 회원 목록 조회 -->
 	<select id="selectMemberList" resultMap="member_rm">
 		SELECT * FROM MEMBER
+		ORDER BY MEM_NO DESC
+	</select>
+	
+	<!-- 선택회원 탈퇴 기능 -->
+	<update id="memberSecession" parameterType="list">
+		UPDATE MEMBER SET
+		SIGN_STATUS = 'Y'
+		WHERE MEM_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 선택회원 복구 기능 -->
+	<update id="memberRestore" parameterType="list">
+		UPDATE MEMBER SET
+		SIGN_STATUS = 'N'
+		WHERE MEM_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 회원 검색 결과 페이징 정보 조회 -->
+	<select id="getSearchListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_ID LIKE '%' || #{sv} || '%'
+	</select>
+	
+	<!-- 회원 검색 결과 조회 -->
+	<select id="selectSearchMember" parameterType="string" resultMap="member_rm">
+		SELECT * FROM MEMBER
+		WHERE MEM_ID LIKE '%' || #{sv} || '%'
 		ORDER BY MEM_NO DESC
 	</select>
 	
