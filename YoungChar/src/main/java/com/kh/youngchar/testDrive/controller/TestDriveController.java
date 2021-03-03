@@ -49,6 +49,12 @@ public class TestDriveController {
 			model.addAttribute("cList",cList);
 			model.addAttribute("cListJSON", cListJSON);
 		
+		//대리점들 주소 불러오기
+		List<CompanyMember> list = service.companyList();
+		System.out.println(list);
+		
+		String company = gson.toJson(list);
+		model.addAttribute("company", company);
 		return "testDrive/testDriveReservation";
 	}
 	

@@ -514,6 +514,76 @@
 				 var originalCarList = carList.html();
 				 //console.log(originalCarList);
 				 
+				 
+			
+				 //지도-------------------------------------------------------------------------------------------------------
+				var company = ${company}; //업체 리스트 담을 객체
+				
+				console.log(company);
+				//로그인한 사람 주소 가져와서 중심좌표에 넣기..?
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new kakao.maps.LatLng(37.524279537727175, 127.04819748390128), // 지도의 중심좌표
+			        level: 6 // 지도의 확대 레벨
+			    };  
+			
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+			
+			console.log(company.length);
+			var code = [];
+			//반복문으로 가져온 업체 주소 배열 좌표에 넣기
+			var index = 0;
+			for(var i = 0; i < company.length ; i++){
+				console.log(i);
+			  // 주소로 좌표를 검색합니다
+					geocoder.addressSearch(company[i].memberAddr, function(result, status) {
+						
+						// 정상적으로 검색이 완료됐으면 
+					     if (status === kakao.maps.services.Status.OK) {
+					    	
+					    	var Y =result[0].y;
+					    	var X = result[0].x;
+					    	 
+					       // var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					        
+									addM(Y, X, i);
+									
+					     } 
+					}); 
+					console.log(i);
+		   	
+			}//반복문 끝
+			
+			function addM(Y, X, i){
+					console.log(i);
+				 // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: new kakao.maps.LatLng(Y, X)
+		        });
+				 
+		        company = ${company}; //업체 리스트 담을 객체
+		        var iwContent = '<div style="padding:5px;">'+company[index++].cooName+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	       	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	
+		        var infowindow = new kakao.maps.InfoWindow({
+		       	    content : iwContent,
+		       	    removable : iwRemoveable
+		       	}); 
+	       	    
+				     // 마커에 클릭이벤트를 등록합니다
+					   	kakao.maps.event.addListener( marker, 'click', function() {
+					   		
+					   	      // 마커 위에 인포윈도우를 표시합니다
+					   	      infowindow.open(map,  marker );  
+					   	});
+			}
+			
+			
 			//브랜드 카테고리 선택시 자동차 브랜드에 맞게 가져오기--------------------------------------------------------------
 			$("select[name='brand']").on("change", function(){
 				 var brandName = $(this).val();
@@ -553,8 +623,7 @@
 					 }
 				 
 			});
-			var company = {};
-			var cList = [];
+			
 			
 			//차 선택시 바에 이름 가져오기-----------------------------------------------------------------------------
 			$(document).on("click",".rn-car-item", function(){
@@ -569,77 +638,23 @@
 					url: "getAddr",
 					data : {"carNo": carNo},
 					success(companyList){
-						console.log(companyList);
-						$.each(companyList, function(index, value){
-							company.carNo = value.carNo;
-							company.cooName = value.cooName;
-							company.memPhone = value.memPhone;
-							company.brand = value.brand;
-							company.memberAddr = value.memberAddr;
-							company.memberNo = value.memberNo;
-							
-							cList[i] = company;
-						});
-						console.log(cAddrList);
+						company = companyList;
+						console.log(company);
 					},
 					error(){
 						console.log("업체 불러오기 실패");
 					}
 					
-				})
-			});
-			
-			
-			
-			//지도-------------------------------------------------------------
-			
+				}); //ajax끝
 				
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = {
-			        center: new kakao.maps.LatLng(37.662751484268725, 127.03392645537824), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
-			    };  
+				
+				
+				
+			});// 차 선택 이벤트 끝
 			
-			// 지도를 생성합니다    
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
 			
-			// 주소-좌표 변환 객체를 생성합니다
-			var geocoder = new kakao.maps.services.Geocoder();
 			
-			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch('서울 도봉구 방학로 125-1', function(result, status) {
 			
-			    // 정상적으로 검색이 완료됐으면 
-			     if (status === kakao.maps.services.Status.OK) {
-			
-			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-			
-			        // 결과값으로 받은 위치를 마커로 표시합니다
-			        var marker = new kakao.maps.Marker({
-			            map: map,
-			            position: coords
-			        });
-								
-			       	marker.setMap(map);
-			       	
-			   		  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-			       	var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-			       	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-			
-			     	// 인포윈도우를 생성합니다
-			       	var infowindow = new kakao.maps.InfoWindow({
-			       	    content : iwContent,
-			       	    removable : iwRemoveable
-			       	});
-			
-			       	// 마커에 클릭이벤트를 등록합니다
-			       	kakao.maps.event.addListener(marker, 'click', function() {
-			       	      // 마커 위에 인포윈도우를 표시합니다
-			       	      infowindow.open(map, marker);  
-			       	});
-			     
-			     } 
-		}); 
 
 			
 		</script>
