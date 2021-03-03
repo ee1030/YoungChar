@@ -75,6 +75,13 @@ public interface BoardService {
 	 */
 	public abstract List<String> selectDBFileList();
 
+	/** 카테고리 별 게시판 조회
+	 * @param pInfo
+	 * @param map
+	 * @return bList
+	 */
+	public abstract List<Board> categoryBoardList(PageInfo2 pInfo, Map<String, Object> map);
+
 	
 
 

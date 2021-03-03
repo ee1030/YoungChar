@@ -148,6 +148,37 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectDBFileList");
 	}
 
+	/** 카테고리별 게시판 조회
+	 * @param pInfo
+	 * @param map
+	 * @return bList
+	 */
+	public List<Board> categoryBoardList(PageInfo2 pInfo, Map<String, Object> map) {
+		
+//		RowBounds 객체 : offset과 limit를 이용하여 조회 내용 중 일부 행만 조회하는 마이바티스 객체
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = null;
+		
+		if((int)map.get("type") == 1) {
+			 rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
+			
+		}else {
+			
+			 rowBounds = new RowBounds(offset, pInfo.getLimit());
+		}
+		
+		return sqlSession.selectList("boardMapper.selectList", map, rowBounds);
+		
+	}
+
+	/** 파일 정보 일괄 삭제 DAO
+	 * @param deleteFileNoList
+	 * @return result 
+	 */
+	public int deleteAttachmentList(List<Integer> deleteFileNoList) {
+		return sqlSession.delete("boardMapper.deleteAttachmentList", deleteFileNoList);
+	}
+
 	
 
 	

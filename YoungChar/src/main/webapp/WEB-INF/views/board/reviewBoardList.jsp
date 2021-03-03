@@ -21,9 +21,9 @@ li {
 
 	cursor: pointer;
 }
-/* #list-view #bno{
+ #list-view div > p{
 	color : green;
-} */
+} 
 
 </style>
 
@@ -105,7 +105,7 @@ li {
 				<div class="col-md-2" style="float: left;">
 					<section class="rn-widget">
 						<h2 class="rn-widget-title">Categories</h2>
-						<div class="rn-widget-content" id="categoryName">
+						<div class="rn-widget-content" id="categoryNm">
 							<ul>
 								<li>테슬라</li>
 								<li>현대자동차</li>
@@ -141,7 +141,7 @@ li {
 							<div class="col-md-4">
 
 								<!-- Blog Post Item (Small Size)-->
-								<div class="rn-post-item rn-post-size-sm" id="list-view">
+								<div class="rn-post-item rn-post-size-sm list-view" >
 									<div class="rn-post-item-thumb">
 										<c:forEach items="${thList}" var="th">
 											<c:if test="${th.parentBoardNo  == board.boardNo}">
@@ -151,8 +151,8 @@ li {
 									</div>
 									<div class="rn-post-item-header">
 										<div class="rn-post-date">
-											<div class="rn-post-date-inner">
-												No. <span class="rn-post-item-categories" id="bno"> ${board.boardNo } </span>
+											<div class="rn-post-date-inner" >
+												 <span class="rn-post-item-categories bno" >${board.boardNo }</span>
 												<fmt:formatDate var="createDate" value="${board.boardCreateDate }" pattern="yy-MM-dd" />
 												<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" />
 												<div class="rn-post-date-m-y">${createDate }</div>
@@ -428,40 +428,42 @@ li {
 		<!-- End Site Footer-->
 		<script>
 		// 게시글 상세보기 기능 
-		$("#list-view div").on("click", function() {
+		$(".list-view").on("click", function() {
 
-			var boardNo = $('div > span').eq(0).text();
+			var boardNo = $(this).find('.bno').text();
+			
+			console.log(boardNo);
 			
 			var boardViewURL = "../${pInfo.boardType}/" + boardNo;
 
 			location.href = boardViewURL;
 		});
 		
-		$("#categoryName li").on('click',function(){
+		$("#categoryNm li").on('click',function(){
 			
 			var category = $(this).text();
 			
 			console.log(category);
 			
-			var categoryName = 0;
+			var categoryCode = 0;
 			
 			
 			
 			switch(category){
-			case "테슬라" : categoryName = 1; break;
-			case "현대자동차" : categoryName = 2; break;
-			case "기아" : categoryName = 3 ; break;
-			case "벤츠" : categoryName = 4; break;
-			case "BMW" : categoryName = 5; break;
-			case "아우디" : categoryName = 6; break;
-			case "포르쉐" : categoryName = 7; break;
-			case "르노" : categoryName = 8; break;
+			case "테슬라" : categoryCode = 1; break;
+			case "현대자동차" : categoryCode = 2; break;
+			case "기아" : categoryCode = 3 ; break;
+			case "벤츠" : categoryCode = 4; break;
+			case "BMW" : categoryCode = 5; break;
+			case "아우디" : categoryCode = 6; break;
+			case "포르쉐" : categoryCode = 7; break;
+			case "르노" : categoryCode = 8; break;
 			
 			}
 			
-			console.log(categoryName);
+			console.log(categoryCode);
 			
-			var selectCategoryURL = "${pInfo.boardType}/" + categoryName;
+			var selectCategoryURL = "${pInfo.boardType}/" + categoryCode;
 			location.href = selectCategoryURL;
 			
 		});

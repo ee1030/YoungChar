@@ -145,11 +145,11 @@ public class BoardServiceImpl implements BoardService{
 						
 				if((int)map.get("boardType") == 0) {
 					
-					filePath = "/resources/uploadImages";
+					filePath = "/resources/infoImages";
 					
 				}else {
 					
-					filePath = "/resources/infoImages";
+					filePath = "/resources/uploadImages";
 				}
 				
 //				for문을 이용하여 파일정보가 담긴 images를 반복접근 
@@ -328,8 +328,10 @@ public class BoardServiceImpl implements BoardService{
 		
 //		1. 게시글 수정 
 //		제목 , 내용 크로스사이트 스크립팅 방지 처리 
-		updateBoard.setBoardTitle(replaceParameter(updateBoard.getBoardTitle()));
-		updateBoard.setBoardContent(replaceParameter(updateBoard.getBoardContent()));
+		
+//		썸머 노트는 크로스 사이트 스크립팅 방지처리를 하지 않음 
+//		updateBoard.setBoardTitle(replaceParameter(updateBoard.getBoardTitle()));
+//		updateBoard.setBoardContent(replaceParameter(updateBoard.getBoardContent()));
 		
 //		게시글 수정 DAO 호출 
 		int result = dao.updateBoard(updateBoard);
@@ -429,7 +431,7 @@ public class BoardServiceImpl implements BoardService{
 					
 				}
 				
-			}// images 반복 접근 for 문 종료 
+			} // images 반복 접근 for 문 종료 
 			
 //			uploadImages == 업로드된 파일 정보 --> 서버에 파일 저장
 //			removeFileList == 제거하야될 파일 정보 --> 서버에 파일 삭제 
@@ -462,8 +464,118 @@ public class BoardServiceImpl implements BoardService{
 			for (Attachment removeFile : removeFileList) {
 				File tmp = new File(savePath + "/" + removeFile.getFileName());
 				tmp.delete();
-			}
+			} 
 //			--------------------------------------------------------------------
+			
+			
+//			------------------------------------------------ 썸머 노트 ------------------------------------------------
+			if(updateBoard.getBoardCode() == 1 || updateBoard.getBoardCode() == 2 || updateBoard.getBoardCode() == 3  ) {
+				Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");//img 태그 src 추출 정규표현식
+				
+//				게시글에 작성된 <img> 태그와 src 속성을 이용해서 파일명을 얻어오기
+				Matcher matcher = pattern.matcher(updateBoard.getBoardContent());
+				
+//				정규식을 통해 게시글에 작서된 이미지 파일명만 얻어와 모아둠 List 선언
+				List<String> fileNameList = new ArrayList<String>();
+				
+				String src = null; // matcher에서 저장된 src를 꺼내서 임시 저장할 변수
+				String fileName = null; // src에서 파일명을 추출해서 임시 저장할 변수
+				
+				while(matcher.find()) {
+					src = matcher.group(1); // /spring/board/resources/infoImages/abc.jpg
+					fileName = src.substring(src.lastIndexOf("/") + 1); // abc.jpg
+					fileNameList.add(fileName);
+					
+				}
+				
+//				DB에 새로 추가할 이미지 파일 정보를 모아둘 List 생성
+				List<Attachment> newAttachmentList = new ArrayList<Attachment>();
+				
+//				DB에서 삭제할 이미지 번호를 모아둘 List 생성
+				List<Integer> deleteFileNoList = new ArrayList<Integer>();
+				
+//				수정된 게시글 파일명 목록(fileNameList)과 
+//				수정 전 파일 정보 목록(oldFiles)를 비교해서 
+//				수정된 게시글 파일명 하나를 기준으로 하여 수정 전 파일명과 순차적 비교를 진행 
+//				--> 수정된 게시글 파일명과 일치하는 수정 전 파일명이 없다면 ,
+//					== 새로 삽입된 이미지임을 의미한다.
+				
+				for(String fName : fileNameList) {
+					
+					boolean flag = true;
+					
+					for(Attachment oldAt : oldFiles) {
+						
+						if(oldAt.getFileLevel() == 0) continue;
+						
+						if(fName.equals(oldAt.getFileName())) { // 수정 후 / 수정 전 같은 파일 있다 == 수정되지 않았다.
+							flag = false;
+							break;
+						}
+					}
+					
+//					flag == true == 수정 후 게시글 파일명과 수정 전 파일명이 일치하는 게 없을 경우
+//					== 새로운 이미지 --> newAttachmentList 추가 
+					if(flag) {
+						Attachment at = new Attachment(filePath, fName , 1 , updateBoard.getBoardNo());
+						newAttachmentList.add(at);
+						
+					}
+					
+				}
+				
+//				수정 전 게시글 파일명 목록(fileNameList)과 
+//				수정 된 파일 정보 목록(oldFiles)를 비교해서 
+//				수정 전   파일명 하나를 기준으로 하여 수정 된 파일명과 순차적 비교를 진행 
+//				--> 수정 전  게시글 파일명과 일치하는 수정 후 파일명이 없다면 ,
+//					== 기존 수정 전 이미지가 삭제됨을 의미
+				for(Attachment oldAt : oldFiles) {
+					
+					if(oldAt.getFileLevel() == 0) continue;
+					
+					boolean flag = true;
+					
+					for(String fName : fileNameList) {
+						
+						if(oldAt.getFileName().equals(fName)) {
+							
+							flag = false;
+							break;
+						}
+					}
+					
+//					flag == true == 수정 전  파일명과 수정 후 파일명이 일치하는 게 없을 경우
+//					== 삭제된 이미지 --> deleteFileNoList 추가 
+					if(flag) {
+						deleteFileNoList.add(oldAt.getFileNo());
+					}
+					
+				}
+//				newAttachmentList , deleteFileNoList 완성됨
+				
+				if(!newAttachmentList.isEmpty()) { // 새로 삽입된 이미지가 있다면
+					
+					result = dao.insertAttachmentList(newAttachmentList);
+					
+					if(result != newAttachmentList.size()) { // 삽입된 결과 행의 수와 삽입을 수행한 리스트 수가 맞지 않을 경우 == 실패 
+						throw new InsertAttachmentFailException("파일 수정 실패( 파일 정보 삽입 중 오류발생)");
+						
+						
+					}
+				}
+				
+				if(!deleteFileNoList.isEmpty()) { // 삭제할 이미지가 있다면
+					result = dao.deleteAttachmentList(deleteFileNoList);
+					
+					if(result != deleteFileNoList.size()) {
+						throw new InsertAttachmentFailException("파일 수정 실패( 파일 정보 삭제 중 오류 발생)");
+					}
+				}
+				
+			}
+			
+			
+			
 
 		}
 		return result;
@@ -478,7 +590,7 @@ public class BoardServiceImpl implements BoardService{
 		String fileName = rename(uploadFile.getOriginalFilename());
 		
 //		웹상 접근 주소 
-		String filePath = "/resources/infoImages";
+		String filePath = "/resources/uploadImages";
 		
 //		돌려 보내줄 파일 정보를 Attachment 객체에 담아서 전달
 		Attachment at = new Attachment();
@@ -510,7 +622,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		return dao.selectDBFileList();
 	}
-
+	
+	@Override
+	public List<Board> categoryBoardList(PageInfo2 pInfo, Map<String, Object> map) {
+		return dao.categoryBoardList(pInfo, map);
+	}
 
 
 
