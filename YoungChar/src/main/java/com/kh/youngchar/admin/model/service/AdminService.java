@@ -15,7 +15,7 @@ public interface AdminService {
 	public abstract int getNewMember();
 
 	/** 신규 업체 수 조회 Service
-	 * @return
+	 * @return newCompany
 	 */
 	public abstract int getNewCompany();
 
@@ -50,5 +50,31 @@ public interface AdminService {
 	 * @return mList
 	 */
 	public abstract List<Member> selectMemberList(PageInfo pInfo);
+
+	/** 선택 회원 탈퇴 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int memberSecession(List<String> chkList);
+	
+	/** 선택 회원 복구 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int memberRestore(List<String> chkList);
+
+	/** 회원 검색 결과 페이징 정보 조회 Service
+	 * @param cp
+	 * @param sv
+	 * @return pInfo
+	 */
+	public abstract PageInfo getSearchMemPageInfo(int cp, String sv);
+
+	/** 회원 검색 결과 조회 Service
+	 * @param pInfo
+	 * @param sv
+	 * @return mList
+	 */
+	public abstract List<Member> selectSearchMember(PageInfo pInfo, String sv);
 
 }

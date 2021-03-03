@@ -15,6 +15,7 @@
 
 <!-- Preloader CSS-->
 <style>
+
 .rn-header {
 	position: inherit !important;
 	background-color: rgba(17, 46, 59, 0.7);
@@ -62,7 +63,6 @@
 </style>
 
 
-
 </head>
 <body class="rn-preloader">
 
@@ -84,9 +84,9 @@
 							<div class="card-header">
 								<h5 class="card-title">회원관리</h5>
 								<div class="search-page">
-									<form class="theme-form">
+									<form action="${contextPath}/admin/memberManagement/searchId" method="post" class="theme-form">
 										<div class="input-group m-0">
-											<input class="form-control-plaintext" type="search" placeholder="검색할 단어를 입력하세요"><span class="btn btn-success input-group-text">Search</span>
+												<input class="form-control-plaintext" type="search" name="sv" placeholder="검색할 아이디를 입력하세요"><button class="btn btn-success input-group-text">검색</button>
 										</div>
 									</form>
 								</div>
@@ -107,8 +107,8 @@
 									<tbody>
 										<c:forEach var="member" items="${mList}">
 											<tr>
-												<th><input type="checkbox" name="chkid" class="chk" /></th>
-												<th scope="row">${member.memberNo }</th>
+												<th><input type="checkbox" name="chkid" class="chk" value="${member.memberNo}" /></th>
+												<td scope="row">${member.memberNo}</td>
 												<td>${member.memberId }</td>
 												<td>${member.memberNm }</td>
 												<td><c:choose>
@@ -160,7 +160,7 @@
 				<div class="col-lg-12">
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
-						<button class="btn btn-danger" id="secesseion">선택 탈퇴</button>
+						<button class="btn btn-danger" id="secession">선택 탈퇴</button>
 						<button class="btn btn-success" id="restore">선택 복구</button>
 						<ul>
 						
@@ -233,17 +233,68 @@
 			});
 		});
 		
-		
-		
-		$("#secession").on("click", function({
+		$("#secession").on("click", function(){
 			var chkList = new Array();
 			
-			$("checkbox[name=chkid]:checked").each(function(){
-				chkList.push($(this).prev());
+			$("input[name='chkid']:checked").each(function(){
+				chkList.push($(this).val());
 			});
 			
-			console.log(chkList);
+			if(confirm("선택한 회원을 탈퇴시키겠습니까?")) {
+				$.ajax({
+					url : "${contextPath}/admin/memberManagement/secession",
+					type : "POST",
+					dataType : "json",
+					data : { "chkList" : chkList },	
+					success : function(result) {
+						console.log(result);
+						
+						if(result > 0) {
+							swal({icon : "success", title : "탈퇴처리 완료"}).then(function() {
+								location.reload();
+							});
+						}
+						
+					},
+					error : function() {
+						console.log("회원 탈퇴 실패");
+					}
+					
+				});
+			}
 		});
+		
+		$("#restore").on("click", function(){
+			var chkList = new Array();
+			
+			$("input[name='chkid']:checked").each(function(){
+				chkList.push($(this).val());
+			});
+			
+			if(confirm("선택한 회원을 복구시키겠습니까?")) {
+				$.ajax({
+					url : "${contextPath}/admin/memberManagement/restore",
+					type : "POST",
+					dataType : "json",
+					data : { "chkList" : chkList },	
+					success : function(result) {
+						console.log(result);
+						
+						if(result > 0) {
+							swal({icon : "success", title : "회원 복구 완료"}).then(function() {
+								location.reload();
+							});
+						}
+						
+					},
+					error : function() {
+						console.log("회원 복구 실패");
+					}
+					
+				});
+			}
+		});
+		
 		
 	</script>
 
