@@ -62,12 +62,7 @@ public class BoardController {
 		List<Board> bList = new ArrayList<Board>();
 		
 		
-			bList = service.selectList(pInfo , type);
-		
-		
-//		for(Board b : bList) {
-//			System.out.println(b);
-//		}
+		bList = service.selectList(pInfo , type);
 		
 		if(bList != null && !bList.isEmpty()) { // 게시글 목록 조회 성공 시 
 			List<Attachment> thumbnailList = service.selectThumbnailList(bList);
@@ -81,6 +76,47 @@ public class BoardController {
 //		게시글 목록, 페이징 처리 정보를 request scope로 세팅 후 forward 진행
 		model.addAttribute("bList", bList);
 		model.addAttribute("pInfo", pInfo);
+		
+		String url = "";
+				
+		if (pInfo.getBoardType() == 1) {
+			url = "board/reviewBoardList";
+		} else {
+			url = "board/boardList";
+		}
+		
+		return url;
+	}
+	
+	@RequestMapping("list/{type}/{categoryCode}")
+	public String categoryBoardList(@PathVariable("type") int type , @PathVariable("categoryCode") int categoryCode,
+												@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+												Model model) {
+		
+//		1) 페이징 처리를 위한 객체 PageInfo 생성
+		PageInfo2 pInfo = service.getPageInfo(type, cp);
+		
+		List<Board> bList = new ArrayList<Board>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type" , type);
+		map.put("categoryCode" , categoryCode);
+		
+		bList = service.categoryBoardList(pInfo , map);
+		
+		if(bList != null && !bList.isEmpty()) { // 게시글 목록 조회 성공 시 
+			List<Attachment> thumbnailList = service.selectThumbnailList(bList);
+			
+			if(thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+			
+		}
+		
+//		게시글 목록, 페이징 처리 정보를 request scope로 세팅 후 forward 진행
+		model.addAttribute("bList", bList);
+		model.addAttribute("pInfo", pInfo);
+		
 		String url = "";
 				
 		if (type == 1) {
@@ -88,10 +124,10 @@ public class BoardController {
 		} else {
 			url = "board/boardList";
 		}
-
 		
 		return url;
 	}
+	
 	
 //	게시글 상세조회 Controller
 	@RequestMapping("{type}/{boardNo}")
@@ -103,8 +139,6 @@ public class BoardController {
 //		--> HTTP 요청 헤더에 존재하는 "referer" 값을 얻어와 
 //		매개변수 String referer에 저장
 		
-//		System.out.println("type : " + type);
-//		System.out.println("boardNo : " + boardNo);
 		
 //		게시글 상세조회 Service 호출 
 		Board board = service.selectBoard(boardNo,type);
@@ -128,6 +162,7 @@ public class BoardController {
 //			request scope로 board를 세팅한다.
 			model.addAttribute("board", board);
 			
+	
 			url = "board/boardView";
 			
 		} else { // 상세 조회 실패 시 
@@ -170,9 +205,6 @@ public class BoardController {
 //		@RequestParam(value="images",required = false) List<MultipartFile> images 
 //		-> <input type="file" name="images"> 태그를 모두 얻어와 images라는 List에 매핑
 		
-//		System.out.println("type : " + type);
-//		System.out.println("board : " + board);
-//		System.out.println("loginMember : " + loginMember);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", loginMember.getMemberNo());
@@ -194,13 +226,7 @@ public class BoardController {
 //		-> HttpServletRequest 객체는 Controller에서만 사용 가능하다.
 		String savePath = null;
 		
-		if(type == 0) {
-			savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
-		} else {
-			savePath = request.getSession().getServletContext().getRealPath("resources/infoImages");
-		}
-
-//		System.out.println(savePath);
+		savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
 		
 //		게시글 map , 이미지 images, 저장 경로 savePath 
 		
@@ -263,24 +289,26 @@ public class BoardController {
 		
 		model.addAttribute("board", board);
 		
-		return "board/boardUpdate";
+		String url = "board/boardUpdate";
+		
+		return url;
 	}
 	
 //	게시글 수정 Controller 
 	@RequestMapping("{type}/{boardNo}/updateAction")
-	public String updateAction(@PathVariable int boardNo,
+	public String updateAction(@PathVariable int boardNo, @PathVariable int type,
 					@ModelAttribute Board updateBoard, Model model, RedirectAttributes ra,
 					HttpServletRequest request,
 					@RequestParam("deleteImages") boolean[] deleteImages,
-					@RequestParam(value="images",required=false) List<MultipartFile> images) {
+					@RequestParam(value="image",required=false) List<MultipartFile> images) {
 //																	input 태그들을 다 잡았다.
-//		System.out.println(Arrays.toString(deleteImages));
-//		for(MultipartFile m : images) {
-//			System.out.println(m.getOriginalFilename());
-//		}
 		
 //		boardNo를 updateBoard에 세팅
 		updateBoard.setBoardNo(boardNo);
+		
+//		게시판 종류에 따라서 Service에서 크로스사이트 스크립팅 처리를 결정 할 수 있도록 
+//		type을 updateBoard.boardCode 추가
+		updateBoard.setBoardCode(type);
 		
 //		파일 저장 경로 얻어오기
 		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
@@ -310,13 +338,13 @@ public class BoardController {
 	
 //	----------------------------- summernote ----------------------------------
 //	summernote에 업로드된 이미지 저장 Controller 
-	@RequestMapping("{type}/insertImage")
+	@RequestMapping(value = {"{type}/insertImage" , "{type}/{boardNo}/insertImage"})
 	@ResponseBody // 응답시 값 자체를 return해준다. (주소나 view Name이 아닌)
     public String insertImage(HttpServletRequest request,
                               @RequestParam("uploadFile") MultipartFile uploadFile) {
         // 서버에 파일(이미지)를 저장할 폴더 경로 얻어오기
         String savePath
-            = request.getSession().getServletContext().getRealPath("resources/infoImages");
+            = request.getSession().getServletContext().getRealPath("resources/uploadImages");
 
         Attachment at = service.insertImage(uploadFile, savePath);
 

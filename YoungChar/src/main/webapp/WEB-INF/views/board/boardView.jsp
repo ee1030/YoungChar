@@ -136,10 +136,10 @@
 					<div class="float-right">
 					
 						<%-- 북마크나 주소로 인한 직접 접근 시 목록으로 버튼 경로 지정 --%>
-						<c:if test="${empty sessionScope.returnListURL}">
+					<%-- 	<c:if test="${empty sessionScope.returnListURL}">
 							<c:set var="returnListURL" value="../list/${board.boardCode}" scope="session"/>
-						</c:if>
-						<a class="btn btn-success" href="${sessionScope.returnListURL}">목록으로</a>
+						</c:if> --%>
+						<a class="btn btn-success returnUrl">목록으로</a>
 	                	
 	                	<c:url var="updateUrl" value="${board.boardNo}/update"/>
 	                	
@@ -155,13 +155,26 @@
 			
 
 			<!-- 댓글 부분 -->
-			<jsp:include page="reply.jsp"/>
+			<%-- <jsp:include page="reply.jsp"/> --%>
 			
 		</div>
 	</div>
 	<%-- <jsp:include page="../common/footer.jsp"/> --%>
 	
 	<script>	
+		// 목록으로
+		$(".returnUrl").on('click',function(){
+			
+			var boardCode = ${board.boardCode};
+			var returnURL = "../list/" + boardCode;
+			
+			location.href = returnURL;
+			
+			
+		});
+		
+		
+	
 	
 		// 게시글 삭제
 		
