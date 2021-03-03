@@ -72,7 +72,7 @@ public class AdminController {
 		return result;
 	}
 	
-	// 선택회원 탈퇴
+	// 선택회원 복구
 	@ResponseBody
 	@RequestMapping("memberManagement/restore")
 	public int memberRestore(@RequestParam(value="chkList[]") List<String> chkList) {
@@ -98,15 +98,92 @@ public class AdminController {
 		return "admin/memberManagement";
 	}
 	
-	// 업체 승인 요청 페이지
+	// 신규 업체 승인 요청 페이지
 	@RequestMapping("newCompanyManagement")
-	public String newCompanyManagement() {
+	public String newCompanyManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+										Model model) {
+		
+		PageInfo pInfo = service.getNewComPageInfo(cp);
+		
+		List<Member> cList = service.selectNewCompanyList(pInfo);
+		
+		model.addAttribute("cList", cList);
+		model.addAttribute("pInfo", pInfo);
+		
 		return "admin/newCompanyManagement";
 	}
 	
-	// 업체 관리 페이지
+	// 선택된 업체 가입 승인
+	@ResponseBody
+	@RequestMapping("newCompanyManagement/approval")
+	public int newCompanyApproval(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.newCompanyApproval(chkList);
+		
+		return result;
+	}
+	
+	// 신규 업체 승인 검색
+	@RequestMapping("newCompanyManagement/searchName")
+	public String searchNewCompany(@RequestParam("sv") String sv,
+									@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+									Model model) {
+		
+		PageInfo pInfo = service.getSearchNewComPageInfo(cp, sv);
+		
+		List<Member> cList = service.selectSearchNewCom(pInfo, sv);
+		
+		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("cList", cList);
+		
+		return "admin/newCompanyManagement";
+	}
+	
+	// 모든 업체 관리 페이지
 	@RequestMapping("allCompanyManagement")
-	public String allCompanyManagement() {
+	public String allCompanyManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+										Model model) {
+		
+		PageInfo pInfo = service.getAllComPageInfo(cp);
+		
+		List<Member> cList = service.selectAllCompanyList(pInfo);
+		
+		model.addAttribute("cList", cList);
+		model.addAttribute("pInfo", pInfo);
+		
+		return "admin/allCompanyManagement";
+	}
+	
+	// 선택된 업체 가입 승인
+	@ResponseBody
+	@RequestMapping("allCompanyManagement/approval")
+	public int allCompanyApproval(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.allCompanyApproval(chkList);
+		
+		return result;
+	}
+	
+	// 선택된 업체 가입 승인 취소
+	@ResponseBody
+	@RequestMapping("allCompanyManagement/cancellation")
+	public int allCompanyCancellation(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.allCompanyCancellation(chkList);
+		
+		return result;
+	}
+	
+	// 신규 업체 승인 검색
+	@RequestMapping("allCompanyManagement/searchName")
+	public String searchAllCompany(@RequestParam("sv") String sv,
+									@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+									Model model) {
+		
+		PageInfo pInfo = service.getSearchAllComPageInfo(cp, sv);
+		
+		List<Member> cList = service.selectSearchAllCom(pInfo, sv);
+		
+		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("cList", cList);
+		
 		return "admin/allCompanyManagement";
 	}
 	

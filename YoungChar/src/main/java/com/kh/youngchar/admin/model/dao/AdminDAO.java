@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
+/**
+ * @author sksgu
+ *
+ */
 @Repository
 public class AdminDAO {
 	
@@ -102,11 +106,118 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.getSearchListCount", sv);
 	}
 
+	/** 회원 검색 결과 목록 조회 DAO
+	 * @param pInfo
+	 * @param sv
+	 * @return mList
+	 */
 	public List<Member> selectSearchMember(PageInfo pInfo, String sv) {
 		
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
 		return sqlSession.selectList("adminMapper.selectSearchMember", sv, rowBounds);
+	}
+
+	/** 신규 업체 승인 갯수 조회 DAO
+	 * @return listCount
+	 */
+	public int getNewCompanyListCount() {
+		return sqlSession.selectOne("adminMapper.getNewCompanyListCount");
+	}
+
+	/** 신규업체 승인 목록 조회 DAO
+	 * @param pInfo
+	 * @return cList
+	 */
+	public List<Member> selectNewCompanyList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectNewCompanyList", null, rowBounds);
+	}
+
+	/** 선택된 신규업체 승인 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int newCompanyApproval(List<String> chkList) {
+		return sqlSession.update("adminMapper.newCompanyApproval", chkList);
+	}
+
+	/** 신규 업체 승인 목록 갯수 조회 DAO
+	 * @param sv
+	 * @return listCount
+	 */
+	public int getSearchNCListCount(String sv) {
+		return sqlSession.selectOne("adminMapper.getSearchNCListCount", sv);
+	}
+
+	/** 신규 업체 승인 목록 조회 DAO
+	 * @param pInfo
+	 * @param sv
+	 * @return cList
+	 */
+	public List<Member> selectSearchNewCom(PageInfo pInfo, String sv) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectSearchNewCom", sv, rowBounds);
+	}
+
+	/** 모든 업체 갯수 조회 DAO
+	 * @return listCount
+	 */
+	public int getAllCompanyListCount() {
+		return sqlSession.selectOne("adminMapper.getAllCompanyListCount");
+	}
+
+	/** 모든 업체 목록 조회 DAO
+	 * @param pInfo
+	 * @return cList
+	 */
+	public List<Member> selectAllCompanyList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectAllCompanyList", null, rowBounds);
+	}
+
+	/** 모든 업체 페이지 선택 승인 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int allCompanyApproval(List<String> chkList) {
+		return sqlSession.update("adminMapper.allCompanyApproval", chkList);
+	}
+
+	/** 모든 업체 페이지 선택 승인 취소 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int allCompanyCancellation(List<String> chkList) {
+		return sqlSession.update("adminMapper.allCompanyCancellation", chkList);
+	}
+
+	/** 모든 업체 검색 목록 갯수 조회 DAO
+	 * @param sv
+	 * @return listCount
+	 */
+	public int getSearchACListCount(String sv) {
+		return sqlSession.selectOne("adminMapper.getSearchACListCount", sv);
+	}
+
+	/** 모든 업체 검색 목록 조회 DAO
+	 * @param pInfo
+	 * @param sv
+	 * @return cList
+	 */
+	public List<Member> selectSearchAllCom(PageInfo pInfo, String sv) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectSearchAllCom", sv, rowBounds);
 	}
 }

@@ -105,46 +105,55 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="member" items="${mList}">
-											<tr>
-												<th><input type="checkbox" name="chkid" class="chk" value="${member.memberNo}" /></th>
-												<td scope="row">${member.memberNo}</td>
-												<td>${member.memberId }</td>
-												<td>${member.memberNm }</td>
-												<td><c:choose>
-														<c:when test="${member.memberGrade ==  'A'}">
-															관리자
-														</c:when>
-														<c:when test="${member.memberGrade ==  'C'}">
-															업체회원
-														</c:when>
-														<c:otherwise>
-															일반회원
-														</c:otherwise>
-													</c:choose></td>
-												<td>
-													<%-- 날짜 출력 모양 지정 --%> 
-													<fmt:formatDate var="signDate" value="${member.signDt }" pattern="yyyy-MM-dd" /> 
-													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> 
-													<c:choose>
-														<c:when test="${signDate != now}">
-															${signDate }
-														</c:when>
-														<c:otherwise>
-															<fmt:formatDate value="${member.signDt }" pattern="HH:mm" />
-														</c:otherwise>
-													</c:choose>
-												</td>
-												<td><c:choose>
-														<c:when test="${member.memberStatus == 'N' }">
-															가입
-														</c:when>
-														<c:otherwise>
-															탈퇴
-														</c:otherwise>
-													</c:choose></td>
-											</tr>
-										</c:forEach>
+										<c:choose>
+											<c:when test="${empty mList}">
+												<tr>
+													<td colspan="7">존재하는 회원이 없습니다.</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<c:forEach var="member" items="${mList}">
+													<tr>
+														<th><input type="checkbox" name="chkid" class="chk" value="${member.memberNo}" /></th>
+														<td scope="row">${member.memberNo}</td>
+														<td>${member.memberId }</td>
+														<td>${member.memberNm }</td>
+														<td><c:choose>
+																<c:when test="${member.memberGrade ==  'A'}">
+																	관리자
+																</c:when>
+																<c:when test="${member.memberGrade ==  'C'}">
+																	업체회원
+																</c:when>
+																<c:otherwise>
+																	일반회원
+																</c:otherwise>
+															</c:choose></td>
+														<td>
+															<%-- 날짜 출력 모양 지정 --%> 
+															<fmt:formatDate var="signDate" value="${member.signDt }" pattern="yyyy-MM-dd" /> 
+															<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> 
+															<c:choose>
+																<c:when test="${signDate != now}">
+																	${signDate }
+																</c:when>
+																<c:otherwise>
+																	<fmt:formatDate value="${member.signDt }" pattern="HH:mm" />
+																</c:otherwise>
+															</c:choose>
+														</td>
+														<td><c:choose>
+																<c:when test="${member.memberStatus == 'N' }">
+																	가입
+																</c:when>
+																<c:otherwise>
+																	탈퇴
+																</c:otherwise>
+															</c:choose></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 
 									</tbody>
 								</table>
@@ -247,8 +256,6 @@
 					dataType : "json",
 					data : { "chkList" : chkList },	
 					success : function(result) {
-						console.log(result);
-						
 						if(result > 0) {
 							swal({icon : "success", title : "탈퇴처리 완료"}).then(function() {
 								location.reload();
@@ -278,8 +285,6 @@
 					dataType : "json",
 					data : { "chkList" : chkList },	
 					success : function(result) {
-						console.log(result);
-						
 						if(result > 0) {
 							swal({icon : "success", title : "회원 복구 완료"}).then(function() {
 								location.reload();

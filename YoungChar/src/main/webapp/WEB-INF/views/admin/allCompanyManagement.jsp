@@ -22,8 +22,8 @@
 
 .card {
 	background-color: #79cb4d1f !important;
-	width: 1000px;
-	margin-left: 100px;
+	width: 1100px;
+	margin-left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .rn-pagination ul {
-	margin-left: 50px !important;
+	margin-right: 200px !important;
 	display: inline-block;
 }
 
@@ -57,6 +57,10 @@
 
 .btn-success {
 	display: inline-block;
+}
+
+.btn-area {
+	float: left;
 }
 </style>
 
@@ -83,9 +87,10 @@
 							<div class="card-header">
 								<h5 class="card-title">전체 업체</h5>
 								<div class="search-page">
-									<form class="theme-form">
+									<form action="${contextPath}/admin/allCompanyManagement/searchName" method="post" class="theme-form">
 										<div class="input-group m-0">
-											<input class="form-control-plaintext" type="search" placeholder="검색할 단어를 입력하세요"><span class="btn btn-success input-group-text">Search</span>
+											<input class="form-control-plaintext" type="search" name="sv" placeholder="검색할 업체명을 입력하세요">
+											<button class="btn btn-success input-group-text">검색</button>
 										</div>
 									</form>
 								</div>
@@ -96,104 +101,57 @@
 										<tr>
 											<th scope="col"><input type="checkbox" id="checkAll" /></th>
 											<th scope="col">업체번호</th>
-											<th scope="col">업체이름</th>
+											<th scope="col">업체명</th>
 											<th scope="col">전화번호</th>
-											<th scope="col">주소</th>
-											<th scope="col">가입일자</th>
-											<th scope="col">활동여부</th>
+											<th scope="col">사업자번호</th>
+											<th scope="col">신청일자</th>
+											<th scope="col">브랜드</th>
+											<th scope="col">승인여부</th>											
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>갑돌모터스</td>
-											<td>02-826-4578</td>
-											<td>서울시 응애구 응애동 애기빌딩 10</td>
-											<td>2021-03-02</td>
-											<td>승인</td>								
-										</tr>
+										<c:choose>
+											<c:when test="${empty cList}">
+												<tr>
+													<td colspan="7">존재하는 업체가 없습니다.</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<c:forEach var="allCompany" items="${cList}">
+													<tr>
+														<th><input type="checkbox" name="chkid" class="chk" value="${allCompany.memberNo}" /></th>
+														<td scope="row">${allCompany.memberNo}</td>
+														<td>${allCompany.cooName }</td>
+														<td>${allCompany.phone }</td>
+														<td>${allCompany.cooNumber }</td>
+														<td>
+															<%-- 날짜 출력 모양 지정 --%> 
+															<fmt:formatDate var="signDate" value="${allCompany.signDt }" pattern="yyyy-MM-dd" /> 
+															<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> 
+															<c:choose>
+																<c:when test="${signDate != now}">
+																	${signDate }
+																</c:when>
+																<c:otherwise>
+																	<fmt:formatDate value="${allCompany.signDt }" pattern="HH:mm" />
+																</c:otherwise>
+															</c:choose>
+														</td>
+														<td>${allCompany.brandCategory}</td>
+														<td>
+															<c:choose>
+																<c:when test="${allCompany.memberStatus == 'Y'}">
+																	미승인
+																</c:when>
+																<c:otherwise>
+																	승인
+																</c:otherwise>
+															</c:choose>
+														</td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 
 
 									</tbody>
@@ -207,21 +165,54 @@
 			</div>
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-10">
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
-						<button class="btn btn-danger">선택 승인</button>
-						<button class="btn btn-success">선택 승인취소</button>
+						<div class="btn-area">
+							<button class="btn btn-success" id="approval">선택 승인</button>
+							<button class="btn btn-danger" id="cancellation">선택 승인취소</button>
+						</div>
 						<ul>
-							<li><a href="#"> <i class="fas fa-angle-left"></i>
-							</a></li>
-							<li><a class="rn-active" href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#"> <i class="fas fa-angle-right"></i>
-							</a></li>
+						
+							
+							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+							<c:set var="prevPage" value="?cp=${prev}" />
+
+
+							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+							<c:set var="nextPage" value="?cp=${next}" />
+							
+							<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+								<li>
+									<!-- 이전 페이지로 이동 (<) --> 
+									<a  href="${prevPage}">	<i class="fas fa-angle-left"></i></a>
+								</li>
+							</c:if>
+							
+							<!-- 페이지 목록 -->
+							<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+								<c:choose>
+									<c:when test="${pInfo.currentPage == page }">
+										<li><a class="page-link rn-active">${page}</a></li>
+									</c:when>
+
+									<c:otherwise>
+										<li><a class="page-link" href="?cp=${page}">${page}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+									
+							<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+							<c:if test="${next <= pInfo.maxPage}">
+								<li>
+									<!-- 다음 페이지로 이동 (>) --> 
+									<a  href="${nextPage}"><i class="fas fa-angle-right"></i></a>
+								</li>
+							</c:if>
 						</ul>
 					</nav>
 					<!-- End Cars Pagination-->
@@ -248,11 +239,69 @@
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 
 	<script>
-		$(document).ready(function() {
-			$('#checkAll').click(function() {
-				$('.chk').prop('checked', this.checked);
-			});
+	$(document).ready(function() {
+		$('#checkAll').click(function() {
+			$('.chk').prop('checked', this.checked);
 		});
+	});
+	
+	$("#approval").on("click", function(){
+		var chkList = new Array();
+		
+		$("input[name='chkid']:checked").each(function(){
+			chkList.push($(this).val());
+		});
+		
+		if(confirm("선택한 업체의 활동을 승인하시겠습니까?")) {
+			$.ajax({
+				url : "${contextPath}/admin/allCompanyManagement/approval",
+				type : "POST",
+				dataType : "json",
+				data : { "chkList" : chkList },	
+				success : function(result) {
+					if(result > 0) {
+						swal({icon : "success", title : "승인 처리 완료"}).then(function() {
+							location.reload();
+						});
+					}
+					
+				},
+				error : function() {
+					console.log("회원 승인 실패");
+				}
+				
+			});
+		}
+	});
+		
+	$("#cancellation").on("click", function(){
+		var chkList = new Array();
+		
+		$("input[name='chkid']:checked").each(function(){
+			chkList.push($(this).val());
+		});
+		
+		if(confirm("선택한 업체의 승인을 취소하시겠습니까?")) {
+			$.ajax({
+				url : "${contextPath}/admin/allCompanyManagement/cancellation",
+				type : "POST",
+				dataType : "json",
+				data : { "chkList" : chkList },	
+				success : function(result) {
+					if(result > 0) {
+						swal({icon : "success", title : "취소 처리 완료"}).then(function() {
+							location.reload();
+						});
+					}
+					
+				},
+				error : function() {
+					console.log("승인 취소 실패");
+				}
+				
+			});
+		}
+	});
 	</script>
 
 

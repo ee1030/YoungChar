@@ -77,4 +77,74 @@ public interface AdminService {
 	 */
 	public abstract List<Member> selectSearchMember(PageInfo pInfo, String sv);
 
+	/** 신규 업체 승인 페이징 정보 조회 Service
+	 * @param cp
+	 * @return pInfo
+	 */
+	public abstract PageInfo getNewComPageInfo(int cp);
+
+	/** 신규 업체 승인 목록 조회 Service
+	 * @param pInfo
+	 * @return cList
+	 */
+	public abstract List<Member> selectNewCompanyList(PageInfo pInfo);
+
+	/** 선택된 신규업체 승인 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int newCompanyApproval(List<String> chkList);
+
+	/** 신규 업체 승인 검색 페이징 정보 조회 Service
+	 * @param cp
+	 * @param sv
+	 * @return pInfo
+	 */
+	public abstract PageInfo getSearchNewComPageInfo(int cp, String sv);
+
+	/** 신규 업체 승인 검색 목록 조회 Service
+	 * @param pInfo
+	 * @param sv
+	 * @return cList
+	 */
+	public abstract List<Member> selectSearchNewCom(PageInfo pInfo, String sv);
+
+	/** 모든 업체 페이징 정보 조회 Service
+	 * @param cp
+	 * @return pInfo
+	 */
+	public abstract PageInfo getAllComPageInfo(int cp);
+
+	/** 모든 업체 목록 조회 Service
+	 * @param pInfo
+	 * @return cList
+	 */
+	public abstract List<Member> selectAllCompanyList(PageInfo pInfo);
+
+	/** 모든 업체 페이지 선택 승인 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int allCompanyApproval(List<String> chkList);
+
+	/** 모든 업체 페이지 선택 승인 취소 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int allCompanyCancellation(List<String> chkList);
+	
+	/** 모든 업체 검색 페이징 정보 조회 Service
+	 * @param cp
+	 * @param sv
+	 * @return pInfo
+	 */
+	public abstract PageInfo getSearchAllComPageInfo(int cp, String sv);
+
+	/** 모든 업체 검색 목록 조회 Service
+	 * @param pInfo
+	 * @param sv
+	 * @return cList
+	 */
+	public abstract List<Member> selectSearchAllCom(PageInfo pInfo, String sv);
+
 }
