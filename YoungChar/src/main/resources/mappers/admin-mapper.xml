@@ -290,6 +290,24 @@
 	<select id="selectCarsList" resultMap="cars_rm">
 		SELECT * FROM CAR_INFO
 		JOIN CATEGORY USING (CATEGORY_CD)
+		ORDER BY CAR_NO DESC
 	</select>
+	
+	<!-- 브랜드 리스트 조회 -->
+	<select id="selectBrandList" resultType="map">
+		SELECT * FROM CATEGORY
+	</select>
+	
+	<!-- 다음 차량번호 조회 -->
+	<select id="selectNextNo" resultType="_int">
+		SELECT SEQ_CINO.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 차량 정보 등록 -->
+	<insert id="insertCar" parameterType="Cars">
+		INSERT INTO CAR_INFO
+		VALUES(#{carNo}, #{carName}, #{carModel}, #{drivingSystem}, #{personnel}, #{consumpt}, #{minPrice}, #{maxPrice},
+						#{fuel}, #{mileage}, #{capacity}, #{maxPower}, #{maxTorque}, #{maxSpeed}, #{performance}, #{categoryCode})
+	</insert>
 	
 </mapper>

@@ -15,6 +15,18 @@
 
 <!-- Preloader CSS-->
 <style>
+.modal-content {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -550px;
+}
+
+.modal-input {
+	margin: 0;
+	padding 0;
+	width: 100%;
+}
 .rn-header {
 	position: inherit !important;
 	background-color: rgba(17, 46, 59, 0.7);
@@ -67,7 +79,7 @@ select {
   background-size: 16px 16px;
   color:white;
   padding:12px;
-  width:auto;
+  width: 250px !important;
   font-family:arial,tahoma;
   font-size:16px;
   font-weight:bold;
@@ -99,6 +111,14 @@ select:focus, select:active {
   border:0;
   outline:0;
 }
+
+.btn-area {
+	display: inline-block;
+	position: absolute;
+  right: 750px;
+}
+
+
 </style>
 
 
@@ -180,21 +200,54 @@ select:focus, select:active {
 			</div>
 
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-10">
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
-						<button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">차량 등록</button>
-						<button class="btn btn-danger" id="selectedDel">차량 삭제</button>
+						<div class="btn-area">
+							<button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">차량 등록</button>
+							<button class="btn btn-danger" id="selectedDel">선택 삭제</button>
+						</div>
 						<ul>
-							<li><a href="#"> <i class="fas fa-angle-left"></i>
-							</a></li>
-							<li><a class="rn-active" href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#"> <i class="fas fa-angle-right"></i>
-							</a></li>
+						
+							
+							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+							<c:set var="prevPage" value="?cp=${prev}" />
+
+
+							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 10 }" integerOnly="true" />
+							<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+							<c:set var="nextPage" value="?cp=${next}" />
+							
+							<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+								<li>
+									<!-- 이전 페이지로 이동 (<) --> 
+									<a  href="${prevPage}">	<i class="fas fa-angle-left"></i></a>
+								</li>
+							</c:if>
+							
+							<!-- 페이지 목록 -->
+							<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+								<c:choose>
+									<c:when test="${pInfo.currentPage == page }">
+										<li><a class="page-link rn-active">${page}</a></li>
+									</c:when>
+
+									<c:otherwise>
+										<li><a class="page-link" href="?cp=${page}">${page}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+									
+							<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+							<c:if test="${next <= pInfo.maxPage}">
+								<li>
+									<!-- 다음 페이지로 이동 (>) --> 
+									<a  href="${nextPage}"><i class="fas fa-angle-right"></i></a>
+								</li>
+							</c:if>
 						</ul>
 					</nav>
 					<!-- End Cars Pagination-->
@@ -207,72 +260,101 @@ select:focus, select:active {
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content" style="width: 1100px;">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">차량 등록</h5>
 					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form class="form-signin" method="POST" action="#">
-						<label for="carName">차량이름</label>
-						<input type="text" class="form-control" id="carName" name="carName" placeholder="차량이름">
-						<br>
-						<label for="carModel">모델명</label>
-						<input type="text" class="form-control" id="carModel" name="carModel" placeholder="모델명">
-						<br>
-						<label for="drivingSystem">구동방식</label>
-						<input type="text" class="form-control" id="drivingSystem" name="drivingSystem" placeholder="구동방식">
-						<br>
-						<label for="personnel">탑승인원</label>
-						<input type="text" class="form-control" id="personnel" name="personnel" placeholder="탑승인원">
-						<br>
-						<label for="carName">연비</label>
-						<input type="text" class="form-control" id="consumpt" name="consumpt" placeholder="연비">
-						<br>
-						<label for="carName">최소가격</label>
-						<input type="text" class="form-control" id="minPrice" name="minPrice" placeholder="최소가격">
-						<br>
-						<label for="carName">최대가격</label>
-						<input type="text" class="form-control" id="maxPrice" name="maxPrice" placeholder="최대가격">
-						<br>
-						<label for="carName">연료</label>
-						<input type="text" class="form-control" id="fuel" name="fuel" placeholder="연료">
-						<br>
-						<label for="carName">1회 충전 주행거리</label>
-						<input type="text" class="form-control" id="mileAge" name="mileAge" placeholder="1회 충전 주행거리">
-						<br>
-						<label for="carName">에너지용량</label>
-						<input type="text" class="form-control" id="capacity" name="capacity" placeholder="에너지용량">
-						<br>
-						<label for="carName">모터 최대출력</label>
-						<input type="text" class="form-control" id="maxPower" name="maxPower" placeholder="모터 최대출력">
-						<br>
-						<label for="carName">모터 최대토크</label>
-						<input type="text" class="form-control" id="maxTorque" name="maxTorque" placeholder="모터 최대토크">
-						<br>
-						<label for="carName">최고속도</label>
-						<input type="text" class="form-control" id="maxSpeed" name="maxSpeed" placeholder="최고속도">
-						<br>
-						<label for="carName">가속성능</label>
-						<input type="text" class="form-control" id="performance" name="performance" placeholder="가속성능">
-						<br>
-						<label for="categoryCode">브랜드</label> 
-						<select id="categoryCode">
-							<option selected="selected">테슬라</option>
-							<option>현대</option>
-							<option>기아</option>
-							<option>혼다</option>
-						</select> 
-						<br>
-						<label for="carName">이미지</label>
-						<input type="file" class="form-control" id="carImg" name="carImg">
-						<br>
+					<form id="insert" class="form-signin" method="POST" action="${contextPath}/admin/carDBManagement/insertCar" enctype="multipart/form-data">
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">차량이름</label>
+								<input type="text" class="form-control" id="carName" name="carName" placeholder="차량이름">
+							</div>
+								
+							<div style="display:inline-block; width:250px;">
+								<label for="carModel">모델명</label>
+								<input type="text" class="form-control" id="carModel" name="carModel" placeholder="모델명">
+							</div>
+								
+							<div style="display:inline-block; width:250px;">
+								<label for="drivingSystem">구동방식</label>
+								<input type="text" class="form-control" id="drivingSystem" name="drivingSystem" placeholder="구동방식">
+							</div>
 						
+							<div style="display:inline-block; width:250px;">
+								<label for="personnel">탑승인원</label>
+								<input type="text" class="form-control" id="personnel" name="personnel" placeholder="탑승인원">
+							</div>
+					
+						</div>
+						<br>
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">연비</label>
+								<input type="text" class="form-control" id="consumpt" name="consumpt" placeholder="연비">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">최소가격</label>
+								<input type="text" class="form-control" id="minPrice" name="minPrice" placeholder="최소가격">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">최대가격</label>
+								<input type="text" class="form-control" id="maxPrice" name="maxPrice" placeholder="최대가격">
+							</div>	
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">연료</label>
+								<input type="text" class="form-control" id="fuel" name="fuel" placeholder="연료">
+							</div>
+						</div>
+						<br>
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">1회 충전 주행거리</label>
+								<input type="text" class="form-control" id="mileAge" name="mileAge" placeholder="1회 충전 주행거리">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">에너지용량</label>
+								<input type="text" class="form-control" id="capacity" name="capacity" placeholder="에너지용량">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">모터 최대출력</label>
+								<input type="text" class="form-control" id="maxPower" name="maxPower" placeholder="모터 최대출력">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">모터 최대토크</label>
+								<input type="text" class="form-control" id="maxTorque" name="maxTorque" placeholder="모터 최대토크">
+							</div>
+						</div>
+						<br>
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">최고속도</label>
+								<input type="text" class="form-control" id="maxSpeed" name="maxSpeed" placeholder="최고속도">
+							</div>
+							<div style="display:inline-block; width:250px;">	
+								<label for="carName">가속성능</label>
+								<input type="text" class="form-control" id="performance" name="performance" placeholder="가속성능">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="categoryCode">브랜드</label> 
+								<select id="categoryCode" name="categoryCode">
+									<c:forEach var="brand" items="${brandList}" >
+										<option value="${brand.CATEGORY_CD}">${brand.CATEGORY_NM}</option>
+									</c:forEach>
+								</select> 
+							</div>
+							<div style="display:inline-block; width:250px;">					
+								<label for="carName">이미지</label>
+								<input type="file" class="form-control" id="carImg" name="carImg[]" multiple="multiple">
+							</div>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-success">차량 등록</button>
+					<button type="submit" form="insert" class="btn btn-success">차량 등록</button>
 				</div>
 			</div>
 		</div>
