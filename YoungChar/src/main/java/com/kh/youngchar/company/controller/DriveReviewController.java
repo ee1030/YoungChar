@@ -69,7 +69,7 @@ public class DriveReviewController {
             url = "redirect:../review/" + result;
 			
 			// 새로 작성한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
-			request.getSession().setAttribute("returnListURL", "../reviewlist/");
+			request.getSession().setAttribute("returnListURL", "../reviewlist");
 		}else {
 			swalIcon = "error";
 			swalTitle = "게시글 삽입 실패";
@@ -91,6 +91,64 @@ public class DriveReviewController {
 		
 		return new Gson().toJson(at);
 	}
+	
+	@RequestMapping("update/{boardNo}")
+	public String updateReview(@PathVariable("boardNo") int boardNo,
+							   Model model) {
+		
+		DriveReview board = service.selectBoard(boardNo);
+		board.setBoardNo(boardNo);
+		model.addAttribute("board", board);
+		
+		return "company/updateReview";
+	}
+	
+	@RequestMapping("update/updateAction")
+	public String updateAction(@ModelAttribute DriveReview board,
+								HttpServletRequest request,
+								RedirectAttributes ra) {
+
+		String savePath = request.getSession().getServletContext().getRealPath("resources/reviewImages");
+		
+		int result = service.updateBoard(board, savePath);
+		
+		String url = null;
+		if(result > 0) {
+		
+		url = "redirect:../review/" + board.getBoardNo();
+		
+		// 수정한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
+		request.getSession().setAttribute("returnListURL", "../reviewlist");
+		}else {
+		swalIcon = "error";
+		swalTitle = "게시글 수정 실패";
+		url = "redirect:../update/" + board.getBoardNo();
+		}
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		return url;
+	}
+	
+	@RequestMapping("delete/{boardNo}")
+	public String deleteBoard(@PathVariable("boardNo") int boardNo,
+							  RedirectAttributes ra) {
+		
+		int result = service.deleteBoard(boardNo);
+		String URL = null;
+		
+		if(result > 0) {
+			URL = "redirect:../reviewlist";
+		}else {
+			ra.addFlashAttribute("swalIcon", "error");
+			ra.addFlashAttribute("swalTitle", "게시글 삭제에 실패했습니다.");
+			
+			URL = "redirect:../review/" + boardNo;
+		}
+		
+		return URL;
+	}
+	
 	
 	@RequestMapping("review/{boardNo}")
 	public String reviewView(@PathVariable("boardNo") int boardNo,
@@ -175,5 +233,5 @@ public class DriveReviewController {
 		
 		return "redirect:review/" + report.getReportBoardNo();
 	}
-
+	
 }

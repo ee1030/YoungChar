@@ -69,6 +69,11 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
+				
+				
+				
+				
+				
 					<div class="card">
 						<div class="card-body">
 							<div class="invoice">
@@ -93,9 +98,9 @@
 										</div>
 										<div class="media-body m-l-20">
 										  <h5 class="media-heading">${board.memNickname} </h5>
-										  <p>조회 ${board.readCount}  댓글 ${board.replyCount}  작성일 
-													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yyyy-MM-dd HH:mm"/>
-													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd HH:mm"/> 
+										  <p><i class="icon-eye"></i> ${board.readCount} &nbsp;&nbsp;&nbsp; <i class="fa fa-comment-o"></i> ${board.replyCount} &nbsp;&nbsp;&nbsp;  
+													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yy-MM-dd HH:mm"/>
+													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yy-MM-dd HH:mm"/> 
 													<c:choose>
 														<c:when test="${createDate != now}">
 															${createDate }
@@ -110,7 +115,9 @@
 									</div>
 									<div class="col-md-2">
 									  <div class="text-md-end" id="project">
-										<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger btn-lg">신고</button>
+										  <c:if test="${(loginMember != null) && (board.memId != loginMember.memberId)}">
+												<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger">신고</button>
+											</c:if>
 									  </div>
 									</div>
 								  </div>
@@ -156,7 +163,12 @@
 												<c:set var="returnListURL" value="../reviewlist" scope="session"/>
 											</c:if>
 											<a class="btn btn-light" href="${sessionScope.returnListURL}">목록으로</a>
-
+											
+											<c:url var="updateUrl" value="../update/${board.boardNo}" />
+											<c:if test="${(loginMember != null) && (board.memId == loginMember.memberId)}">
+												<a href="${updateUrl}" class="btn btn-light">수정</a>
+												<button id="deleteButton" type="button" class="btn btn-light">삭제</button>
+											</c:if>
 										</div>
 									</div>
 								</div>
@@ -207,7 +219,7 @@
 						<br><br>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
 					<button type="submit" class="btn btn-secondary">신고</button>
 				</div>
 					</form>
@@ -220,15 +232,23 @@
 
 	<script>
 	function validate() {
-		
-		
 		if ($('input[name="reportType"]:checked').val() == "4" && $("#reportContent").val().trim().length == 0) {
 			alert("신고 내용을 입력해 주세요.");
 			$("#reportContent").focus();
 			return false;
 		}
-
 	}
+	
+	$("#deleteButton").click(function(){
+		
+		if(confirm("정말 삭제하시겠습니까?")){
+			
+			location.href = "../delete/"+ ${board.boardNo};
+			
+		}
+		
+	});
+	
 	</script>
 
 

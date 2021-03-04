@@ -8,7 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Insert Review</title>
+	<title>Update Review</title>
 	<style>
 			.card{
 				font-family: 'Noto Sans KR', sans-serif;
@@ -60,7 +60,7 @@
 
 
 	<!-- Page Content-->
-	<form action="insertAction" method="post" role="form" onsubmit="return validate();">
+	<form action="updateAction" method="post" role="form" onsubmit="return validate();">
 	<section class="rn-section">
 		<div class="container">
 			<a href="${header.referer}"><i class="fas fa-arrow-left" ></i></a><br><br>
@@ -91,12 +91,11 @@
 										</select>
 									</div>
 								  </div>
-								</div>
-								<hr>
+								</div><br>
 								<!-- End InvoiceTop-->
 								<div class="row">
 								  <div class="col-md-12">
-									<input type="text" class="form-control" id="title" name="boardTitle" size="70" placeholder="제목을 입력해주세요.">
+									<input type="text" class="form-control" id="title" name="boardTitle" size="70" value="${board.boardTitle}">
 								  </div>
 								</div>
 								<!-- End Invoice Mid-->
@@ -105,12 +104,12 @@
 								  </div>
 								  <!-- End Table-->
 								  <textarea class="form-control" id="summernote" name="boardContent"
-								  rows="10" style="resize: none;"></textarea>
+								  rows="10" style="resize: none;">${board.boardContent}</textarea>
 
 								</div>
 								<!-- End InvoiceBot-->
-							  </div>
-							  <div class="col-sm-12 text-center mt-3"><br>
+							  </div><br>
+							  <div class="col-sm-12 text-center mt-3">
 								<button class="btn btn-success btn-lg" type="submit">시승 후기 남기기</button>
 							  </div>
 							  <!-- End Invoice-->
@@ -124,9 +123,7 @@
 		</div>
 		<!-- End Page Content-->
 	</section>
-	<input type="hidden" name="memNo" value="${board.memNo}"readonly>
-	<input type="hidden" name="rsrvtNo" value="${board.rsrvtNo}"readonly>
-	<input type="hidden" name="categoryCd" value="${board.categoryCd}"readonly>
+	<input type="hidden" name="boardNo" value="${board.boardNo}"readonly>
 	</form>
 
 
@@ -151,6 +148,13 @@
 				return false;
 			}
 		}
+		
+		$.each($("#select1 > option"), function(index, item){
+			
+			if($(item).val() == ${board.csat}){
+				$(item).prop("selected", "true");
+			}
+		});
 		
 		$(document).ready(function() {
 		    $('#summernote').summernote({

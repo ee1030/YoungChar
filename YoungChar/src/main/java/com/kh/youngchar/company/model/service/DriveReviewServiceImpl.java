@@ -48,11 +48,17 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 	public List<DriveReview> selectList(PageInfo pInfo) {
 		return dao.selectList(pInfo);
 	}
+	
+	@Override
+	public DriveReview selectBoard(int boardNo) {
+		DriveReview board = dao.selectBoard(boardNo);
+		return board;
+	}
 
 	@Override
 	public DriveReview driveReview(int boardNo) {
 		
-		DriveReview board = dao.selectBoard(boardNo);
+		DriveReview board = selectBoard(boardNo);
 		
 		if(board != null) {
 
@@ -65,6 +71,7 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		
 		return board;
 	}
+	
 
 	@Override
 	public List<Reply> selectReplyList(int boardNo) {
@@ -161,6 +168,192 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		return at;
 	}
 	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateBoard(DriveReview board, String savePath) {
+		
+		int result = 0;
+		
+		result = dao.updateBoard(board);
+			
+		if(result > 0) {
+			
+			// 파일수정 ========================================================================================
+			
+			List<Attachment> oldFiles = dao.selectAttachmentList(board.getBoardNo());
+			
+			Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>"); //img 태그 src 추출 정규표현식
+	
+			// src 속성을 이용해서 파일명 얻어오기
+			Matcher matcher = pattern.matcher(board.getBoardContent());
+			
+			// 이미지 파일명만 얻어와 모아둘 List 선언
+			List<String> fileNameList = new ArrayList<String>();
+			
+			String src = null; // matcher에 저장된 src를 꺼내서 임시 저장할 변수
+			String fileName = null; // src에서 파일명을 추출해서 임시 저장할 변수
+			String filePath = "/resources/reviewImages";
+			
+			// matcher를 하나씩 꺼내옴
+			while(matcher.find()) {
+				src = matcher.group(1); // /youngchar/board/resources/reviewImages/abc.jpg
+				fileName = src.substring(src.lastIndexOf("/") + 1); // 마지막 / 까지 잘라낸다.
+				fileNameList.add(fileName);
+			}
+			
+			
+			// DB에 새로 추가할 이미지파일 정보를 모아둘 List 생성
+			List<Attachment> newAttachmentList = new ArrayList<Attachment>();
+			
+			// DB에서 삭제할 이미지 파일 번호를 모아둘 List 생성
+			List<Integer> deleteFileNoList = new ArrayList<Integer>(); 
+			
+			// 수정된 게시글 파일명 목록(fileNameList)과 수정 전 파일정보 목록(oldFiles)를 비교해서 
+			// 수정된 게시글 파일명 하나를 기준으로 하여 수정 전 파일명과 순차적 비교 진행
+			// --> 수정된 게시글 파일명과 일치하는 수정 전 파일명이 없다면
+			//		== 새로 삽입된 이미지임을 의미함.
+			
+			for(String fName : fileNameList) {
+				
+				boolean flag = true;
+				
+				for(Attachment oldAt : oldFiles) {
+	
+					if(fName.equals(oldAt.getFileName())) { // 수정 후/수정 전 같은 파일이 있다.
+						flag = false;
+						break;
+					}
+				}
+				
+				// flag == true == 새로 추가된 이미지 
+				if(flag) {
+					Attachment at = new Attachment(filePath, fName, 1, board.getBoardNo());
+					newAttachmentList.add(at);
+				}
+			}
+			
+			// 수정 전 파일정보 목록(oldFiles) 수정된 게시글 파일명 목록(fileNameList)를 비교해서 
+			// 수정 전 파일명 하나를 기준으로 하여 수정 후 파일명과 순차적 비교 진행
+			// --> 수정 전 게시글 파일명과 일치하는 수정 후 파일명이 없다면
+			//		== 기존 이미지가 삭제됨 의미함.
+			for(Attachment oldAt : oldFiles) {
+				
+				boolean flag = true;
+				
+				for(String fName : fileNameList) {
+					if(oldAt.getFileName().equals(fName)) {
+						flag = false;
+						break;
+					}
+				}
+				
+				if(flag) {
+					deleteFileNoList.add(oldAt.getFileNo());
+				}
+			}
+			
+			Attachment temp = null;
+			
+			// 뉴파일리스트가 비어있지 않으면 올드파일리스트의 0번 파일레벨을 불러와서
+			// src의 0번째 파일네임과 다르면
+			// 올드파일리스트의 파일레벨을 1번으로 바꿔주고
+			// src의 0번째 파일네임의 레벨을 0으로 바꿔준다.
+			
+			if(!newAttachmentList.isEmpty()) {
+				
+				if(!oldFiles.isEmpty()) {
+					for(Attachment oldAt : oldFiles) {
+						if(oldAt.getFileLevel() == 0) {
+							temp = oldAt;
+							break;
+						}
+					}
+				}
+				
+				
+				if(temp != null && !temp.getFileName().equals(fileNameList.get(0))) {
+					temp.setFileLevel(1);
+					
+					for(Attachment newFile : newAttachmentList) {
+						if(fileNameList.get(0).equals(newFile.getFileName())){
+							newFile.setFileLevel(0);
+						}
+					}
+					result = dao.updateAttachment(temp);
+				}else if(oldFiles.isEmpty()) {
+					newAttachmentList.get(0).setFileLevel(0);
+				}else {
+					temp = null;
+					newAttachmentList.get(0).setFileLevel(1);
+				}
+				
+				
+				if(result > 0) {
+					result = dao.insertAttachmentList(newAttachmentList);
+				}
+			
+				if(result != newAttachmentList.size()) {
+					throw new InsertAttachmentFailException("파일 정보 삽입 중 오류 발생");
+				}
+			}
+			
+			// 딜리트 파일리스트 중에 파일레벨 0번이 있고 파일네임리스트가 비어있지 않다면
+			// 파일네임리스트의 첫번째 파일네임을 가져와 파일레벨 0번으로 업데이트 해준다.
+			
+			if(!deleteFileNoList.isEmpty()) {
+				
+				for(int deleteFileNo : deleteFileNoList) {
+					
+					for(Attachment oldAt : oldFiles) {
+						if(deleteFileNo == oldAt.getFileNo() && oldAt.getFileLevel() == 0) {
+							
+							if(!fileNameList.isEmpty()) {
+								
+								result = dao.updateAttachment2(fileNameList.get(0));
+							}
+							break;
+						}
+					}
+				}
+				
+				if(result > 0 ) {
+					result = dao.deleteAttachmentList(deleteFileNoList);
+				}
+				
+				if(result != deleteFileNoList.size()) {
+					throw new InsertAttachmentFailException("파일 정보 삭제 중 오류 발생");
+				}
+			}
+		
+		}
+		
+		return result;
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteBoard(int boardNo) {
+		
+		int result = dao.deleteBoard(boardNo);
+		List<Integer> deleteFileNoList = new ArrayList<Integer>();
+		
+		if(result > 0) {
+			List<Attachment> oldFiles = dao.selectAttachmentList(boardNo);
+			
+			if (!oldFiles.isEmpty()) {
+				
+				for(Attachment file : oldFiles) {
+					deleteFileNoList.add(file.getFileNo());
+				}
+				
+				result = dao.deleteAttachmentList(deleteFileNoList);
+			}
+		}
+		
+		return result;
+	}
+	
+	
 	// 파일명 변경 메소드
 	public String rename(String originFileName) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
@@ -193,6 +386,11 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		
 		return result;
 	}
+
+
+
+
+
 
 
 }
