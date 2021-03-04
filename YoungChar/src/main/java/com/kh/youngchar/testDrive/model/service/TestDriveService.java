@@ -40,6 +40,15 @@ public class TestDriveService {
 		return dao.selectCompanyList(carNo);
 	}
 
+	/** 예약 확인하기
+	 * @param memNo
+	 * @return
+	 */
+	public List<TestDrReservation> selectReservation(int memNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

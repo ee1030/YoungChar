@@ -1,5 +1,7 @@
 package com.kh.youngchar.testDrive.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,27 +43,37 @@ public class TestDriveController {
 		//모델가져오기
 		List<TestCars> cList = service.selectCarList();
 		
-			Gson gson = new Gson();
-			String cListJSON = gson.toJson(cList);
-			
-			System.out.println(cList);
-			
-			model.addAttribute("cList",cList);
-			model.addAttribute("cListJSON", cListJSON);
+		//브랜드 리스트 중복제거
+		List<String> brandList = new ArrayList<String>();
+		for(TestCars c : cList) {brandList.add(c.getBrand());}
+		HashSet<String> bList =new HashSet<String>(brandList);
+
+		Gson gson = new Gson();
+	
+		String cListJSON = gson.toJson(cList);
+		
+		System.out.println(cList);
 		
 		//대리점들 주소 불러오기
-		List<CompanyMember> list = service.companyList();
-		System.out.println(list);
+		//List<CompanyMember> list = service.companyList();
+		//System.out.println(list);
 		
-		String company = gson.toJson(list);
-		model.addAttribute("company", company);
+		//String companyJson = gson.toJson(list);
+		
+		model.addAttribute("bList",bList); //브랜드리스트
+		model.addAttribute("cList",cList); //자동차리스트
+		model.addAttribute("cListJSON", cListJSON); //자동차 리스트 JSON
+		
+		//model.addAttribute("company", companyJson); //대리점 리스트 JSON
+		
+		
 		return "testDrive/testDriveReservation";
 	}
 	
-	//대리점 불러오기
-	@RequestMapping("getAddr")
+	//선택한 자동차 대리점 불러오기
+	@RequestMapping(value="getAddr", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public List<CompanyMember> getAddr (@RequestParam int carNo,
+	public String getAddr (@RequestParam int carNo,
 									Model model){
 		
 		System.out.println(carNo);
@@ -75,12 +87,19 @@ public class TestDriveController {
 		
 		model.addAttribute("companyList", companyListJSON);
 		
-		return companyList;
+		return companyListJSON;
 	}
 	
 	//예약 확인 페이지 전환 Controller
 	@RequestMapping("myReservation")
-	public String myReservationView() {
+	public String myReservationView(@ModelAttribute("loginMember") Member loginMember, Model model) {
+		
+		int memNo = loginMember.getMemberNo();
+		
+		List<TestDrReservation> rList = service.selectReservation(memNo);
+		
+		model.addAttribute("rList", rList );
+		
 		return "testDrive/confirmReservation";
 	}
 	
