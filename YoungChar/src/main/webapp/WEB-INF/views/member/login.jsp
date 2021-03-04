@@ -32,7 +32,12 @@
     <link id="color" rel="stylesheet" href="${contextPath}/resources/assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
-    
+    <style>
+    	#kakao{
+    		width: 100%;
+    		height: 50px;
+    	}
+    </style>
 </head>
 <body>
 
@@ -78,7 +83,12 @@
                   </div>
                   <h6 class="text-muted mt-4 or">Or Sign in with</h6>
                   <div class="social mt-4">
-                  <img src="${contextPath}/resources/uploadImages/large.png" onclick="klogin()">
+                  <img id="kakao" src="${contextPath}/resources/uploadImages/large.png" onclick="klogin()">
+                  <!-- 네이버 로그인 창으로 이동 -->
+									<div id="naver_id_login" style="text-align:center"><a href="${url}">
+										<img width="100%" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+									</div>
+
                   </div>
                   <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="${contextPath}/member/signUp">회원가입 하기</a></p>
                 </form>
