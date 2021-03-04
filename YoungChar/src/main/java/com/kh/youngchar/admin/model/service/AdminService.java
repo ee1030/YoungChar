@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -159,5 +160,29 @@ public interface AdminService {
 	 * @return bList
 	 */
 	public abstract List<Board> selectAllBoardList(PageInfo pInfo);
+
+	/** 모든 게시글 페이지 삭제 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int allBoardDelete(List<String> chkList);
+
+	/** 모든 게시글 페이지 복구 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int allBoardRestore(List<String> chkList);
+
+	/** 차량 DB 목록 페이징 정보 조회 Service
+	 * @param cp
+	 * @return pInfo
+	 */
+	public abstract PageInfo getCarsPageInfo(int cp);
+
+	/** 차량 DB 목록 조회 Service
+	 * @param pInfo
+	 * @return carList
+	 */
+	public abstract List<Cars> selectCarsList(PageInfo pInfo);
 
 }

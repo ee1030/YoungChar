@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -239,5 +240,39 @@ public class AdminDAO {
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
 		return sqlSession.selectList("adminMapper.selectAllBoardList", null, rowBounds);
+	}
+
+	/** 모든 게시글 페이지 삭제 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int allBoardDelete(List<String> chkList) {
+		return sqlSession.update("adminMapper.allBoardDelete", chkList);
+	}
+
+	/** 모든 게시글 페이지 복구 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int allBoardRestore(List<String> chkList) {
+		return sqlSession.update("adminMapper.allBoardRestore", chkList);
+	}
+
+	/** 차량 DB 목록 개수 조회 DAO
+	 * @return listCount
+	 */
+	public int getCarsListCount() {
+		return sqlSession.selectOne("adminMapper.getCarsListCount");
+	}
+
+	/** 차량 DB 목록 조회 DAO
+	 * @param pInfo
+	 * @return carList
+	 */
+	public List<Cars> selectCarsList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectCarsList", null, rowBounds);
 	}
 }

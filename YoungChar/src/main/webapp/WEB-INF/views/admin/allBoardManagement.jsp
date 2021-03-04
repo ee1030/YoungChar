@@ -175,8 +175,8 @@
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
 						<div class="btn-area">
-							<button class="btn btn-success" id="approval">선택 승인</button>
-							<button class="btn btn-danger" id="cancellation">선택 승인취소</button>
+							<button class="btn btn-danger" id="delete">선택 삭제</button>
+							<button class="btn btn-success" id="restore">선택 복구</button>
 						</div>
 						<ul>
 						
@@ -247,6 +247,64 @@
 			$('#checkAll').click(function() {
 				$('.chk').prop('checked', this.checked);
 			});
+		});
+		
+		$("#delete").on("click", function(){
+			var chkList = new Array();
+			
+			$("input[name='chkid']:checked").each(function(){
+				chkList.push($(this).val());
+			});
+			
+			if(confirm("선택한 게시글을 삭제 하시겠습니까?")) {
+				$.ajax({
+					url : "${contextPath}/admin/allBoardManagement/delete",
+					type : "POST",
+					dataType : "json",
+					data : { "chkList" : chkList },	
+					success : function(result) {
+						if(result > 0) {
+							swal({icon : "success", title : "삭제 완료"}).then(function() {
+								location.reload();
+							});
+						}
+						
+					},
+					error : function() {
+						console.log("삭제 실패");
+					}
+					
+				});
+			}
+		});
+		
+		$("#restore").on("click", function(){
+			var chkList = new Array();
+			
+			$("input[name='chkid']:checked").each(function(){
+				chkList.push($(this).val());
+			});
+			
+			if(confirm("선택한 게시글을 복구하시겠습니까?")) {
+				$.ajax({
+					url : "${contextPath}/admin/allBoardManagement/restore",
+					type : "POST",
+					dataType : "json",
+					data : { "chkList" : chkList },	
+					success : function(result) {
+						if(result > 0) {
+							swal({icon : "success", title : "복구 완료"}).then(function() {
+								location.reload();
+							});
+						}
+						
+					},
+					error : function() {
+						console.log("복구 실패");
+					}
+					
+				});
+			}
 		});
 	</script>
 
