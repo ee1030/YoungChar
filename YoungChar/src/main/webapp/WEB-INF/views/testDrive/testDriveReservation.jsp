@@ -27,6 +27,15 @@
 				
 			}
 			
+			#tableheight{
+				max-height: 600px;
+				overflow-y:auto;
+
+			}
+
+			#searchNo{
+				text-align: center;
+			}
 
 		</style>
 		<!-- Preloader CSS-->
@@ -231,23 +240,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-10">
-						<div class="col-lg-4 col-md-3">
-							<select name="addr1" id="addr1" display="inline">
-								<option value="seoul">서울</option>
-								<option value="inchon">인천</option>
-								<option value="busan">부산</option>
-							</select>
-							<select name="addr2" id="addr2">
-								<option value="seoul">노원구</option>
-							</select>
-						</div>
-						
-						<div class="col-lg-12 col-md-2"> 
-							<h3>검색 결과 2건</h3>
-						</div>
-						<div class="col-lg-12 col-md-6">
-							<div> 오마와리상 센터</div>
-							<div> 노노카짱 센터</div>
+						<div class="row justify-content-md-center">
+							<div id="tableheight" class="col-lg-10" >
+								<h2 id="searchNo"></h2> <br>
+								
+									<table class="table table-hover">
+										<tbody id="centerTable"></tbody>
+									</table>
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-10">
@@ -501,6 +501,7 @@
 					dataType: 'json',
 					success(companyList){
 						map(companyList);
+						
 					},
 					error(){
 						console.log("업체 불러오기 실패");
@@ -515,7 +516,6 @@
 			
 			
 			// 대리점 불러오기!
-			
 			
 
 			
