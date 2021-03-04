@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.youngchar.admin.model.service.AdminService;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -203,6 +204,24 @@ public class AdminController {
 		return "admin/allBoardManagement";
 	}
 	
+	// 선택된 게시글 삭제
+	@ResponseBody
+	@RequestMapping("allBoardManagement/delete")
+	public int allBoardDelete(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.allBoardDelete(chkList);
+		
+		return result;
+	}
+	
+	// 선택된 게시글 복구
+	@ResponseBody
+	@RequestMapping("allBoardManagement/restore")
+	public int allBoardRestore(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.allBoardRestore(chkList);
+		
+		return result;
+	}
+	
 	// 리뷰 게시글 조회 페이지
 	@RequestMapping("reviewBoardManagement")
 	public String reviewBoardManagement() {
@@ -241,7 +260,19 @@ public class AdminController {
 	
 	// 차량 DB 관리 페이지
 	@RequestMapping("carDBManagement")
-	public String carDBManagement() {
+	public String carDBManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, 
+									Model model) {
+		
+		PageInfo pInfo = service.getCarsPageInfo(cp);
+		List<Cars> carList = service.selectCarsList(pInfo);
+		
+		System.out.println("pInfo : " + pInfo);
+		System.out.println("carList : " + carList);
+		System.out.println("size : " + carList.size());
+		
+		model.addAttribute("carList", carList);
+		model.addAttribute("pInfo", pInfo);
+		
 		return "admin/carDBManagement";
 	}
 

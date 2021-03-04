@@ -138,112 +138,36 @@ select:focus, select:active {
 											<th scope="col"><input type="checkbox" id="checkAll" /></th>
 											<th scope="col">차량 번호</th>
 											<th scope="col">차량 이름</th>
+											<th scope="col">차량 모델</th>
 											<th scope="col">제조사</th>
 											<th scope="col">수정 / 삭제</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-										<tr>
-											<th><input type="checkbox" name="chkid" class="chk" /></th>
-											<th scope="row">123</th>
-											<td>오나타</td>
-											<td>횬다이</td>
-											<td>
-												<button class="btn btn-success btn-sm">수정</button>
-												<button class="btn btn-danger btn-sm">삭제</button>
-											</td>
-										</tr>
-
+									<c:choose>
+										<c:when test="${empty carList}">
+											<tr>
+												<td colspan="7">존재하는 차량이 없습니다.</td>
+											</tr>
+										</c:when>
+											
+										<c:otherwise>
+											<c:forEach var="car" items="${carList}">
+											<tbody>
+												<tr>
+													<th><input type="checkbox" name="chkid" class="chk" /></th>
+													<th scope="row">${car.carNo}</th>
+													<td>${car.carName }</td>
+													<td>${car.carModel }</td>
+													<td>${car.categoryName }</td>
+													<td>
+														<button class="btn btn-success btn-sm" id="modify">수정</button>
+														<button class="btn btn-danger btn-sm" id="delete">삭제</button>
+													</td>
+												</tr>								
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+										
 
 									</tbody>
 								</table>
@@ -260,7 +184,7 @@ select:focus, select:active {
 					<!-- Cars Pagination-->
 					<nav class="rn-pagination rn-pagination-center">
 						<button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">차량 등록</button>
-						<button class="btn btn-danger">차량 삭제</button>
+						<button class="btn btn-danger" id="selectedDel">차량 삭제</button>
 						<ul>
 							<li><a href="#"> <i class="fas fa-angle-left"></i>
 							</a></li>

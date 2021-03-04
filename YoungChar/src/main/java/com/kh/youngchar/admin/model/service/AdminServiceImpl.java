@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.youngchar.admin.model.dao.AdminDAO;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
@@ -179,5 +180,31 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Board> selectAllBoardList(PageInfo pInfo) {
 		return dao.selectAllBoardList(pInfo);
+	}
+	
+	// 모든 게시글 페이지 삭제 Service 구현
+	@Override
+	public int allBoardDelete(List<String> chkList) {
+		return dao.allBoardDelete(chkList);
+	}
+
+	// 모든 게시글 페이지 복구 Service 구현
+	@Override
+	public int allBoardRestore(List<String> chkList) {
+		return dao.allBoardRestore(chkList);
+	}
+
+	// 차량 DB 목록 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getCarsPageInfo(int cp) {
+		int listCount = dao.getCarsListCount();
+		
+		return new PageInfo(cp, listCount);
+	}
+
+	// 차량 DB 목록 조회 Service 구현
+	@Override
+	public List<Cars> selectCarsList(PageInfo pInfo) {
+		return dao.selectCarsList(pInfo);
 	}
 }

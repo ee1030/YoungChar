@@ -36,6 +36,29 @@
 	
 	</resultMap>
 	
+	<resultMap type="Cars" id="cars_rm">
+
+		<id property="carNo" column="CAR_NO"/>
+		
+		<result property="carName" column="CAR_NAME"/>
+		<result property="carModel" column="CAR_MODEL"/>
+		<result property="drivingSystem" column="DRIVING_SYSTEM"/>
+		<result property="personnel" column="PERSONNEL"/>
+		<result property="consumpt" column="CONSUMPT"/>
+		<result property="minPrice" column="MIN_PRICE"/>
+		<result property="maxPrice" column="MAX_PRICE"/>
+		<result property="fuel" column="FUEL"/>
+		<result property="mileage" column="MILEAGE"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="maxPower" column="MAX_POWER"/>
+		<result property="maxTorque" column="MAX_TORQUE"/>
+		<result property="maxSpeed" column="MAX_SPEED"/>
+		<result property="performance" column="PERFORMANCE"/>
+		<result property="categoryCode" column="CATEGORY_CD"/>
+		<result property="categoryName" column="CATEGORY_NM"/>
+
+</resultMap>
+	
 	<!-- 신규 회원 수 조회 -->
 	<select id="getNewMember" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
@@ -236,6 +259,37 @@
 	<select id="selectAllBoardList" resultMap="board_rm">
 		SELECT * FROM V_BOARD
 		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 선택 게시글 삭제 기능 -->
+	<update id="allBoardDelete" parameterType="list">
+		UPDATE BOARD SET
+		BOARD_STATUS = 'N'
+		WHERE BOARD_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 선택 게시글 복구 기능 -->
+	<update id="allBoardRestore" parameterType="list">
+		UPDATE BOARD SET
+		BOARD_STATUS = 'Y'
+		WHERE BOARD_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 차량 DB 목록 개수 조회 -->
+	<select id="getCarsListCount" resultType="_int">
+		SELECT COUNT(*) FROM CAR_INFO
+	</select>
+	
+	<!-- 차량 DB 목록 조회 -->
+	<select id="selectCarsList" resultMap="cars_rm">
+		SELECT * FROM CAR_INFO
+		JOIN CATEGORY USING (CATEGORY_CD)
 	</select>
 	
 </mapper>
