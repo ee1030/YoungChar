@@ -59,6 +59,12 @@ public interface MemberService {
 	int deleteProfile(int memImgNo);
 
 
+	//---------------------------------------------------
+	//				카카오 로그인 Service
+	//---------------------------------------------------
+	Member loginMember(Member loginMember);
+
+
 
 
 

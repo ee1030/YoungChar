@@ -70,7 +70,6 @@
 	<select id="loginAction" parameterType="Member" resultMap="member_rm">
 		SELECT * FROM MEMBER
 		WHERE MEM_ID = #{memberId}
-		<!-- AND MEMBER_PWD = #{memberPwd} -->
 		AND SIGN_STATUS = 'N'
 	</select>
 	
@@ -129,7 +128,10 @@
 		WHERE MEM_IMG_NO = #{memImgNo}
 	</delete>
 	
-	
+	<insert id="loginMember" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberNm}, null, null, null, null, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
 	
 	
 	<!-- 회원 탈퇴 -->

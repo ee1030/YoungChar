@@ -78,7 +78,7 @@
                   </div>
                   <h6 class="text-muted mt-4 or">Or Sign in with</h6>
                   <div class="social mt-4">
-                    <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
+                  <img src="${contextPath}/resources/uploadImages/large.png" onclick="klogin()">
                   </div>
                   <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="${contextPath}/member/signUp">회원가입 하기</a></p>
                 </form>
@@ -95,6 +95,56 @@
       <script src="${contextPath}/resources/assets/js/icons/feather-icon/feather-icon.js"></script>
       <script src="${contextPath}/resources/assets/js/config.js"></script>
       <script src="${contextPath}/resources/assets/js/script.js"></script>
+      
+      <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  		
+  		
+  		<script>
+	  		
+	  	   /* 카카오 로그인 */
+	  	    window.Kakao.init('943fedae8b7b18638ffecff5fde84e3e');
+	  	    function klogin() {
+	  	        window.Kakao.Auth.login({
+	  	            scope:'profile, account_email',
+	  	            success: function(authObj) {
+	  	                //console.log(authObj);
+	  	                window.Kakao.API.request({
+	  	                    url: '/v2/user/me',
+	  	                        success: res => {
+	  	                        const kakao_account = res.kakao_account
+	  	                        //console.log(kakao_account);
+	  	                        //console.log(kakao_account.profile.nickname);
+	  	                        //console.log(kakao_account.email);
+	  	                          
+	  	                        $.ajax({
+	  	                           url: "kakaoLogin",
+	  	                           data: {
+	  	                              "memberId": kakao_account.email,
+	  	                              "memberNm": kakao_account.profile.nickname,
+	  	                              "memberPwd": Kakao.Auth.getAccessToken()
+	  	                           },
+	  	                           type: "post",
+	  	                           		success: function(loginMember){
+	  	                           		if(loginMember != null){
+	  	                              swal({icon:"success", title:"로그인 성공!"}).then(function(){
+	  	                                   window.location.href = "../";                                 
+	  	                              });                       
+	  	                              //console.log(Kakao.Auth.getAccessToken());
+	  	                              //console.log(loginMember);
+	  	                           }},
+	  	                           error: function(){
+	  	                              console.log("ajax 통신 실패");
+	  	                           }
+	  	                        });  
+	  	                    }
+	  	                });
+	  	            },
+	  	            fail: function() {
+	  	                alert('err');
+	  	            }
+	  	        });   
+	  	    }
+  		</script>
     </div>
 </body>
 </html>

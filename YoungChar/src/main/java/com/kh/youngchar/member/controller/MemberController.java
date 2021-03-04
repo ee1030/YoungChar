@@ -51,6 +51,7 @@ public class MemberController {
 		return "member/login";
 	}
 
+
 	// 회원가입 화면전환 Controller
 	@RequestMapping("signUp")
 	public String signUpForm() {
@@ -87,6 +88,16 @@ public class MemberController {
 
 		return "member/cooSignUp";
 	}
+	
+	
+	@RequestMapping("session")
+	public String session() {
+		
+		return "member/session";
+	}
+	
+	
+	
 
 	// ---------------------------------------------------
 	// 아이디 중복검사 Controller (AJAX)
@@ -336,6 +347,25 @@ public class MemberController {
 		return result;
 		
 	}
+	
+	
+	// ---------------------------------------------------
+	// 카카오 로그인 Controller
+	// ---------------------------------------------------
+	@RequestMapping("kakaoLogin")
+	@ResponseBody
+	public Member loginMember(@ModelAttribute Member loginMember,
+							  @RequestParam("memberId") String memberId,
+							  @RequestParam("memberPwd") String memberPwd,
+							  @RequestParam("memberNm") String memberNm, Model model) {
+		
+		loginMember = service.loginMember(loginMember);
+		
+		model.addAttribute("loginMember", loginMember);
+		
+		return loginMember;
+	}
+	
 	
 	
 	
