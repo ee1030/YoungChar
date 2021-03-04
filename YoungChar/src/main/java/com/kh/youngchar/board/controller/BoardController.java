@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
+import com.kh.youngchar.board.model.vo.Search;
 import com.kh.youngchar.board.model.service.BoardService;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
@@ -79,7 +80,7 @@ public class BoardController {
 		
 		String url = "";
 				
-		if (pInfo.getBoardType() == 1) {
+		if (pInfo.getBoardType() == 1 || pInfo.getBoardType() == 2) {
 			url = "board/reviewBoardList";
 		} else {
 			url = "board/boardList";
@@ -88,6 +89,7 @@ public class BoardController {
 		return url;
 	}
 	
+//	카테고리 별 조회 기능
 	@RequestMapping("list/{type}/{categoryCode}")
 	public String categoryBoardList(@PathVariable("type") int type , @PathVariable("categoryCode") int categoryCode,
 												@RequestParam(value="cp", required=false, defaultValue="1") int cp,
@@ -98,9 +100,23 @@ public class BoardController {
 		
 		List<Board> bList = new ArrayList<Board>();
 		
+		String categoryName = null;
+		
+		switch(categoryCode) {
+			case 1 : categoryName = "테슬라"; break;
+			case 2 : categoryName = "현대자동차"; break;
+			case 3 : categoryName = "기아"; break;
+			case 4 : categoryName = "벤츠"; break;
+			case 5 : categoryName = "BMW"; break;
+			case 6 : categoryName = "아우디"; break;
+			case 7 : categoryName = "포르쉐"; break;
+			case 8 : categoryName = "르노"; break;
+		}
+												
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("type" , type);
-		map.put("categoryCode" , categoryCode);
+		map.put("type" , pInfo.getBoardType());
+		map.put("categoryName" , categoryName);
 		
 		bList = service.categoryBoardList(pInfo , map);
 		
@@ -119,10 +135,10 @@ public class BoardController {
 		
 		String url = "";
 				
-		if (type == 1) {
-			url = "board/reviewBoardList";
-		} else {
+		if (type == 3) {
 			url = "board/boardList";
+		} else {
+			url = "board/reviewBoardList";
 		}
 		
 		return url;
@@ -352,6 +368,43 @@ public class BoardController {
         return new Gson().toJson(at);
     }
 	
+//	게시글 검색 Controller 
+	@RequestMapping("search/{type}")
+	public String searchBoard(@PathVariable int type, 
+					@RequestParam(value = "cp" , required= false, defaultValue = "1") int cp,
+					@ModelAttribute Search search/* ct,sv,sk 커맨드 객체 형태로 반환 */, Model model) {
+		
+//		@PathVariable로 얻어온 게시판 타입을 search 커맨드 객체에 저장 
+		search.setBoardType(type);
+		
+//		1) 검색 조건이 포함된 페이징 처리용 객체 얻어오기
+		
+		PageInfo2 pInfo = service.getSearchPageInfo(search,cp);
+		
+//		2) 검색 조건이 포함된 게시글 목록 조회
+		List<Board> bList = service.selectSearchList(search, pInfo);
+		
+		System.out.println(bList);
+		System.out.println(pInfo);
+		
+		
+//		3) 썸네일 목록 조회
+		if(!bList.isEmpty()) { // 검색된 목록이 있다면
+			
+			List<Attachment> thList = service.selectThumbnailList(bList);
+			
+			model.addAttribute("thList",thList);
+			
+		}
+		
+		model.addAttribute("bList" , bList);
+		model.addAttribute("pInfo" , pInfo);
+		model.addAttribute("search" , search);
+		
+		System.out.println(search);
+		
+		return "board/boardList";
+	}
 	
 	
 	

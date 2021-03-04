@@ -21,7 +21,7 @@
 		
 			.rn-header{
 				position: inherit !important;
-				background-color: rgb(85, 85, 85);
+				background-color: #112E3B;
 			}
 
 			
@@ -184,13 +184,6 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
-	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 
 
 </body>

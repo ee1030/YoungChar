@@ -20,7 +20,7 @@
 		
 			.rn-header{
 				position: inherit !important;
-				background-color: rgb(85, 85, 85);
+				background-color: #112E3B;
 			}
 			
 
@@ -101,7 +101,6 @@
 			}
 		
 		</style>
-		
 
 	</head>
 	<body class="rn-preloader">
@@ -118,14 +117,19 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 order-lg-1 pb-15">
-
-					
 						<div class="col-xl-8">
 							<form class="card" method="POST" action="updateAction" name="updateAction" onsubmit="return updateValidate();">
 							  <div class="card-header">
 									<div class="img bg-wrap text-center">
 										<div class="user-logo">
-											<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+											<c:choose>
+												<c:when test="${!empty company.memImgPath}">
+													<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+												</c:when>
+												<c:otherwise>
+													<div class="img" style="background-image: url(${contextPath}/resources/memberFile/user-basic.png);"></div>
+												</c:otherwise>
+											</c:choose>											
 											<h4 class="card-title mb-0">${company.categoryNm}&nbsp;${company.cooName}</h4>
 											<h6 class="card-title mb-0">${company.memId}</h6>
 										</div>

@@ -1,6 +1,5 @@
 package com.kh.youngchar.company.model.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class DriveReview {
@@ -14,6 +13,7 @@ public class DriveReview {
 	private String boardTitle;
 	private String boardContent;
 	private int memNo;
+	private String memId;
 	private String memNickname;
 	private Timestamp boardCreateDt;
 	private int replyCount;
@@ -96,6 +96,14 @@ public class DriveReview {
 		this.memNo = memNo;
 	}
 
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
 	public String getMemNickname() {
 		return memNickname;
 	}
@@ -156,12 +164,13 @@ public class DriveReview {
 	public String toString() {
 		return "DriveReview [boardNo=" + boardNo + ", csat=" + csat + ", categoryNm=" + categoryNm + ", categoryCd="
 				+ categoryCd + ", cooName=" + cooName + ", carName=" + carName + ", boardTitle=" + boardTitle
-				+ ", boardContent=" + boardContent + ", memNo=" + memNo + ", memNickname=" + memNickname
-				+ ", boardCreateDt=" + boardCreateDt + ", replyCount=" + replyCount + ", readCount=" + readCount
-				+ ", rsrvtNo=" + rsrvtNo + ", memImgPath=" + memImgPath + ", memImgName=" + memImgName + "]";
+				+ ", boardContent=" + boardContent + ", memNo=" + memNo + ", memId=" + memId + ", memNickname="
+				+ memNickname + ", boardCreateDt=" + boardCreateDt + ", replyCount=" + replyCount + ", readCount="
+				+ readCount + ", rsrvtNo=" + rsrvtNo + ", memImgPath=" + memImgPath + ", memImgName=" + memImgName
+				+ "]";
 	}
 
-
+	
 	
 	
 }

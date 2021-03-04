@@ -14,8 +14,8 @@
 		<result property="replyCreateDate" column="REPLY_CREATE_DT" />
 		<result property="replyModifyDate" column="REPLY_MODIFY_DT" />
 		<result property="replyStatus" column="REPLY_STATUS" />
-		<result property="memberId" column="MEMBER_ID" />
-		<result property="parentBoardNo" column="PARENT_BOARD_NO" />
+		<result property="memberId" column="MEM_NICKNAME" />
+		<result property="parentBoardNo" column="BOARD_NO" />
 		<result property="parentReplyNo" column="PARENT_REPLY_NO" />
 		<result property="replyDepth" column="REPLY_DEPTH" />
 	</resultMap>
@@ -30,12 +30,12 @@
 	<select id="selectReplyList" parameterType="_int" resultMap="reply_rm">
 		
 		SELECT * FROM V_REPLY
-		WHERE REPLY_STATUS = 'Y' 
-		AND PARENT_BOARD_NO = #{parentBoardNo} 
+		<!-- WHERE REPLY_STATUS = 'Y' --> 
+		WHERE BOARD_NO = #{parentBoardNo} 
 		AND PARENT_REPLY_NO IN(SELECT REPLY_NO FROM V_REPLY
-                        WHERE REPLY_STATUS = 'Y'
-                        AND REPLY_DEPTH = 0
-                        AND PARENT_BOARD_NO = #{parentBoardNo})
+                        <!-- WHERE REPLY_STATUS = 'Y' -->
+                        WHERE REPLY_DEPTH = 0
+                        AND BOARD_NO = #{parentBoardNo})
 		ORDER BY PARENT_REPLY_NO DESC,
         CASE WHEN PARENT_REPLY_NO = REPLY_NO THEN 99999999
         ELSE REPLY_NO END DESC
@@ -44,7 +44,7 @@
 	
 	<!-- 댓글 삽입  -->
 	<insert id="insertReply" parameterType="map">
-		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, PARENT_BOARD_NO, PARENT_REPLY_NO, REPLY_WRITER)
+		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, BOARD_NO, PARENT_REPLY_NO, REPLY_WRITER)
 		VALUES(SEQ_RNO.NEXTVAL, #{replyContent}, #{parentBoardNo}, SEQ_RNO.CURRVAL, #{replyWriter} )
 	</insert> 
 	
@@ -71,7 +71,7 @@
 	
 	<!-- 대댓글 삽입 -->
 	<insert id="insertChildReply" parameterType="map">
-		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, PARENT_BOARD_NO, PARENT_REPLY_NO, REPLY_WRITER, REPLY_DEPTH)
+		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, BOARD_NO, PARENT_REPLY_NO, REPLY_WRITER, REPLY_DEPTH)
 		VALUES(SEQ_RNO.NEXTVAL, #{replyContent}, #{parentBoardNo}, #{parentReplyNo}, #{replyWriter}, 1)
 	
 	</insert>

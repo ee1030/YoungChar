@@ -9,6 +9,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,11 +28,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.youngchar.member.model.service.MemberService;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
+import com.kh.youngchar.member.model.vo.NaverLoginBO;
 
 @Controller
 @RequestMapping("/member/*")
 @SessionAttributes({"loginMember", "memFile"})
 public class MemberController {
+	
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
+
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+	this.naverLoginBO = naverLoginBO;
+	}
+
 
 	@Autowired
 	private MemberService service;
@@ -46,10 +57,20 @@ public class MemberController {
 
 	// 로그인 화면전환 Controller
 	@RequestMapping("login")
-	public String loginForm() {
+	public String loginForm(Model model, HttpSession session) {
+		
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+		System.out.println("네이버:" + naverAuthUrl);
+		//네이버
+		model.addAttribute("url", naverAuthUrl);
+
+		출처: https://bumcrush.tistory.com/151 [맑음때때로 여름]
 
 		return "member/login";
 	}
+
 
 	// 회원가입 화면전환 Controller
 	@RequestMapping("signUp")
@@ -87,6 +108,16 @@ public class MemberController {
 
 		return "member/cooSignUp";
 	}
+	
+	
+	@RequestMapping("session")
+	public String session() {
+		
+		return "member/session";
+	}
+	
+	
+	
 
 	// ---------------------------------------------------
 	// 아이디 중복검사 Controller (AJAX)
@@ -336,6 +367,25 @@ public class MemberController {
 		return result;
 		
 	}
+	
+	
+	// ---------------------------------------------------
+	// 카카오 로그인 Controller
+	// ---------------------------------------------------
+	@RequestMapping("kakaoLogin")
+	@ResponseBody
+	public Member loginMember(@ModelAttribute Member loginMember,
+							  @RequestParam("memberId") String memberId,
+							  @RequestParam("memberPwd") String memberPwd,
+							  @RequestParam("memberNm") String memberNm, Model model) {
+		
+		loginMember = service.loginMember(loginMember);
+		
+		model.addAttribute("loginMember", loginMember);
+		
+		return loginMember;
+	}
+	
 	
 	
 	

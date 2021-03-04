@@ -66,7 +66,7 @@
 											<a href="#">마이 페이지</a>
 										</li>
 										<li>
-											<a href="#">회원 탈퇴</a>
+											<a href="${contextPath}/member/session">회원 탈퇴</a>
 										</li>
 										
 									</ul>

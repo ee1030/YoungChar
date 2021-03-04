@@ -138,6 +138,14 @@ public class MemberDAO {
 		
 	}
 
+	//---------------------------------------------------
+	//				카카오 로그인 DAO
+	//---------------------------------------------------
+	public int loginMember(Member loginMember) {
+		return sqlSession.insert("memberMapper.loginMember", loginMember);
+		
+	}
+
 
 	
 	

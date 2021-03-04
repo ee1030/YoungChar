@@ -65,16 +65,16 @@
 	<div class="container" id="content-main">
 
 		<div>
-			<h1>${board.boardName }</h1>
+			<h1 class="rn-widget-title">${board.boardName }</h1>
 			<br>
 			<br>
 			<div id="board-area">
 
 				<!-- Category -->
-				<h6 class="mt-4">카테고리 : [${board.categoryName }]</h6>
+				<h5 class="mt-4">카테고리 : ${board.categoryName }</h5>
 				
 				<!-- Title -->
-				<h3 class="mt-4">${board.boardTitle }</h3>
+				<h1 class="mt-4 ">제목 : ${board.boardTitle }</h1>
 	
 				<br>
 				<br>
@@ -85,7 +85,6 @@
 				 	<span class="float-right">조회수 : ${board.readCount }</span>
 					<div id="date-area">
 						<p>작성일 : ${board.boardCreateDate}</p>
-						<p>마지막 수정일 : ${board.boardModifyDate}</p>  
 					</div>
 					
 				</div>
@@ -95,7 +94,7 @@
 
 				
 				<!-- 이미지 부분 -->
-				<%-- <c:if test="${!empty attachmentList }">
+				 <c:if test="${!empty attachmentList }">
 
 					<div class="carousel slide m-3" id="carousel-325626">
 
@@ -108,13 +107,13 @@
 							</c:forEach>
 						</div>
 
-						<!-- <a class="carousel-control-prev" href="#carousel-325626" data-slide="prev">
+						 <a class="carousel-control-prev" href="#carousel-325626" data-slide="prev">
 						<span class="carousel-control-prev-icon"></span> 
 						<span class="sr-only">Previous</span>
 						</a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"> 
-						<span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a> -->
+						<span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a> 
 					</div>
-				</c:if> --%>
+				</c:if> 
 
 
 				<!-- Content -->
@@ -155,11 +154,11 @@
 			
 
 			<!-- 댓글 부분 -->
-			<%-- <jsp:include page="reply.jsp"/> --%>
+			 <jsp:include page="reply.jsp"/> -
 			
 		</div>
 	</div>
-	<%-- <jsp:include page="../common/footer.jsp"/> --%>
+	 <jsp:include page="../common/footer.jsp"/> 
 	
 	<script>	
 		// 목록으로

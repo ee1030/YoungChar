@@ -63,8 +63,39 @@ public class DriveReviewDAO {
 		return sqlSession.insert("driveReviewMapper.insertDriveReview", board);
 	}
 
+	public int updateBoard(DriveReview board) {
+		
+		int result = sqlSession.update("driveReviewMapper.updateBoard", board);
+		
+		if(result > 0) {
+			result = sqlSession.update("driveReviewMapper.updateDriveReview", board);
+		}
+		
+		return result;
+	}
+	
+	public List<Attachment> selectAttachmentList(int boardNo) {
+		return sqlSession.selectList("driveReviewMapper.selectAttachmentList", boardNo);
+	}
+
 	public int insertAttachmentList(List<Attachment> uploadImages) {
 		return sqlSession.insert("driveReviewMapper.insertAttachmentList", uploadImages);
+	}
+
+	public int deleteAttachmentList(List<Integer> deleteFileNoList) {
+		return sqlSession.delete("driveReviewMapper.deleteAttachmentList", deleteFileNoList);
+	}
+
+	public int updateAttachment(Attachment temp) {
+		return sqlSession.update("driveReviewMapper.updateAttachment", temp);
+	}
+
+	public int updateAttachment2(String fileName) {
+		return sqlSession.update("driveReviewMapper.updateAttachment2", fileName);
+	}
+	
+	public int deleteBoard(int boardNo) {
+		return sqlSession.update("driveReviewMapper.deleteBoard", boardNo);
 	}
 
 	public int selectReport(Report report) {
@@ -74,6 +105,13 @@ public class DriveReviewDAO {
 	public int insertReport(Report report) {
 		return sqlSession.insert("driveReviewMapper.insertReport", report);
 	}
+
+
+
+
+
+
+
 
 
 
