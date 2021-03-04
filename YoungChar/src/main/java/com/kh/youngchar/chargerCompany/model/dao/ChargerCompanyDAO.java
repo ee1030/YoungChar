@@ -58,7 +58,7 @@ public class ChargerCompanyDAO {
 	 * @param companyNo
 	 * @return
 	 */
-	public List<ChargerCompany> selectChargerCompanyList(int companyNo) {
+	public List<CompanyImage> selectChargerCompanyList(int companyNo) {
 		return sqlSession.selectList("chargerCompanyMapper.selectChargerCompanyList", companyNo);
 	}
 	
@@ -82,6 +82,34 @@ public class ChargerCompanyDAO {
 
 	public int insertchargerCompanyImagesList(List<CompanyImage> chargerCompanyImages) {
 		return sqlSession.insert("chargerCompanyMapper.insertchargerCompanyImagesList", chargerCompanyImages);
+	}
+
+
+	
+	public int updateCompany(ChargerCompany updateCompany) {
+		return sqlSession.update("chargerCompanyMapper.updateCompany", updateCompany);	
+		
+	}
+
+
+	public int updateCompanyImage(CompanyImage ci) {
+		return sqlSession.update("chargerCompanyMapper.updateCompanyImage", ci);
+	}
+
+
+	public int insertCompanyImage(CompanyImage ci) {
+		return sqlSession.insert("chargerCompanyMapper.insertCompanyImage", ci);
+
+	}
+
+
+	public int deleteCompanyImage(int fileNo) {
+		return sqlSession.delete("chargerCompanyMapper.deleteCompanyImage",fileNo);
+	}
+
+
+	public int deleteCompany(int companyNo) {
+		return sqlSession.update("chargerCompanyMapper.deleteCompany",companyNo);
 	}
 
 

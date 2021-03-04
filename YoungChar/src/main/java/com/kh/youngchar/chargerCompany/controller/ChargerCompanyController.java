@@ -42,7 +42,7 @@ public class ChargerCompanyController {
 		PageInfo pInfo = service.getPageInfo(cp);
 
 		List<ChargerCompany> cList = service.selectList(pInfo);
-		
+
 		if (cList != null && !cList.isEmpty()) { // 게시글 목록 조회 성공 시
 			List<CompanyImage> thumbnailList = service.selectThumbnailList(cList);
 
@@ -69,7 +69,7 @@ public class ChargerCompanyController {
 		if (chargerCompany != null) { // 상세 조회 성공 시
 
 //			상세조회 성공한 게시물의 이미지 목록을 조회하는 Service 호출 
-			List<ChargerCompany> chargerCompanyList = service.selectChargerCompanyList(companyNo);
+			List<CompanyImage> chargerCompanyList = service.selectChargerCompanyList(companyNo);
 
 //			조회된 이미지 목록이 있을 경우 
 			if (chargerCompanyList != null && !chargerCompanyList.isEmpty()) {
@@ -100,17 +100,12 @@ public class ChargerCompanyController {
 
 		return url;
 	}
-	
-	
-	
 
 	@RequestMapping("insertChargerCompany")
 	public String insertCompany() {
 		return "chargerCompany/insertChargerCompany";
 	}
-	
-	
-	
+
 	@RequestMapping("insertAction")
 	public String insertAction(@ModelAttribute ChargerCompany chargerCompany,
 			@ModelAttribute("loginMember") Member loginMember,
@@ -125,23 +120,23 @@ public class ChargerCompanyController {
 		map.put("email", chargerCompany.getEmail());
 		map.put("link", chargerCompany.getLink());
 		map.put("companyContent", chargerCompany.getCompanyContent());
-		
+
 //		파일 업로드 확인 
 		for (int i = 0; i < images.size(); i++) {
 			System.out.println("images[" + i + "] :" + images.get(i).getOriginalFilename());
 		}
-		
+
 //		파일 저장 경로 설정
 //		HttpServletRequest 객체가 있어야지만 파일 저장 경로를 얻어올 수 있다.
 //		-> HttpServletRequest 객체는 Controller에서만 사용 가능하다.
 		String savePath = null;
-				
+
 		savePath = request.getSession().getServletContext().getRealPath("resources/chargerCompanyImages");
-	
+
 		int result = service.insertCompany(map, images, savePath);
-		
+
 		String url = null;
-		
+
 //		삽입 결과에 따른 View 연결 처리
 		if (result > 0) {
 			swalIcon = "success";
@@ -166,5 +161,98 @@ public class ChargerCompanyController {
 
 		return url;
 	}
+
+	@RequestMapping("{companyNo}/chargerCompanyUpdate")
+	public String update(@PathVariable("companyNo") int companyNo, Model model) {
+
+		// 1) 게시글 상세 조회
+		ChargerCompany chargerCompany = service.selectCompany(companyNo);
+
+		// 2) 해당 게시글에 포함된 이미지 목록 조회
+		if (chargerCompany != null) {
+			List<CompanyImage> chargerCompanyList = service.selectChargerCompanyList(companyNo);
+
+			model.addAttribute("chargerCompanyList", chargerCompanyList);
+		}
+
+		model.addAttribute("chargerCompany", chargerCompany);
+
+		return "chargerCompany/chargerCompanyUpdate";
+
+	}
+	
+	
+	
+	@RequestMapping("{companyNo}/updateAction")
+	public String updateAction(@PathVariable("companyNo") int companyNo, @ModelAttribute ChargerCompany updateCompany, Model model,
+			RedirectAttributes ra, HttpServletRequest request, @RequestParam("deleteImages") boolean[] deleteImages,
+			@RequestParam(value = "images", required = false) List<MultipartFile> images) {
+		
+		updateCompany.setCompanyNo(companyNo);
+
+		String savePath = request.getSession().getServletContext().getRealPath("resources/chargerCompanyImages");
+
+		int result = service.updateCompany(updateCompany, images, savePath, deleteImages);
+
+		String url = null;
+
+		if (result > 0) {
+			swalIcon = "success";
+			swalTitle = "게시글 수정 성공";
+			url = "redirect:../" + companyNo;
+		} else {
+			swalIcon = "error";
+			swalTitle = "게시글 수정 실패";
+			url = "redirect:" + request.getHeader("referer");
+		}
+
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+
+		return url;
+	}
+	
+	
+	
+	
+	@RequestMapping("{companyNo}/deleteAction")
+	public String deleteAction(@PathVariable("companyNo") int companyNo,@ModelAttribute ChargerCompany chargerCompany, Model model,
+			RedirectAttributes ra, HttpServletRequest request) {
+		
+		chargerCompany.setCompanyNo(companyNo);
+		
+		int result = service.deleteCompany(companyNo);
+		
+		
+		String url = null;
+		
+		if (result > 0) {
+			swalIcon = "success";
+			swalTitle = "삭제 성공";
+			url = "redirect:..";
+		} else {
+			swalIcon = "error";
+			swalTitle = "삭제 실패";
+			url = "redirect:" + request.getHeader("referer");
+		}
+
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+
+		return url;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

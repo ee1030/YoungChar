@@ -56,7 +56,7 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 	
 
 	@Override
-	public List<ChargerCompany> selectChargerCompanyList(int companyNo) {
+	public List<CompanyImage> selectChargerCompanyList(int companyNo) {
 		return dao.selectChargerCompanyList(companyNo);
 
 	}
@@ -230,6 +230,133 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 
 		return date + str + ext;
 	}
+
+	
+	
+	
+	
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int updateCompany(ChargerCompany updateCompany, List<MultipartFile> images, String savePath,
+			boolean[] deleteImages) {
+		// 1) 게시글 수정
+		// 제목, 내용 크로스사이트 스크립팅 방지
+		updateCompany.setCompanyName(replaceParameter(updateCompany.getCompanyName()));
+		updateCompany.setPhone(replaceParameter(updateCompany.getPhone()));
+		updateCompany.setFax(replaceParameter(updateCompany.getFax()));
+		updateCompany.setEmail(replaceParameter(updateCompany.getEmail()));
+		updateCompany.setLink(replaceParameter(updateCompany.getLink()));
+		updateCompany.setCompanyContent(replaceParameter(updateCompany.getCompanyContent()));
+
+		// 게시글 수정 DAO 호출
+		int result = dao.updateCompany(updateCompany);
+
+		// 2) 이미지 수정(난이도 쩔음)
+		if (result > 0) {
+			// 수정 전 업로드 되어있던 파일 정보를 얻어옴.
+			// -> 새롭게 삽입 또는 수정되는 파일과 비교하기 위함.
+			List<CompanyImage> oldFiles = dao.selectChargerCompanyList(updateCompany.getCompanyNo());
+
+			// 새로 업로드 된 파일 정보를 담을 리스트
+			List<CompanyImage> uploadImages = new ArrayList<CompanyImage>();
+			// 삭제 되어야 할 파일 정보를 담을 리스트
+			List<CompanyImage> removeFileList = new ArrayList<CompanyImage>();
+
+			// DB에 저장할 웹상 이미지 접근 경로
+			String filePath = "/resources/chargerCompanyImages";
+
+			// 새롭게 업로드 된 파일 정보를 가지고 있는 images에 반복 접근
+			for (int i = 0; i < images.size(); i++) {
+				if (!images.get(i).getOriginalFilename().equals("")) {
+					// 파일명 변경
+					String fileName = rename(images.get(i).getOriginalFilename());
+
+					// Attachment 객체 생성
+					CompanyImage ci = new CompanyImage(filePath, fileName, i, updateCompany.getCompanyNo());
+
+					uploadImages.add(ci); // 업로드 이미지 리스트에 추가
+
+					// true : update 진행
+					// false : insert 진행
+					boolean flag = false;
+
+					// 새로운 파일 정보와 이전 파일 정보를 비교하는 반복문
+					for (CompanyImage old : oldFiles) {
+						if (old.getFileLevel() == i) {
+							// 현재 접근한 이전 파일의 레벨이 새롭게 업로드한 파일의 레벨과 같은 경우
+							// == 같은 레벨의 새로운 이미지 업로드 -> update 진행
+							flag = true;
+
+							// DB에서 파일 번호가 일치하는 행의 내용을 수정하기 위해 파일 번호를 받아옴.
+							ci.setFileNo(old.getFileNo());
+
+							removeFileList.add(old);
+						}
+					}
+					// flag 값에 따른 insert / update 제어
+					if (flag) { // true : update 진행
+						result = dao.updateCompanyImage(ci);
+					} else { // false : insert 진행
+						result = dao.insertCompanyImage(ci);
+					}
+					if (result <= 0) {
+//						throw new UpdateAttachmentFailException("파일 정보 수정 실패");
+					}
+
+				} else { 
+
+					if (deleteImages[i]) {
+
+						for (CompanyImage old : oldFiles) {
+							if (old.getFileLevel() == i) {
+								result = dao.deleteCompanyImage(old.getFileNo());
+
+								if (result > 0) { // 삭제 성공 시
+//									removeFileList : 서버에서 삭제할 파일 정보를 모아둔 리스트
+									removeFileList.add(old);
+								} else { // 삭제 실패 시
+//									throw new UpdateAttachmentFailException("파일 정보 수정 실패");
+								}
+							}
+						}
+					}
+				}
+
+			}
+			if (result > 0) {
+				for (int i = 0; i < uploadImages.size(); i++) {
+
+					try {
+						images.get(uploadImages.get(i).getFileLevel())
+								.transferTo(new File(savePath + "/" + uploadImages.get(i).getFileName()));
+					} catch (Exception e) {
+						e.printStackTrace();
+//						throw new UpdateAttachmentFailException("파일 정보 수정 실패");
+					}
+				}
+
+			}
+			// ------------------------------------------
+			// 이전 파일 서버에서 삭제하는 코드
+			for (CompanyImage removeFile : removeFileList) {
+				File tmp = new File(savePath + "/" + removeFile.getFileName());
+				tmp.delete();
+			}
+			// ------------------------------------------
+
+		}
+
+		return result;
+	}
+
+	@Override
+	public int deleteCompany(int companyNo) {
+		return dao.deleteCompany(companyNo);
+	}
+
+
+
+	
 
 	
 

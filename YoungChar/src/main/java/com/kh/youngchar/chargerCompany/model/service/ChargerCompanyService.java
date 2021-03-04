@@ -21,9 +21,15 @@ public interface ChargerCompanyService {
 	
 	ChargerCompany selectCompany(int companyNo);
 
-	List<ChargerCompany> selectChargerCompanyList(int companyNo);
+	List<CompanyImage> selectChargerCompanyList(int companyNo);
 
 	int insertCompany(Map<String, Object> map, List<MultipartFile> images, String savePath);
+
+	int updateCompany(ChargerCompany updateCompany, List<MultipartFile> images, String savePath,
+			boolean[] deleteImages);
+
+	int deleteCompany(int companyNo);
+
 
 
 
