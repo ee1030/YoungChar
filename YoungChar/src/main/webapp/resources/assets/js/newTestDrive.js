@@ -18,7 +18,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 console.log(company.length);
-
     //반복문으로 가져온 업체 주소 배열 좌표에 넣기
     for(var i = 0; i < company.length ; i++){
         
@@ -31,7 +30,6 @@ console.log(company.length);
                 
                 // 정상적으로 검색이 완료됐으면 
                 if (status === kakao.maps.services.Status.OK) {
-                    
                     var Y =result[0].y;
                     var X = result[0].x;
                     
@@ -59,8 +57,95 @@ console.log(company.length);
     for(var c of com){
         var tr = $("<tr>");
         var td = $("<td>");
-        td.html("<h4>"+c.brand+" " +c.cooName +"</h4>"+"<h5>"+ c.memberAddr+"</h5>"+c.memPhone);
+        td.html("<h4>"+c.brand+" " +c.cooName +"</h4>"+"<h5>"+ c.memberAddr+"</h5>"+c.memPhone+"<span display='none'>"+c.memberNo+"</span>");
         tr.html(td);
         $("#centerTable").append(tr);
     }
+
+      
+           
+        //ajax 완료시 수행
+		if(checkFlag == true){
+            console.log(com[0].memberAddr);
+            addTo(com[0].memberAddr, com[0].brand, com[0].memberNo);
+        }
+
+        //목록 클릭시 지도 이동 시키기
+			$(document).on("click","tr", function(){
+				addr = $(this).children().children("h5").text();
+				brand = $(this).children().children("h4").text();
+                memberNo = $(this).children().children("span").text();
+				
+                addTo(addr, brand,memberNo);
+	            
+          
+        });
+
+        function addTo(addr, brand, memberNo){
+            
+				geocoder.addressSearch(addr, function(result, status) {
+
+                    // 정상적으로 검색이 완료됐으면
+                     if (status === daum.maps.services.Status.OK) {
+            
+                        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+                        panTo(coords);
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap" id='+memberNo+'>' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + 
+                                                    brand + 
+                                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+                                    '        </div>' + 
+                                    '        <div class="body">' + 
+                                    '            <div class="img">' +
+                                    '                <img  width="73" height="70">' +
+                                    '           </div>' + 
+                                    '            <div class="desc">' + 
+                                    '                <div class="ellipsis">'+ addr+'</div>' + 
+                                    '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+                                    '                <div><a  target="_blank" class="link">홈페이지</a></div>' + 
+                                    '            </div>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: coords       
+                        });
+
+                         // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                                overlay.setMap(map);
+                        
+                           
+                        $(document).on("click","#"+memberNo, function(){
+                            $(this).css("display","none");
+                        });     
+                     }
+                });
+          
+        }
+        
+        function panTo(coords) {
+            // 이동할 위도 경도 위치를 생성합니다 
+            var moveLatLon = coords;
+            
+            // 지도 중심을 부드럽게 이동시킵니다
+            // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+            map.panTo(moveLatLon);            
+        }  
+
+        
+        
+       
+
 }
+
+
