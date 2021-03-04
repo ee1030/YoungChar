@@ -215,7 +215,7 @@
 								</div>
 							  </div>
 							  <div class="card-footer text-end">
-								<button class="right btn btn-success" type="submit">정보 수정</button>
+								<button class="right btn btn-success" type="submit" >정보 수정</button>
 							  </div>
 							</form>
 						  </div>

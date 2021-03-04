@@ -295,6 +295,26 @@ public class MemberServiceImpl implements MemberService{
 
 	}
 
+	
+	
+	//---------------------------------------------------
+	//				카카오 로그인 Service (AJAX)
+	//---------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public Member loginMember(Member loginMember) {
+		
+		int result = dao.loginMember(loginMember);
+		
+		if(result > 0) {
+			loginMember = dao.loginAction(loginMember);
+		}
+		
+		
+		return loginMember;
+		
+	}
+
 
 	
 	
