@@ -1,6 +1,8 @@
 package com.kh.youngchar.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -51,11 +53,16 @@ public class MemberController {
 
 	// 회원가입 화면전환 Controller
 	@RequestMapping("signUp")
-	public String signUpForm(@ModelAttribute("loginMember") Member loginMember, Model model) {
-		
-		
+	public String signUpForm() {
 		
 		return "member/signUp";
+	}
+	
+	// 마이페이지 수정 페이지 Controller
+	@RequestMapping("updateMypage")
+	public String updateMypage() {
+		
+		return "member/updateMypage";
 	}
 
 	// 마이페이지 화면전환 Controller
@@ -264,6 +271,72 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	
+	// ---------------------------------------------------
+	// 내 정보 수정  Controller
+	// ---------------------------------------------------
+	@RequestMapping("mypageUpdate")
+	public String mypageUpdate(@ModelAttribute Member member,
+							   @ModelAttribute(name="loginMember", binding=false) Member loginMember,
+							   RedirectAttributes ra, Model model,
+							   @RequestParam("memberPwd1") String memberPwd1){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberPwd", member.getMemberPwd());
+		map.put("newPwd", memberPwd1);
+		map.put("memberAddr", member.getMemberAddr());
+		map.put("phone", member.getPhone());
+		map.put("nickName", member.getNickName());
+		map.put("memberNo", loginMember.getMemberNo());
+		
+		
+		int result = service.mypageUpdate(map);
+		
+		String url = null;
+		
+		// 비밀번호 변경 성공 시 
+		// success, 비밀번호 변경 성공, 마이페이지 재요청
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원정보가 변경되었습니다.";
+			
+			loginMember.setMemberAddr(member.getMemberAddr());
+			loginMember.setPhone(member.getPhone());
+			loginMember.setNickName(member.getNickName());
+			
+			model.addAttribute("loginMember", loginMember);
+			
+			url = "redirect:mypage";
+		}else {
+		// 비밀번호 변경 실패 시 
+		// error, 비밀번호 변경 실패, 비밀번호 변경 페이지 재요청 
+			swalIcon = "error";
+			swalTitle = "회원정보 수정 실패";
+			url = "redirect:updateMypage";
+		}
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		
+		
+		return url;
+	}
+	
+	
+	// ---------------------------------------------------
+	// 내 정보 수정(프로필 삭제부분)  Controller
+	// ---------------------------------------------------
+	@RequestMapping("deleteProfile")
+	@ResponseBody
+	public int deleteProfile(@RequestParam("memImgNo") int memImgNo ) {
+		
+		int result = service.deleteProfile(memImgNo);
+				
+		return result;
+		
+	}
+	
 	
 	
 }

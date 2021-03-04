@@ -63,20 +63,12 @@
 								<div class="rn-widget-content">
 									<ul>
 										<li>
-											<a href="${contextPath}/company/dashboard">Dash board</a>
+											<a href="#">마이 페이지</a>
 										</li>
 										<li>
-											<a href="${contextPath}/company/#">Schedule</a>
+											<a href="#">회원 탈퇴</a>
 										</li>
-										<li>
-											<a href="${contextPath}/company/applicationlist">Application list</a>
-										</li>
-										<li>
-											<a href="${contextPath}/company/companyinfo">Company Info</a>
-										</li>
-										<li>
-											<a href="${contextPath}/carCompany/carView">Cars</a>
-										</li>
+										
 									</ul>
 								</div>
 							</section>

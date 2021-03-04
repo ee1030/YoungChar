@@ -1,6 +1,7 @@
 package com.kh.youngchar.member.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,8 +95,47 @@ public class MemberDAO {
 	}
 
 
+	//---------------------------------------------------
+	//				마이페이지 프사 조회 DAO
+	//---------------------------------------------------
 	public MemberFile selectFile(int memNo) {
 		return sqlSession.selectOne("companyMapper.selectFile", memNo);
+	}
+
+
+	//---------------------------------------------------
+	//				비밀번호 조회 DAO
+	//---------------------------------------------------
+	public String selectPwd(int memberNo) {
+		return sqlSession.selectOne("memberMapper.selectPwd", memberNo);
+		
+	}
+
+
+	
+	//---------------------------------------------------
+	//				비밀번호 수정 DAO
+	//---------------------------------------------------
+	public int updatePwd(Map<String, Object> map) {
+		return sqlSession.update("memberMapper.updatePwd", map);
+	}
+
+
+	//---------------------------------------------------
+	//				회원정보 수정 DAO
+	//---------------------------------------------------
+	public int updateAction(Map<String, Object> map) {
+		return sqlSession.update("memberMapper.updateAction", map);
+		
+	}
+
+	
+	//---------------------------------------------------
+	//				회원정보 수정(프로필 삭제) DAO
+	//---------------------------------------------------
+	public int deleteProfile(int memImgNo) {
+		return sqlSession.delete("memberMapper.deleteProfile", memImgNo);
+		
 	}
 
 

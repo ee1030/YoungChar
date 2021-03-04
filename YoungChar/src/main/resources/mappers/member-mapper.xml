@@ -20,6 +20,8 @@
 	</resultMap> 
 	
 	
+	
+	
 	<!-- 아이디 중복 체크 -->
 	<select id="idDupCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
@@ -97,29 +99,37 @@
 	
 	
 	<!-- 회원 정보 수정 -->
-	<update id="updateAction" parameterType="Member">
+	<update id="updateAction" parameterType="map">
 		UPDATE MEMBER SET
-			MEMBER_EMAIL = #{memberEmail},
-			MEMBER_PHONE = #{memberPhone},
-			MEMBER_ADDR = #{memberAddress},
-			MEMBER_INTEREST = #{memberInterest}
-		WHERE MEMBER_NO = #{memberNo}
+			MEM_PHONE = #{phone},
+			MEM_ADDRESS = #{memberAddr},
+			MEM_NICKNAME = #{nickName}
+		WHERE MEM_NO = #{memberNo}
 	</update>
 	
 	
 	<!-- 비밀번호 조회 -->
 	<select id="selectPwd" parameterType="_int" resultType="string">
-		SELECT MEMBER_PWD FROM MEMBER
-		WHERE MEMBER_NO = #{memberNo}
+		SELECT MEM_PWD FROM MEMBER
+		WHERE MEM_NO = #{memberNo}
 	</select>
 	
 	
 	<!-- 비밀번호 변경 -->
 	<update id="updatePwd" parameterType="map">
 		UPDATE MEMBER SET
-		MEMBER_PWD = #{newPwd}		<!-- map에 지정된 데이터의 key값을 직접 작성 -->
-		WHERE MEMBER_NO = #{memberNo}
+		MEM_PWD = #{newPwd}		<!-- map에 지정된 데이터의 key값을 직접 작성 -->
+		WHERE MEM_NO = #{memberNo}
 	</update>
+	
+	
+	<!-- 프로필 변경 -->
+	<delete id="deleteProfile" parameterType="_int">
+		DELETE FROM MEMBER_FILE
+		WHERE MEM_IMG_NO = #{memImgNo}
+	</delete>
+	
+	
 	
 	
 	<!-- 회원 탈퇴 -->

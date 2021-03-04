@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Company Info</title>
+		<title>마이 페이지</title>
 
 		<!-- Preloader CSS-->
 		<style>
@@ -499,7 +500,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 				<h1 class="profile-user-name">${loginMember.memberNm}</h1>
 
-				<a href="#"><button class="btn profile-edit-btn">Edit Profile</button></a>
+				<a href="${contextPath}/member/updateMypage"><button class="btn profile-edit-btn">Edit Profile</button></a>
 
 				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
 
@@ -509,7 +510,15 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 				<ul>
 					<li><span class="profile-stat-count">164</span> posts</li>
-					<li><span class="profile-stat-count">가입일 : </span> ${loginMember.signDt }</li>
+					<li><span class="profile-stat-count">가입일 : </span>
+					<fmt:formatDate var="createDate" value="${loginMember.signDt }" pattern="yyyy-MM-dd"/>
+					<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd"/> 
+					<c:choose>
+										<c:when test="${createDate != now}">
+											${createDate }
+										</c:when>
+					</c:choose>
+					</li>
 					<li><span class="profile-stat-count">206</span> following</li>
 				</ul>
 
