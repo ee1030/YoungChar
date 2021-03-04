@@ -80,7 +80,7 @@
                   <div class="social mt-4">
                     <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
                   </div>
-                  <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="signUpAction">회원가입 하기</a></p>
+                  <p class="mt-4 mb-0">회원이 아니세요?<a class="ms-2" href="${contextPath}/member/signUp">회원가입 하기</a></p>
                 </form>
               </div>
             </div>

@@ -261,7 +261,7 @@ a{
           <input type="tel" id="phone" name="phone" placeholder="' - ' 제외하고 입력" required>
           
           <label for="postcodify_search_button">주소:</label>
-          <input type="text" name="post" class="form-control postcodify_postcode5 inputTag address" style="width: 50%;" placeholder="우편번호" required>
+          <input type="text" name="post" id="post" class="form-control postcodify_postcode5 inputTag address" style="width: 50%;" placeholder="우편번호" required>
           <button type="button" class="sendBtn" id="postcodify_search_button" >검색</button>
           <input type="text" class="form-control postcodify_address inputTag" name="address1" id="address1" placeholder="도로명 주소">
           <input type="text" class="form-control postcodify_details inputTag" name="address2" id="address2" placeholder="상세 주소">

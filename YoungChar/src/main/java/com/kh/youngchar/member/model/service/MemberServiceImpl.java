@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -235,11 +236,63 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	// 마이페이지 프사 얻어오기 Service 구현
 	@Override
 	public MemberFile selectFile(int memNo) {
 		MemberFile mFile = dao.selectFile(memNo);
 		
 		return mFile;
+	}
+
+
+	// 내 정보 수정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int mypageUpdate(Map<String, Object> map) {
+		
+		String savePwd = dao.selectPwd((int)map.get("memberNo"));
+		
+		// 결과 저장용 변수 선언
+		int result = 0;
+		
+		if(savePwd != null) {
+			
+			// 비밀번호 확인
+			if(enc.matches((String)map.get("memberPwd"), savePwd )) {
+				// 비밀번호가 일치할 경우
+				
+				// 2. 현재 비밀번호 일치 확인 시 새 비밀번호로 변경
+				// == 비밀번호를 수정할 dao 필요
+				
+				// 새 비밀번호 암호화 진행
+				String encPwd = enc.encode( (String)map.get("newPwd") );
+				
+				// 암호화된 비밀번호를 다시 map에 세팅
+				map.put("newPwd", encPwd);
+				
+				// 비밀번호 수정 DAO 호출
+				result = dao.updatePwd(map);
+			}
+			
+		}
+		
+		if(result > 0) {
+			result = 0;
+			
+			result = dao.updateAction(map);
+			
+		}
+		
+		return result;
+	}
+
+
+	
+	// 내 정보 수정(프로필 삭제) Service 구현
+	@Override
+	public int deleteProfile(int memImgNo) {
+		return dao.deleteProfile(memImgNo);
+
 	}
 
 

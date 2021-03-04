@@ -1,6 +1,7 @@
 package com.kh.youngchar.member.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,8 +39,24 @@ public interface MemberService {
 	//---------------------------------------------------
 	int cooSignUpAction(Member member, List<MultipartFile> images, String savePath);
 
-
+	
+	//---------------------------------------------------
+	//				마이페이지 프사 얻어오기 Service
+	//---------------------------------------------------
 	MemberFile selectFile(int memNo);
+
+
+	//---------------------------------------------------
+	//				내 정보 수정 Service
+	//---------------------------------------------------
+	int mypageUpdate(Map<String, Object> map);
+
+	
+	
+	//---------------------------------------------------
+	//				내 정보 수정(프로필 삭제) Service
+	//---------------------------------------------------
+	int deleteProfile(int memImgNo);
 
 
 
