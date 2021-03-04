@@ -16,12 +16,13 @@
       <result property="readCount" column="READ_COUNT"/>
       <result property="memNickname" column="MEM_NICKNAME"/>
       <result property="memNo" column="MEM_NO"/>
+      <result property="memId" column="MEM_ID"/>
       <result property="memImgPath" column="MEM_IMG_PATH"/>
       <result property="memImgName" column="MEM_IMG_NAME"/>
       <result property="rsrvtNo" column="RESERVATION_NO"/>
    </resultMap>
    
-     <resultMap type="ReviewReply" id="reply_rm">
+    <resultMap type="ReviewReply" id="reply_rm">
       <id property="replyNo" column="REPLY_NO"/>
       <result property="replyContent" column="REPLY_CONTENT"/>
       <result property="replyCreateDt" column="REPLY_CREATE_DT"/>
@@ -34,6 +35,14 @@
       <result property="memImgPath" column="MEM_IMG_PATH"/>
       <result property="memImgName" column="MEM_IMG_NAME"/>
    </resultMap>
+   
+   	<resultMap type="Attachment" id="attachment_rm">
+			<id property="fileNo" column="FILE_NO"/>
+			<result property="filePath" column="FILE_PATH"/>
+			<result property="fileName" column="FILE_NAME"/>
+			<result property="fileLevel" column="FILE_LEVEL"/>
+			<result property="parentBoardNo" column="PARENT_BOARD_NO"/>
+		</resultMap>
    
    <select id="getListCount" resultType="_int">
       SELECT COUNT(*)
@@ -58,9 +67,9 @@
    <select id="selectBoard" parameterType="_int" resultMap="driveReview_rm">
 			SELECT CATEGORY_NM, COO_NAME, CAR_NAME, CSAT, BOARD_TITLE, BOARD_CONTENT, 
 			           BOARD_CREATE_DT, READ_COUNT, REPLY_COUNT, BOARD_CREATE_DT, 
-			           MEM_NICKNAME, MEM_IMG_PATH, MEM_IMG_NAME
+			           MEM_ID, MEM_NICKNAME, MEM_IMG_PATH, MEM_IMG_NAME
 			FROM V_DRIVE_REVIEW
-			JOIN MEMBER U USING(MEM_NO)
+			JOIN MEMBER USING(MEM_NO)
 			LEFT OUTER JOIN MEMBER_FILE USING(MEM_NO)
 			JOIN DRIVE_REVIEW USING(BOARD_NO)
 			JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
@@ -69,7 +78,7 @@
 			JOIN COO_MEMBER M ON(MEM_NO2 = M.MEM_NO)
 			JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD)
 			WHERE BOARD_NO = #{boardNo}
-			AND (MEM_IMG_LEVEL IS NULL OR MEM_IMG_LEVEL=0)
+			AND (MEM_IMG_LEVEL IS NULL OR MEM_IMG_LEVEL=0)	
    </select>
   
    
@@ -117,6 +126,12 @@
 			INSERT INTO DRIVE_REVIEW
 			VALUES (#{boardNo}, #{csat}, #{rsrvtNo})   
 	 </insert>
+	 
+	 <select id="selectAttachmentList" parameterType="_int" resultMap="attachment_rm">
+	 		SELECT *
+	 		FROM ATTACHMENT
+	 		WHERE PARENT_BOARD_NO = #{boardNo}
+	 </select>
 
 	<insert id="insertAttachmentList" parameterType="list">
 		INSERT INTO ATTACHMENT
@@ -130,6 +145,45 @@
 			</foreach>
 		)A 
 	</insert>
+	
+	<update id="updateBoard" parameterType="DriveReview">
+		UPDATE BOARD SET
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+
+	<update id="updateDriveReview" parameterType="DriveReview">
+		UPDATE DRIVE_REVIEW SET
+		CSAT = #{csat}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<update id="updateAttachment" parameterType="Attachment">
+		UPDATE ATTACHMENT SET
+		FILE_LEVEL = 1
+		WHERE FILE_NAME = #{fileName}
+	</update>
+
+	<update id="updateAttachment2" parameterType="string">
+		UPDATE ATTACHMENT SET
+		FILE_LEVEL = 0
+		WHERE FILE_NAME = #{fileName}
+	</update>
+	
+	<delete id="deleteAttachmentList" parameterType="list">
+		DELETE FROM ATTACHMENT
+		WHERE FILE_NO IN
+		<foreach collection="list" item="fileNo" open="(" close=")" separator=",">
+			#{fileNo}
+		</foreach>
+	</delete>	
+	
+	<update id="deleteBoard" parameterType="_int">
+		UPDATE BOARD SET
+		BOARD_STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 	
 	<select id="selectReport" parameterType="Report" resultType="_int">
 		SELECT COUNT(*)

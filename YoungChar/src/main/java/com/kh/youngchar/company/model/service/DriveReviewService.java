@@ -22,6 +22,8 @@ public interface DriveReviewService{
 
 	List<DriveReview> selectList(PageInfo pInfo);
 
+	DriveReview selectBoard(int boardNo);
+
 	DriveReview driveReview(int boardNo);
 
 	List<Reply> selectReplyList(int boardNo);
@@ -32,7 +34,14 @@ public interface DriveReviewService{
 
 	Attachment insertImage(MultipartFile uploadFile, String savePath);
 
+	int updateBoard(DriveReview board, String savePath);
+	
+	int deleteBoard(int boardNo);
+
+
 	int reportBoard(Report report);
+
+
 
 
 }

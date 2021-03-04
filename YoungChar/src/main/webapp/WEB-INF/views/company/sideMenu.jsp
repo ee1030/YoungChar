@@ -51,11 +51,17 @@
 						<aside class="rn-widget-area rn-left-sidebar" id="secondary">
 		
 							<!-- Widget Item-->
-							
 							<div class="rn-widget">
 								<div class="img bg-wrap text-center">
 									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+										<c:choose>
+											<c:when test="${!empty company.memImgPath}">
+												<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+											</c:when>
+											<c:otherwise>
+												<div class="img" style="background-image: url(${contextPath}/resources/memberFile/user-basic.png);"></div>
+											</c:otherwise>
+										</c:choose>
 										<h3>${company.categoryNm}&nbsp;${company.cooName}</h3>
 										<h6 class="card-title mb-0">${company.memId}</h6>
 									</div>

@@ -20,7 +20,7 @@
 		
 			.rn-header{
 				position: inherit !important;
-				background-color: rgb(85, 85, 85);
+				background-color: #112E3B;
 			}
 	
 
@@ -124,7 +124,7 @@
 									<tr>
 										<c:if test="${empty list}">
 											<tr>
-												<td colspan="7">금일 시승 신청건이 없습니다.</td>
+												<td colspan="7">시승 신청건이 없습니다.</td>
 											</tr>
 										</c:if>
 										<c:if test="${!empty list}">
