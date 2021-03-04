@@ -1,14 +1,20 @@
 package com.kh.youngchar.admin.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.admin.model.service.AdminService;
 import com.kh.youngchar.board.model.vo.Board;
@@ -35,8 +41,6 @@ public class AdminController {
 		
 		List<Member> mList = service.getNewMemList();
 		List<Map<String, Integer>> cList = service.getChartData();
-		
-		System.out.println(cList);
 		
 		model.addAttribute("newMember", newMember);
 		model.addAttribute("newCompany", newCompany);
@@ -266,14 +270,37 @@ public class AdminController {
 		PageInfo pInfo = service.getCarsPageInfo(cp);
 		List<Cars> carList = service.selectCarsList(pInfo);
 		
-		System.out.println("pInfo : " + pInfo);
-		System.out.println("carList : " + carList);
-		System.out.println("size : " + carList.size());
+		List<Map<Integer, String>> brandList = service.selectBrandList();
 		
 		model.addAttribute("carList", carList);
 		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("brandList", brandList);
 		
 		return "admin/carDBManagement";
+	}
+	
+	@RequestMapping("carDBManagement/insertCar")
+	public String insertCar(@ModelAttribute Cars cars,
+							@RequestParam("carImg[]") List<MultipartFile> carImgs,
+							HttpServletRequest request,
+							RedirectAttributes ra) {
+		
+		int result = service.insertCar(cars);
+		
+		if(result > 0) {
+			String savePath = null;
+			
+			savePath = request.getSession().getServletContext().getRealPath("resources/carImages");
+			
+			//result = service.insertImages(result, carImgs, savePath);
+			
+			
+			if(result > 0) {
+				ra.addFlashAttribute("swalIcon", "success");
+				ra.addFlashAttribute("swalTitle", "차량 등록 성공");
+			}
+		}
+		return "redirect:../carDBManagement";
 	}
 
 }

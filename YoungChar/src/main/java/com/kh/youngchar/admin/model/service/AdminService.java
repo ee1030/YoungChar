@@ -185,4 +185,15 @@ public interface AdminService {
 	 */
 	public abstract List<Cars> selectCarsList(PageInfo pInfo);
 
+	/** 브랜드 리스트 조회 Service
+	 * @return brandList
+	 */
+	public abstract List<Map<Integer, String>> selectBrandList();
+
+	/** 차량 등록 Service
+	 * @param cars
+	 * @return result
+	 */
+	public abstract int insertCar(Cars cars);
+
 }

@@ -275,4 +275,26 @@ public class AdminDAO {
 		
 		return sqlSession.selectList("adminMapper.selectCarsList", null, rowBounds);
 	}
+
+	/** 브랜드 리스트 조회 DAO
+	 * @return brandList
+	 */
+	public List<Map<Integer, String>> selectBrandList() {
+		return sqlSession.selectList("adminMapper.selectBrandList");
+	}
+
+	/** 다음 차량번호 조회 DAO
+	 * @return carNo
+	 */
+	public int selectNextNo() {
+		return sqlSession.selectOne("adminMapper.selectNextNo");
+	}
+
+	/** 차량 등록 DAO
+	 * @param cars
+	 * @return result
+	 */
+	public int insertCar(Cars cars) {
+		return sqlSession.insert("adminMapper.insertCar", cars);
+	}
 }

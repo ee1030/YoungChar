@@ -207,4 +207,32 @@ public class AdminServiceImpl implements AdminService {
 	public List<Cars> selectCarsList(PageInfo pInfo) {
 		return dao.selectCarsList(pInfo);
 	}
+
+	// 브랜드 리스트 조회 Service 구현
+	@Override
+	public List<Map<Integer, String>> selectBrandList() {
+		return dao.selectBrandList();
+	}
+
+	// 차량 등록 Service 구현
+	@Override
+	public int insertCar(Cars cars) {
+		int result = 0;
+		
+		int carNo = dao.selectNextNo();
+		
+		if(carNo > 0) {
+			cars.setCarNo(carNo);
+			
+			result = dao.insertCar(cars);
+			
+			if(result > 0) {
+				carNo = result;
+			}
+		}
+		
+		return result;
+	}
+	
+	
 }
