@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>충전기 설치 업체 상세페이지</title>
+
+<style>
+
+
+	#deleteBtn, #updateBtn {
+		float: right;
+	}
+</style>
 
 <!--
 		All CSS Codes Loaded
@@ -55,17 +65,18 @@
 
 					<!-- Check Availability-->
 					<div class="rn-small-search-form">
+					
 						<div class="rn-small-search-form-title">
 							<h2>INFORMATION</h2>
 						</div>
 						<form action="car-single.html">
-							<div class="rn-icon-input" id="title">${chargerCompany.companyName}</div>
+							<div class="rn-icon-input" id="title">업체명    :  ${chargerCompany.companyName}</div>
 							<hr>
-							<div class="rn-icon-input" id="phone">${chargerCompany.phone}</div>
+							<div class="rn-icon-input" id="phone">전화번호 :   ${chargerCompany.phone}</div>
 							<hr>
-							<div class="rn-icon-input" id="fax">${chargerCompany.fax}</div>
+							<div class="rn-icon-input" id="fax">팩스 :   ${chargerCompany.fax}</div>
 							<hr>
-							<div class="rn-icon-input" id="email">${chargerCompany.email}</div>
+							<div class="rn-icon-input" id="email">이메일 :  ${chargerCompany.email}</div>
 							<hr>
 							<div class="rn-icon-input" id="link">
 								<a href="${chargerCompany.link}">바로 가기</a>
@@ -91,6 +102,20 @@
 						</ul>
 					</div>
 					<!-- End Car Sharing Buttons-->
+					
+					<div class="text-center">
+					<a class="btn btn-success float-right" href="${sessionScope.returnListURL}">이전</a>
+					
+					<c:url var="updateUrl" value="${chargerCompany.companyNo}/chargerCompanyUpdate" />
+	                	
+	                	<!-- 로그인된 회원이 글 작성자인 경우 -->
+						<c:if test="${(loginMember != null) }">
+							<a href="${updateUrl}" id="updateBtn" class="btn btn-success ml-1 mr-1">수정</a>
+							<form action="deleteAction"  method="post" enctype="multipart/form-data" role="form" onsubmit="return validate();">
+								<button id="deleteBtn" class="btn btn-success">삭제</button> 
+							</form>
+						</c:if>
+				</div>
 
 				</div>
 			</div>
