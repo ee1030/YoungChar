@@ -238,74 +238,80 @@ to {
 				
 			-->
 			</div>
-			<div class="row">
-				<div class="col-lg-12">
+			
+		<!-- Post Pagination-->
+			<div class="my-4">
+				<nav class="rn-pagination rn-pagination-center">
+					<ul>
 
-					<div class="my-4">
-						<ul class="pagination">
+						<%-- 주소 조합 작업 --%>
 
-							<!-- 화살표에 들어갈 주소를 변수로 생성 -->
-							<c:set var="firstPage" value="${pageUrl}cp=1" />
-							<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
-
-							<%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다--%>
-							<%-- 
-					<fmt:parseNumber>   : 숫자 형태를 지정하여 변수 선언 
-					integerOnly="true"  : 정수로만 숫자 표현 (소수점 버림)
-				--%>
-
-							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
-							<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
-							<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
-
-
-							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) / 10 }" integerOnly="true" />
-							<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
-							<c:set var="nextPage" value="${pageUrl}cp=${next}" />
+						<!-- 화살표에 들어갈 주소를 변수로 생성 -->
+						<c:set var="firstPage" value="${pageUrl}cp=1" />
+						<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
 
 
 
-							<c:if test="${pInfo.currentPage > pInfo.pageSize}">
-								<li>
-									<!-- 첫 페이지로 이동(<<) --> <a class="page-link" href="${firstPage}">&lt;&lt;</a>
-								</li>
-
-								<li>
-									<!-- 이전 페이지로 이동 (<) --> <a class="page-link" href="${prevPage}">&lt;</a>
-								</li>
-							</c:if>
+						<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }"
+							integerOnly="true" />
+						<fmt:parseNumber var="prev" value="${ c1 * 10 }"
+							integerOnly="true" />
+						<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
 
 
-
-							<!-- 페이지 목록 -->
-							<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
-								<c:choose>
-									<c:when test="${pInfo.currentPage == page }">
-										<li><a class="page-link">${page}</a></li>
-									</c:when>
-
-									<c:otherwise>
-										<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
+						<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) /10 }"
+							integerOnly="true" />
+						<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }"
+							integerOnly="true" />
+						<c:set var="nextPage" value="${pageUrl}cp=${next}" />
 
 
-							<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
-							<c:if test="${next <= pInfo.maxPage}">
-								<li>
-									<!-- 다음 페이지로 이동 (>) --> <a class="page-link" href="${nextPage}">&gt;</a>
-								</li>
 
-								<li>
-									<!-- 마지막 페이지로 이동(>>) --> <a class="page-link" href="${lastPage}">&gt;&gt;</a>
-								</li>
-							</c:if>
-						</ul>
-					</div>
+						<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+							<li>
+								<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i
+									class="fas fa-angle-right">..</i></a>
+							</li>
 
-				</div>
+							<li>
+								<!-- 이전 페이지로 이동 (<) --> <a href="${prevPage}"> <i
+									class="fas fa-angle-left"></i></a>
+							</li>
+						</c:if>
+
+						<!-- 페이지 목록 -->
+						<c:forEach var="page" begin="${pInfo.startPage}"
+							end="${pInfo.endPage}">
+							<c:choose>
+								<c:when test="${pInfo.currentPage == page }">
+									<li><a class="page-link">${page}</a></li>
+								</c:when>
+
+								<c:otherwise>
+									<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+
+						<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+						<c:if test="${next <= pInfo.maxPage}">
+							<li>
+								<!-- 다음 페이지로 이동 (>) --> <a href="${nextPage}"><i
+									class="fas fa-angle-right"></i></a>
+							</li>
+
+							<li>
+								<!-- 마지막 페이지로 이동(>>) --> <a href="${lastPage}"><i
+									class="fas fa-angle-right"></i></a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
 			</div>
+
+
+
 		</div>
 	</section>
 	<!-- End Cars-->

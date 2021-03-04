@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>충전기 설치 업체 등록</title>
+<title>충전기 설치 업체 수정</title>
 
 <style>
     .insert-label {
@@ -70,14 +70,15 @@
 		<div class="container pb-5 mb-5">
 
 
-			<form action="insertAction"  method="post" enctype="multipart/form-data" role="form" onsubmit="return validate();">
+			<form action="updateAction"  method="post" name="updateForm" enctype="multipart/form-data" role="form" onsubmit="return validate();">
 			<!-- enctype="multipart/form-data" -->
 
 				<div class="form-inline mb-2">
 					<div class="boardImg" id="titleImgArea">
 						<img id="titleImg" width="200" height="200">
+						<span class="deleteImg">x</span>
 					</div>
-					<label class="input-group-addon mr-3 insert-label" id="cont">INSERT IMAGE</label>
+					<label class="input-group-addon mr-3 insert-label" id="cont">UPDATE IMAGE</label>
 				</div>
 				
 					<!-- 파일 업로드 하는 부분 -->
@@ -89,29 +90,29 @@
 				
 				<div class="row">
 				<div class="col-lg-8" id="companyContent">
-					<textarea class="form-control" id="content" name="companyContent" placeholder="내용을 입력하세요." rows="10" style="resize: none;"></textarea>
+					<textarea class="form-control" id="content" name="companyContent"  rows="10" style="resize: none;">${chargerCompany.companyContent}</textarea>
 				</div>
 				<div class="col-lg-4">
 
 					<!-- Check Availability-->
 					<div class="rn-small-search-form">
 						<div class="rn-small-search-form-title">
-							<h2>충전기 설치 업체 등록</h2>
+							<h2>충전기 설치 업체 수정</h2>
 						</div>
 							<div class="rn-icon-input" id="companyName">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="companyName" placeholder="업체명을 입력하세요.">
+								<i class="fas fa-map-marker-alt"></i> <input type="text" name="companyName" value="${chargerCompany.companyName}">
 							</div>
 							<div class="rn-icon-input" id="phone">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="phone" placeholder="전화번호를 입력하세요.">
+								<i class="fas fa-map-marker-alt"></i> <input type="text" name="phone" value="${chargerCompany.phone}">
 							</div>
 							<div class="rn-icon-input" id="fax">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="fax" placeholder="팩스번호를 입력하세요.">
+								<i class="fas fa-map-marker-alt"></i> <input type="text" name="fax" value="${chargerCompany.fax}">
 							</div>
 							<div class="rn-icon-input" id="email">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="email" placeholder="이메일을 입력하세요.">
+								<i class="fas fa-map-marker-alt"></i> <input type="text" name="email" value=" ${chargerCompany.email}">
 							</div>
 							<div class="rn-icon-input" id="link">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="link" placeholder="링크를 입력하세요">
+								<i class="fas fa-map-marker-alt"></i> <input type="text" name="link" value="${chargerCompany.link}">
 							</div>
 
 					</div>
@@ -139,7 +140,7 @@
 				<hr class="mb-4">
 
 				<div class="text-center">
-					<button id="submitButton" type="submit" class="btn btn-success">등록</button>
+					<button id="submitButton" type="submit" class="btn btn-success">수정</button>
 					<a class="btn btn-success float-right" href="${sessionScope.returnListURL}">이전</a>
 				</div>
 
@@ -287,57 +288,108 @@
 	<!-- End Site Footer-->
 	
 	<script>
+	// 이미지 배치
+
+
 	// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 	$(function(){
 		$("#fileArea").hide(); // #fileArea 요소를 숨김.		
 		
 		$(".boardImg").on("click", function(){ // 이미지 영역이 클릭 되었을 때
-			
-			// 클릭한 이미지 영역 인덱스 얻어오기
-			var index = $(".boardImg").index(this);
-					// -> 클릭된 요소가 .boardImg 중 몇번째 인덱스인지 반환
-					
-			//console.log(index);
-			
-			// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
-			$("#img" + index).click();
+			var index = $(".boardImg").index(this);// 클릭한 이미지 영역 인덱스 얻어오기
+			$("#img" + index).click(); // 클릭된 영역 인덱스에 맞는 input file 태그 클릭
 		});
 		
 	});
 	 
 	
-	
-  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-  function LoadImg(value, num) {
-	  // value.files : 파일이 업로드되어 있으면 true
-	  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+	 // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+	 function LoadImg(value, num) {
 	  
 		if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
 			
 			var reader = new FileReader();
-   	// 자바스크립트 FileReader
-  	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
-  	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
-  	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
-  	
-  	reader.readAsDataURL(value.files[0]);
-    // FileReader.readAsDataURL()
-  	// 지정된의 내용을 읽기 시작합니다. 
-  	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.	
-  	
-  	reader.onload = function(e){
-    	// FileReader.onload
-				// load 이벤트의 핸들러. 
-				// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
-  		
-				// 읽어들인 내용(이미지 파일)을 화면에 출력
-				
+	    	reader.readAsDataURL(value.files[0]);
+	    	
+	    	reader.onload = function(e){
+	    		
+	    		// 미리보기
 				$(".boardImg").eq(num).children("img").attr("src", e.target.result);
-				// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
 				
-  	}
+	    		
+	    		// 특정 fileLevel에 이미지가 업로드 된 경우
+	    		// == deleteImages 배열에서 해당 fileLevel과 일치하는 인덱스의 값을
+	    		// false로 바꿔 삭제되지 않음을 알려줌.
+	    		
+				
+				
+	    	}
 		}
 	}
+	
+  
+	// 유효성 검사
+	function validate() {
+
+		// 유효성 검사에서 문제가 없을 경우
+		// 유효성 검사에서 문제가 없을 경우 서버에 제출 전
+         // deleteImages배열의 내용을 hidden 타입으로 하여 form태그 마지막에 추가하여 파라미터로 전달
+         for(var i=0 ; i<deleteImages.length ; i++){
+            $deleteImages = $("<input>", {type : "hidden", name : "deleteImages", value : deleteImages[i]});
+            $("form[name=updateForm]").append($deleteImages);
+         }
+		
+		
+	}
+	
+	
+	
+	
+	
+	// 게시글에 업로드 된 이미지 삭제
+	var deleteImages = [];
+	// 배열을 생성하여 이미지 삭제 버튼 수 만큼 배열에 false 요소를 추가
+	// -> 배열에 4개 false가 추가 됨 == 인덱스는 0~3 == fileLevel과 같음
+	// --> 이미지 삭제 버튼이 클릭 될 경우
+	// 		해당 fileLevel과 같은 인덱스 값을 true로 변경
+	//  	--> 해당 이미지가 삭제 되었음을 전달하기 위한 용도로 사용할 예정
+
+	for(var i=0; i<$(".deleteImg").length; i++) {
+		deleteImages.push(false);
+	}
+	
+	// 이미지 삭제 버튼 동작
+	$(".deleteImg").on("click", function(event){
+		// event : 현재 발생한 이벤트에 대한 정보가 담긴 객체
+		event.stopPropagation(); 		// 이벤트가 연달아 실행되는 것을 방지
+		
+		// 기존 이미지 태그를 삭제하고 새로운 이미지 태그를 만들어서 제자리에 추가
+		
+		// 기존 이미지 태그
+		var $beforeImg = $(this).prev();
+		
+		// 기존 정보를 토대로 새로운 이미지 태그 생성
+		var $newImg = $("<img>", {id : $beforeImg.attr("id"),
+															width : $beforeImg.css("width"),
+															height : $beforeImg.css("height")	});
+		
+		$(this).prev().remove();		// 기존 이미지 태그 삭제
+		$(this).before($newImg); 		// 새로운 이미지 태그 추가
+		
+		
+		// 특정 fileLevel의 요소가 삭제 되었음을 알리기 위해 deleteImages에 기록
+		// == deleteImages에 클릭된 삭제버튼 인덱스와
+		// 일치하는 deleteImages 인덱스 값을 true로 변경
+		
+		deleteImages[$(".deleteImg").index(this)] = true;
+		
+		console.log(deleteImages);
+		
+		// 삭제 버튼이 클릭된 경우
+		// 해당 이미지와 연결된 input type="file" 태그의 값을 없앰
+		$("#img" + ($(".deleteImg").index(this) )).val("");
+		
+	});
 	</script>
 	
 	
