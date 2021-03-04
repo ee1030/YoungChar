@@ -87,6 +87,7 @@
 
 
 </style>
+
 <div id="reply-area ">
 	<!-- 댓글 작성 부분 -->
 	<div class="replyWrite">
@@ -114,7 +115,7 @@
 </div>
 
 <script>
-var loginMemberId = "${loginMember.memberId}"; // 로그인한 회원 아이디 (있으면 ID , 없으면 빈문자열이 넘어온다.)
+var loginMemberId = "${loginMember.nickName}"; // 로그인한 회원 아이디 (있으면 ID , 없으면 빈문자열이 넘어온다.)
 var replyWriter = "${loginMember.memberNo}"; // 로그인한 회원 번호(없으면 빈문자열이 넘어온다.)
 var parentBoardNo = ${board.boardNo}; // 게시글 번호
 
@@ -157,7 +158,7 @@ function selectReplyList(){
 	            // 작성자, 작성일, 수정일 영역 
 	            var div = $("<div>");
 	            var rWriter = $("<a>").addClass("rWriter").html(item.memberId);
-	            var rDate = $("<p>").addClass("rDate").html("작성일 : " + item.replyCreateDate + "<br>마지막 수정 날짜 : " + item.replyModifyDate);
+	            var rDate = $("<p>").addClass("rDate").html("작성일 : " + item.replyCreateDate);
 	            div.append(rWriter).append(rDate)
 	            
 	            

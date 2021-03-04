@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 
 public interface BoardService {
 
@@ -81,6 +82,20 @@ public interface BoardService {
 	 * @return bList
 	 */
 	public abstract List<Board> categoryBoardList(PageInfo2 pInfo, Map<String, Object> map);
+
+	/** 검색 조건이 포함된 페이징 처리 객체 생성 Service
+	 * @param search
+	 * @param cp
+	 * @return listCount
+	 */
+	public abstract PageInfo2 getSearchPageInfo(Search search, int cp);
+
+	/** 검색 조건이 포함된 게시글 목록 조회 Service
+	 * @param search
+	 * @param pInfo
+	 * @return bList
+	 */
+	public abstract List<Board> selectSearchList(Search search, PageInfo2 pInfo);
 
 	
 

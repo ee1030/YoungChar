@@ -199,8 +199,86 @@
 			SELECT BOARD_NO, BOARD_TITLE, MEM_ID, READ_COUNT , CATEGORY_NM, BOARD_CREATE_DT, BOARD_NM
 			FROM V_BOARD
 			WHERE BOARD_STATUS = 'Y'
+			AND BOARD_CD = #{type}
+			AND CATEGORY_NM = #{categoryName}
+			ORDER BY BOARD_NO DESC
+		
+		</select>
+		
+		
+		
+		
+		<!--  검색 조건에 맞는 게시글 수 조회 -->
+		<select id="getSearchListCount" parameterType="Search" resultType="_int">
+			SELECT COUNT(*) FROM V_BOARD
+			WHERE BOARD_STATUS = 'Y'
+			AND BOARD_CD = #{boardType} 
+			<if test="sv != null"><!-- 검색한 내용이 있다면  -->
+				<bind name = "val" value ="'%' + sv + '%'"/> <!-- bind : 변수처럼 사용 가능한 동적 SQL -->
+			
+				AND
+				
+				<choose>
+					<when test="sk == 'tit'">
+						BOARD_TITLE LIKE #{val}
+					</when>
+					
+					<when test="sk == 'con'">
+						BOARD_CONTENT LIKE #{val}
+					</when>
+					
+					<when test="sk == 'titcont'">
+						(BOARD_TITLE LIKE #{val} OR BOARD_CONTENT LIKE #{val} )
+					</when>
+					
+				</choose>
+				
+				<if test="ct != null"> <!-- 카테고리 체크가 되어있으면 -->
+					AND CATEGORY_NM IN 
+					<foreach collection ="ct" item="ctName" open="(" close=")" separator=",">
+						#{ctName}
+					</foreach>
+					
+				</if>
+			</if>
+		
+		</select>
+		
+		
+		<!-- 검색 조건에 맞는 게시글 목록 -->
+		<select id="selectSearchList" parameterType="Search" resultMap="board_rm">
+			SELECT * FROM V_BOARD
+			WHERE BOARD_STATUS = 'Y'
 			AND BOARD_CD = #{boardType}
-			AND CATEGORY_CD = #{categoryCode}
+			<if test="sv != null"><!-- 검색한 내용이 있다면  -->
+				<bind name = "val" value ="'%' + sv + '%'"/> <!-- bind : 변수처럼 사용 가능한 동적 SQL -->
+			
+				AND
+				
+				<choose>
+					<when test="sk == 'tit'">
+						BOARD_TITLE LIKE #{val}
+					</when>
+					
+					<when test="sk == 'con'">
+						BOARD_CONTENT LIKE #{val}
+					</when>
+					
+					<when test="sk == 'titcont'">
+						(BOARD_TITLE LIKE #{val} OR BOARD_CONTENT LIKE #{val} )
+					</when>
+					
+				</choose>
+				
+				<if test="ct != null"> <!-- 카테고리 체크가 되어있으면 -->
+					AND CATEGORY_NM IN 
+					<foreach collection ="ct" item="ctName" open="(" close=")" separator=",">
+						#{ctName}
+					</foreach>
+					
+				</if>
+			</if>
+			
 			ORDER BY BOARD_NO DESC
 		
 		</select>

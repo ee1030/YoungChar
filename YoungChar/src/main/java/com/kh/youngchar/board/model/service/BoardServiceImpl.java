@@ -21,6 +21,7 @@ import com.kh.youngchar.board.model.exception.UpdateAttachmentFailException;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 
 @Service // Service임을 알려줌 + bean 등록 
 public class BoardServiceImpl implements BoardService{
@@ -623,11 +624,29 @@ public class BoardServiceImpl implements BoardService{
 		return dao.selectDBFileList();
 	}
 	
+//	카테고리 별 조회 Service
 	@Override
 	public List<Board> categoryBoardList(PageInfo2 pInfo, Map<String, Object> map) {
 		return dao.categoryBoardList(pInfo, map);
 	}
-
+	
+	
+//	검색 조건이 포함된 페이징 처리 객체 생성 Service 구현 
+	@Override
+	public PageInfo2 getSearchPageInfo(Search search, int cp) {
+		
+		int listCount = dao.getSearchListCount(search);
+		
+		
+		return new PageInfo2(cp, listCount, search.getBoardType());
+	}
+	
+//	검색 조건이 포함된 게시글 목록 조회 Service 구현
+	@Override
+	public List<Board> selectSearchList(Search search, PageInfo2 pInfo) {
+		
+		return dao.selectSearchList(search,pInfo);
+	}
 
 
 

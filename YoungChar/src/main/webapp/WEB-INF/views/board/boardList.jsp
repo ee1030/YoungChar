@@ -75,9 +75,50 @@
 			<div class="row">
 				<div class="col-lg-8 order-lg-1 pb-15" style="margin: auto;">
 					<div class="col-sm-12">
+						<div>
+								<!-- /spring/board/list/1or2 -> search/2 -->
+								<form action="../search/${pInfo.boardType}" class="text-center" id="searchForm" >
+									<span> 카테고리(다중 선택 가능)<br> 
+									
+									<label for="exercise">테슬라</label> 
+									<input type="checkbox" name="ct" value="테슬라" id="tesla"> &nbsp; 
+									
+									<label for="movie">현대자동차</label>
+									<input type="checkbox" name="ct" value="현대자동차" id="hyundai"> &nbsp; 
+									
+									<label for="music">기아</label> 
+									 <input type="checkbox" name="ct" value="기아" id="kia"> &nbsp; 
+									 
+									 <label for="cooking">벤츠</label>
+									  <input type="checkbox" name="ct" value="벤츠" id="benz"> &nbsp; 
+									  
+									  <label for="game">BMW</label>
+									   <input type="checkbox" name="ct" value="BMW" id="bmw"> &nbsp; 
+									   
+									  <label for="game">아우디</label>
+									   <input type="checkbox" name="ct" value="아우디" id="audi"> &nbsp; 
+									   
+									  <label for="game">포르쉐</label>
+									   <input type="checkbox" name="ct" value="포르쉐" id="porsche"> &nbsp;
+									    
+									  <label for="game">르노</label>
+									   <input type="checkbox" name="ct" value="르노" id="renault"> &nbsp; 
+									   
+									   
+									   
+									</span> <br> <select name="sk" class="form-control" style="width: 100px; display: inline-block; margin-bottom: 10px;">
+										<option value="tit">글제목</option>
+										<option value="con">내용</option>
+										<option value="titcont">제목+내용</option>
+									</select> <input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
+									<button class="form-control btn btn-success" id="searchBtn" type="submit" style="width: 100px; display: inline-block;">검색</button>
+								</form>
+							</div>
 						<div class="card">
 							<div class="card-header">
-								<div id="head"></div>
+								<div id="head">
+								
+								</div>
 							</div>
 							<div class="table-responsive">
 								<table class="table table-hover" id="list-table">
@@ -145,7 +186,37 @@
 									<ul>
 
 										<%-- 주소 조합 작업 --%>
-										<c:url var="pageUrl" value="${pInfo.boardType}?" />
+										<c:choose>
+											<%-- 검색이 된 경우 --%>
+											<c:when test="${!empty search }">
+												<%--선택된 카테고리를 하나의 쿼리스트링으로 조합 --%>
+
+												<c:forEach items="${search.ct}" var="c">
+													<c:set var="category" value="${category}ct=${c}&" />
+												</c:forEach>
+
+												<c:set var="searchStr" value="${category}" />
+
+												<%-- 검색된 내용이 있다면 --%>
+												<c:if test="${!empty search.sv}">
+													<c:set var="searchStr" value="${category}sk=${search.sk}&sv=${search.sv}" />
+												</c:if>
+
+												<c:url var="pageUrl" value="../search/${search.boardType}?${searchStr}&" />
+												<c:set var="returnListURL" value="${contextPath}/board/search/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+											</c:when>
+
+											<%-- 안된 경우 --%>
+											<c:otherwise>
+												<c:url var="pageUrl" value="${pInfo.boardType}?" />
+												<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+												<c:set var="returnListURL" value="${contextPath}/board/list/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+											</c:otherwise>
+
+										</c:choose>
+
+
+
 
 										<!-- 화살표에 들어갈 주소를 변수로 생성 -->
 										<c:set var="firstPage" value="${pageUrl}cp=1" />
@@ -244,40 +315,18 @@
 
 
 						<!-- Widget Item-->
-						<c:if test="${pInfo.boardType != 3 }">
-									
-								
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">Categories</h2>
-							<div class="rn-widget-content">
-								<ul>
-									<li><a href="#">테슬라</a></li>
-									<li><a href="#">현대자동차</a></li>
-									<li><a href="#">기아</a></li>
-									<li><a href="#">벤츠</a></li>
-									<li><a href="#">BMW</a></li>
-									<li><a href="#">아우디</a></li>
-									<li><a href="#">포르쉐</a></li>
-									<li><a href="#">르노</a></li>
-								</ul>
-							</div>
-						</section>
-						</c:if>
+				
 
 						<section class="rn-widget">
 							<h2 class="rn-widget-title">게시판 이동</h2>
 							<div class="rn-widget-content">
 								<ul>
 							
-								<c:if test="${pInfo.boardType == 2 }">
-									<li><a href="${contextPath }/board/list/1">리뷰 게시판</a></li>
-									<li><a href="${contextPath }/board/list/3">잡담 게시판</a></li>
-								</c:if>
-								<c:if test="${pInfo.boardType == 3 }">
+						
+								
 									<li><a href="${contextPath }/board/list/1">리뷰 게시판</a></li>
 									<li><a href="${contextPath }/board/list/2">정보 게시판</a></li>
-								</c:if>
-
+							
 
 								</ul>
 							</div>
@@ -303,137 +352,9 @@
 	</div>
 	<!-- End Page Content-->
 
-	<!-- Site Footer-->
-	<footer class="rn-footer">
+	
 
-		<!-- Footer Widgets-->
-		<div class="rn-footer-widgets">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">About Us</h2>
-							<div class="rn-widget-content">
-								<a class="brand-name" href="index.html"> <img src="assets/images/logo.svg" alt="Logo">
-								</a>
-								<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
-								<ul class="rn-widget-social">
-									<li><a href="#"> <i class="fab fa-facebook-f"></i>
-									</a></li>
-									<li><a href="#"> <i class="fab fa-twitter"></i>
-									</a></li>
-									<li><a href="#"> <i class="fab fa-instagram"></i>
-									</a></li>
-									<li><a href="#"> <i class="fab fa-linkedin-in"></i>
-									</a></li>
-								</ul>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
-					</div>
-					<div class="col-md-5">
-
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">Quick Links</h2>
-							<div class="rn-widget-content">
-								<div class="row rn-quick-links">
-									<div class="col-6">
-										<ul>
-											<li><a href="#">About Us</a></li>
-											<li><a href="#">Contact Us</a></li>
-											<li><a href="#">Support</a></li>
-											<li><a href="#">View Booking</a></li>
-											<li><a href="#">Affiliate Programme</a></li>
-											<li><a href="#">Marketplace</a></li>
-										</ul>
-									</div>
-									<div class="col-6">
-										<ul>
-											<li><a href="#">Site Map</a></li>
-											<li><a href="#">Careers</a></li>
-											<li><a href="#">Press</a></li>
-											<li><a href="#">Get a Receipt</a></li>
-											<li><a href="#">Community</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
-					</div>
-					<div class="col-md-3">
-
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">Contact Us</h2>
-							<div class="rn-widget-content">
-								<div class="rn-icon-contents">
-									<div class="rn-phone rn-icon-content">
-										<div class="rn-icon">
-											<i class="lnr lnr-phone"></i>
-										</div>
-										<div class="rn-info">
-											<ul>
-												<li>(954)-944-1250</li>
-												<li>(954)-944-1251</li>
-											</ul>
-										</div>
-									</div>
-									<div class="rn-email rn-icon-content">
-										<div class="rn-icon">
-											<i class="lnr lnr-envelope"></i>
-										</div>
-										<div class="rn-info">
-											<ul>
-												<li>support@example.coms</li>
-												<li>sale@example.com</li>
-											</ul>
-										</div>
-									</div>
-									<div class="rn-address rn-icon-content">
-										<div class="rn-icon">
-											<i class="lnr lnr-map-marker"></i>
-										</div>
-										<div class="rn-info">
-											<ul>
-												<li>1425 Pointe Lane, Miami</li>
-												<li>Florida – 33169, USA</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Footer Widgets-->
-
-		<!-- Footer Copyright-->
-		<div class="rn-footer-copyright">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
-					</div>
-					<div class="col-md-6 text-right">
-						<span class="rn-pyament-methods"> <span>We Accept</span> <img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Footer Copyright-->
-
-	</footer>
+	<jsp:include page="../common/footer.jsp"/> 
 	<!-- End Site Footer-->
 
 	<script>
@@ -456,6 +377,34 @@
 
 			location.href = boardViewURL;
 		});
+		
+		
+		
+		
+		// ------- 검색 파라미터 유지 ----------
+		$(function(){
+			// 카테고리 
+			<c:forEach items="${search.ct}" var="ctName">
+				$("input[name=ct]").each(function(index, item){
+					if($(item).val() == "${ctName}"){
+						$(item).prop("checked",true);
+					}
+				});	
+			
+			</c:forEach>
+			
+			// 검색 조건(sk)
+			$("select[name=sk] > option").each(function(index,item){
+				if($(item).val() == "${search.sk}"){
+					$(item).prop("selected",true);
+				}
+			}); 
+			
+			// 검색 값(sv)
+			$("input[name=sv]").val("${search.sv}");
+			
+		});
+		
 	</script>
 
 	<!--

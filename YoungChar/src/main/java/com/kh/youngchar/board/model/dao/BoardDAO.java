@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 
 @Repository // 저장소 (DB) 연결 객체임을 알려줌 + bean 등록
 public class BoardDAO {
@@ -40,12 +41,12 @@ public class BoardDAO {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = null;
 		
-		if(type == 1) {
-			 rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
+		if(type == 3) {
+			rowBounds = new RowBounds(offset, pInfo.getLimit());
 			
 		}else {
+			rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
 			
-			 rowBounds = new RowBounds(offset, pInfo.getLimit());
 		}
 		
 		return sqlSession.selectList("boardMapper.selectList", pInfo.getBoardType(), rowBounds);
@@ -159,15 +160,15 @@ public class BoardDAO {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = null;
 		
-		if((int)map.get("type") == 1) {
-			 rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
+		if((int)map.get("type") == 3) {
+			rowBounds = new RowBounds(offset, pInfo.getLimit());
 			
 		}else {
+			rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
 			
-			 rowBounds = new RowBounds(offset, pInfo.getLimit());
 		}
 		
-		return sqlSession.selectList("boardMapper.selectList", map, rowBounds);
+		return sqlSession.selectList("boardMapper.categoryBoardList", map, rowBounds);
 		
 	}
 
@@ -177,6 +178,34 @@ public class BoardDAO {
 	 */
 	public int deleteAttachmentList(List<Integer> deleteFileNoList) {
 		return sqlSession.delete("boardMapper.deleteAttachmentList", deleteFileNoList);
+	}
+
+	/** 검색 조건에 맞는 게시글 수 조회 DAO
+	 * @param search
+	 * @return listCount
+	 */
+	public int getSearchListCount(Search search) {
+		return sqlSession.selectOne("boardMapper.getSearchListCount", search);
+	}
+
+	/** 검색 조건이 포함된 게시글 목록 조회 DAO
+	 * @param search
+	 * @param pInfo
+	 * @return bList
+	 */
+	public List<Board> selectSearchList(Search search, PageInfo2 pInfo) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = null;
+		
+		if(pInfo.getBoardType() == 3) {
+			rowBounds = new RowBounds(offset, pInfo.getLimit());
+			
+		}else {
+			rowBounds = new RowBounds(offset, pInfo.getLimit() - 1);
+			
+		}
+		return sqlSession.selectList("boardMapper.selectSearchList", search, rowBounds);
 	}
 
 	
