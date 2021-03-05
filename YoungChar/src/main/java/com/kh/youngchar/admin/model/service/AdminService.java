@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
@@ -213,5 +214,61 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int selectedCarDelete(List<String> chkList);
+
+	/** 게시글 관리 검색 페이징 정보 조회 Service
+	 * @param cp
+	 * @param sv
+	 * @param type
+	 * @return pInfo
+	 */
+	public abstract PageInfo getSearchBoardPageInfo(int cp, Map<String, Object> map);
+
+	/** 게시글 관리 검색 Serivce
+	 * @param pInfo
+	 * @param sv
+	 * @param type
+	 * @return bList
+	 */
+	public abstract List<Board> selectSearchBoard(PageInfo pInfo, Map<String, Object> map);
+
+	/** 댓글 목록 페이징 정보 조회 Service
+	 * @param cp
+	 * @return pInfo
+	 */
+	public abstract PageInfo getReplyPageInfo(int cp);
+
+	/** 댓글 목록 조회 Service
+	 * @param pInfo
+	 * @return rList
+	 */
+	public abstract List<Reply> selectReplyList(PageInfo pInfo);
+
+	/** 선택된 댓글 삭제 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int replyDelete(List<String> chkList);
+
+	/** 선택된 댓글 복구 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int replyRestore(List<String> chkList);
+	
+	/** 댓글 관리 검색 페이징 정보 조회 Service
+	 * @param cp
+	 * @param sv
+	 * @param type
+	 * @return pInfo
+	 */
+	public abstract PageInfo getSearchReplyPageInfo(int cp, String sv);
+
+	/** 댓글 관리 검색 Serivce
+	 * @param pInfo
+	 * @param sv
+	 * @param type
+	 * @return rList
+	 */
+	public abstract List<Reply> selectSearchReply(PageInfo pInfo, String sv);
 
 }

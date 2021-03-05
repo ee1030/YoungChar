@@ -1,5 +1,6 @@
 package com.kh.youngchar.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.admin.model.service.AdminService;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
@@ -100,6 +102,7 @@ public class AdminController {
 		
 		model.addAttribute("pInfo", pInfo);
 		model.addAttribute("mList", mList);
+		model.addAttribute("sv", sv);
 		
 		return "admin/memberManagement";
 	}
@@ -140,6 +143,8 @@ public class AdminController {
 		
 		model.addAttribute("pInfo", pInfo);
 		model.addAttribute("cList", cList);
+		model.addAttribute("sv", sv);
+		
 		
 		return "admin/newCompanyManagement";
 	}
@@ -177,7 +182,7 @@ public class AdminController {
 		return result;
 	}
 	
-	// 신규 업체 승인 검색
+	// 모든 업체 검색
 	@RequestMapping("allCompanyManagement/searchName")
 	public String searchAllCompany(@RequestParam("sv") String sv,
 									@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
@@ -189,11 +194,12 @@ public class AdminController {
 		
 		model.addAttribute("pInfo", pInfo);
 		model.addAttribute("cList", cList);
+		model.addAttribute("sv", sv);
 		
 		return "admin/allCompanyManagement";
 	}
 	
-	// 모든 게시글 조회 페이지
+	// 게시글 조회 페이지
 	@RequestMapping("boardManagement/{type}")
 	public String boardManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 									@PathVariable(name="type", required = false) int type,
@@ -203,11 +209,9 @@ public class AdminController {
 		
 		List<Board> bList = service.selectBoardList(pInfo, type);
 		
-		System.out.println(pInfo);
-		System.out.println(bList);
-		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("type", type);
 		
 		return "admin/boardManagement";
 	}
@@ -230,9 +234,76 @@ public class AdminController {
 		return result;
 	}
 	
+	// 게시글 검색
+	@RequestMapping("boardManagement/searchTitle/{type}")
+	public String searchBoard(@RequestParam("sv") String sv,
+							  @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+							  @PathVariable("type") int type,
+							  Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		
+		map.put("sv", sv);
+		map.put("type", type);
+		
+		PageInfo pInfo = service.getSearchBoardPageInfo(cp, map);
+		
+		List<Board> bList = service.selectSearchBoard(pInfo, map);
+		
+		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("bList", bList);
+		model.addAttribute("type", type);
+		model.addAttribute("sv", sv);
+		
+		return "admin/boardManagement";
+	}
+	
 	// 댓글 관리 페이지
 	@RequestMapping("replyManagement")
-	public String replyManagement() {
+	public String replyManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+								  Model model) {
+		
+		PageInfo pInfo = service.getReplyPageInfo(cp);
+		
+		List<Reply> rList = service.selectReplyList(pInfo);
+		
+		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("rList", rList);
+		
+		return "admin/replyManagement";
+	}
+	
+	// 선택된 댓글 삭제
+	@ResponseBody
+	@RequestMapping("replyManagement/delete")
+	public int replyDelete(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.replyDelete(chkList);
+	
+		return result;
+	}
+	
+	// 선택된 댓글 복구
+	@ResponseBody
+	@RequestMapping("replyManagement/restore")
+	public int replyRestore(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.replyRestore(chkList);
+		
+		return result;
+	}
+	
+	// 댓글 검색
+	@RequestMapping("replyManagement/searchId")
+	public String searchReply(@RequestParam("sv") String sv,
+							  @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+							  Model model) {
+		
+		PageInfo pInfo = service.getSearchReplyPageInfo(cp, sv);
+		List<Reply> rList = service.selectSearchReply(pInfo, sv);
+		
+		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("rList", rList);
+		model.addAttribute("sv", sv);
+		
 		return "admin/replyManagement";
 	}
 	
@@ -300,5 +371,6 @@ public class AdminController {
 		
 		return result;
 	}
+
 
 }

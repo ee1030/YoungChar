@@ -89,7 +89,7 @@
 							<div class="card-header">
 								<h5 class="card-title">게시글 관리</h5>
 								<div class="search-page">
-									<form action="${contextPath}/admin/allBoardManagement/searchTitle" method="post" class="theme-form">
+									<form action="${contextPath}/admin/boardManagement/searchTitle/${type}" method="post" class="theme-form">
 										<div class="input-group m-0">
 											<input class="form-control-plaintext" type="search" name="sv" placeholder="검색할 단어를 입력하세요">
 											<button class="btn btn-success input-group-text">검색</button>
@@ -212,7 +212,7 @@
 									</c:when>
 
 									<c:otherwise>
-										<li><a class="page-link" href="?cp=${page}">${page}</a></li>
+										<li><a class="page-link" href="?cp=${page}<c:if test="${sv != null}">&sv=${sv}</c:if>">${page}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
