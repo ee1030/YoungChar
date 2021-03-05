@@ -21,7 +21,7 @@
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .info .desc {position: relative; margin:5px;height: 75px;}
     .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
@@ -38,8 +38,8 @@
 			}
 			
 			.carSelect{
-				border : 1px solid #green !important;
-				
+				border : 2px solid #a1f583 !important;
+				box-shadow: 0 0 8px #64ec32 !important; 
 			}
 			
 			#tableheight{
@@ -50,6 +50,25 @@
 
 			#searchNo{
 				text-align: center;
+			}
+			
+			.brandName{
+				margin-bottom : 7px !important;
+				color : #49B53F !important;
+				font-size: 1.2em !important;
+			}
+			
+			.modelName{
+				margin-bottom : 7px !important;
+				color : #B4B4B4 !important;
+			}
+			
+			.cursorP{
+				cursor : pointer;
+			}
+
+			table h5{
+				color : #888;
 			}
 
 		</style>
@@ -87,7 +106,7 @@
 		
 		<!-- 선택안했을때 바 -->
 		<div class="row justify-content-md-center selectBar1" >
-			<div class="col-lg-10 select1"> 
+			<div class="col-lg-10 select1 cursorP"> 
 			<span class="carNameArea area1">모델 선택</span> 
 			</div>
 		</div>	
@@ -95,7 +114,7 @@
 		<br>
 
 		<!-- Car Search Form-->
-		<div class="rn-search-form-big rn-section selectBar s2">
+		<div class="rn-search-form-big rn-section selectBar s2 cursorP">
 			<div class="container">
 				<div class="row">
 
@@ -150,11 +169,11 @@
 		<!-- Cars-->
 		<section class="rn-section rn-car-list">
 			<div class="container">
-				<div class="row" id="carList">
+				<div class="row" id="carList" >
 				
 						  <!-- 반복문으로 차동차 목록 가져오기 -->
 							<c:forEach var="car" items="${cList}">
-									<div class="col-lg-4 col-md-6">
+									<div class="col-lg-4 col-md-6 cursorP">
 									<!-- Car Item-->
 									<div class="rn-car-item">
 										<div class="rn-car-item-thumb">
@@ -165,6 +184,8 @@
 										<div class="rn-car-item-info">
 											<span style="display: none;">${car.carNo}</span>
 											<h3>${car.carName}</h3>
+											<p class="modelName">${car.carModel}</p>
+											<p class="brandName">${car.brand}</p>
 										</div>
 										
 									</div>
@@ -216,12 +237,12 @@
 
 
 		<div class="row justify-content-md-center selectBar1 centerBar">
-			<div class="col-lg-10 select1">센터 선택</div>
+			<div class="col-lg-10 select1 centerName">센터 선택</div>
 		</div>	
 		<br>
 
 		<!--  Search Form-->
-		<div class="rn-search-form-big rn-section selectBar s2 search center">
+		<div class="rn-search-form-big rn-section selectBar s2 search center cursorP">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -232,8 +253,7 @@
 										시승 센터 선택
 									</h1>
 								</div>
-								<div class="text-center">
-									시승 센터 이름 불러오기
+								<div class="text-center centerName">
 								</div>
 							</form>
 						</div>
@@ -251,7 +271,7 @@
 
 
 		<!-- 시승 센터 위치-->
-		<section class="rn-section rn-car-list selectBar">
+		<section class="rn-section rn-car-list selectBar cursorP">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-10">
@@ -369,92 +389,12 @@
 			
 				 var carList = $("#carList");
 				 var originalCarList = carList.html();
-				 //console.log(originalCarList);
-				/*  
+				
+				
+
+
+
 				 
-				//지도-------------------------------------------------------------------------------------------------------
-				var company = ${company}; //업체 리스트 담을 객체
-				
-				function map(company){
-				
-				
-				console.log(company);
-				//로그인한 사람 주소 가져와서 중심좌표에 넣기..?
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = {
-			        center: new kakao.maps.LatLng(37.524279537727175, 127.04819748390128), // 지도의 중심좌표
-			        level: 6 // 지도의 확대 레벨
-			    };  
-				
-				// 지도를 생성합니다    
-				var map = new kakao.maps.Map(mapContainer, mapOption); 
-				
-				// 주소-좌표 변환 객체를 생성합니다
-				var geocoder = new kakao.maps.services.Geocoder();
-				
-				console.log(company.length);
-				var code = [];
-				//반복문으로 가져온 업체 주소 배열 좌표에 넣기
-				var index = 0;
-				for(var i = 0; i < company.length ; i++){
-					
-	        var start = company[i].memberAddr.indexOf(",") + 1;
-	        var end = company[i].memberAddr.lastIndexOf(",");
-	        company[i].memberAddr = company[i].memberAddr.substring(start,end);
-	        //console.log(company[i].memberAddr);
-				  // 주소로 좌표를 검색합니다
-						geocoder.addressSearch(company[i].memberAddr, function(result, status) {
-							
-							// 정상적으로 검색이 완료됐으면 
-						     if (status === kakao.maps.services.Status.OK) {
-						    	
-						    	var Y =result[0].y;
-						    	var X = result[0].x;
-						    	 
-						       // var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-						        
-										addM(Y, X);
-										
-						     } 
-						}); 
-			   	
-				}//반복문 끝
-			
-			function addM(Y, X){
-				 // 결과값으로 받은 위치를 마커로 표시합니다
-		        var marker = new kakao.maps.Marker({
-		            map: map,
-		            position: new kakao.maps.LatLng(Y, X)
-		        });
-				 		
-		        marker.setMap(map);
-				 
-		        company = ${company}; //업체 리스트 담을 객체
-		        var iwContent = '<div style="padding:5px;">'
-		        								+ company[index].brand + '<br>'+
-		        								company[index++].cooName+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	       	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-	
-		        var infowindow = new kakao.maps.InfoWindow({
-		       	    content : iwContent,
-		       	    removable : iwRemoveable
-		       	}); 
-	       	    
-				     // 마커에 클릭이벤트를 등록합니다
-					   	kakao.maps.event.addListener( marker, 'click', function() {
-					   		
-					   	      // 마커 위에 인포윈도우를 표시합니다
-					   	 infowindow.open(map,  marker );  
-					   	});
-			}
-			
-				
-			
-	}
-				 */
-				
-				
-				
 			//브랜드 카테고리 선택시 자동차 브랜드에 맞게 가져오기--------------------------------------------------------------
 			$("select[name='brand']").on("change", function(){
 				 var brandName = $(this).val();
@@ -465,9 +405,6 @@
 				 	if(brandName == "Any"){
 				 		carList.html(originalCarList);
 				 	}
-					 //console.log(brandName);
-					 //var cList = ${cList};
-					 //console.log(cList);
 					 var cList = ${cListJSON};
 					 console.log(cList);
 					 
@@ -484,9 +421,14 @@
 
 								var info = $("<div>").addClass("rn-car-item-info");
 								var h3 = $("<h3>").text(car.carName);
+								var model = $("<p>").addClass("modelName").text(car.carModel);
+								var brand = $("<p>").addClass("brandName").text(car.brand);
+								
 								var carNo = $("<span>").css("display","none").text(car.carNo);
 								info.append(carNo);
 								info.append(h3);
+								info.append(model);
+								info.append(brand);
 								rn.append(info);
 								col.append(rn);
 								carList.append(col); 
@@ -495,11 +437,21 @@
 				 
 			});
 			
-				 var checkFlag = true; 
+			var checkFlag = true; 
 			//차 선택시 바에 이름 가져오기-----------------------------------------------------------------------------
 			$(document).on("click",".rn-car-item", function(){
 				openCenterBar();
-				$(this).addClass("carSelect");
+				
+				//선택된거 테두리 색변경하기
+						$(this).addClass("carSelect");                      //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+						$(this).parent().siblings().children().removeClass("carSelect");  //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+
+
+
+
+
+
+
 				var carName = $(this).children().next().children("h3").text();
 				var carNo = $(this).children().next().children("span").text();
 				$(".carNameArea").text(carName);

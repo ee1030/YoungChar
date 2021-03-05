@@ -57,7 +57,7 @@ console.log(company.length);
     for(var c of com){
         var tr = $("<tr>");
         var td = $("<td>");
-        td.html("<h4>"+c.brand+" " +c.cooName +"</h4>"+"<h5>"+ c.memberAddr+"</h5>"+c.memPhone+"<span display='none'>"+c.memberNo+"</span>");
+        td.html("<h4>"+"<span>"+c.brand+"</span>"+"<span>"+c.cooName +"</span>"+"</h4>"+"<h5>"+ c.memberAddr+"</h5>"+c.memPhone+"<span display='none'>"+c.memberNo+"</span>");
         tr.html(td);
         $("#centerTable").append(tr);
     }
@@ -67,21 +67,28 @@ console.log(company.length);
         //ajax 완료시 수행
 		if(checkFlag == true){
             console.log(com[0].memberAddr);
-            addTo(com[0].memberAddr, com[0].brand, com[0].memberNo);
+            addTo(com[0].memberAddr, com[0].brand, com[0].memberNo, com[0].cooName);
         }
 
-        //목록 클릭시 지도 이동 시키기
+        //목록 클릭시 지도 이동 시키기------------------------------------------------------
 			$(document).on("click","tr", function(){
+
+                //선택시 테두리 색 추가
+                $(this).addClass("carSelect");
+                $(this).siblings().removeClass("carSelect"); 
+
 				addr = $(this).children().children("h5").text();
-				brand = $(this).children().children("h4").text();
+				brand = $(this).children().children("h4").children().first();
+                brandName = brand.text();
+                cooName = brand.next().text();
                 memberNo = $(this).children().children("span").text();
-				
-                addTo(addr, brand,memberNo);
+                addTo(addr, brandName,memberNo, cooName);
 	            
+                $(".centerName").text(brandName+" "+cooName);
           
         });
 
-        function addTo(addr, brand, memberNo){
+        function addTo(addr, brand, memberNo, cooName){
             
 				geocoder.addressSearch(addr, function(result, status) {
 
@@ -97,17 +104,12 @@ console.log(company.length);
                         var content = '<div class="wrap" id='+memberNo+'>' + 
                                     '    <div class="info">' + 
                                     '        <div class="title">' + 
-                                                    brand + 
-                                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+                                                    brand +" " +cooName +
+                                    '            <div class="close" title="닫기"></div>' + 
                                     '        </div>' + 
                                     '        <div class="body">' + 
-                                    '            <div class="img">' +
-                                    '                <img  width="73" height="70">' +
-                                    '           </div>' + 
                                     '            <div class="desc">' + 
                                     '                <div class="ellipsis">'+ addr+'</div>' + 
-                                    '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-                                    '                <div><a  target="_blank" class="link">홈페이지</a></div>' + 
                                     '            </div>' + 
                                     '        </div>' + 
                                     '    </div>' +    

@@ -73,6 +73,16 @@
             text-align: center;
             line-height : 45px;
          }
+		 .brandName{
+				margin-bottom : 7px !important;
+				color : #49B53F !important;
+				font-size: 1.2em !important;
+			}
+			
+			.modelName{
+				margin-bottom : 7px !important;
+				color : #B4B4B4 !important;
+			}
          
          
          
@@ -226,9 +236,14 @@
 
 					var info = $("<div>").addClass("rn-car-item-info");
 					var h3 = $("<h3>").text(value.carName);
+					var model = $("<p>").addClass("modelName").text(value.carModel);
+					var brand = $("<p>").addClass("brandName").text(value.brand);
+								
 					var carNo = $("<span>").css("display","none").text(value.carNo);
 					info.append(carNo);
 					info.append(h3);
+					info.append(model);
+					info.append(brand);
 					rn.append(info);
 					col.append(rn);
 					addedCarList.append(col); 
@@ -269,9 +284,14 @@
 		
 							var info = $("<div>").addClass("rn-car-item-info");
 							var h3 = $("<h3>").text(value.carName);
+							var model = $("<p>").addClass("modelName").text(value.carModel);
+							var brand = $("<p>").addClass("brandName").text(value.brand);
+					
 							var carNo = $("<span>").css("display","none").text(value.carNo);
 							info.append(carNo);
 							info.append(h3);
+							info.append(model);
+							info.append(brand);
 							rn.append(info);
 							col.append(rn);
 							addedCar.append(col); 

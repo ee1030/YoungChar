@@ -42,13 +42,13 @@
 	
 	
 	
-	<!-- 차량 목록 조회 -->
-	<select id="selectCarList" parameterType="_int" resultMap="testCars_rm">
+	<!--전체 차량 목록 조회 -->
+	<select id="selectCarList" resultMap="testCars_rm">
 		SELECT DISTINCT(CAR_NO), CAR_NAME, CAR_MODEL, CATEGORY_NM 
-		FROM CAR_INFO
-		JOIN TEST_DRIVE_CAR USING(CAR_NO)
+		FROM CAR_INFO 
+		JOIN TEST_DRIVE_CAR t USING(CAR_NO)
 		JOIN "CATEGORY" USING(CATEGORY_CD)
-		WHERE CAR_STATUS = 'Y'
+		WHERE t.CAR_STATUS = 'Y'
 		ORDER BY CAR_NO
 	</select>	
 	
