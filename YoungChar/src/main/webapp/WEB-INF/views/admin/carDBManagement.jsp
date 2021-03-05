@@ -173,8 +173,8 @@ select:focus, select:active {
 										<c:otherwise>
 											<c:forEach var="car" items="${carList}">
 											<tbody>
-												<tr>
-													<th><input type="checkbox" name="chkid" class="chk" /></th>
+												<tr> 
+													<th><input type="checkbox" name="chkid" class="chk" value="${car.carNo }"/></th>
 													<th scope="row">${car.carNo}</th>
 													<td>${car.carName }</td>
 													<td>${car.carModel }</td>
@@ -365,6 +365,37 @@ select:focus, select:active {
 			$('#checkAll').click(function() {
 				$('.chk').prop('checked', this.checked);
 			});
+		});
+		
+		$("#selectedDel").on("click", function(){
+			var chkList = new Array();
+			
+			$("input[name='chkid']:checked").each(function(){
+				chkList.push($(this).val());
+			});
+			
+			console.log(chkList);
+			
+			if(confirm("선택한 차량을 삭제 하시겠습니까?")) {
+				$.ajax({
+					url : "${contextPath}/admin/carDBManagement/selectDelete",
+					type : "POST",
+					dataType : "json",
+					data : { "chkList" : chkList },	
+					success : function(result) {
+						if(result > 0) {
+							swal({icon : "success", title : "삭제 완료"}).then(function() {
+								location.reload();
+							});
+						}
+						
+					},
+					error : function() {
+						console.log("삭제 실패");
+					}
+					
+				});
+			}
 		});
 	</script>
 

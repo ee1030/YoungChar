@@ -227,20 +227,20 @@ public class AdminDAO {
 	/** 전체 게시글 수 조회 DAO
 	 * @return listCount
 	 */
-	public int getAllBoardListCount() {
-		return sqlSession.selectOne("adminMapper.getAllBoardListCount");
+	public int getBoardListCount(int type) {
+		return sqlSession.selectOne("adminMapper.getBoardListCount", type);
 	}
 
 	/** 전체 게시글 목록 조회 DAO
 	 * @param pInfo
 	 * @return bList
 	 */
-	public List<Board> selectAllBoardList(PageInfo pInfo) {
+	public List<Board> getBoardList(PageInfo pInfo, int type) {
 		
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
-		return sqlSession.selectList("adminMapper.selectAllBoardList", null, rowBounds);
+		return sqlSession.selectList("adminMapper.selectBoardList", type, rowBounds);
 	}
 
 	/** 모든 게시글 페이지 삭제 DAO
@@ -305,5 +305,13 @@ public class AdminDAO {
 	 */
 	public int insertAttachmentList(List<CAttachment> uploadImages) {
 		return sqlSession.insert("adminMapper.insertAttachmentList", uploadImages);
+	}
+
+	/** 선택된 차량 정보 삭제 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int selectedCarDelete(List<String> chkList) {
+		return sqlSession.delete("adminMapper.selectedCarDelete", chkList);
 	}
 }

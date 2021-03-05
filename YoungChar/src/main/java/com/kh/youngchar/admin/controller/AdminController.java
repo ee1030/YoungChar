@@ -1,6 +1,5 @@
 package com.kh.youngchar.admin.controller;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -194,23 +194,27 @@ public class AdminController {
 	}
 	
 	// 모든 게시글 조회 페이지
-	@RequestMapping("allBoardManagement")
-	public String allBoardManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+	@RequestMapping("boardManagement/{type}")
+	public String boardManagement(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+									@PathVariable(name="type", required = false) int type,
 									 Model model) {
 		
-		PageInfo pInfo = service.getAllBoardPageInfo(cp);
+		PageInfo pInfo = service.getBoardPageInfo(cp, type);
 		
-		List<Board> bList = service.selectAllBoardList(pInfo);
+		List<Board> bList = service.selectBoardList(pInfo, type);
+		
+		System.out.println(pInfo);
+		System.out.println(bList);
 		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pInfo", pInfo);
 		
-		return "admin/allBoardManagement";
+		return "admin/boardManagement";
 	}
 	
 	// 선택된 게시글 삭제
 	@ResponseBody
-	@RequestMapping("allBoardManagement/delete")
+	@RequestMapping("boardManagement/delete")
 	public int allBoardDelete(@RequestParam(value="chkList[]") List<String> chkList) {
 		int result = service.allBoardDelete(chkList);
 		
@@ -219,29 +223,11 @@ public class AdminController {
 	
 	// 선택된 게시글 복구
 	@ResponseBody
-	@RequestMapping("allBoardManagement/restore")
+	@RequestMapping("boardManagement/restore")
 	public int allBoardRestore(@RequestParam(value="chkList[]") List<String> chkList) {
 		int result = service.allBoardRestore(chkList);
 		
 		return result;
-	}
-	
-	// 리뷰 게시글 조회 페이지
-	@RequestMapping("reviewBoardManagement")
-	public String reviewBoardManagement() {
-		return "admin/reviewBoardManagement";
-	}
-	
-	// 정보 게시글 조회 페이지
-	@RequestMapping("infoBoardManagement")
-	public String infoBoardManagement() {
-		return "admin/infoBoardManagement";
-	}
-	
-	// 잡담 게시글 조회 페이지
-	@RequestMapping("freeBoardManagement")
-	public String freeBoardManagement() {
-		return "admin/freeBoardManagement";
 	}
 	
 	// 댓글 관리 페이지
@@ -304,6 +290,15 @@ public class AdminController {
 			}
 		}
 		return "redirect:../carDBManagement";
+	}
+	
+	// 선택된 차량 정보 삭제
+	@ResponseBody
+	@RequestMapping("carDBManagement/selectDelete")
+	public int selectedCarDelete(@RequestParam(value="chkList[]") List<String> chkList) {
+		int result = service.selectedCarDelete(chkList);
+		
+		return result;
 	}
 
 }

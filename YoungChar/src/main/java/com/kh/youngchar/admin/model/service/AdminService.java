@@ -153,15 +153,17 @@ public interface AdminService {
 
 	/** 모든 게시글 관리페이지 페이징 정보 조회 Service
 	 * @param cp
+	 * @param type 
 	 * @return pInfo
 	 */
-	public abstract PageInfo getAllBoardPageInfo(int cp);
+	public abstract PageInfo getBoardPageInfo(int cp, int type);
 
 	/** 모든 게시글 목록 조회 Service
 	 * @param pInfo
+	 * @param type 
 	 * @return bList
 	 */
-	public abstract List<Board> selectAllBoardList(PageInfo pInfo);
+	public abstract List<Board> selectBoardList(PageInfo pInfo, int type);
 
 	/** 모든 게시글 페이지 삭제 Service
 	 * @param chkList
@@ -205,5 +207,11 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int insertImages(int result, List<MultipartFile> carImgs, String savePath);
+
+	/** 선택된 차량정보 삭제 Service
+	 * @param chkList
+	 * @return result
+	 */
+	public abstract int selectedCarDelete(List<String> chkList);
 
 }

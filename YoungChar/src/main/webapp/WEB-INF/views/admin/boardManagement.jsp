@@ -22,7 +22,7 @@
 
 .card {
 	background-color: #79cb4d1f !important;
-	width: 1000px;
+	width: 1100px;
 	margin-left: 100px;
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -87,7 +87,7 @@
 					<div class="col-sm-12">
 						<div class="card">
 							<div class="card-header">
-								<h5 class="card-title">전체 게시글</h5>
+								<h5 class="card-title">게시글 관리</h5>
 								<div class="search-page">
 									<form action="${contextPath}/admin/allBoardManagement/searchTitle" method="post" class="theme-form">
 										<div class="input-group m-0">
@@ -122,7 +122,14 @@
 												<tr>
 													<th><input type="checkbox" name="chkid" class="chk" value="${board.boardNo}" /></th>
 													<td scope="row">${board.boardNo}</td>
-													<td>${board.boardTitle }</td>
+													<td>
+														<%-- 제목의 길이가 15글자를 넘어가는 경우 --%>
+														<c:set var="title" value="${board.boardTitle}"/>
+														<c:if test="${fn:length(title) > 15 }">
+															<c:set var="title" value="${fn:substring(title,0,15) }..."/>
+														</c:if>
+														${title}
+													</td>
 													<td>${board.memberId }</td>
 													<td>${board.boardName }</td>
 													<td>

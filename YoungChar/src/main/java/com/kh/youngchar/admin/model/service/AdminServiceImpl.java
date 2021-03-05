@@ -179,8 +179,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 모든 게시글 관리페이지 페이징 정보 조회 Service 구현
 	@Override
-	public PageInfo getAllBoardPageInfo(int cp) {
-		int listCount = dao.getAllBoardListCount();
+	public PageInfo getBoardPageInfo(int cp, int type) {
+		int listCount = dao.getBoardListCount(type);
 		
 		return new PageInfo(cp, listCount);
 	}
@@ -188,8 +188,9 @@ public class AdminServiceImpl implements AdminService {
 	// 모든 게시글 목록 조회 Service 구현
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public List<Board> selectAllBoardList(PageInfo pInfo) {
-		return dao.selectAllBoardList(pInfo);
+	public List<Board> selectBoardList(PageInfo pInfo, int type) {
+	
+		return dao.getBoardList(pInfo, type);
 	}
 	
 	// 모든 게시글 페이지 삭제 Service 구현
@@ -327,6 +328,12 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
+	// 선택된 차량정보 삭제 Service 구현
+	@Override
+	public int selectedCarDelete(List<String> chkList) {
+		return dao.selectedCarDelete(chkList);
+	}
+
 	// 파일명 변경 메소드
 	public String rename(String originFileName) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
