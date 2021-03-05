@@ -15,6 +15,7 @@
       
 			<typeAlias type="com.kh.youngchar.member.model.vo.Member" alias="Member" />
 			<typeAlias type="com.kh.youngchar.cars.model.vo.Cars" alias="Cars" />
+			<typeAlias type="com.kh.youngchar.cars.model.vo.CAttachment" alias="CAttachment" />
 			
 			<typeAlias type="com.kh.youngchar.company.model.vo.DriveReview" alias="DriveReview" />
 			<typeAlias type="com.kh.youngchar.company.model.vo.Reply" alias="ReviewReply" />
