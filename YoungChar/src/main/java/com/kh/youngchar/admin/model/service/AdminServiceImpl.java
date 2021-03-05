@@ -1,14 +1,20 @@
 package com.kh.youngchar.admin.model.service;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.admin.model.dao.AdminDAO;
+import com.kh.youngchar.board.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
@@ -111,6 +117,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// 선택된 신규업체 승인 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int newCompanyApproval(List<String> chkList) {
 		return dao.newCompanyApproval(chkList);
@@ -144,12 +151,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// 모든 업체 페이지 선택 승인 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int allCompanyApproval(List<String> chkList) {
 		return dao.allCompanyApproval(chkList);
 	}
 
 	// 모든 업체 페이지 선택 승인 취소 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int allCompanyCancellation(List<String> chkList) {
 		return dao.allCompanyCancellation(chkList);
@@ -177,18 +186,21 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// 모든 게시글 목록 조회 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public List<Board> selectAllBoardList(PageInfo pInfo) {
 		return dao.selectAllBoardList(pInfo);
 	}
 	
 	// 모든 게시글 페이지 삭제 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int allBoardDelete(List<String> chkList) {
 		return dao.allBoardDelete(chkList);
 	}
 
 	// 모든 게시글 페이지 복구 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int allBoardRestore(List<String> chkList) {
 		return dao.allBoardRestore(chkList);
@@ -215,6 +227,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	// 차량 등록 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertCar(Cars cars) {
 		int result = 0;
@@ -227,12 +240,106 @@ public class AdminServiceImpl implements AdminService {
 			result = dao.insertCar(cars);
 			
 			if(result > 0) {
-				carNo = result;
+				result = carNo;
 			}
 		}
 		
 		return result;
 	}
+
+	// 차량 이미지 삽입 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertImages(int result, List<MultipartFile> carImgs, String savePath) {
+		
+		int carNo = result;
+		
+		List<CAttachment> uploadImages = new ArrayList<CAttachment>();
+		
+		String filePath = "/resources/carImages";
+		
+		for(int i = 0; i < carImgs.size(); i++) {
+			// i == 인덱스 == fileLevel과 같은 값
+			
+			// 현재 접근한 images의 요소(MultipartFile)에 업로드된 파일이 있는지 확인
+			if(!carImgs.get(i).getOriginalFilename().equals("")) {
+				// 파일이 업로드 된 경우 == 업로드된 원본 파일명이 있는 경우
+				
+				// 원본 파일명 변경
+				String fileName = rename(carImgs.get(i).getOriginalFilename());
+				
+				// Attachment 객체 생성
+				CAttachment ca = new CAttachment(filePath, fileName, i, carNo);
+				
+				uploadImages.add(ca); // 리스트에 추가
+			}
+		}
+		
+		if(!uploadImages.isEmpty()) { // 업로드된 이미지가 있을 경우
+			// 파일 정보 삽입 DAO 호출
+			result = dao.insertAttachmentList(uploadImages);	
+			// result == 삽입된 행의 개수
+			
+			// 모든 데이터가 정상 삽입 되었을 경우 --> 서버에 파일 저장
+			if(result == uploadImages.size()) {
+				result = carNo; 
+				// result에 carNo 저장
+				// MultipartFile.transferTo(O)
+				// -> multipartFile 객체에 저장된 파일을
+				//	  저장된 경로에 실제 파일의 형태로 변환하여 저장하는 메소드
+				
+				int size = 0;
+				
+				size = uploadImages.size();
+				
+				for(int i = 0; i < size; i++) {
+					
+					// uploadImages : 업로드된 이미지 정보를 담고있는 Attachment가 모여있는 List
+					// images : input type="file" 태그의 정보를 담은 MultipartFile이 모여있는 List
+					
+					// uploadImages를 만들 때 각 요소의 파일레벨은
+					// images의 index를 이용해서 부여함
+					
+					try {
+						carImgs.get(uploadImages.get(i).getFileLevel())
+							.transferTo(new File(savePath + "/" + uploadImages.get(i).getFileName()));
+					} catch (Exception e) {
+						e.printStackTrace();
+						
+						// .transferTo()는 IOException을 발생 시킴(Checked Exception)
+						// -> 어쩔 수 없이 try-catch문 작성
+						// --> 예외가 처리되버려서 @Transactional이 정상동작 하지 못함
+						// --> 꼭 예외처리를 하지 않아도 되는 UncheckedException을 강제 발생시켜
+						// 	   @Transactional이 예외가 발생했음을 감지하게 함
+						// --> 상황에 맞는 사용자 정의 예외를 작성
+						throw new InsertAttachmentFailException("파일 서버 저장 실패");
+					}
+				}
+				
+			} else { // 파일 정보를 DB에 삽입하는데 실패했을 때
+				throw new InsertAttachmentFailException("파일 정보 DB 삽입 실패");
+			}
+			
+		} else { // 업로드된 이미지가 없을 경우
+			result = carNo;
+		}
+		
+		return result;
+	}
 	
-	
+	// 파일명 변경 메소드
+	public String rename(String originFileName) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+		String date = sdf.format(new java.util.Date(System.currentTimeMillis()));
+		
+		int ranNum = (int)(Math.random()*100000); // 5자리 랜덤 숫자 생성
+		
+		String str = "_" + String.format("%05d", ranNum);
+		//String.format : 문자열을 지정된 패턴의 형식으로 변경하는 메소드
+		// %05d : 오른쪽 정렬된 십진 정수(d) 5자리(5)형태로 변경. 빈자리는 0으로 채움(0)
+		
+		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		
+		return date + str + ext;
+	}
 }

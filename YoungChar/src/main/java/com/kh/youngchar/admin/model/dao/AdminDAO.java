@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
@@ -296,5 +297,13 @@ public class AdminDAO {
 	 */
 	public int insertCar(Cars cars) {
 		return sqlSession.insert("adminMapper.insertCar", cars);
+	}
+
+	/** 차량 이미지 등록 DAO
+	 * @param uploadImages
+	 * @return result
+	 */
+	public int insertAttachmentList(List<CAttachment> uploadImages) {
+		return sqlSession.insert("adminMapper.insertAttachmentList", uploadImages);
 	}
 }
