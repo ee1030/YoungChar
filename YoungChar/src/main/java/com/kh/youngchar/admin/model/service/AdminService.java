@@ -3,6 +3,8 @@ package com.kh.youngchar.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
@@ -195,5 +197,13 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int insertCar(Cars cars);
+
+	/** 차량 이미지 삽입 Service
+	 * @param result
+	 * @param carImgs
+	 * @param savePath
+	 * @return result
+	 */
+	public abstract int insertImages(int result, List<MultipartFile> carImgs, String savePath);
 
 }

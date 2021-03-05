@@ -279,9 +279,10 @@ public class AdminController {
 		return "admin/carDBManagement";
 	}
 	
+	// 차량 정보 삽입
 	@RequestMapping("carDBManagement/insertCar")
 	public String insertCar(@ModelAttribute Cars cars,
-							@RequestParam("carImg[]") List<MultipartFile> carImgs,
+							@RequestParam(value="carImg[]", required = false) List<MultipartFile> carImgs,
 							HttpServletRequest request,
 							RedirectAttributes ra) {
 		
@@ -292,12 +293,14 @@ public class AdminController {
 			
 			savePath = request.getSession().getServletContext().getRealPath("resources/carImages");
 			
-			//result = service.insertImages(result, carImgs, savePath);
-			
+			result = service.insertImages(result, carImgs, savePath);
 			
 			if(result > 0) {
 				ra.addFlashAttribute("swalIcon", "success");
 				ra.addFlashAttribute("swalTitle", "차량 등록 성공");
+			} else {
+				ra.addFlashAttribute("swalIcon", "error");
+				ra.addFlashAttribute("swalTitle", "차량 등록 실패");
 			}
 		}
 		return "redirect:../carDBManagement";

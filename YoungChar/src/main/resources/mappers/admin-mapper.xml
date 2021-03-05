@@ -57,7 +57,15 @@
 		<result property="categoryCode" column="CATEGORY_CD"/>
 		<result property="categoryName" column="CATEGORY_NM"/>
 
-</resultMap>
+	</resultMap>
+
+   	<resultMap type="CAttachment" id="cAttachment_rm">
+			<id property="fileNo" column="FILE_NO"/>
+			<result property="filePath" column="FILE_PATH"/>
+			<result property="fileName" column="FILE_NAME"/>
+			<result property="fileLevel" column="FILE_LEVEL"/>
+			<result property="carNo" column="CAR_NO"/>
+		</resultMap>
 	
 	<!-- 신규 회원 수 조회 -->
 	<select id="getNewMember" resultType="_int">
@@ -308,6 +316,20 @@
 		INSERT INTO CAR_INFO
 		VALUES(#{carNo}, #{carName}, #{carModel}, #{drivingSystem}, #{personnel}, #{consumpt}, #{minPrice}, #{maxPrice},
 						#{fuel}, #{mileage}, #{capacity}, #{maxPower}, #{maxTorque}, #{maxSpeed}, #{performance}, #{categoryCode})
+	</insert>
+	
+	<!-- 차량 이미지 등록 -->
+	<insert id="insertAttachmentList" parameterType="list">
+		INSERT INTO C_ATTACHMENT
+		SELECT SEQ_CFNO.NEXTVAL, A.* FROM ( 
+			<foreach collection="list" item="item" separator=" UNION ALL ">
+				SELECT #{item.filePath} FILE_PATH,
+							 #{item.fileName} FILE_NAME,
+							 #{item.fileLevel} FILE_LEVEL,
+							 #{item.carNo} CAR_NO
+				FROM DUAL
+			</foreach>
+		)A 
 	</insert>
 	
 </mapper>
