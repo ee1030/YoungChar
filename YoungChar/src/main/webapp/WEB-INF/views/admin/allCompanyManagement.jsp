@@ -201,7 +201,7 @@
 									</c:when>
 
 									<c:otherwise>
-										<li><a class="page-link" href="?cp=${page}">${page}</a></li>
+										<li><a class="page-link" href="?cp=${page}<c:if test="${sv != null}">&sv=${sv}</c:if>">${page}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>

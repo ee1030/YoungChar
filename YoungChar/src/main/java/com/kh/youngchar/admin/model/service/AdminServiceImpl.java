@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.youngchar.admin.model.dao.AdminDAO;
 import com.kh.youngchar.board.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
@@ -179,8 +180,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 모든 게시글 관리페이지 페이징 정보 조회 Service 구현
 	@Override
-	public PageInfo getAllBoardPageInfo(int cp) {
-		int listCount = dao.getAllBoardListCount();
+	public PageInfo getBoardPageInfo(int cp, int type) {
+		int listCount = dao.getBoardListCount(type);
 		
 		return new PageInfo(cp, listCount);
 	}
@@ -188,8 +189,9 @@ public class AdminServiceImpl implements AdminService {
 	// 모든 게시글 목록 조회 Service 구현
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public List<Board> selectAllBoardList(PageInfo pInfo) {
-		return dao.selectAllBoardList(pInfo);
+	public List<Board> selectBoardList(PageInfo pInfo, int type) {
+	
+		return dao.getBoardList(pInfo, type);
 	}
 	
 	// 모든 게시글 페이지 삭제 Service 구현
@@ -204,6 +206,20 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int allBoardRestore(List<String> chkList) {
 		return dao.allBoardRestore(chkList);
+	}
+
+	// 게시글 관리 검색 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchBoardPageInfo(int cp, Map<String, Object> map) {
+		int listCount = dao.getSearchBoardPageInfo(map);
+		
+		return new PageInfo(cp, listCount);
+	}
+
+	// 게시글 관리 검색 Service 구현
+	@Override
+	public List<Board> selectSearchBoard(PageInfo pInfo, Map<String, Object> map) {
+		return dao.selectSearchBoard(pInfo, map);
 	}
 
 	// 차량 DB 목록 페이징 정보 조회 Service 구현
@@ -327,6 +343,54 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
+	// 선택된 차량정보 삭제 Service 구현
+	@Override
+	public int selectedCarDelete(List<String> chkList) {
+		return dao.selectedCarDelete(chkList);
+	}
+	
+	// 댓글 목록 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getReplyPageInfo(int cp) {
+		int listCount = dao.getReplyListCount();
+		
+		return new PageInfo(cp, listCount);
+	}
+	
+	// 댓글 목록 조회 Service 구현
+	@Override
+	public List<Reply> selectReplyList(PageInfo pInfo) {
+		return dao.selectReplyList(pInfo);
+	}
+	
+	// 선택된 댓글 삭제 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int replyDelete(List<String> chkList) {
+		return dao.replyDelete(chkList);
+	}
+
+	// 선택된 댓글 복구 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int replyRestore(List<String> chkList) {
+		return dao.replyRestore(chkList);
+	}
+	
+	// 게시글 관리 검색 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchReplyPageInfo(int cp, String sv) {
+		int listCount = dao.getSearchReplyCount(sv);
+		
+		return new PageInfo(cp, listCount);
+	}
+
+	// 게시글 관리 검색 Service 구현
+	@Override
+	public List<Reply> selectSearchReply(PageInfo pInfo, String sv) {
+		return dao.selectSearchReply(pInfo, sv);
+	}
+
 	// 파일명 변경 메소드
 	public String rename(String originFileName) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
@@ -342,4 +406,5 @@ public class AdminServiceImpl implements AdminService {
 		
 		return date + str + ext;
 	}
+
 }

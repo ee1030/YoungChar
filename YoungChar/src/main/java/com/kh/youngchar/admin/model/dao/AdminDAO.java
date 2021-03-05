@@ -9,11 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 
+/**
+ * @author sksgu
+ *
+ */
 /**
  * @author sksgu
  *
@@ -227,20 +232,20 @@ public class AdminDAO {
 	/** 전체 게시글 수 조회 DAO
 	 * @return listCount
 	 */
-	public int getAllBoardListCount() {
-		return sqlSession.selectOne("adminMapper.getAllBoardListCount");
+	public int getBoardListCount(int type) {
+		return sqlSession.selectOne("adminMapper.getBoardListCount", type);
 	}
 
 	/** 전체 게시글 목록 조회 DAO
 	 * @param pInfo
 	 * @return bList
 	 */
-	public List<Board> selectAllBoardList(PageInfo pInfo) {
+	public List<Board> getBoardList(PageInfo pInfo, int type) {
 		
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
-		return sqlSession.selectList("adminMapper.selectAllBoardList", null, rowBounds);
+		return sqlSession.selectList("adminMapper.selectBoardList", type, rowBounds);
 	}
 
 	/** 모든 게시글 페이지 삭제 DAO
@@ -258,6 +263,29 @@ public class AdminDAO {
 	public int allBoardRestore(List<String> chkList) {
 		return sqlSession.update("adminMapper.allBoardRestore", chkList);
 	}
+	
+	/** 게시글 관리 검색 정보 조회 DAO
+	 * @param map
+	 * @return listCount
+	 */
+	public int getSearchBoardPageInfo(Map<String, Object> map) {
+		return sqlSession.selectOne("adminMapper.getSearchBoardPageInfo", map);
+	}
+	
+
+	/** 게시글 관리 검색 DAO
+	 * @param pInfo
+	 * @param map
+	 * @return bList
+	 */
+	public List<Board> selectSearchBoard(PageInfo pInfo, Map<String, Object> map) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectSearchBoard", map, rowBounds);
+	}
+
 
 	/** 차량 DB 목록 개수 조회 DAO
 	 * @return listCount
@@ -306,4 +334,69 @@ public class AdminDAO {
 	public int insertAttachmentList(List<CAttachment> uploadImages) {
 		return sqlSession.insert("adminMapper.insertAttachmentList", uploadImages);
 	}
+
+	/** 선택된 차량 정보 삭제 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int selectedCarDelete(List<String> chkList) {
+		return sqlSession.delete("adminMapper.selectedCarDelete", chkList);
+	}
+
+	/** 댓글 목록 페이지 정보 조회 DAO
+	 * @return listCount
+	 */
+	public int getReplyListCount() {
+		return sqlSession.selectOne("adminMapper.getReplyListCount");
+	}
+
+	/** 댓글 목록 조회 DAO
+	 * @param pInfo
+	 * @return rList
+	 */
+	public List<Reply> selectReplyList(PageInfo pInfo) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectReplyList", null, rowBounds);
+	}
+
+	/** 선택된 댓글 삭제 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int replyDelete(List<String> chkList) {
+		return sqlSession.update("adminMapper.replyDelete", chkList);
+	}
+
+	/** 선택된 댓글 복구 DAO
+	 * @param chkList
+	 * @return result
+	 */
+	public int replyRestore(List<String> chkList) {
+		return sqlSession.update("adminMapper.replyRestore", chkList);
+	}
+
+	/** 댓글 검색 페이징 정보 조회 DAO
+	 * @param sv
+	 * @return listCount
+	 */
+	public int getSearchReplyCount(String sv) {
+		return sqlSession.selectOne("adminMapper.getSearchReplyCount", sv);
+	}
+
+	/** 댓글 검색 목록 조회 DAO
+	 * @param pInfo
+	 * @param sv
+	 * @return rList
+	 */
+	public List<Reply> selectSearchReply(PageInfo pInfo, String sv) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("adminMapper.selectSearchReply", sv, rowBounds);
+	}
+
 }

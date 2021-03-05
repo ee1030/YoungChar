@@ -18,12 +18,13 @@ public class Cars {
 	private double performance;
 	private int categoryCode;
 	private String categoryName;
+	private String carStatus;
 	
 	public Cars() {}
 
 	public Cars(int carNo, String carName, String carModel, String drivingSystem, int personnel, double consumpt,
 			int minPrice, int maxPrice, String fuel, double mileage, double capacity, double maxPower, double maxTorque,
-			double maxSpeed, double performance, int categoryCode, String categoryName) {
+			double maxSpeed, double performance, int categoryCode, String categoryName, String carStatus) {
 		super();
 		this.carNo = carNo;
 		this.carName = carName;
@@ -42,6 +43,15 @@ public class Cars {
 		this.performance = performance;
 		this.categoryCode = categoryCode;
 		this.categoryName = categoryName;
+		this.carStatus = carStatus;
+	}
+
+	public String getCarStatus() {
+		return carStatus;
+	}
+
+	public void setCarStatus(String carStatus) {
+		this.carStatus = carStatus;
 	}
 
 	public int getCarNo() {
@@ -182,10 +192,13 @@ public class Cars {
 
 	@Override
 	public String toString() {
-		return "CarsDAO [carNo=" + carNo + ", carName=" + carName + ", carModel=" + carModel + ", drivingSystem="
+		return "Cars [carNo=" + carNo + ", carName=" + carName + ", carModel=" + carModel + ", drivingSystem="
 				+ drivingSystem + ", personnel=" + personnel + ", consumpt=" + consumpt + ", minPrice=" + minPrice
 				+ ", maxPrice=" + maxPrice + ", fuel=" + fuel + ", mileage=" + mileage + ", capacity=" + capacity
 				+ ", maxPower=" + maxPower + ", maxTorque=" + maxTorque + ", maxSpeed=" + maxSpeed + ", performance="
-				+ performance + ", categoryCode=" + categoryCode + ", categoryName=" + categoryName + "]";
+				+ performance + ", categoryCode=" + categoryCode + ", categoryName=" + categoryName + ", carStatus="
+				+ carStatus + "]";
 	}
+
+
 }
