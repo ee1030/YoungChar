@@ -1,5 +1,6 @@
 package com.kh.youngchar.member.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.youngchar.member.model.service.MemberService;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
@@ -66,10 +71,54 @@ public class MemberController {
 		//네이버
 		model.addAttribute("url", naverAuthUrl);
 
-		출처: https://bumcrush.tistory.com/151 [맑음때때로 여름]
-
 		return "member/login";
 	}
+	
+	//네이버 로그인 성공시 callback호출 메소드
+	@RequestMapping(value = "callback")
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	System.out.println("여기는 callback");
+	OAuth2AccessToken oauthToken;
+	oauthToken = naverLoginBO.getAccessToken(session, code, state);
+	//1. 로그인 사용자 정보를 읽어온다.
+	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+	/** apiResult json 구조
+	{"resultcode":"00",
+	"message":"success",
+	"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+	**/
+	//2. String형식인 apiResult를 json형태로 바꿈
+	JSONParser parser = new JSONParser();
+	Object obj = parser.parse(apiResult);
+	JSONObject jsonObj = (JSONObject) obj;
+	//3. 데이터 파싱
+	//Top레벨 단계 _response 파싱
+	JSONObject response_obj = (JSONObject)jsonObj.get("response");
+	//response의 nickname값 파싱
+	String memberId = (String)response_obj.get("id");
+	String nickName = (String)response_obj.get("nickname");
+	String memberNm = (String)response_obj.get("name");
+	String memberEmail = (String)response_obj.get("email");
+	System.out.println(nickName+ memberId+ memberNm + memberEmail);
+	
+	Member member = null;
+	
+	member.setMemberEmail(memberEmail);
+	
+
+	
+	member = service.naverMem(member);
+	
+	if(member != null) {
+		session.setAttribute("loginMember", member);
+		
+	}
+	//4.파싱 닉네임 세션으로 저장
+	session.setAttribute("sessionId",nickName); //세션 생성
+	model.addAttribute("result", apiResult);
+	return "redirect:/";
+	}
+
 
 
 	// 회원가입 화면전환 Controller
@@ -385,6 +434,123 @@ public class MemberController {
 		
 		return loginMember;
 	}
+	
+	
+	// ---------------------------------------------------
+	// 아이디 찾기 화면전환 Controller
+	// ---------------------------------------------------
+	@RequestMapping("findId")
+	public String findIdForm() {
+		
+		return "member/findId";
+	}
+	
+	
+	@RequestMapping("findIdAction")
+	public String findIdAction(@RequestParam("memberNm") String memberNm, @RequestParam("memberEmail") String memberEmail, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNm", memberNm);
+		map.put("memberEmail", memberEmail);
+		
+		String memberId = service.findIdAction(map);
+		
+		model.addAttribute("memberId", memberId);
+		
+		return "member/findIdResult";
+	}
+	
+	
+	
+	// ---------------------------------------------------
+	// 비밀번호 찾기 화면전환 Controller
+	// ---------------------------------------------------
+	@RequestMapping("findPwd")
+	public String findPwdForm() {
+		
+		return "member/findPwd";
+	}
+	
+	
+	
+	// ---------------------------------------------------
+		// 비밀번호 찾기 이메일 발송 Controller (AJAX)
+		// ---------------------------------------------------
+		@RequestMapping("findPwdMail")
+		@ResponseBody
+		public String findPwdMail(HttpServletRequest request) {
+			
+			String setfrom = "jihoprac@gmail.com";
+			String tomail = request.getParameter("mail"); // 받는 사람 이메일
+			String title = "[영차영차] 비밀번호 찾기에 필요한 이메일 인증 키값 전송"; // 제목
+			String content = "키 값을 인증번호 확인영역에 입력해주세요."; // 내용
+			String key = "";
+
+			try {
+				Random random = new Random();
+				  
+				  for (int i = 0; i < 3; i++) {
+						int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성
+						key += (char) index;
+					}
+					int numIndex = random.nextInt(8999) + 1000; // 4자리 정수를 생성
+					key += numIndex;
+					
+					
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+						true, "UTF-8");
+
+				messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setTo(tomail); // 받는사람 이메일
+				messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				messageHelper.setText(content + key); // 메일 내용
+
+				mailSender.send(message);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+			return key;
+		}
+		
+		
+	// ---------------------------------------------------
+	// 비밀번호 찾기  Controller
+	// ---------------------------------------------------
+	@RequestMapping("findPwdAction")
+	public String findPwdAction(@RequestParam("memberId") String memberId,
+								@RequestParam("memberEmail") String memberEmail,
+								@RequestParam("memberPwd1") String memberPwd1,
+								RedirectAttributes ra) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("memberEmail", memberEmail);
+		map.put("memberPwd", memberPwd1);
+		
+		int result = service.findPwdAction(map);
+		
+		String url = "";
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원정보가 변경되었습니다.";
+			url = "redirect:/";
+			
+		}else {
+			swalIcon = "error";
+			swalTitle = "아이디 또는 이메일을 확인해주세요";
+			url = "redirect:findPwd";
+		
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		return url;
+	}
+	
+	
 	
 	
 	

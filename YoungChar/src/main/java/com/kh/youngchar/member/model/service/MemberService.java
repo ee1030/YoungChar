@@ -65,6 +65,21 @@ public interface MemberService {
 	Member loginMember(Member loginMember);
 
 
+	//---------------------------------------------------
+	//				네이버 로그인 Service
+	//---------------------------------------------------
+	Member naverMem(Member member);
+
+
+	String findIdAction(Map<String, Object> map);
+
+
+	//---------------------------------------------------
+	//				비밀번호 찾기 Service
+	//---------------------------------------------------
+	int findPwdAction(Map<String, Object> map);
+
+
 
 
 
