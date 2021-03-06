@@ -316,6 +316,43 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public Member naverMem(Member member) {
+		
+		int result = dao.naverMem(member);
+		
+		if(result > 0) {
+			member = dao.loginAction(member);
+			
+		}
+		
+		return member;
+	}
+
+
+	@Override
+	public String findIdAction(Map<String, Object> map) {
+		return dao.findIdAction(map);
+		
+	}
+
+
+	// 비밀번호 찾기
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int findPwdAction(Map<String, Object> map) {
+		
+		String encPwd = enc.encode( (String)map.get("memberPwd") );
+		
+		map.put("memberPwd", encPwd);
+		
+		int result = dao.findPwdAction(map);
+		
+		return result;
+		
+	}
+
+
 	
 	
 	

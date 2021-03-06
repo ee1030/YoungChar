@@ -132,6 +132,31 @@
 		INSERT INTO MEMBER
 		VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberNm}, null, null, null, null, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+
+
+	<insert id="naverMem" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MNO.NEXTVAL, #{memberId}, null, #{memberNm}, null, null, null, null, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	
+	<!-- 아이디 찾기 -->
+	<select id="findIdAction" parameterType="map" resultType="string">
+		SELECT MEM_ID FROM MEMBER
+		WHERE MEM_NAME = #{memberNm}
+		AND MEM_EMAIL = #{memberEmail}
+		AND SIGN_STATUS = 'N'
+	</select>
+	
+	
+	<!-- 비밀번호 찾기 -->
+	<update id="findPwdAction" parameterType="map">
+		UPDATE MEMBER SET
+		MEM_PWD = #{memberPwd}
+		WHERE MEM_ID = #{memberId}
+		AND MEM_EMAIL = #{memberEmail}
+	</update>
+	
 	
 	
 	<!-- 회원 탈퇴 -->

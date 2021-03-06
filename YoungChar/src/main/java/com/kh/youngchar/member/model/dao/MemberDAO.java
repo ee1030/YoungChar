@@ -147,6 +147,26 @@ public class MemberDAO {
 	}
 
 
+	public int naverMem(Member member) {
+		return sqlSession.insert("memberMapper.naverMem", member);
+		
+	}
+
+
+	public String findIdAction(Map<String, Object> map) {
+		return sqlSession.selectOne("memberMapper.findIdAction", map);
+		
+	}
+
+
+	
+	// 비밀번호 찾기
+	public int findPwdAction(Map<String, Object> map) {
+		return sqlSession.update("memberMapper.findPwdAction", map);
+		
+	}
+
+
 	
 	
 	
