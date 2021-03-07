@@ -234,4 +234,11 @@
 			ORDER BY BOARD_NO DESC
 	</select>
 	
+	
+	<select id="addMem" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_ID = #{memberId}
+	</select>
+	
+	
 </mapper>

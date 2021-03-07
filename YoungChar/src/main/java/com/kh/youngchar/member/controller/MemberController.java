@@ -33,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.member.model.service.MemberService;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
@@ -155,13 +156,11 @@ public class MemberController {
 		String memberNo = loginMember.getMemberId();
 		List<Board> bList = new ArrayList<Board>();
 		
-		
 		bList = service.selectList(memberNo);
 		int bListNo = service.bListNo(memberNo);
 		
 		if(bList != null && !bList.isEmpty()) { // 게시글 목록 조회 성공 시 
 			List<Attachment> thumbnailList = service.selectThumbnailList(bList);
-			
 			if(thumbnailList != null) {
 				model.addAttribute("thList", thumbnailList);
 			}
@@ -451,8 +450,11 @@ public class MemberController {
 							  @RequestParam("memberPwd") String memberPwd,
 							  @RequestParam("memberNm") String memberNm, Model model) {
 		
-		loginMember = service.loginMember(loginMember);
+		int result = service.addMem(memberId);
 		
+		if(result == 0) {
+			loginMember = service.loginMember(loginMember);
+		}
 		model.addAttribute("loginMember", loginMember);
 		
 		return loginMember;
@@ -605,6 +607,9 @@ public class MemberController {
 		
 		return "member/mypage";
 	}
+	
+	
+	
 	
 	
 }

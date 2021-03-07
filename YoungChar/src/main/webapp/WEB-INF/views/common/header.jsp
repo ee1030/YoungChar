@@ -173,7 +173,7 @@
 											
 											<c:otherwise>
 												<li class="nav-item">
-				                	<a class="nav-link" href="${contextPath}/member/mypage">${loginMember.nickName}</a>
+				                	<a class="nav-link" href="${contextPath}/member/mypage">${loginMember.memberNm}</a>
 				                	
 				                </li>
 				                <li class="nav-item"><a class="nav-link" href="${contextPath}/member/logout">Logout</a></li>

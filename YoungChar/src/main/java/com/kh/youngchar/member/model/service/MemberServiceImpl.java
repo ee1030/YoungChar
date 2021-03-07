@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.member.model.dao.MemberDAO;
 import com.kh.youngchar.member.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.member.model.vo.Member;
@@ -384,6 +385,15 @@ public class MemberServiceImpl implements MemberService{
 		return dao.chooseList(map);
 		
 	}
+
+
+	@Override
+	public int addMem(String memberId) {
+		return dao.addMem(memberId);
+		
+	}
+
+
 
 
 	
