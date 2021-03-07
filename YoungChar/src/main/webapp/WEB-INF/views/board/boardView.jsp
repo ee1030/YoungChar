@@ -138,7 +138,15 @@
 					<%-- 	<c:if test="${empty sessionScope.returnListURL}">
 							<c:set var="returnListURL" value="../list/${board.boardCode}" scope="session"/>
 						</c:if> --%>
-						<a class="btn btn-success returnUrl">목록으로</a>
+						<c:choose>
+							<c:when test="${!empty param.adm}">
+								<a class="btn btn-success" href="javascript:history.back();">목록으로</a>
+							</c:when>
+							<c:otherwise>
+								<a class="btn btn-success returnUrl">목록으로</a>
+							</c:otherwise>
+						</c:choose>
+						
 	                	
 	                	<c:url var="updateUrl" value="${board.boardNo}/update"/>
 	                	
