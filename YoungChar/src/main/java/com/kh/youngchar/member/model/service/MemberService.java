@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
@@ -103,6 +104,11 @@ public interface MemberService {
 	//				마이페이지 내가 쓴 글 카테고리별 조회 썸네일 Service
 	//---------------------------------------------------
 	List<Board> chooseList(Map<String, Object> map);
+
+
+	int addMem(String memberId);
+
+
 
 
 

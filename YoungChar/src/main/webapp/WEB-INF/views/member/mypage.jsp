@@ -544,16 +544,17 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 		<div class="gallery">
 		<c:if test="${!empty bList }">
-											<c:forEach var="board" items="${bList}" varStatus="vs">
+				<c:forEach var="board" items="${bList}" varStatus="vs">
 				<c:forEach items="${thList}" var="th">
 					<c:if test="${th.parentBoardNo  == board.boardNo}">
 			<div class="gallery-item" tabindex="0">
+				<input type="hidden" value="${board.boardNo}">
+				<input type="hidden" value="${board.boardName}">
 				<img src="${contextPath}${th.filePath}/${th.fileName}" class="gallery-image">
 				<div class="gallery-item-info">
-
 					<ul>
 						<li class="gallery-item-likes"><span class="visually-hidden">view:</span><i class="fas fa-eye" aria-hidden="true"></i> ${board.readCount }</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> ${board.readCount }</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i>${board.boardTitle}</li>
 					</ul>
 
 				</div>
@@ -625,5 +626,28 @@ Remove or comment-out the code block below to see how the browser will fall-back
 		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 
+	<script>
+		
+		$(".gallery-item").on("click", function(){
+			var boardNo = $(this).children().val();
+			var boardName = $(this).children().next().val();
+			/* console.log(boardNo);
+			console.log(boardName); */
+			
+			var myBoardList;
+			
+			switch(boardName) {
+				case '리뷰게시판' : myBoardList = "${contextPath}/board/1/" + boardNo; break;
+				case '정보게시판' : myBoardList = "${contextPath}/board/2/" + boardNo; break;
+				case '잡담게시판' : myBoardList = "${contextPath}/board/3/" + boardNo; break;
+				case '시승후기게시판' : myBoardList = "${contextPath}/driveReview/review/" + boardNo; break;
+			}
+			
+			location.href = myBoardList;
+			
+		});
+	
+	</script>
+		
 	</body>
 </html>

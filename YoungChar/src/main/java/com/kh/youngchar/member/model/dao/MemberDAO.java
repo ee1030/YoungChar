@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
@@ -192,6 +193,14 @@ public class MemberDAO {
 		return sqlSession.selectList("memberMapper.chooseList", map);
 		
 	}
+
+
+	public int addMem(String memberId) {
+		return sqlSession.selectOne("memberMapper.addMem", memberId);
+		
+	}
+
+
 
 
 	
