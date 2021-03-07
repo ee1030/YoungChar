@@ -113,6 +113,11 @@ public class ChargerCompanyDAO {
 	}
 
 
+	public int deleteCompany(ChargerCompany chargerCompany) {
+		return sqlSession.update("chargerCompanyMapper.deleteCompany", chargerCompany);
+	}
+
+
 
 
 }
