@@ -29,6 +29,10 @@
 
 			<typeAlias type="com.kh.youngchar.testDrive.model.vo.TestDrReservation" alias="TestDrReservation" />
 			<typeAlias type="com.kh.youngchar.testDrive.model.vo.CompanyMember" alias="CompanyMember" />
+			
+			<typeAlias type="com.kh.youngchar.news.model.vo.News" alias="News" />
+			<typeAlias type="com.kh.youngchar.news.model.vo.NewsImage" alias="NewsImage" />
+			
 	
 	</typeAliases>
 	
@@ -48,5 +52,7 @@
 		<mapper resource="/mappers/chargerCompany-mapper.xml" />
 		
 		<mapper resource="/mappers/testDrive-mapper.xml" />
+		
+		<mapper resource="/mappers/news-mapper.xml" />
 	</mappers>
 </configuration>
