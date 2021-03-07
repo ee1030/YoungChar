@@ -21,10 +21,35 @@ public class NewsServiceImpl implements NewsService{
 
 		return new PageInfo(cp, listCount);
 	}
+	
+	
+	
 
 	@Override
 	public List<News> selectNewsList(PageInfo pInfo) {
 		return dao.selectNewsList(pInfo);
+	}
+	
+	
+	
+
+	@Override
+	public News selectNews(int newsNo) {
+		News temp = new News();
+		temp.setNewsNo(newsNo);
+
+		News news = dao.selectNews(temp);
+
+
+		return news;
+	}
+	
+	
+	
+
+	@Override
+	public List<News> selectCharNewsList(int newsNo) {
+		return dao.selectCharNewsList(newsNo);
 	}
 
 }

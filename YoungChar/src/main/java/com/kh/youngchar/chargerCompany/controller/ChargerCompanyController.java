@@ -77,7 +77,6 @@ public class ChargerCompanyController {
 				model.addAttribute("chargerCompanyList", chargerCompanyList);
 			}
 
-//			request scope로 board를 세팅한다.
 			model.addAttribute("chargerCompany", chargerCompany);
 
 			url = "chargerCompany/chargerCompanyView";

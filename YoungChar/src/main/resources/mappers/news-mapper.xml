@@ -3,7 +3,7 @@
 <mapper namespace="newsMapper">
 
 	<resultMap type="News" id="news_rm">
-		<id property="newsNo" column="COMP_NO" />
+		<id property="newsNo" column="NEWS_NO" />
 
 		<result property="newsTitle" column="NEWS_TITLE" />
 		<result property="press" column="PRESS" />
@@ -42,6 +42,24 @@
 		WHERE
 		NEWS_STATUS = 'Y'
 		ORDER BY NEWS_NO DESC
+	</select>
+	
+	
+	
+	<select id="selectNews" parameterType="News" resultMap="news_rm">
+		SELECT NEWS_NO, NEWS_TITLE, PRESS, REPORTER, NEWS_CONTENT, NEWS_CREATE_DT,
+		READCOUNT, BEST, WORST
+		FROM V_NEWS
+		WHERE NEWS_STATUS = 'Y'
+		AND NEWS_NO = #{newsNo}
+	</select>
+
+
+	<select id="selectCharNewsList" parameterType="_int"
+		resultMap="newsImage_rm">
+		SELECT * FROM NEWS_IMAGE
+		WHERE NEWS_NO = #{newsNo}
+		ORDER BY FILE_LEVEL
 	</select>
 
 

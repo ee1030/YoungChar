@@ -265,12 +265,12 @@ to {
 									<div class="rn-post-item-title-meta">
 										<div class="rn-post-item-title-meta-inner">
 											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">${news.press}</a>
+												<span class="rn-post-item-categories"><a href="#">${news.press}</a>
 												</span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
 												</span>
 											</div>
 											<h3 class="rn-post-item-title">
-												<a href="#">${news.newsTitle}</a>
+												<a href="../news/${news.newsNo}">${news.newsTitle}</a>
 											</h3>
 										</div>
 									</div>
@@ -332,13 +332,13 @@ to {
 											</div>
 											<div class="rn-recent-post-item-info">
 												<div class="rn-recent-post-item-meta">
-													<span class="rn-recent-post-item-categories">In <a href="#">News</a>
+													<span class="rn-recent-post-item-categories">In <a>News</a>
 													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
 													</span>
 												</div>
 												<div class="rn-recent-post-item-title">
 													<h3>
-														<a href="#">A standard blog post with image</a>
+														<a>A standard blog post with image</a>
 													</h3>
 												</div>
 											</div>
@@ -359,6 +359,77 @@ to {
 		</div>
 	</div>
 	<!-- End Page Content-->
+	
+	<!-- Post Pagination-->
+			<div class="my-4">
+				<nav class="rn-pagination rn-pagination-center">
+					<ul>
+
+						<%-- 주소 조합 작업 --%>
+
+						<!-- 화살표에 들어갈 주소를 변수로 생성 -->
+						<c:set var="firstPage" value="${pageUrl}cp=1" />
+						<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
+
+
+
+						<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }"
+							integerOnly="true" />
+						<fmt:parseNumber var="prev" value="${ c1 * 10 }"
+							integerOnly="true" />
+						<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
+
+
+						<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) /10 }"
+							integerOnly="true" />
+						<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }"
+							integerOnly="true" />
+						<c:set var="nextPage" value="${pageUrl}cp=${next}" />
+
+
+
+						<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+							<li>
+								<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i
+									class="fas fa-angle-right">..</i></a>
+							</li>
+
+							<li>
+								<!-- 이전 페이지로 이동 (<) --> <a href="${prevPage}"> <i
+									class="fas fa-angle-left"></i></a>
+							</li>
+						</c:if>
+
+						<!-- 페이지 목록 -->
+						<c:forEach var="page" begin="${pInfo.startPage}"
+							end="${pInfo.endPage}">
+							<c:choose>
+								<c:when test="${pInfo.currentPage == page }">
+									<li><a class="page-link">${page}</a></li>
+								</c:when>
+
+								<c:otherwise>
+									<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+
+						<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+						<c:if test="${next <= pInfo.maxPage}">
+							<li>
+								<!-- 다음 페이지로 이동 (>) --> <a href="${nextPage}"><i
+									class="fas fa-angle-right"></i></a>
+							</li>
+
+							<li>
+								<!-- 마지막 페이지로 이동(>>) --> <a href="${lastPage}"><i
+									class="fas fa-angle-right"></i></a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
+			</div>
 
 	<!-- Site Footer-->
 	<footer class="rn-footer">
