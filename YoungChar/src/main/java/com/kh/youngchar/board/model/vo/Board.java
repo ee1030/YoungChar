@@ -15,9 +15,40 @@ public class Board {
 	private String boardStatus;
 	private int boardCode;
 	private String boardName;
+	private int reportCount;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+	public Board(int boardNo, String boardTitle, String boardContent, String memberId, int readCount,
+			String categoryName, Timestamp boardCreateDate, Timestamp boardModifyDate, String boardStatus,
+			int boardCode, String boardName, int reportCount) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.memberId = memberId;
+		this.readCount = readCount;
+		this.categoryName = categoryName;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardStatus = boardStatus;
+		this.boardCode = boardCode;
+		this.boardName = boardName;
+		this.reportCount = reportCount;
+	}
+
+
+
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
 	}
 
 	public int getBoardNo() {
@@ -113,9 +144,7 @@ public class Board {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", memberId=" + memberId + ", readCount=" + readCount + ", categoryName=" + categoryName
 				+ ", boardCreateDate=" + boardCreateDate + ", boardModifyDate=" + boardModifyDate + ", boardStatus="
-				+ boardStatus + ", boardCode=" + boardCode + ", boardName=" + boardName + "]";
+				+ boardStatus + ", boardCode=" + boardCode + ", boardName=" + boardName + ", reportCount=" + reportCount
+				+ "]";
 	}
-	
-	
-
 }
