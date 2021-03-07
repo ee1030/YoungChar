@@ -66,6 +66,14 @@
 		JOIN CATEGORY USING (CATEGORY_CD)
 		ORDER BY CAR_NO DESC
 	</select>
+	
+	<select id="selectCar" parameterType="Cars" resultMap="cars_rm">
+		
+		SELECT * FROM CAR_INFO
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE CAR_NO = #{carNo}
+		
+	</select>
 
 
 

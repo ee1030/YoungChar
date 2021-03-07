@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +67,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="rn-big-search-form rn-big-search-form-dark">
-							<form action="car-search.html">
+							<form action="carSearch">
 								<div class="row">
 
 									<div class="col-lg-3 ">
@@ -112,7 +115,7 @@
 								</div>
 								<div class="text-center">
 									<button class="btn btn-orange btn-lg mt-30 btn-shadow" type="submit">
-										<i class="fas fa-search"></i> Find Now
+										<i class="fas fa-search"> </i> Find Now
 									</button>
 								</div>
 							</form>
@@ -163,279 +166,136 @@
 						<!-- End Car Search Filters-->
 
 						<!-- Car Search Item-->
-						<div class="rn-car-search-item">
-							<div class="rn-car-search-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="" />
-									<!--srcset="assets/images/car-search-item-1.jpg 1x, assets/images/car-search-item-1@2x.jpg 2x"-->
-								</a>
-							</div>
-							<div class="rn-car-search-item-info">
-								<h2 class="rn-car-search-item-title">
-									<a href="#">2021 테슬라 모델 Y</a>
-									
-								</h2>
-								<p>제조사 : 테슬라 | 차종 : 중형</p>
 
-								<div class="rn-car-reviews">
+					 <c:if test= "${!empty carList }">
+						<c:forEach var="list" items ="${carList}" varStatus="vs"> 
+				
 
-									<a href="#">3 Reviews</a>
-
-								</div>
-								<br>
-								<div class="rn-car-meta">
-									<span>
-										<i class="rni-car-seat"></i> 4 Passengers
-									</span>
-								
-									<span>
-										<i class="rni-petrol-station"></i> Elctric
-									</span>
-									<span>
-										<i class="rni-car-gear"></i> Auto
-									</span>
-									<span>
-										<i class="rni-car-door"></i> 4 Doors
-									</span>
-								</div>
-							</div>
-							<div class="rn-car-search-item-pricing">
-								<div class="rn-car-total-price">
-									<span>5,999만원</span>
-								</div>
-								<br>
-								<a class="btn btn-main btn-lg btn-shadow" href="carView">상세보기</a>
-							</div>
-						</div>
-						<!-- End Car Search Item-->
 							<div class="rn-car-search-item">
-							<div class="rn-car-search-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="" />
-									<!--srcset="assets/images/car-search-item-1.jpg 1x, assets/images/car-search-item-1@2x.jpg 2x"-->
-								</a>
-							</div>
-							<div class="rn-car-search-item-info">
-								<h2 class="rn-car-search-item-title">
-									<a href="#">2021 테슬라 모델 Y</a>
-									
-								</h2>
-								<p>제조사 : 테슬라 | 차종 : 중형</p>
-
-								<div class="rn-car-reviews">
-
-									<a href="#">3 Reviews</a>
-
+								<div class="rn-car-search-item-thumb">
+									<a href="car-single.html"> <img class="img-fluid" src="${contextPath}/resources/assets/images/tesla-roadster.jpg" /> <!--srcset="assets/images/car-search-item-1.jpg 1x, assets/images/car-search-item-1@2x.jpg 2x"-->
+									</a>
 								</div>
-								<br>
-								<div class="rn-car-meta">
-									<span>
-										<i class="rni-car-seat"></i> 4 Passengers
-									</span>
-								
-									<span>
-										<i class="rni-petrol-station"></i> Elctric
-									</span>
-									<span>
-										<i class="rni-car-gear"></i> Auto
-									</span>
-									<span>
-										<i class="rni-car-door"></i> 4 Doors
-									</span>
+								<div class="rn-car-search-item-info">
+									<h2 class="rn-car-search-item-title">
+										${list.carName }
+
+									</h2>
+									<p>제조사 : ${list.categoryName } | 모델명 : ${list.carModel }</p>
+
+									<div class="rn-car-reviews">
+											
+
+									</div>
+									<br>
+									<div class="rn-car-meta">
+										<span> <i class="rni-car-seat"></i> ${list.personnel} Passengers
+										</span> <span> <i class="rni-petrol-station"></i> ${list.fuel }
+										</span> <span> <i class="rni-car-gear"></i> Auto
+										</span> <span> <i class="rni-car-door"></i> 4 Doors
+										</span>
+									</div>
+								</div>
+								<div class="rn-car-search-item-pricing">
+									<div class="rn-car-total-price">
+										<span>${list.minPrice }만원 ~ ${list.maxPrice }만원</span>
+									</div>
+									<br> <a class="btn btn-main btn-lg btn-shadow viewBtn" ><input type="hidden" name= "carNo" value="${list.carNo }"/>상세보기</a>
 								</div>
 							</div>
-							<div class="rn-car-search-item-pricing">
-								<div class="rn-car-total-price">
-									<span>5,999만원</span>
-								</div>
-								<br>
-								<a class="btn btn-main btn-lg btn-shadow" href="#">상세보기</a>
-							</div>
-						</div>
-						<!-- End Car Search Item-->
+						</c:forEach>
+
+					</c:if>
 
 
-					
-
-						<!-- Load More Cars-->
-						<div class="text-center">
+					 	<!-- Load More Cars-->
+						<!-- <div class="text-center">
 							<a class="btn btn-lg btn-outline-light mb-40" href="#">Load More</a>
-						</div>
+						</div> -->
+						
+							<!-- Post Pagination-->
+					<div class="my-4">
+							<nav class="rn-pagination rn-pagination-center">
+										<ul >
+										
+										<c:set var="firstPage" value="?cp=1"/>
+										<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
+										
+										
+										<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }"  integerOnly="true" />
+										<fmt:parseNumber var="prev" value="${ c1 * 5 }"  integerOnly="true" />
+										<c:set var="prevPage" value="?cp=${prev}" />
+					
+										<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
+										<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
+										<c:set var="nextPage" value="?cp=${next}" />
+											
+											
+										<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+										<li class="page-item"> <!-- 첫 페이지로 이동(<<) -->
+											<a class="page-link" href="${firstPage}">&lt;&lt;</a>
+										</li>
+										
+										<li class="page-item"> <!-- 이전 페이지로 이동 (<) -->
+											<a class="page-link" href="${prevPage}">&lt;</a>
+										</li>
+										</c:if>	
+											
+										
+										<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}" >
+											<c:choose>
+												<c:when test="${pInfo.currentPage == page }">
+													<li class="page-item disabled">
+														<a class="page-link">${page}</a>
+													</li>
+												</c:when>
+											
+												<c:otherwise>
+													<li  class="page-item">	
+														<a class="page-link" href="?cp=${page}">${page}</a>
+													</li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										
+										
+										<c:if test="${next <= pInfo.maxPage}">
+											<li class="page-item"> <!-- 다음 페이지로 이동 (>) -->
+												<a class="page-link" href="${nextPage}">&gt;</a>
+											</li>
+											
+											<li class="page-item"> <!-- 마지막 페이지로 이동(>>) -->
+												<a class="page-link" href="${lastPage}">&gt;&gt;</a>
+											</li>
+										</c:if>
+									</ul>
+							</nav>
+					</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- End Car Results-->
 
-		<!-- Site Footer-->
-		<footer class="rn-footer">
-
-			<!-- Footer Widgets-->
-			<div class="rn-footer-widgets">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">About Us</h2>
-								<div class="rn-widget-content">
-									<a class="brand-name" href="index.html">
-										<img src="cesassets/images/logo.svg" alt="Logo">
-									</a>
-									<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
-									<ul class="rn-widget-social">
-										<li>
-											<a href="#">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-twitter"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-instagram"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-linkedin-in"></i>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-						<div class="col-md-5">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Quick Links</h2>
-								<div class="rn-widget-content">
-									<div class="row rn-quick-links">
-										<div class="col-6">
-											<ul>
-												<li>
-													<a href="#">About Us</a>
-												</li>
-												<li>
-													<a href="#">Contact Us</a>
-												</li>
-												<li>
-													<a href="#">Support</a>
-												</li>
-												<li>
-													<a href="#">View Booking</a>
-												</li>
-												<li>
-													<a href="#">Affiliate Programme</a>
-												</li>
-												<li>
-													<a href="#">Marketplace</a>
-												</li>
-											</ul>
-										</div>
-										<div class="col-6">
-											<ul>
-												<li>
-													<a href="#">Site Map</a>
-												</li>
-												<li>
-													<a href="#">Careers</a>
-												</li>
-												<li>
-													<a href="#">Press</a>
-												</li>
-												<li>
-													<a href="#">Get a Receipt</a>
-												</li>
-												<li>
-													<a href="#">Community</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-						<div class="col-md-3">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Contact Us</h2>
-								<div class="rn-widget-content">
-									<div class="rn-icon-contents">
-										<div class="rn-phone rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-phone"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>(954)-944-1250</li>
-													<li>(954)-944-1251</li>
-												</ul>
-											</div>
-										</div>
-										<div class="rn-email rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-envelope"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>support@example.coms</li>
-													<li>sale@example.com</li>
-												</ul>
-											</div>
-										</div>
-										<div class="rn-address rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-map-marker"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>1425 Pointe Lane, Miami</li>
-													<li>Florida – 33169, USA</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Footer Widgets-->
-
-			<!-- Footer Copyright-->
-			<div class="rn-footer-copyright">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-md-6">
-							<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
-						</div>
-						<div class="col-md-6 text-right">
-							<span class="rn-pyament-methods">
-								<span>We Accept</span>
-								<img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Footer Copyright-->
-
-		</footer>
+		
 		<!-- End Site Footer-->
+		
+		<script >
+		
+			$(".viewBtn").on("click", function() {
+				
+				var carNo = $(this).children().val();
+				
+				console.log(carNo);
+				
+				var carViewURL = "${contextPath}/car/carView/" + carNo;
+				
+				location.href = carViewURL;
+				
+				
+			});
+		
+		</script>
 
 		<!--
 		All JavaScripts Codes Loaded
@@ -448,7 +308,7 @@
 		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
-	</body>
+	
 
 </body>
 </html>
