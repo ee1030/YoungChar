@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newsMapper">
+
+	<resultMap type="News" id="news_rm">
+		<id property="newsNo" column="COMP_NO" />
+
+		<result property="newsTitle" column="NEWS_TITLE" />
+		<result property="press" column="PRESS" />
+		<result property="reporter" column="REPORTER" />
+		<result property="newsContent" column="NEWS_CONTENT" />
+		<result property="newsCreateDate" column="NEWS_CREATE_DT" />
+		<result property="newsStatus" column="NEWS_STATUS" />
+		<result property="memberNo" column="MEM_NO" />
+		<result property="readCount" column="READCOUNT" />
+		<result property="best" column="BEST" />
+		<result property="worst" column="WORST" />
+	</resultMap>
+
+	<resultMap type="NewsImage" id="newsImage_rm">
+		<id property="fileNo" column="FILE_NO" />
+
+		<result property="filePath" column="FILE_PATH" />
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileLevel" column="FILE_LEVEL" />
+		<result property="newsNo" column="NEWS_NO" />
+
+	</resultMap>
+	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM
+		V_NEWS
+		WHERE NEWS_STATUS = 'Y'
+	</select>
+	
+	
+	<select id="selectNewsList" parameterType="_int"
+		resultMap="news_rm">
+		SELECT NEWS_NO, NEWS_TITLE, PRESS, REPORTER, NEWS_CONTENT, NEWS_CREATE_DT,
+		NEWS_STATUS, READCOUNT, BEST, WORST
+		FROM V_NEWS
+		WHERE
+		NEWS_STATUS = 'Y'
+		ORDER BY NEWS_NO DESC
+	</select>
+
+
+
+</mapper>

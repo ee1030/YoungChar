@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -242,6 +244,9 @@ to {
 			<div class="row">
 				<div class="col-lg-8 rn-post-list rn-grid-post-col-2">
 					<div class="row">
+					
+					<c:if test="${!empty nList }">
+					<c:forEach var="news" items="${nList}" varStatus="vs">
 						<div class="col-md-6">
 
 							<!-- Blog Post Item (Small Size)-->
@@ -260,12 +265,12 @@ to {
 									<div class="rn-post-item-title-meta">
 										<div class="rn-post-item-title-meta-inner">
 											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
+												<span class="rn-post-item-categories">In <a href="#">${news.press}</a>
+												</span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
 												</span>
 											</div>
 											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
+												<a href="#">${news.newsTitle}</a>
 											</h3>
 										</div>
 									</div>
@@ -274,245 +279,13 @@ to {
 							<!-- End Blog Post Item (Small Size)-->
 
 						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
-						<div class="col-md-6">
-
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-2.jpg 1x, assets/images/blog-item-sm-2@2x.jpg 2x" />
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
-										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories">In <a href="#">News</a>
-												</span> <span class="rn-post-item-author">By <a href="#">John Doe</a>
-												</span>
-											</div>
-											<h3 class="rn-post-item-title">
-												<a href="#">A standard blog post with image</a>
-											</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
-
-						</div>
+						</c:forEach>
+						</c:if>
+						
+						
 					</div>
 
-					<!-- Post Pagination-->
-					<nav class="rn-pagination rn-pagination-center">
-						<ul>
-							<li><a href="#"> <i class="fas fa-angle-left"></i>
-							</a></li>
-							<li><a class="rn-active" href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#"> <i class="fas fa-angle-right"></i>
-							</a></li>
-						</ul>
-					</nav>
+
 				</div>
 				<div class="col-lg-4">
 
@@ -531,14 +304,14 @@ to {
 
 						<!-- Widget Item-->
 						<section class="rn-widget">
-							<h2 class="rn-widget-title">Categories</h2>
+							<h2 class="rn-widget-title">CATEGORI</h2>
 							<div class="rn-widget-content">
 								<ul>
-									<li><a href="#">Lifestyle</a></li>
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Fashion</a></li>
-									<li><a href="#">Music</a></li>
-									<li><a href="#">Branding</a></li>
+									<li><a href="#">NEWEST</a></li>
+									<li><a href="#">OLDEST</a></li>
+									<li><a href="#">BEST</a></li>
+									<li><a href="#">WOSRT</a></li>
+									<li><a href="#">MOST COMMENTS</a></li>
 								</ul>
 							</div>
 						</section>
@@ -555,50 +328,6 @@ to {
 										<div class="rn-recent-post-item">
 											<div class="rn-recent-post-item-thumb">
 												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-1.jpg 1x, assets/images/blog-item-xs-1@2x.jpg 2x" />
-												</a>
-											</div>
-											<div class="rn-recent-post-item-info">
-												<div class="rn-recent-post-item-meta">
-													<span class="rn-recent-post-item-categories">In <a href="#">News</a>
-													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
-													</span>
-												</div>
-												<div class="rn-recent-post-item-title">
-													<h3>
-														<a href="#">A standard blog post with image</a>
-													</h3>
-												</div>
-											</div>
-										</div> <!-- End Extra Small Post-->
-
-									</li>
-									<li>
-										<!-- Extra Small Post-->
-										<div class="rn-recent-post-item">
-											<div class="rn-recent-post-item-thumb">
-												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-2.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-2.jpg 1x, assets/images/blog-item-xs-2@2x.jpg 2x" />
-												</a>
-											</div>
-											<div class="rn-recent-post-item-info">
-												<div class="rn-recent-post-item-meta">
-													<span class="rn-recent-post-item-categories">In <a href="#">News</a>
-													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
-													</span>
-												</div>
-												<div class="rn-recent-post-item-title">
-													<h3>
-														<a href="#">A standard blog post with image</a>
-													</h3>
-												</div>
-											</div>
-										</div> <!-- End Extra Small Post-->
-
-									</li>
-									<li>
-										<!-- Extra Small Post-->
-										<div class="rn-recent-post-item">
-											<div class="rn-recent-post-item-thumb">
-												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-3.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-3.jpg 1x, assets/images/blog-item-xs-3@2x.jpg 2x" />
 												</a>
 											</div>
 											<div class="rn-recent-post-item-info">
