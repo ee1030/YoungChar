@@ -64,6 +64,11 @@
 	position: absolute;
   right: 750px;
 }
+
+tbody td:hover{
+	cursor: pointer;
+	
+}
 </style>
 
 
@@ -87,7 +92,25 @@
 					<div class="col-sm-12">
 						<div class="card">
 							<div class="card-header">
-								<h5 class="card-title">게시글 관리</h5>
+								<h5 class="card-title">
+									<c:choose>
+										<c:when test="${type == 1}">
+											리뷰 게시글
+										</c:when>
+										<c:when test="${type == 2}">
+											정보 게시글
+										</c:when>
+										<c:when test="${type == 3}">
+											잡담 게시글
+										</c:when>
+										<c:when test="${type == 4}">
+											시승 후기
+										</c:when>
+										<c:otherwise>
+											전체 게시글
+										</c:otherwise>
+									</c:choose>
+								</h5>
 								<div class="search-page">
 									<form action="${contextPath}/admin/boardManagement/searchTitle/${type}" method="post" class="theme-form">
 										<div class="input-group m-0">
@@ -250,6 +273,23 @@
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 
 	<script>
+		$(".table td").on("click", function() {
+			var boardNo = $(this).parent().children().eq(1).text();		
+			var boardName = $(this).parent().children().eq(4).text();
+	
+			var boardViewURL = null;
+			
+			switch(boardName) {
+			case '리뷰게시판' : boardViewURL = "${contextPath}/board/1/" + boardNo + "?adm=1"; break;
+			case '정보게시판' : boardViewURL = "${contextPath}/board/2/" + boardNo + "?adm=1"; break;
+			case '잡담게시판' : boardViewURL = "${contextPath}/board/3/" + boardNo + "?adm=1"; break;
+			case '시승후기게시판' : boardViewURL = "${contextPath}/driveReview/review/" + boardNo + "?adm=1"; break;
+			
+			}
+			
+			location.href = boardViewURL;
+		});
+	
 		$(document).ready(function() {
 			$('#checkAll').click(function() {
 				$('.chk').prop('checked', this.checked);
@@ -265,7 +305,7 @@
 			
 			if(confirm("선택한 게시글을 삭제 하시겠습니까?")) {
 				$.ajax({
-					url : "${contextPath}/admin/allBoardManagement/delete",
+					url : "${contextPath}/admin/boardManagement/delete",
 					type : "POST",
 					dataType : "json",
 					data : { "chkList" : chkList },	
@@ -294,7 +334,7 @@
 			
 			if(confirm("선택한 게시글을 복구하시겠습니까?")) {
 				$.ajax({
-					url : "${contextPath}/admin/allBoardManagement/restore",
+					url : "${contextPath}/admin/boardManagement/restore",
 					type : "POST",
 					dataType : "json",
 					data : { "chkList" : chkList },	
