@@ -69,7 +69,7 @@
 						<div class="rn-small-search-form-title">
 							<h2>INFORMATION</h2>
 						</div>
-						<form action="car-single.html">
+						<form>
 							<div class="rn-icon-input" id="title">업체명    :  ${chargerCompany.companyName}</div>
 							<hr>
 							<div class="rn-icon-input" id="phone">전화번호 :   ${chargerCompany.phone}</div>
@@ -111,7 +111,7 @@
 	                	<!-- 로그인된 회원이 글 작성자인 경우 -->
 						<c:if test="${(loginMember != null) }">
 							<a href="${updateUrl}" id="updateBtn" class="btn btn-success ml-1 mr-1">수정</a>
-							<form action="deleteAction"  method="post" enctype="multipart/form-data" role="form" onsubmit="return validate();">
+							<form method="POST" action="${chargerCompany.companyNo}/deleteCompany" enctype="multipart/form-data" onsubmit="return validate();">
 								<button id="deleteBtn" class="btn btn-success">삭제</button> 
 							</form>
 						</c:if>

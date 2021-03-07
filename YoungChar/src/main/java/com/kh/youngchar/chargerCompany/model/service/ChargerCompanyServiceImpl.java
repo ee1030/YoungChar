@@ -349,11 +349,20 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 		return result;
 	}
 
+	
+	
+	
+	
+	@Transactional(rollbackFor=Exception.class)
 	@Override
-	public int deleteCompany(int companyNo) {
-		return dao.deleteCompany(companyNo);
+	public int deleteCompany(ChargerCompany chargerCompany) {
+		int result = 0;
+		
+		
+		result = dao.deleteCompany(chargerCompany);
+		
+		return result;
 	}
-
 
 
 	

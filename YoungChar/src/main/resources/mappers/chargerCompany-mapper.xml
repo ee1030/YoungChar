@@ -160,15 +160,17 @@
 		COMPANY_IMAGE
 		WHERE FILE_NO = #{fileNo}
 	</delete>
-	
-	
-	<update id="deleteCompany" parameterType="_int">
+
+
+
+	<!-- 게시글 삭제 -->
+	<update id="deleteCompany" parameterType="ChargerCompany">
 		UPDATE CHARGER_COMPANY
 		SET STATUS = 'N'
 		WHERE COMP_NO = #{companyNo}
 	</update>
-	
-	
+
+
 
 
 

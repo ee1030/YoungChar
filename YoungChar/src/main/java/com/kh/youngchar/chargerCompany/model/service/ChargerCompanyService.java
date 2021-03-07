@@ -28,7 +28,8 @@ public interface ChargerCompanyService {
 	int updateCompany(ChargerCompany updateCompany, List<MultipartFile> images, String savePath,
 			boolean[] deleteImages);
 
-	int deleteCompany(int companyNo);
+
+	int deleteCompany(ChargerCompany chargerCompany);
 
 
 
