@@ -481,4 +481,11 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.selectSearchRB", sv, rowBounds);
 	}
 
+	/** 디비에 저장된 모든 이미지 가져오기 DAO
+	 * @return dbFileList
+	 */
+	public List<String> getDbList() {
+		return sqlSession.selectList("adminMapper.getDbList");
+	}
+
 }

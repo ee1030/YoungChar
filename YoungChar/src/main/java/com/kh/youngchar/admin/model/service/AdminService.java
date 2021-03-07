@@ -329,6 +329,11 @@ public interface AdminService {
 	 */
 	public abstract List<Board> selectSearchRB(PageInfo pInfo, String sv);
 
+	/** 디비에 저장된 모든 이미지 조회
+	 * @return dbFileList
+	 */
+	public abstract List<String> getDbList();
+
 
 	
 

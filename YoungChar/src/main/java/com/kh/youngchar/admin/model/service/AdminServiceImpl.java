@@ -452,6 +452,12 @@ public class AdminServiceImpl implements AdminService {
 	public List<Board> selectSearchRB(PageInfo pInfo, String sv) {
 		return dao.selectSearchRB(pInfo, sv);
 	}
+	
+	// 디비에 저장된 모든 이미지 파일 가져오기 Service 구현
+	@Override
+	public List<String> getDbList() {
+		return dao.getDbList();
+	}
 
 	// 파일명 변경 메소드
 	public String rename(String originFileName) {
