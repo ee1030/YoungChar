@@ -12,9 +12,36 @@ public class Reply {
 	private int parentBoardNo;			// 댓글이 작성된 게시글 번호
 	private int parentReplyNo;			// 부모 댓글 번호
 	private int replyDepth;				// 댓글 깊이
+	private int reportCount;
 
 	public Reply() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Reply(int replyNo, String replyContent, Timestamp replyCreateDate, Timestamp replyModifyDate,
+			String replyStatus, String memberId, int parentBoardNo, int parentReplyNo, int replyDepth,
+			int reportCount) {
+		super();
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyCreateDate = replyCreateDate;
+		this.replyModifyDate = replyModifyDate;
+		this.replyStatus = replyStatus;
+		this.memberId = memberId;
+		this.parentBoardNo = parentBoardNo;
+		this.parentReplyNo = parentReplyNo;
+		this.replyDepth = replyDepth;
+		this.reportCount = reportCount;
+	}
+
+
+
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
 	}
 
 	public int getReplyNo() {
@@ -94,8 +121,7 @@ public class Reply {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
 				+ ", replyModifyDate=" + replyModifyDate + ", replyStatus=" + replyStatus + ", memberId=" + memberId
 				+ ", parentBoardNo=" + parentBoardNo + ", parentReplyNo=" + parentReplyNo + ", replyDepth=" + replyDepth
-				+ "]";
+				+ ", reportCount=" + reportCount + "]";
 	}
-	
-	
+
 }
