@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
 @Repository
@@ -43,6 +44,22 @@ public class CarsDAO {
 	public Cars selectCar(int carNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("carsMapper.selectCar", carNo);
+	}
+
+	/** 썸네일 조회
+	 * @param carInfo
+	 * @return
+	 */
+	public List<CAttachment> selectThumbnailList(List<Cars> carList) {
+		return sqlSession.selectList("carsMapper.selectThumbnailList" , carList);
+	}
+
+	/** 상세 조회 시 이미지 목록 조회
+	 * @param carNo
+	 * @return
+	 */
+	public List<CAttachment> selectAttachmentList(int carNo) {
+		return sqlSession.selectList("carsMapper.selectAttachmentList" , carNo);
 	}
 
 }

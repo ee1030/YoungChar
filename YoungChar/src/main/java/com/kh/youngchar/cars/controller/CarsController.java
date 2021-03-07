@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.PageInfo2;
 import com.kh.youngchar.cars.model.service.CarsService;
+import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
 @Controller
@@ -38,6 +40,15 @@ public class CarsController {
 		PageInfo2 pInfo = service.carListPageInfo(cp);
 		List<Cars> carList = service.selectCarList(pInfo);
 		
+		
+		if(carList != null) {
+			List<CAttachment> thumbnailList = service.selectThumbnailList(carList);
+			
+			if(thumbnailList != null) {
+				model.addAttribute("thList" , thumbnailList);
+			}
+		}
+		
 		model.addAttribute("pInfo" , pInfo);
 		model.addAttribute("carList" , carList);
 		
@@ -53,6 +64,15 @@ public class CarsController {
 			@RequestHeader(value = "referer",required = false ) String referer, RedirectAttributes ra) {
 		
 		Cars carInfo = service.selectCar(carNo);
+		
+		List<CAttachment> attachmentList = service.selectAttachmentList(carNo);
+		
+		if(attachmentList != null && !attachmentList.isEmpty()) {
+			
+			model.addAttribute("attachmentList" , attachmentList);
+		}
+		
+		
 		
 		model.addAttribute("carInfo" , carInfo);
 		

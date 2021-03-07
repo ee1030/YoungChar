@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.youngchar.board.model.vo.PageInfo2;
 import com.kh.youngchar.cars.model.dao.CarsDAO;
+import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
 @Service
@@ -36,6 +37,18 @@ public class CarsServiceImpl implements CarsService{
 	@Override
 	public Cars selectCar(int carNo) {
 		return dao.selectCar(carNo);
+	}
+	
+//	썸네일 조회 Service 구현 
+	@Override
+	public List<CAttachment> selectThumbnailList(List<Cars> carList) {
+		return dao.selectThumbnailList(carList);
+	}
+	
+//	상세조회 시 이미지 목록 조회 service
+	@Override
+	public List<CAttachment> selectAttachmentList(int carNo) {
+		return dao.selectAttachmentList(carNo);
 	}
 	
 

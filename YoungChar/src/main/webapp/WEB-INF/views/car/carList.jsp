@@ -173,8 +173,11 @@
 
 							<div class="rn-car-search-item">
 								<div class="rn-car-search-item-thumb">
-									<a href="car-single.html"> <img class="img-fluid" src="${contextPath}/resources/assets/images/tesla-roadster.jpg" /> <!--srcset="assets/images/car-search-item-1.jpg 1x, assets/images/car-search-item-1@2x.jpg 2x"-->
-									</a>
+									<c:forEach items="${thList}" var="th">
+											<c:if test="${th.carNo  == list.carNo}">
+												<img style="height: 250px" src="${contextPath}${th.filePath}/${th.fileName}">
+											</c:if>
+										</c:forEach>
 								</div>
 								<div class="rn-car-search-item-info">
 									<h2 class="rn-car-search-item-title">

@@ -3,6 +3,7 @@ package com.kh.youngchar.cars.model.service;
 import java.util.List;
 
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
 public interface CarsService {
@@ -24,5 +25,17 @@ public interface CarsService {
 	 * @return
 	 */
 	Cars selectCar(int carNo);
+
+	/** 썸네일 조회
+	 * @param carList
+	 * @return
+	 */
+	List<CAttachment> selectThumbnailList(List<Cars> carList);
+
+	/** 상세조회 시 이미지 목록 조회 service
+	 * @param carNo
+	 * @return
+	 */
+	List<CAttachment> selectAttachmentList(int carNo);
 
 }
