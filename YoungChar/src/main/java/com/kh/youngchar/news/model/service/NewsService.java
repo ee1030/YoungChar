@@ -14,4 +14,8 @@ public interface NewsService {
 
 	List<News> selectNewsList(PageInfo pInfo);
 
+	News selectNews(int newsNo);
+
+	List<News> selectCharNewsList(int newsNo);
+
 }

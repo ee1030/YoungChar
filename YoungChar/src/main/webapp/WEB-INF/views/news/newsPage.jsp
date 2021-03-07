@@ -69,15 +69,15 @@
 								<div class="rn-post-item-title-meta">
 									<div class="rn-post-item-title-meta-inner">
 										<div class="rn-post-item-meta">
-											<span class="rn-post-item-categories">In 
-												<a href="#">News</a>
+											<span class="rn-post-item-categories">
+												<a href="#">${news.press}</a>
 											</span>
 											<span class="rn-post-item-author">By 
-												<a href="#">John Doe</a>
+												<a href="#">${news.reporter}</a>
 											</span>
 										</div>
 										<h3 class="rn-post-item-title">
-											<a href="#">A standard blog post with image</a>
+											<a href="#">${news.newsTitle}</a>
 										</h3>
 									</div>
 								</div>
@@ -92,156 +92,29 @@
 								<ul class="rn-post-love-n-view">
 									<li>
 										<button>
-											<i class="fas fa-heart"></i>
+											<i class="fas fa-thumbs-up"></i>
 										</button>
-										<span>1k</span>
+										<span>${news.best}</span>
 									</li>
-									<li>
-										<span class="rn-post-view-icon">
-											<i class="far fa-eye"></i>
-										</span>
-										<span>50k</span>
-									</li>
-								</ul>
-							</div>
-						</article>
-						<!-- End Blog Post Item -->
-
-
-						<!-- Blog Post Item -->
-						<article class="rn-post-item rn-post-size-lg">
-							<div class="rn-post-item-thumb">
-								<a href="#">
-									<img class="img-fluid" src="assets/images/post-item-2.jpg" alt="A standard blog post with image"/>
-								</a>
-							</div>
-							<div class="rn-post-item-header">
-								<div class="rn-post-date">
-									<div class="rn-post-date-inner">
-										<div class="rn-post-date-d">15</div>
-										<div class="rn-post-date-m-y">May, 2018</div>
-									</div>
-								</div>
-								<div class="rn-post-item-title-meta">
-									<div class="rn-post-item-title-meta-inner">
-										<div class="rn-post-item-meta">
-											<span class="rn-post-item-categories">In 
-												<a href="#">News</a>
-											</span>
-											<span class="rn-post-item-author">By 
-												<a href="#">John Doe</a>
-											</span>
-										</div>
-										<h3 class="rn-post-item-title">
-											<a href="#">A standard blog post with image</a>
-										</h3>
-									</div>
-								</div>
-							</div>
-							<div class="rn-post-item-body">
-								<p>Aliquam erat volutpat. Morbi eget velit ut lectus efficitur vulputate dictum vel ex. Etiam bibendum libero eget lorem malesuada, id mattis est egestas. Mauris eu quam bibendum, placerat odio non, ultrices leo. Proin laoreet purus nisl, non elementum tortor accumsan vitae. Proin commodo vulputate purus, eu dignissim ipsum lobortis ut. Sed ac nisi velit. Integer magna mi, faucibus a sapien eget, volutpat euismod dolor.</p>
-							</div>
-							<div class="rn-post-item-footer">
-								<div class="rn-post-read-more">
-									<a class="btn btn-dark" href="#">Read more</a>
-								</div>
-								<ul class="rn-post-love-n-view">
 									<li>
 										<button>
-											<i class="fas fa-heart"></i>
+											<i class="fas fa-thumbs-down"></i>
 										</button>
-										<span>1k</span>
+										<span>${news.worst}</span>
 									</li>
 									<li>
 										<span class="rn-post-view-icon">
 											<i class="far fa-eye"></i>
 										</span>
-										<span>50k</span>
+										<span>${news.readCount}</span>
 									</li>
 								</ul>
 							</div>
 						</article>
 						<!-- End Blog Post Item -->
 
-
-						<!-- Blog Post Item -->
-						<article class="rn-post-item rn-post-size-lg">
-							<div class="rn-post-item-header">
-								<div class="rn-post-date">
-									<div class="rn-post-date-inner">
-										<div class="rn-post-date-d">15</div>
-										<div class="rn-post-date-m-y">May, 2018</div>
-									</div>
-								</div>
-								<div class="rn-post-item-title-meta">
-									<div class="rn-post-item-title-meta-inner">
-										<div class="rn-post-item-meta">
-											<span class="rn-post-item-categories">In 
-												<a href="#">News</a>
-											</span>
-											<span class="rn-post-item-author">By 
-												<a href="#">John Doe</a>
-											</span>
-										</div>
-										<h3 class="rn-post-item-title">
-											<a href="#">A standard blog post without image</a>
-										</h3>
-									</div>
-								</div>
-							</div>
-							<div class="rn-post-item-body">
-								<p>Aliquam erat volutpat. Morbi eget velit ut lectus efficitur vulputate dictum vel ex. Etiam bibendum libero eget lorem malesuada, id mattis est egestas. Mauris eu quam bibendum, placerat odio non, ultrices leo. Proin laoreet purus nisl, non elementum tortor accumsan vitae. Proin commodo vulputate purus, eu dignissim ipsum lobortis ut. Sed ac nisi velit. Integer magna mi, faucibus a sapien eget, volutpat euismod dolor.</p>
-							</div>
-							<div class="rn-post-item-footer">
-								<div class="rn-post-read-more">
-									<a class="btn btn-dark" href="#">Read more</a>
-								</div>
-								<ul class="rn-post-love-n-view">
-									<li>
-										<button>
-											<i class="fas fa-heart"></i>
-										</button>
-										<span>1k</span>
-									</li>
-									<li>
-										<span class="rn-post-view-icon">
-											<i class="far fa-eye"></i>
-										</span>
-										<span>50k</span>
-									</li>
-								</ul>
-							</div>
-						</article>
-						<!-- End Blog Post Item -->
-
-						<!-- Post Pagination-->
-						<nav class="rn-pagination">
-							<ul>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-left"></i>
-									</a>
-								</li>
-								<li>
-									<a class="rn-active" href="#">1</a>
-								</li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">3</a>
-								</li>
-								<li>
-									<a href="#">4</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fas fa-angle-right"></i>
-									</a>
-								</li>
-							</ul>
-						</nav>
-
+					
+				
 					</div>
 					<div class="col-lg-4">
 
@@ -380,26 +253,7 @@
 							<!-- End Widget Item-->
 
 
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Tags</h2>
-								<div class="rn-widget-content">
-									<div class="tags">
-										<a href="#">video</a>
-										<a href="#">audio</a>
-										<a href="#">images</a>
-										<a href="#">javascript</a>
-										<a href="#">php</a>
-										<a href="#">wordpress</a>
-										<a href="#">travel</a>
-										<a href="#">music</a>
-										<a href="#">python</a>
-										<a href="#">ui/ux</a>
-										<a href="#">cars</a>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
+							
 
 						</aside>
 						<!-- End Sidebar-->
