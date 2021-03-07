@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,56 +37,21 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="product-slider owl-carousel owl-theme" id="sync1">
+							<c:forEach var="at" items="${attachmentList}" varStatus="vs">
+								<c:set var="src" value="${contextPath}${at.filePath}/${at.fileName}" />
 								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
+									<img src="${src}" /> <input type="hidden" value="${at.fileNo}">
 								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/02.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/03.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/04.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/05.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/06.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/07.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/08.jpg" alt="">
-								</div>
+							</c:forEach>
 							</div>
+							
 							<div class="owl-carousel owl-theme" id="sync2">
+							<c:forEach var="at" items="${attachmentList}" varStatus="vs">
+								<c:set var="src" value="${contextPath}${at.filePath}/${at.fileName}" />
 								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/01.jpg" alt="">
+									<img src="${src}" /> <input type="hidden" value="${at.fileNo}">
 								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/02.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/03.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/04.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/05.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/06.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/07.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/08.jpg" alt="">
-								</div>
+							</c:forEach>
 							</div>
 						</div>
 					</div>
