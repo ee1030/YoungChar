@@ -35,6 +35,12 @@ public class CompanyServiceImpl implements CompanyService {
 		return dao.getCompanyProfile(memberNo);
 	}
 
+
+	@Override
+	public List<Application> selectTodayApl(int memberNo) {
+		return dao.selectTodayApl(memberNo);
+	}
+
 	@Override
 	public List<Application> selectAplList(Map<String, Object> map) {
 		return dao.selectAplList(map);

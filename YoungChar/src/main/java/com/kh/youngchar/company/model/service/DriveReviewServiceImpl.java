@@ -49,6 +49,12 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		return dao.selectList(pInfo);
 	}
 	
+
+	@Override
+	public List<Attachment> selectThumbnailList(List<DriveReview> bList) {
+		return dao.selectThumbnailList(bList);
+	}
+	
 	@Override
 	public DriveReview selectBoard(int boardNo) {
 		DriveReview board = dao.selectBoard(boardNo);
@@ -386,6 +392,7 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		
 		return result;
 	}
+
 
 
 

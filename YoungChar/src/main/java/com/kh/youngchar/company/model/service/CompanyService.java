@@ -17,6 +17,8 @@ public interface CompanyService {
 	
 	Company getCompanyProfile(int memberNo);
 
+	List<Application> selectTodayApl(int memberNo);
+
 	List<Application> selectAplList(Map<String, Object> map);
 
 	int updateAplStatus(Application apl);
@@ -26,5 +28,6 @@ public interface CompanyService {
 	int updateMember(Member updateMember, String newPwd);
 
 	int updateMemberStatus(Member member);
+
 
 }

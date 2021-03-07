@@ -28,6 +28,10 @@ public class CompanyDAO {
 		return sqlSession.selectOne("companyMapper.getCompanyProfile", memberNo);
 	}
 
+	public List<Application> selectTodayApl(int memberNo) {
+		return sqlSession.selectList("companyMapper.selectTodayApl", memberNo);
+	}
+
 
 	public List<Application> selectAplList(Map<String, Object> map) {
 		

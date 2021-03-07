@@ -53,6 +53,13 @@ public class CompanyController {
 			model.addAttribute("company", company);
 		}
 		
+		List<Application> apl = service.selectTodayApl(loginMember.getMemberNo());
+		
+		if(apl != null) {
+			model.addAttribute("apl", apl);
+		}
+		
+		
 		return "company/dashBoard";
 	}
 	
