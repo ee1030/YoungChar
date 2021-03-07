@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.youngchar.board.model.vo.Attachment;
+import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
@@ -78,6 +80,29 @@ public interface MemberService {
 	//				비밀번호 찾기 Service
 	//---------------------------------------------------
 	int findPwdAction(Map<String, Object> map);
+
+
+	//---------------------------------------------------
+	//				마이페이지 내가 쓴 글 조회 Service
+	//---------------------------------------------------
+	List<Board> selectList(String memberNo);
+
+
+	//---------------------------------------------------
+	//				마이페이지 내가 쓴 글 조회 썸네일 Service
+	//---------------------------------------------------
+	List<Attachment> selectThumbnailList(List<Board> bList);
+
+	//---------------------------------------------------
+	//				전체 게시글 수 Service
+	//---------------------------------------------------
+	int bListNo(String memberNo);
+
+
+	//---------------------------------------------------
+	//				마이페이지 내가 쓴 글 카테고리별 조회 썸네일 Service
+	//---------------------------------------------------
+	List<Board> chooseList(Map<String, Object> map);
 
 
 

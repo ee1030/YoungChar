@@ -1,6 +1,7 @@
 package com.kh.youngchar.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.kh.youngchar.board.model.vo.Attachment;
+import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.member.model.service.MemberService;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
@@ -101,18 +104,17 @@ public class MemberController {
 	String memberEmail = (String)response_obj.get("email");
 	System.out.println(nickName+ memberId+ memberNm + memberEmail);
 	
-	Member member = null;
-	
-	member.setMemberEmail(memberEmail);
-	
-
-	
-	member = service.naverMem(member);
-	
-	if(member != null) {
-		session.setAttribute("loginMember", member);
-		
-	}
+	/*
+	 * Member member = null;
+	 * 
+	 * member.setMemberEmail(memberEmail);
+	 * 
+	 * member = service.naverMem(member);
+	 * 
+	 * if(member != null) { session.setAttribute("loginMember", member);
+	 * 
+	 * }
+	 */
 	//4.파싱 닉네임 세션으로 저장
 	session.setAttribute("sessionId",nickName); //세션 생성
 	model.addAttribute("result", apiResult);
@@ -135,6 +137,8 @@ public class MemberController {
 		return "member/updateMypage";
 	}
 
+	
+	
 	// 마이페이지 화면전환 Controller
 	@RequestMapping("mypage")
 	public String mypageForm(@ModelAttribute("loginMember") Member loginMember, Model model) {
@@ -147,6 +151,25 @@ public class MemberController {
 			model.addAttribute("memFile", mFile);
 			
 		}
+		
+		String memberNo = loginMember.getMemberId();
+		List<Board> bList = new ArrayList<Board>();
+		
+		
+		bList = service.selectList(memberNo);
+		int bListNo = service.bListNo(memberNo);
+		
+		if(bList != null && !bList.isEmpty()) { // 게시글 목록 조회 성공 시 
+			List<Attachment> thumbnailList = service.selectThumbnailList(bList);
+			
+			if(thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+			
+		}
+		
+		model.addAttribute("bList", bList);
+		model.addAttribute("bListNo", bListNo);
 		
 		return "member/mypage";
 	}
@@ -552,7 +575,36 @@ public class MemberController {
 	
 	
 	
-	
+	// ---------------------------------------------------
+	// 내가 쓴 글 카테고리별 조회  Controller
+	// ---------------------------------------------------
+	@RequestMapping("chooseList")
+	public String chooseList(@ModelAttribute(name="loginMember", binding=false) Member loginMember,
+							 @RequestParam("boardCode") int boardCode, Model model) {
+		
+		String memberNo = loginMember.getMemberId();
+		List<Board> bList1 = new ArrayList<Board>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("boardCode", boardCode);
+		
+		bList1 = service.chooseList(map);
+		
+		if(bList1 != null && !bList1.isEmpty()) { // 게시글 목록 조회 성공 시 
+			List<Attachment> thumbnailList = service.selectThumbnailList(bList1);
+			
+			if(thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+			
+		}
+		
+		model.addAttribute("bList", bList1);
+		
+		
+		return "member/mypage";
+	}
 	
 	
 }

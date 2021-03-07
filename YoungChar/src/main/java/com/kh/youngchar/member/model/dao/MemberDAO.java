@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.youngchar.board.model.vo.Attachment;
+import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
@@ -163,6 +165,31 @@ public class MemberDAO {
 	// 비밀번호 찾기
 	public int findPwdAction(Map<String, Object> map) {
 		return sqlSession.update("memberMapper.findPwdAction", map);
+		
+	}
+
+
+	public List<Board> selectList(String memberNo) {
+		return sqlSession.selectList("memberMapper.selectList", memberNo);
+		
+	}
+
+
+	public List<Attachment> selectThumbnailList(List<Board> bList) {
+		return sqlSession.selectList("memberMapper.selectThumbnailList", bList);
+		
+	}
+
+
+	public int bListNo(String memberNo) {
+		return sqlSession.selectOne("memberMapper.bListNo", memberNo);
+		
+	}
+
+
+	// 마이페이지 카테고리별 조회
+	public List<Board> chooseList(Map<String, Object> map) {
+		return sqlSession.selectList("memberMapper.chooseList", map);
 		
 	}
 

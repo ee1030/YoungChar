@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.youngchar.board.model.vo.Attachment;
+import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.member.model.dao.MemberDAO;
 import com.kh.youngchar.member.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.member.model.vo.Member;
@@ -349,6 +351,37 @@ public class MemberServiceImpl implements MemberService{
 		int result = dao.findPwdAction(map);
 		
 		return result;
+		
+	}
+
+
+	// 마이페이지 내가 쓴 글 조회
+	@Override
+	public List<Board> selectList(String memberNo) {
+		return dao.selectList(memberNo);
+		
+	}
+
+	// 마이페이지 썸네일
+	@Override
+	public List<Attachment> selectThumbnailList(List<Board> bList) {
+		return dao.selectThumbnailList(bList);
+		
+	}
+
+
+	// 전체 게시글 수
+	@Override
+	public int bListNo(String memberNo) {
+		return dao.bListNo(memberNo);
+		
+	}
+
+
+	// 마이페이지 카테고리별 조회
+	@Override
+	public List<Board> chooseList(Map<String, Object> map) {
+		return dao.chooseList(map);
 		
 	}
 
