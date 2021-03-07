@@ -19,6 +19,7 @@ import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
+import com.kh.youngchar.member.model.vo.MemberFile;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -54,6 +55,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> getNewMemList() {
 		return dao.getNewMemList();
+	}
+	
+	// 신규 회원 목록 프로필사진 조회 Service 구현
+	@Override
+	public List<MemberFile> getNewMfList() {
+		return dao.getNewMfList();
 	}
 
 	// 대시보드 차트 데이터 조회 Service 구현
@@ -389,6 +396,61 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Reply> selectSearchReply(PageInfo pInfo, String sv) {
 		return dao.selectSearchReply(pInfo, sv);
+	}
+
+	// 차량정보 수정용 데이터 조회 Service 구현
+	@Override
+	public Cars selectUpdateCar(int carNo) {
+		return dao.selectUpdateCar(carNo);
+	}
+	
+	// 차량 정보 수정 Service 구현
+	@Override
+	public int updateCarAction(Cars cars) {
+		return dao.updateCarAction(cars);
+	}
+	
+	// 차량 정보 검색 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchCarPageInfo(int cp, String sv) {
+		int listCount = dao.getSearchCarCount(sv);
+		
+		return new PageInfo(cp, listCount);
+	}
+	
+	// 차량 정보 검색 목록 조회 Service 구현
+	@Override
+	public List<Cars> selectSearchCarInfo(PageInfo pInfo, String sv) {
+		return dao.selectSearchCarInfo(pInfo, sv);
+	}
+	
+	
+	// 신고 게시글 목록 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getRBPageInfo(int cp) {
+		int listCount = dao.getRBCount();
+		
+		return new PageInfo(cp, listCount);
+	}
+	
+	// 신고 게시글 목록 조회 Service 구현
+	@Override
+	public List<Board> selectRBList(PageInfo pInfo) {
+		return dao.selectRBList(pInfo);
+	}
+
+	// 신고 게시글 관리 검색 페이징 정보 조회 Service 구현
+	@Override
+	public PageInfo getSearchRBPageInfo(int cp, String sv) {
+		int listCount = dao.getSearchRBCount(sv);
+		
+		return new PageInfo(cp, listCount);
+	}
+
+	// 신고 게시글 관리 검색 Serivce 구현
+	@Override
+	public List<Board> selectSearchRB(PageInfo pInfo, String sv) {
+		return dao.selectSearchRB(pInfo, sv);
 	}
 
 	// 파일명 변경 메소드

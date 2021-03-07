@@ -136,11 +136,21 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="member" items="${mList}">  
+										<c:forEach var="member" items="${mList}">
+											<c:forEach var="memberFile" items="${mfList}">
+												<c:choose>
+													<c:when test="${member.memberNo == memberFile.memNo}">
+														<c:set var="src" value="${contextPath}${memberFile.memImgPath}/${memberFile.memImgName}"/>
+													</c:when>
+													<c:otherwise>
+														<c:set var="src" value="${contextPath}/resources/assets/images/user/defaultProfile.jpg"/>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
 											<tr>
 												<td class="bd-t-none u-s-tb">
 													<div class="align-middle image-sm-size">
-														<img class="img-radius align-top m-r-15 rounded-circle" src="${contextPath}/resources/assets/images/user/tmpImg.png" alt="">
+														<img class="img-radius align-top m-r-15 rounded-circle" src="${src}" alt="">
 														<div class="d-inline-block">
 															<h6>
 																${member.nickName} 

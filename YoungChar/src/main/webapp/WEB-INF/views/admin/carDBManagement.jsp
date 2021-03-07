@@ -144,9 +144,10 @@ select:focus, select:active {
 							<div class="card-header">
 								<h5 class="card-title">차량 DB 관리</h5>
 								<div class="search-page">
-									<form class="theme-form">
+									<form action="${contextPath}/admin/carDBManagement/searchCatrgory" method="post" class="theme-form">
 										<div class="input-group m-0">
-											<input class="form-control-plaintext" type="search" placeholder="검색할 단어를 입력하세요"><span class="btn btn-success input-group-text">Search</span>
+											<input class="form-control-plaintext" type="search" name="sv" placeholder="검색할 제조사를 입력하세요">
+											<button class="btn btn-success input-group-text">검색</button>
 										</div>
 									</form>
 								</div>
@@ -160,7 +161,7 @@ select:focus, select:active {
 											<th scope="col">차량 이름</th>
 											<th scope="col">차량 모델</th>
 											<th scope="col">제조사</th>
-											<th scope="col">수정 / 삭제</th>
+											<th scope="col">수정</th>
 										</tr>
 									</thead>
 									<c:choose>
@@ -180,8 +181,7 @@ select:focus, select:active {
 													<td>${car.carModel }</td>
 													<td>${car.categoryName }</td>
 													<td>
-														<button class="btn btn-success btn-sm" id="modify">수정</button>
-														<button class="btn btn-danger btn-sm" id="delete">삭제</button>
+														<button class="btn btn-success btn-sm modify" id="modify">수정</button>
 													</td>
 												</tr>								
 											</c:forEach>
@@ -236,7 +236,7 @@ select:focus, select:active {
 									</c:when>
 
 									<c:otherwise>
-										<li><a class="page-link" href="?cp=${page}">${page}</a></li>
+										<li><a class="page-link" href="?cp=${page}<c:if test="${sv != null}">&sv=${sv}</c:if>">${page}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -359,6 +359,106 @@ select:focus, select:active {
 			</div>
 		</div>
 	</div>
+	
+		<!-- Modal -->
+	<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 1100px;">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">차량 등록</h5>
+					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="update" class="form-signin" method="POST" action="${contextPath}/admin/carDBManagement/updateCar" enctype="multipart/form-data">
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">차량이름</label>
+								<input type="text" class="form-control" id="updateCarName" name="carName" placeholder="차량이름">
+							</div>
+								
+							<div style="display:inline-block; width:250px;">
+								<label for="carModel">모델명</label>
+								<input type="text" class="form-control" id="updateCarModel" name="carModel" placeholder="모델명">
+							</div>
+								
+							<div style="display:inline-block; width:250px;">
+								<label for="drivingSystem">구동방식</label>
+								<input type="text" class="form-control" id="updateDrivingSystem" name="drivingSystem" placeholder="구동방식">
+							</div>
+						
+							<div style="display:inline-block; width:250px;">
+								<label for="personnel">탑승인원</label>
+								<input type="text" class="form-control" id="updatePersonnel" name="personnel" placeholder="탑승인원">
+							</div>
+					
+						</div>
+						<br>
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">연비</label>
+								<input type="text" class="form-control" id="updateConsumpt" name="consumpt" placeholder="연비">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">최소가격</label>
+								<input type="text" class="form-control" id="updateMinPrice" name="minPrice" placeholder="최소가격">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">최대가격</label>
+								<input type="text" class="form-control" id="updateMaxPrice" name="maxPrice" placeholder="최대가격">
+							</div>	
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">연료</label>
+								<input type="text" class="form-control" id="updateFuel" name="fuel" placeholder="연료">
+							</div>
+						</div>
+						<br>
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">1회 충전 주행거리</label>
+								<input type="text" class="form-control" id="updateMileAge" name="mileAge" placeholder="1회 충전 주행거리">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">에너지용량</label>
+								<input type="text" class="form-control" id="updateCapacity" name="capacity" placeholder="에너지용량">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">모터 최대출력</label>
+								<input type="text" class="form-control" id="updateMaxPower" name="maxPower" placeholder="모터 최대출력">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">모터 최대토크</label>
+								<input type="text" class="form-control" id="updateMaxTorque" name="maxTorque" placeholder="모터 최대토크">
+							</div>
+						</div>
+						<br>
+						<div class="modal-input">
+							<div style="display:inline-block; width:250px;">
+								<label for="carName">최고속도</label>
+								<input type="text" class="form-control" id="updateMaxSpeed" name="maxSpeed" placeholder="최고속도">
+							</div>
+							<div style="display:inline-block; width:250px;">	
+								<label for="carName">가속성능</label>
+								<input type="text" class="form-control" id="updatePerformance" name="performance" placeholder="가속성능">
+							</div>
+							<div style="display:inline-block; width:250px;">
+								<label for="categoryCode">브랜드</label> 
+								<select id="updateCategoryCode" name="categoryCode">
+									<c:forEach var="brand" items="${brandList}" >
+										<option value="${brand.CATEGORY_CD}">${brand.CATEGORY_NM}</option>
+									</c:forEach>
+								</select>
+								<input type="hidden" id="updateCarNo" name="carNo"> 
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					<button type="submit" form="update" class="btn btn-success">차량 수정</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script>
 		$(document).ready(function() {
@@ -397,6 +497,53 @@ select:focus, select:active {
 				});
 			}
 		});
+		
+		$(document).ready(function(){
+		    $(".modify").click(function(){
+		    	
+		    	var carNo = $(this).parent().parent().children().eq(1).text();
+		    	
+		    	$.ajax({
+		    		url : "${contextPath}/admin/carDBManagement/modifyView",
+		    		type : "POST",
+		    		dataType : "json",
+		    		data : {"carNo" : carNo},
+		    		success : function(result) {
+		    			console.log(result);
+		    			
+		    			$("#updateCarName").val(result.carName);
+		    			$("#updateCarModel").val(result.carModel);
+		    			$("#updateDrivingSystem").val(result.drivingSystem);
+		    			$("#updatePersonnel").val(Number(result.personnel));
+		    			$("#updateConsumpt").val(Number(result.consumpt));
+		    			$("#updateMinPrice").val(result.minPrice);
+		    			$("#updateMaxPrice").val(result.maxPrice);
+		    			$("#updateFuel").val(result.fuel);
+		    			$("#updateMileAge").val(result.mileage);
+		    			$("#updateCapacity").val(Number(result.capacity));
+		    			$("#updateMaxPower").val(Number(result.maxPower));
+		    			$("#updateMaxTorque").val(Number(result.maxTorque));
+		    			$("#updateMaxSpeed").val(Number(result.maxSpeed));
+		    			$("#updatePerformance").val(Number(result.performance));
+		    			$("#updateCategoryCode > option").each(function(index, item) {
+		    				
+		    				if($(item).text() == result.categoryName){
+		    					$(item).prop("selected", true);
+		    				}
+		    				
+		    			});
+		    			$("#updateCarNo").val(result.carNo);
+		    		
+		    		}, error : function(){
+		    			console.log("삭제 실패");
+		    		}
+		    		
+		    	});
+		    	
+		      $("#updateModal").modal();
+		    });
+		});
+
 	</script>
 
 

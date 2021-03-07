@@ -103,7 +103,7 @@
 			<h2 class="rn-widget-title">Categories</h2>
 			<div class="rn-widget-content">
 				<ul id="main-menu">
-					<li><a href="dashboard">대시보드</a></li>
+					<li><a href="${contextPath}/admin/dashboard">대시보드</a></li>
 					<li><a href="">회원 관리</a>
 						<ul>
 							<li><a href="${contextPath}/admin/memberManagement">일반회원 관리</a></li>
@@ -120,12 +120,7 @@
 						</ul>
 					</li>
 					<li><a href="${contextPath}/admin/replyManagement">댓글 관리</a></li>
-					<li><a href="#">신고관리</a>
-						<ul>
-							<li><a href="${contextPath}/admin/reportBoardManagement">신고 게시글</a></li>
-							<li><a href="${contextPath}/admin/reportReplyManagement">신고 댓글</a></li>
-						</ul>
-					</li>
+					<li><a href="${contextPath}/admin/reportBoardManagement">신고 관리</a></li>
 					<li><a href="${contextPath}/admin/carDBManagement">DB 관리</a></li>
 				</ul>
 			</div>

@@ -64,6 +64,10 @@
 	position: absolute;
   right: 750px;
 }
+
+tbody td:hover{
+	cursor: pointer;
+}
 </style>
 
 
@@ -119,11 +123,19 @@
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="reply" items="${rList}">
+													<input type="hidden" id="boardCode" value="${reply.boardCode}">
 													<tr>
 														<th><input type="checkbox" name="chkid" class="chk" value="${reply.replyNo}"/></th>
 														<th scope="row">${reply.replyNo}</th>
 														<td id="boardNo">${reply.parentBoardNo}</td>
-														<td>${reply.replyContent}</td>
+														<td>
+															<%-- 내용의 길이가 15글자를 넘어가는 경우 --%>
+															<c:set var="content" value="${reply.replyContent}"/>
+															<c:if test="${fn:length(title) > 15 }">
+																<c:set var="content" value="${fn:substring(title,0,15) }..."/>
+															</c:if>
+															${content}
+														</td>
 														<td>${reply.memberId}</td>
 														<td>
 															<%-- 날짜 출력 모양 지정 --%> 
@@ -244,6 +256,22 @@
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 
 	<script>
+		$(".table td").on("click", function() {
+			var boardNo = $(this).parent().children().eq(2).text();
+			var boardCode = $("#boardCode").val();
+	
+			var boardViewURL = null;
+			
+			switch(boardCode) {
+			case '1' : boardViewURL = "${contextPath}/board/1/" + boardNo + "?adm=1"; break;
+			case '2' : boardViewURL = "${contextPath}/board/2/" + boardNo + "?adm=1"; break;
+			case '3' : boardViewURL = "${contextPath}/board/3/" + boardNo + "?adm=1"; break;
+			case '4' : boardViewURL = "${contextPath}/driveReview/review/" + boardNo + "?adm=1"; break;
+			}
+			
+			location.href = boardViewURL;
+		});
+	
 		$(document).ready(function() {
 			$('#checkAll').click(function() {
 				$('.chk').prop('checked', this.checked);

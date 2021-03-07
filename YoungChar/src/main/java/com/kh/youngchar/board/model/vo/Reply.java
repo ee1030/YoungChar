@@ -13,14 +13,17 @@ public class Reply {
 	private int parentReplyNo;			// 부모 댓글 번호
 	private int replyDepth;				// 댓글 깊이
 	private int reportCount;
+	private String memImgPath;
+	private String memImgName;
+	private int boardCode;
 
 	public Reply() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Reply(int replyNo, String replyContent, Timestamp replyCreateDate, Timestamp replyModifyDate,
-			String replyStatus, String memberId, int parentBoardNo, int parentReplyNo, int replyDepth,
-			int reportCount) {
+			String replyStatus, String memberId, int parentBoardNo, int parentReplyNo, int replyDepth, int reportCount,
+			String memImgPath, String memImgName, int boardCode) {
 		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
@@ -32,9 +35,33 @@ public class Reply {
 		this.parentReplyNo = parentReplyNo;
 		this.replyDepth = replyDepth;
 		this.reportCount = reportCount;
+		this.memImgPath = memImgPath;
+		this.memImgName = memImgName;
+		this.boardCode = boardCode;
 	}
 
+	public String getMemImgPath() {
+		return memImgPath;
+	}
 
+	public void setMemImgPath(String memImgPath) {
+		this.memImgPath = memImgPath;
+	}
+
+	public String getMemImgName() {
+		return memImgName;
+	}
+	public void setMemImgName(String memImgName) {
+		this.memImgName = memImgName;
+	}
+
+	public int getBoardCode() {
+		return boardCode;
+	}
+
+	public void setBoardCode(int boardCode) {
+		this.boardCode = boardCode;
+	}
 
 	public int getReportCount() {
 		return reportCount;
@@ -116,12 +143,17 @@ public class Reply {
 		this.replyDepth = replyDepth;
 	}
 
+
+
+
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
 				+ ", replyModifyDate=" + replyModifyDate + ", replyStatus=" + replyStatus + ", memberId=" + memberId
 				+ ", parentBoardNo=" + parentBoardNo + ", parentReplyNo=" + parentReplyNo + ", replyDepth=" + replyDepth
-				+ ", reportCount=" + reportCount + "]";
+				+ ", reportCount=" + reportCount + ", memImgPath=" + memImgPath + ", memImgName=" + memImgName
+				+ ", boardCode=" + boardCode + "]";
 	}
+
 
 }
