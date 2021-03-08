@@ -386,6 +386,17 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		if(result == 0) {
 			
 			result = dao.insertReport(report);
+			
+			// 현재 게시글 신고 수 조회
+			int reportCount = dao.selectReportCount(report);
+			
+			if(reportCount > 9) {
+				// 신고수 10개 이상이면 상태 업데이트
+				result = dao.updateReviewStatus(report);
+				
+				System.out.println(result);
+			}
+			
 		}else {
 			result = 0;
 		}
