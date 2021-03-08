@@ -204,7 +204,7 @@
 						<div class="col-4">
 							<!-- Logo-->
 							<a class="brand-name" href="${contextPath}">
-								<img class="img-fluid" src="${contextPath}/resources/assets/images/0char_logo(200).png" alt="Logo">
+								<img class="img-fluid" src="${contextPath}/resources/assets/images/영차로고.png" alt="Logo">
 							</a>
 						</div>
 						<div class="col-8">
