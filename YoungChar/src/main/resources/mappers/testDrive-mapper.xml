@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="testDriveMapper">
 
-	<resultMap type="TestDrReservation" id="TestDrReservation_rm">
+	<resultMap type="TestDrReservation" id="testDrReservation_rm">
 		<id property="reservationNo" column="RESERVATION_NO"/>
 		<result property="testDriveCarNo" column="TEST_DRIVE_CAR_NO"/>
 		<result property="memNo" column="MEM_NO"/>
@@ -11,12 +11,14 @@
 		<result property="carNo" column="CAR_NO"/>
 		<result property="carName" column="CAR_NAME"/>
 		<result property="carModel" column="CAR_MODEL"/>
+		<result property="brand" column="CATEGORY_NM"/>
 		<result property="fileNo" column="FILE_NO"/>
 		<result property="filePath" column="FILE_PATH"/>
 		<result property="fileName" column="FILE_NAME"/>
 		<result property="memNo2" column="MEM_NO2"/>
 		<result property="cooName" column="COO_NAME"/>
 		<result property="memAdress" column="MEM_ADDRESS"/>
+		
 	</resultMap>
 	
 	<resultMap type="TestCars" id="testCars_rm">
@@ -42,14 +44,10 @@
 	
 	
 	
-	<!-- 차량 목록 조회 -->
-	<select id="selectCarList" parameterType="_int" resultMap="testCars_rm">
+	<!--전체 차량 목록 조회 -->
+	<select id="selectCarList" resultMap="testCars_rm">
 		SELECT DISTINCT(CAR_NO), CAR_NAME, CAR_MODEL, CATEGORY_NM 
-		FROM CAR_INFO
-		JOIN TEST_DRIVE_CAR USING(CAR_NO)
-		JOIN "CATEGORY" USING(CATEGORY_CD)
-		WHERE CAR_STATUS = 'Y'
-		ORDER BY CAR_NO
+		FROM V_T_CAR_LIST
 	</select>	
 	
 	<!-- 전국 대리점 목록 조회 -->
@@ -59,12 +57,57 @@
 	</select>
 	
 	<!-- 선택된 대리점 목록 조회 -->
-	<select id="selectCompanyList" parameterType="_int" resultMap="companyMember_rm">
+	<select id="selectCompanyList" parameterType="list" resultMap="companyMember_rm">
 		SELECT *
 		FROM V_CAR_COMPANY
-		WHERE CAR_NO = #{carNo}
+		WHERE CAR_NO = #{carNumbers}
+	</select>
+
+<!-- ********************************************************************* -->
+<!-- 예약 목록 조회 -->
+	<select id="selectReservation" parameterType="_int" resultMap="testDrReservation_rm">
+		SELECT * FROM V_RESERVATION
+		WHERE MEM_NO = #{memNo}
 	</select>
 
 
+	<!-- 
+	<select id="selectReservation" parameterType="_int" resultMap="testDrReservation_rm">
+		SELECT *
+		FROM TES_DR_RESERVATION
+		WHERE MEM_NO = #{memNo}
+	</select>
+	
+	예약 차량 정보 조회 
+	<select id="selectRCarList" parameterType="list" resultMap="testCars_rm">
+		SELECT DISTINCT(CAR_NO), CAR_NAME, CAR_MODEL, CATEGORY_NM 
+		FROM CAR_INFO 
+		JOIN TEST_DRIVE_CAR t USING(CAR_NO)
+		JOIN "CATEGORY" USING(CATEGORY_CD)
+		WHERE t.CAR_STATUS = 'Y'
+    AND TEST_DRIVE_CAR_NO IN
+    <foreach collection="list" item="rList" open="(" close=")" separator=",">
+  		#{rList.testDriveCarNo}
+  	</foreach>
+		ORDER BY CAR_NO
+	</select>-->
+	
+	<!-- 대리점 정보 조회 -->
+	<select id="selectRcompanyList" parameterType="list" resultMap="companyMember_rm">
+		SELECT *
+		FROM V_CAR_COMPANY
+		WHERE TEST_DRIVE_CAR_NO IN
+    <foreach collection="list" item="rList" open="(" close=")" separator=",">
+  		#{rList.testDriveCarNo}
+  	</foreach>
+	</select> 
+	
+	
+	<!-- 예약 취소 -->
+	<update id="cancleReservation" parameterType="_int">
+		UPDATE TES_DR_RESERVATION SET
+		APPROVAL_STATUS = 'C'
+		WHERE RESERVATION_NO = #{reservationNo}
+	</update>
 </mapper>
 

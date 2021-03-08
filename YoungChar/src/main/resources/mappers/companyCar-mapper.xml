@@ -11,15 +11,17 @@
 		<result property="filePath" column="FILE_PATH"/>
 		<result property="fileName" column="FILE_NAME"/>
 		<result property="memNo2" column="MEM_NO2"/>
+		<result property="brand" column="CATEGORY_NM"/>
 	</resultMap>
 	
 	<!-- 차량 목록 조회 -->
 	<select id="carList" parameterType="_int" resultMap="testCars_rm">
-		SELECT CAR_NO, CAR_NAME, CAR_MODEL, MEM_NO2
+		SELECT CAR_NO, CAR_NAME, CAR_MODEL, MEM_NO2, CATEGORY_NM 
 		FROM CAR_INFO
-		JOIN TEST_DRIVE_CAR USING(CAR_NO)
+		JOIN TEST_DRIVE_CAR t USING(CAR_NO)
+		JOIN "CATEGORY" USING(CATEGORY_CD)
 		WHERE MEM_NO2 = #{memNo}
-		AND CAR_STATUS = 'Y'
+		AND t.CAR_STATUS = 'Y'
 		ORDER BY CAR_NAME
 	</select>	
 	
@@ -34,13 +36,16 @@
 	</select>	 -->
 	<!-- 차량검색 -->
 	<select id="carSearchList" parameterType="string" resultMap="testCars_rm">
-		SELECT CAR_NO, CAR_NAME, CAR_MODEL
-		FROM CAR_INFO
-		WHERE CAR_NAME LIKE '%' || #{carName}  || '%'
+		SELECT CAR_NO, CAR_NAME, CAR_MODEL, CATEGORY_NM 
+		FROM CAR_INFO i
+		JOIN "CATEGORY" USING(CATEGORY_CD)
+		WHERE (CAR_NAME LIKE '%' || #{carName}  || '%'
 		OR CAR_MODEL LIKE '%' || #{carName}  || '%'
+		OR CATEGORY_NM  LIKE '%' || #{carName}  || '%')
+		AND i.CAR_STATUS = 'Y'
 	</select>	
 	
-	<!-- 추가차량 추가되어 있나 검색 -->
+	<!-- 추가차량 추가된적 있나 검색 -->
 	<select id="ex"  parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM TEST_DRIVE_CAR

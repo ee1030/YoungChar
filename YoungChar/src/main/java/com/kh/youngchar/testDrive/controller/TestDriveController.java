@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -92,15 +94,95 @@ public class TestDriveController {
 	
 	//예약 확인 페이지 전환 Controller
 	@RequestMapping("myReservation")
-	public String myReservationView(@ModelAttribute("loginMember") Member loginMember, Model model) {
+	public String myReservationView(@ModelAttribute("loginMember") Member loginMember,
+									Model model) {
 		
 		int memNo = loginMember.getMemberNo();
 		
+		//예약 목록 조회하기
 		List<TestDrReservation> rList = service.selectReservation(memNo);
 		
-		model.addAttribute("rList", rList );
+		if(rList != null) { //예약 있다면 (예약중/시승완료)
+			
+			//예약목록들의 자동차 사진 가져오기
+			//List<TestCars> cList = service.selectRCarList(rList);
+			
+			//대리점 정보 가져오기
+			List<CompanyMember> comList = service.selectRcompanyList(rList);
+			
+			for(TestDrReservation rs : rList) {
+				
+				for(CompanyMember com : comList) {
+					if(rs.getCarNo() == com.getCarNo()) {
+						rs.setCooName(com.getCooName());
+						rs.setMemAdress(com.getMemberAddr());
+					}
+					
+				}
+			}
+			
+			
+			
+			//model.addAttribute("cList", cList);
+			model.addAttribute("comList", comList);
+		}
+		
+		model.addAttribute("rList", rList);
+	
 		
 		return "testDrive/confirmReservation";
 	}
+	
+	//예약 수정 페이지 전환
+	@RequestMapping("updateReservation/{reservationNo}")
+	public String updateReservation(@ModelAttribute("loginMember") Member loginMember,
+									Model model,
+									@PathVariable("reservationNo") int reservationNo) {
+		//모델가져오기
+		List<TestCars> cList = service.selectCarList();
+		
+		//브랜드 리스트 중복제거
+		List<String> brandList = new ArrayList<String>();
+		for(TestCars c : cList) {brandList.add(c.getBrand());}
+		HashSet<String> bList =new HashSet<String>(brandList);
+
+		Gson gson = new Gson();
+	
+		String cListJSON = gson.toJson(cList);
+		
+		System.out.println(cList);
+		
+		
+		model.addAttribute("bList",bList); //브랜드리스트
+		model.addAttribute("cList",cList); //자동차리스트
+		model.addAttribute("cListJSON", cListJSON); //자동차 리스트 JSON
+				
+		
+		return "../updateTestDriveReservation";
+	}
+	
+	//예약 삭제
+	@RequestMapping("cancleReservation/{reservationNo}")
+	public String cancleReservation(@ModelAttribute("loginMember") Member loginMember,
+									Model model,
+									RedirectAttributes ra,
+									@PathVariable("reservationNo") int reservationNo
+									) {
+		
+		int result = service.cancleReservation(reservationNo);
+		String url = "";
+		if(result > 0) {
+			ra.addFlashAttribute("swalIcon", "success");
+			ra.addFlashAttribute("swalTitle", "예약 취소 되었습니다.");
+			url = "redirect:../myReservation";
+		}else {
+			ra.addFlashAttribute("swalIcon", "error");
+			ra.addFlashAttribute("swalTitle", "예약 취소 실패");
+			url = "referer";
+		}
+		
+		return url;
+	}
+	
 	
 }

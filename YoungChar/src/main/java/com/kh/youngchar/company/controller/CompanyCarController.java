@@ -78,13 +78,18 @@ public class CompanyCarController {
 		
 		int result = 0;
 		
+		//추가된적 있나 없나 검사
 		int ex = service.ex(map);
-		if(ex >0) { //이미 추가됨 (상태값 변경)
+		System.out.println(ex);
+		
+		if(ex >0) { //추가 됐던 적 있음 (상태값 변경)
+			
 			String exist = service.carListEx(map);
+			System.out.println(exist);
 			
 			if(exist.equals("N")) { //상태 N일때
 				result = service.updateStatus(map);
-				
+				System.out.println(result);
 			}else { //상태 Y일때 이미 있음 알림
 				result = 0;
 			}
