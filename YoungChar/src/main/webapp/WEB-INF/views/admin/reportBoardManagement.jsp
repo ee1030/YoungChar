@@ -15,6 +15,13 @@
 
 <!-- Preloader CSS-->
 <style>
+.modal-content {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -400px;
+}
+
 .rn-header {
 	position: inherit !important;
 	background-color: rgba(17, 46, 59, 0.7);
@@ -239,6 +246,24 @@ tbody td:hover{
 		</div>
 		<!-- End Page Content-->
 	</section>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="width: 800px; height: 800px;">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">제목 : <span id="reportTitle"></span></h5>
+	        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <span id="boardContent"></span>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<!-- Site Footer-->
 
@@ -257,22 +282,29 @@ tbody td:hover{
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
 
 	<script>
+		
+		
 		$(".table td").on("click", function() {
 			var boardNo = $(this).parent().children().eq(1).text();
-			var categoryCode = $("#categoryCd").val();
-
-			var boardViewURL = null;
 			
-			switch(categoryCode) {
-			case '1' : boardViewURL = "${contextPath}/board/1/" + boardNo + "?adm=1"; break;
-			case '2' : boardViewURL = "${contextPath}/board/2/" + boardNo + "?adm=1"; break;
-			case '3' : boardViewURL = "${contextPath}/board/3/" + boardNo + "?adm=1"; break;
-			case '4' : boardViewURL = "${contextPath}/driveReview/review/" + boardNo + "?adm=1"; break;
-			}
+			$.ajax({
+	    		url : "${contextPath}/admin/reportBoardManagement/selectReportBoard",
+	    		type : "POST",
+	    		dataType : "json",
+	    		data : {"boardNo" : boardNo},
+	    		success : function(result) {
+	    			$("#reportTitle").text(result.boardTitle)
+	    			$("#boardContent").html(result.boardContent)
+	    		
+	    		}, error : function(){
+	    			console.log("삭제 실패");
+	    		}
+			});
 			
-			location.href = boardViewURL;
+			$("#exampleModal").modal();
 		});
 	
+		
 		$(document).ready(function() {
 			$('#checkAll').click(function() {
 				$('.chk').prop('checked', this.checked);

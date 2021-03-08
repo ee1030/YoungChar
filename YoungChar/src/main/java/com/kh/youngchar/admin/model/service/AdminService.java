@@ -334,6 +334,12 @@ public interface AdminService {
 	 */
 	public abstract List<String> getDbList();
 
+	/** 신고 게시글 내용 조회
+	 * @param boardNo
+	 * @return board
+	 */
+	public abstract Board selectReportBoard(int boardNo);
+
 
 	
 

@@ -453,6 +453,13 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectSearchRB(pInfo, sv);
 	}
 	
+	// 신고 게시글 내용 확인 Service 구현
+	@Override
+	public Board selectReportBoard(int boardNo) {
+		return dao.selectReportBoard(boardNo);
+	}
+
+	
 	// 디비에 저장된 모든 이미지 파일 가져오기 Service 구현
 	@Override
 	public List<String> getDbList() {

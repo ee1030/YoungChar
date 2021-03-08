@@ -488,4 +488,12 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.getDbList");
 	}
 
+	/** 신고 게시글 내용확인 DAO
+	 * @param boardNo
+	 * @return board
+	 */
+	public Board selectReportBoard(int boardNo) {
+		return sqlSession.selectOne("adminMapper.selectReportBoard", boardNo);
+	}
+
 }
