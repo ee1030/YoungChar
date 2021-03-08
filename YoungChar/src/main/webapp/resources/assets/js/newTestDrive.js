@@ -57,7 +57,9 @@ console.log(company.length);
     for(var c of com){
         var tr = $("<tr>");
         var td = $("<td>");
-        td.html("<h4>"+"<span>"+c.brand+"</span>"+"<span>"+c.cooName +"</span>"+"</h4>"+"<h5>"+ c.memberAddr+"</h5>"+c.memPhone+"<span display='none'>"+c.memberNo+"</span>");
+        td.html("<h4>"+"<span>"+c.brand+"</span>"+"<span>"+c.cooName +"</span>"+"</h4>"+"<h5>"+
+         c.memberAddr+"</h5>"+"<span>전화번호 : </span>"+ "<span class='memPhone'>"+c.memPhone+"</span>"+"<span class='spanNone memNo'>"+c.memberNo+"</span>"+
+         "<span class='spanNone testDriveNo'>"+c.testDriveNo+"</span>");
         tr.html(td);
         $("#centerTable").append(tr);
     }
@@ -67,7 +69,7 @@ console.log(company.length);
         //ajax 완료시 수행
 		if(checkFlag == true){
             console.log(com[0].memberAddr);
-            addTo(com[0].memberAddr, com[0].brand, com[0].memberNo, com[0].cooName);
+            addTo(com[0].memberAddr, com[0].brand, com[0].memberNo, com[0].cooName, com[0].memPhone, com[0].testDriveNo);
         }
 
         //목록 클릭시 지도 이동 시키기------------------------------------------------------
@@ -77,18 +79,26 @@ console.log(company.length);
                 $(this).addClass("carSelect");
                 $(this).siblings().removeClass("carSelect"); 
 
+                
+
 				addr = $(this).children().children("h5").text();
 				brand = $(this).children().children("h4").children().first();
                 brandName = brand.text();
                 cooName = brand.next().text();
-                memberNo = $(this).children().children("span").text();
-                addTo(addr, brandName,memberNo, cooName);
+                memPhone = $(this).children().children(':nth-child(4)').text();
+                memberNo = $(this).children().children(':nth-child(5)').text();
+                testDriveNo = $(this).children().children(':nth-child(6)').last().text();
+                addTo(addr, brandName,memberNo, cooName, memPhone, testDriveNo);
 	            
                 $(".centerName").text(brandName+" "+cooName);
+
+            //input에 값추가하기
+                $("input[name=car]").val(testDriveNo);
+                $("input[name=company]").val(memberNo);
           
         });
 
-        function addTo(addr, brand, memberNo, cooName){
+        function addTo(addr, brand, memberNo, cooName, memPhone, testDriveNo){
             
 				geocoder.addressSearch(addr, function(result, status) {
 
@@ -104,12 +114,14 @@ console.log(company.length);
                         var content = '<div class="wrap" id='+memberNo+'>' + 
                                     '    <div class="info">' + 
                                     '        <div class="title">' + 
-                                                    brand +" " +cooName +
+                                    brand +" " +cooName +
                                     '            <div class="close" title="닫기"></div>' + 
                                     '        </div>' + 
                                     '        <div class="body">' + 
                                     '            <div class="desc">' + 
+                                    '               <span class="spanNone testDriveNo">'+ testDriveNo +'</span>' +
                                     '                <div class="ellipsis">'+ addr+'</div>' + 
+                                    '                 <div class="ellipsis memPhone">'+"전화번호 : "+ memPhone+'</div>' + 
                                     '            </div>' + 
                                     '        </div>' + 
                                     '    </div>' +    
@@ -129,6 +141,7 @@ console.log(company.length);
                            
                         $(document).on("click","#"+memberNo, function(){
                             $(this).css("display","none");
+                            
                         });     
                      }
                 });
