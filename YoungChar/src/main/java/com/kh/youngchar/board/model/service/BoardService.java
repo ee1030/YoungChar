@@ -10,6 +10,7 @@ import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.PageInfo2;
 import com.kh.youngchar.board.model.vo.Search;
+import com.kh.youngchar.company.model.vo.Report;
 
 public interface BoardService {
 
@@ -96,6 +97,18 @@ public interface BoardService {
 	 * @return bList
 	 */
 	public abstract List<Board> selectSearchList(Search search, PageInfo2 pInfo);
+
+	/** 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	public abstract int delBoard(int boardNo);
+
+	/** 게시글 신고 Service
+	 * @param report
+	 * @return
+	 */
+	public abstract int reportBoard(Report report);
 
 	
 

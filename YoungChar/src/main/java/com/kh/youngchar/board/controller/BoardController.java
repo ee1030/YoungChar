@@ -1,5 +1,6 @@
 package com.kh.youngchar.board.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.kh.youngchar.board.model.vo.Search;
+import com.kh.youngchar.company.model.vo.Report;
 import com.kh.youngchar.board.model.service.BoardService;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
@@ -406,6 +408,65 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
+	
+	
+	@RequestMapping("delete/{boardCode}/{boardNo}")
+	public String delBoard(@PathVariable int boardCode ,@PathVariable int boardNo ,
+			@RequestHeader(value = "referer",required = false ) String referer,
+			RedirectAttributes ra) {
+		
+		int result = service.delBoard(boardNo);
+		
+		String url = "";
+		
+		System.out.println(boardCode);
+		
+		if(result > 0 ) {
+			
+			url = "redirect:../../list/" + boardCode;
+			
+			swalIcon = "success";
+			swalTitle = "삭제가 완료되었습니다.";
+			
+			/*
+			 * if(boardCode == 3) {
+				url = "board/boardList";
+			} else {
+				url = "board/reviewBoardList";
+			} */
+		}else {
+			swalIcon = "error";
+			swalTitle = "삭제가 실패 되었습니다.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		return url;
+		
+	}
+	
+	@RequestMapping("{boardCode}/reportBoard")
+	public String reportBoard(@PathVariable int boardCode, RedirectAttributes ra , @ModelAttribute Report report ,
+								HttpServletRequest request) {
+		
+		int result = service.reportBoard(report);
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "신고가 완료되었습니다.";
+			swalText = "관리자 확인 후 조치 예정입니다.";
+		}else {
+			swalIcon = "error";
+			swalTitle = "이미 신고한 게시글입니다.";
+		}
+		
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		ra.addFlashAttribute("swalText", swalText);
+		
+		return "redirect:../" + boardCode +"/"+ report.getReportBoardNo();
+	}
 	
 	
 	

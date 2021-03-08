@@ -38,4 +38,28 @@ public interface CarsService {
 	 */
 	List<CAttachment> selectAttachmentList(int carNo);
 
+	/** 검색 차량 조회 1
+	 * @param carNo1
+	 * @return
+	 */
+	Cars selectSearchCar1(int carNo1);
+
+	/** 검색 차량 조회 2
+	 * @param carNo2
+	 * @return
+	 */
+	Cars selectSearchCar2(int carNo2);
+
+	/** 차량 이미지 조회 1
+	 * @param carNo1
+	 * @return
+	 */
+	List<CAttachment> selectAtList1(int carNo1);
+
+	/** 차량 이미지 조회 2
+	 * @param carNo2
+	 * @return
+	 */
+	List<CAttachment> selectAtList2(int carNo2);
+
 }

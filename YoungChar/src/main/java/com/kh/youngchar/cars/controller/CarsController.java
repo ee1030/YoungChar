@@ -81,8 +81,33 @@ public class CarsController {
 	}
 	
 //	비교 검색
-	@RequestMapping("carSearch")
-	public String carSearch() {
+	@RequestMapping("carSearch/{carNo1}/{carNo2}")
+	public String carSearch(@PathVariable int carNo1 , @PathVariable int carNo2 , Model model) {
+		
+		
+		
+		Cars carInfo = service.selectSearchCar1(carNo1);
+		Cars carInfo2 = service.selectSearchCar2(carNo2);
+		
+		List<CAttachment> attachmentList1 = service.selectAtList1(carNo1);
+		
+		List<CAttachment> attachmentList2 = service.selectAtList2(carNo2);
+		
+		if(attachmentList1 != null && !attachmentList1.isEmpty()) {
+			
+			model.addAttribute("attachmentList1" , attachmentList1);
+		}
+		if(attachmentList2 != null && !attachmentList1.isEmpty()) {
+			
+			model.addAttribute("attachmentList2" , attachmentList2);
+		}
+		
+		System.out.println(attachmentList1);
+		System.out.println(attachmentList2);
+		
+		model.addAttribute("carInfo1" , carInfo);
+		model.addAttribute("carInfo2" , carInfo2);
+		
 		
 		return "car/carSearch";
 	}

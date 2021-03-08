@@ -22,6 +22,7 @@ import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.PageInfo2;
 import com.kh.youngchar.board.model.vo.Search;
+import com.kh.youngchar.company.model.vo.Report;
 
 @Service // Service임을 알려줌 + bean 등록 
 public class BoardServiceImpl implements BoardService{
@@ -647,8 +648,50 @@ public class BoardServiceImpl implements BoardService{
 		
 		return dao.selectSearchList(search,pInfo);
 	}
+	
+//	게시글 삭제 Service 구현
+	@Override
+	public int delBoard(int boardNo) {
+		
+		int result = dao.delBoard(boardNo);
+		List<Integer> deleteFileNoList = new ArrayList<Integer>();
+		
+		if(result > 0) {
+			List<Attachment> oldFiles = dao.selectAttachmentList(boardNo);
+			
+			if (!oldFiles.isEmpty()) {
+				
+				for(Attachment file : oldFiles) {
+					deleteFileNoList.add(file.getFileNo());
+				}
+				
+				result = dao.deleteAttachmentList(deleteFileNoList);
+			}
+		}
+		
+		return result;
+	}
 
-
+	
+//	게시글 신고 Service 구현 
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int reportBoard(Report report) {
+		
+		int result = 1;
+		result = dao.selectReport(report);
+		
+		if(result == 0) {
+			
+			result = dao.insertReport(report);
+			
+		}else {
+			
+			result = 0;
+			
+		}
+		return result;
+	}
 
 
 	

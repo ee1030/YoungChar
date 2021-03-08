@@ -62,4 +62,37 @@ public class CarsDAO {
 		return sqlSession.selectList("carsMapper.selectAttachmentList" , carNo);
 	}
 
+	/** 검색 차량 1 
+	 * @param carNo1
+	 * @return
+	 */
+	public Cars selectSearchCar1(int carNo1) {
+		return sqlSession.selectOne("carsMapper.selectSearchCar1",carNo1);
+	}
+
+	/** 검색 차량 2
+	 * @param carNo2
+	 * @return
+	 */
+	public Cars selectSearchCar2(int carNo2) {
+		return sqlSession.selectOne("carsMapper.selectSearchCar2",carNo2);
+	}
+
+	/** 검색 차량 이미지 1
+	 * @param carNo1
+	 * @return
+	 */
+	public List<CAttachment> selectAtList1(int carNo1) {
+		return sqlSession.selectList("carsMapper.selectAtList1", carNo1);
+	}
+
+	/** 검색 차량 이미지 2
+	 * @param carNo2
+	 * @return
+	 */
+	public List<CAttachment> selectAtList2(int carNo2) {
+		return sqlSession.selectList("carsMapper.selectAtList1", carNo2);
+
+	}
+
 }

@@ -282,8 +282,25 @@
 			ORDER BY BOARD_NO DESC
 		
 		</select>
+		
+		<update id="delBoard" parameterType="_int">
+			UPDATE BOARD SET
+			BOARD_STATUS = 'N'
+			WHERE BOARD_NO = #{boardNo}
+		</update>
 
 
+		<select id="selectReport" parameterType="Report" resultType="_int">
+			SELECT COUNT(*)
+			FROM REPORT
+			WHERE MEM_NO = #{memNo}
+			AND REPORT_BOARD_NO = #{reportBoardNo}
+		</select>
+		
+		<insert id="insertReport" parameterType="Report">
+			INSERT INTO REPORT
+			VALUES(SEQ_PNO.NEXTVAL, SYSDATE, 'N', #{reportType}, #{reportBoardNo}, #{reportContent}, #{memNo})
+		</insert>
 
 
 
