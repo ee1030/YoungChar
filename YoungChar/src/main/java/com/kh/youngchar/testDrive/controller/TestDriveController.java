@@ -92,6 +92,16 @@ public class TestDriveController {
 		return companyListJSON;
 	}
 	
+	
+	//예약 하기 
+	@RequestMapping("makeReservation")
+	public String makeReservation(@ModelAttribute("loginMember") Member loginMember,
+								Model model, RedirectAttributes ra , TestDrReservation reservation) {
+		
+		return "";
+	}
+	
+	
 	//예약 확인 페이지 전환 Controller
 	@RequestMapping("myReservation")
 	public String myReservationView(@ModelAttribute("loginMember") Member loginMember,

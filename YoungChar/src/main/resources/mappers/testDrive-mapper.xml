@@ -34,6 +34,7 @@
 	</resultMap>
 	
 	<resultMap type="CompanyMember" id="companyMember_rm">
+			<result property="testDriveNo" column="TEST_DRIVE_CAR_NO"/>
    		<result property="carNo" column="CAR_NO"/>
   		<result property="memberNo" column="MEM_NO"/>
   		<result property="brand" column="CATEGORY_NM"/>

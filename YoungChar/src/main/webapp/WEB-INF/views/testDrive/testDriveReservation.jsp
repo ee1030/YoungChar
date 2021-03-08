@@ -70,6 +70,14 @@
 			table h5{
 				color : #888;
 			}
+			
+			.inputs{
+				/* display: none; */
+			}
+			
+			.spanNone{
+				display: none ;
+			}
 
 		</style>
 		<!-- Preloader CSS-->
@@ -86,6 +94,9 @@
 		<!-- Header-->
 		<jsp:include page="../common/header.jsp"></jsp:include>
 
+
+	
+		
 		<!-- Page Title-->
 		<div class="rn-page-title">
 			<div class="rn-pt-overlayer"></div>
@@ -126,7 +137,7 @@
 										모델 선택
 									</h1>
 								</div>
-								<div class="text-center carNameArea"></div>
+								<div class="text-center carNameArea" id="modelName"></div>
 							</form>
 						</div>
 					</div>
@@ -293,7 +304,7 @@
 		</section>
 
 		<div class="row justify-content-md-center selectBar1">
-			<div class="col-lg-10 select1"> 날짜 선택</div>
+			<div class="col-lg-10 select1 time"> 날짜 선택</div>
 		</div>	
 		<br>
 
@@ -309,8 +320,8 @@
 										날짜 선택
 									</h1>
 								</div>
-								<div class="text-center">
-									날짜, 시간 불러오기
+								<div class="text-center time">
+									
 								</div>
 							</form>
 						</div>
@@ -330,7 +341,25 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-10">
-						달력
+						<div class="col-lg-10 rn-date-time-input">
+										<div class="row">
+											<div class="col-lg-6 col-md-8 col-8">
+												<div class="rn-icon-input">
+													<i class="far fa-calendar-alt"></i>
+													<input type="text" placeholder="Pickup Date" id="pickup-date">
+												</div>
+											</div>
+											<div class="col-lg-4 col-md-4 col-4">
+												<div class="rn-icon-input">
+													<i class="far fa-clock"></i>
+													<input type="text" placeholder="Time" id="pickup-time">
+												</div>
+											</div>
+											<div class="col-lg-2 col-md-4 col-4">
+											 <button class="btn btn-main btn-shadow btn-block" id="timeBtn">선택</button>
+											</div>
+										</div>
+									</div>
 					</div>
 					
 				</div>
@@ -338,10 +367,16 @@
 		</div>
 		</section>
 		<br><br><br><br>
-		<div class="row justify-content-md-center">
-			<button class="col-lg-1 btn btn-main  btn-shadow btn-block" >완료</button>
-		</div>
-
+			<form action="makeReservation" method="post" onsubmit="return validate();">
+				<div class="row justify-content-md-center">
+						<div class="inputArea">
+							<input name="car" class="inputs">
+							<input name="company" class="inputs">
+							<input name="time" class="inputs">
+						</div>
+					<button class="col-lg-1 btn btn-main  btn-shadow btn-block" type="submit">완료</button>
+				</div>
+		</form>
 		<br><br>
 
 
@@ -490,7 +525,6 @@
 			var comAddr = $("#centerTable").children(":first").children().text();
 			console.log(comAddr);
 			
-	  	
 			
 		</script>
 		<script src="${contextPath}/resources/assets/js/newTestDrive.js"></script>
@@ -501,5 +535,59 @@
 		<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 		<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+		<script type="text/javascript">
+		//시간 설정
+	  	$("#pickup-time").flatpickr({
+	  		minuteIncrement : 30,
+	  		enableTime: true,
+	  	    noCalendar: true,
+	  	    dateFormat: "H:i",
+	  	    minTime: "09:00",
+	  	    maxTime: "17:30",
+	  	    
+	  	 /*  onChange: function(selectedDates, dateStr, instance) {
+	         $("#time").html(selectedDates);
+	      }, */
+	  	});
+		
+			//시간 선택 버튼 클릭 시
+			$("#timeBtn").on("click",function(){
+	  		console.log($("#pickup-date").val()+" " +$("#pickup-time").val());
+	  		$(".time").text($("#pickup-date").val()+" " +$("#pickup-time").val());
+	  		
+	  		//input태그에 시간 추가
+				$("input[name=time]").val($("#pickup-date").val()+" " +$("#pickup-time").val());
+			});
+			
+			
+			//유효성 검사
+			function validate(){
+				
+				if($("#modelName").text() == ""){
+					swal({
+						icon: "error",
+						text: "차를 선택해주세요"
+					})
+					return false;
+				}else if($("input[name=company]").val() == ""){
+					swal({
+						icon: "error",
+						text: "대리점을 선택해주세요"
+					})
+					return false;
+				}else if($("input[name=time]").val() == ""){
+					swal({
+						icon: "error",
+						text: "시간을 선택해주세요"
+					});
+					return false;
+				}else{
+					return true;
+					
+				}
+			}
+			
+			
+		</script>
 	</body>
 </html>
