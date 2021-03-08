@@ -82,7 +82,7 @@ li {
 		<div class="rn-section">
 			<div class="container">
 				
-				<div class="row">
+				<div class="row card">
 					<c:if test = "${pInfo.boardType == 1 }">
 						<h1>REVIEW</h1>
 					</c:if>
@@ -91,26 +91,54 @@ li {
 						<h1>INFORMATION</h1>
 					</c:if>
 
-					<div id="ssss">
-
-
-						<select name="sk" class="form-control" style="width: 100px; display: inline-block; margin: auto;">
-					<option value="tit">글제목</option>
-					<option value="con">내용</option>
-					<option value="titcont">제목+내용</option>
-				</select> 
-				<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
-				<button class="form-control btn btn-success" id="searchBtn" type="button" style="width: 100px; display: inline-block;">검색</button>
-			</div>
+					<div >
+								<!-- /spring/board/list/1or2 -> search/2 -->
+								<form action="../search/${pInfo.boardType}" class="text-center" id="searchForm" >
+									<span> 카테고리(다중 선택 가능)<br> 
+									
+									<label for="exercise">테슬라</label> 
+									<input type="checkbox" name="ct" value="테슬라" id="tesla"> &nbsp; 
+									
+									<label for="movie">현대자동차</label>
+									<input type="checkbox" name="ct" value="현대자동차" id="hyundai"> &nbsp; 
+									
+									<label for="music">기아</label> 
+									 <input type="checkbox" name="ct" value="기아" id="kia"> &nbsp; 
+									 
+									 <label for="cooking">벤츠</label>
+									  <input type="checkbox" name="ct" value="벤츠" id="benz"> &nbsp; 
+									  
+									  <label for="game">BMW</label>
+									   <input type="checkbox" name="ct" value="BMW" id="bmw"> &nbsp; 
+									   
+									  <label for="game">아우디</label>
+									   <input type="checkbox" name="ct" value="아우디" id="audi"> &nbsp; 
+									   
+									  <label for="game">포르쉐</label>
+									   <input type="checkbox" name="ct" value="포르쉐" id="porsche"> &nbsp;
+									    
+									  <label for="game">르노</label>
+									   <input type="checkbox" name="ct" value="르노" id="renault"> &nbsp; 
+									   
+									   
+									   
+									</span> <br> <select name="sk" class="form-control" style="width: 100px; display: inline-block; margin-bottom: 10px;">
+										<option value="tit">글제목</option>
+										<option value="con">내용</option>
+										<option value="titcont">제목+내용</option>
+									</select> <input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
+									<button class="form-control btn btn-success" id="searchBtn" type="submit" style="width: 100px; display: inline-block;">검색</button>
+								</form>
+							</div>
 			
 		</div>
 
-			<div class="col-lg-12 rn-post-list">
+			<div class="col-lg-12 rn-post-list ">
 
 				<div class="col-md-2" style="float: left;">
 					<section class="rn-widget">
 						<h2 class="rn-widget-title">Categories</h2>
-						<div class="rn-widget-content" id="categoryNm">
+						<div class="rn-widget-content card" id="categoryNm">
 							<ul>
 								<li>테슬라</li>
 								<li>현대자동차</li>
@@ -204,7 +232,34 @@ li {
 							<ul>
 
 								<%-- 주소 조합 작업 --%>
-								<c:url var="pageUrl" value="${pInfo.boardType}?" />
+								<c:choose>
+									<%-- 검색이 된 경우 --%>
+									<c:when test="${!empty search }">
+										<%--선택된 카테고리를 하나의 쿼리스트링으로 조합 --%>
+
+										<c:forEach items="${search.ct}" var="c">
+											<c:set var="category" value="${category}ct=${c}&" />
+										</c:forEach>
+
+										<c:set var="searchStr" value="${category}" />
+
+										<%-- 검색된 내용이 있다면 --%>
+										<c:if test="${!empty search.sv}">
+											<c:set var="searchStr" value="${category}sk=${search.sk}&sv=${search.sv}" />
+										</c:if>
+
+										<c:url var="pageUrl" value="../search/${search.boardType}?${searchStr}&" />
+										<c:set var="returnListURL" value="${contextPath}/board/search/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+									</c:when>
+
+									<%-- 안된 경우 --%>
+									<c:otherwise>
+										<c:url var="pageUrl" value="${pInfo.boardType}?" />
+										<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+										<c:set var="returnListURL" value="${contextPath}/board/list/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+									</c:otherwise>
+
+								</c:choose>
 
 								<!-- 화살표에 들어갈 주소를 변수로 생성 -->
 								<c:set var="firstPage" value="${pageUrl}cp=1" />
@@ -310,6 +365,33 @@ li {
 			location.href = selectCategoryURL;
 			
 		});
+		
+		
+		// ------- 검색 파라미터 유지 ----------
+		$(function(){
+			// 카테고리 
+			<c:forEach items="${search.ct}" var="ctName">
+				$("input[name=ct]").each(function(index, item){
+					if($(item).val() == "${ctName}"){
+						$(item).prop("checked",true);
+					}
+				});	
+			
+			</c:forEach>
+			
+			// 검색 조건(sk)
+			$("select[name=sk] > option").each(function(index,item){
+				if($(item).val() == "${search.sk}"){
+					$(item).prop("selected",true);
+				}
+			}); 
+			
+			// 검색 값(sv)
+			$("input[name=sv]").val("${search.sv}");
+			
+		});
+		
+		
 	</script>
 
 		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>

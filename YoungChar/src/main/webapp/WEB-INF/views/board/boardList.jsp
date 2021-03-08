@@ -75,7 +75,7 @@
 			<div class="row">
 				<div class="col-lg-8 order-lg-1 pb-15" style="margin: auto;">
 					<div class="col-sm-12">
-						<div>
+						<div class = "card">
 								<!-- /spring/board/list/1or2 -> search/2 -->
 								<form action="../search/${pInfo.boardType}" class="text-center" id="searchForm" >
 									<span> 카테고리(다중 선택 가능)<br> 
@@ -285,7 +285,7 @@
 
 
 
-				<div class="col-lg-3">
+				<div class="col-lg-2">
 
 					<!-- Sidebar-->
 					<aside class="rn-widget-area rn-left-sidebar" id="secondary">
@@ -295,8 +295,7 @@
 							<h1>
 								<%-- 	${bList[0].boardName } --%>
 								<c:choose>
-									<c:when test="${pInfo.boardType == 2 }">정보게시판	</c:when>
-									<c:when test="${pInfo.boardType == 3 }">잡담게시판	</c:when>
+									<c:when test="${pInfo.boardType == 3 }">FREECHAT	</c:when>
 								</c:choose>
 
 
@@ -319,7 +318,7 @@
 
 						<section class="rn-widget">
 							<h2 class="rn-widget-title">게시판 이동</h2>
-							<div class="rn-widget-content">
+							<div class="rn-widget-content ">
 								<ul>
 							
 						
