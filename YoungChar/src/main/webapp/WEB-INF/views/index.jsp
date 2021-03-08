@@ -47,90 +47,7 @@
 		</div>
 		<!-- End slider-->
 
-		<!-- Car Search Form-->
-		<section class="rn-search-form-big rn-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-
-						<!-- Section Title-->
-						<div class="rn-section-title  rn-title-bg-color-white-10 rn-title-color-white">
-							<h2 class="rn-title">Search &amp; Hire Cars</h2>
-							<span class="rn-title-bg">Search &amp; Hire Cars</span>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-12">
-
-						<!-- Main Big Search Form-->
-						<div class="rn-big-search-form rn-big-search-form-dark">
-							<form action="car-search.html">
-								<div class="row">
-									<div class="col-lg-3 col-sm-6">
-										<div class="rn-icon-input">
-											<i class="fas fa-map-marker-alt"></i>
-											<input type="text" placeholder="Pickup Location">
-										</div>
-									</div>
-									<div class="col-lg-3 col-sm-6">
-										<div class="rn-icon-input">
-											<i class="fas fa-map-marker-alt"></i>
-											<input type="text" placeholder="Drop Location">
-										</div>
-									</div>
-									<div class="col-lg-3 rn-date-time-input">
-										<div class="row">
-											<div class="col-lg-7 col-md-8 col-8">
-												<div class="rn-icon-input">
-													<i class="far fa-calendar-alt"></i>
-													<input type="text" placeholder="Pickup Date" id="pickup-date">
-												</div>
-											</div>
-											<div class="col-lg-5 col-md-4 col-4">
-												<div class="rn-icon-input">
-													<i class="far fa-clock"></i>
-													<input type="text" placeholder="Time" id="pickup-time">
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-3 rn-date-time-input">
-										<div class="row">
-											<div class="col-lg-7 col-md-8 col-8">
-												<div class="rn-icon-input">
-													<i class="far fa-calendar-alt"></i>
-													<input type="text" placeholder="Drop Date" id="drop-date">
-												</div>
-											</div>
-											<div class="col-lg-5 col-md-4 col-4">
-												<div class="rn-icon-input">
-													<i class="far fa-clock"></i>
-													<input type="text" placeholder="Time" id="drop-time">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="text-center">
-									<button class="btn btn-orange btn-lg mt-30 btn-shadow" type="submit">
-										<i class="fas fa-search"></i> Find Now
-									</button>
-								</div>
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<!-- Section Shape-->
-			<div class="rn-shape rn-shape-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
-	<path class="rn-shape-fill" d="M500.2,94.7L0,0v100h1000V0L500.2,94.7z"/>
-</svg>
-			</div>
-		</section>
-		<!-- End Car Search Form-->
+	
 
 		<!-- Why People Like Us Section-->
 		<section class="rn-section">
@@ -201,60 +118,7 @@
 
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-3 col-md-6">
 
-						<!-- Feature with dot-->
-						<div class="rn-dot-feature">
-							<div class="rn-the-dot"></div>
-							<div class="rn-dot-feature-info">
-								<h3>Personal Driver</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
-							</div>
-						</div>
-						<!-- End Feature with dot-->
-
-					</div>
-					<div class="col-lg-3 col-md-6">
-
-						<!-- Feature with dot-->
-						<div class="rn-dot-feature">
-							<div class="rn-the-dot"></div>
-							<div class="rn-dot-feature-info">
-								<h3>Unlimited Miles</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
-							</div>
-						</div>
-						<!-- End Feature with dot-->
-
-					</div>
-					<div class="col-lg-3 col-md-6">
-
-						<!-- Feature with dot-->
-						<div class="rn-dot-feature">
-							<div class="rn-the-dot"></div>
-							<div class="rn-dot-feature-info">
-								<h3>City to City</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
-							</div>
-						</div>
-						<!-- End Feature with dot-->
-
-					</div>
-					<div class="col-lg-3 col-md-6">
-
-						<!-- Feature with dot-->
-						<div class="rn-dot-feature">
-							<div class="rn-the-dot"></div>
-							<div class="rn-dot-feature-info">
-								<h3>24/7 Customer Support</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
-							</div>
-						</div>
-						<!-- End Feature with dot-->
-
-					</div>
-				</div>
 			</div>
 		</section>
 		<!-- End Why People Like Us Section-->
@@ -509,12 +373,12 @@
 		<!-- End Popular Cars Section-->
 
 		<!-- Car Categories-->
-		<section class="rn-section">
+<!-- 		<section class="rn-section">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
 
-						<!-- Section Title-->
+						Section Title
 						<div class="rn-section-title   ">
 							<h2 class="rn-title">Car by Types</h2>
 							<p>Inbecilloque elegans errorem concedo etsi electram.</p>
@@ -525,7 +389,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-2 col-6 col-md-4">
-						<!-- Car Category-->
+						Car Category
 						<div class="rn-car-type">
 							<a href="cars.html">
 								<span class="rn-car-type-icon">
@@ -536,7 +400,7 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-6 col-md-4">
-						<!-- Car Category-->
+						Car Category
 						<div class="rn-car-type">
 							<a href="cars.html">
 								<span class="rn-car-type-icon">
@@ -547,7 +411,7 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-6 col-md-4">
-						<!-- Car Category-->
+						Car Category
 						<div class="rn-car-type">
 							<a href="cars.html">
 								<span class="rn-car-type-icon">
@@ -558,7 +422,7 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-6 col-md-4">
-						<!-- Car Category-->
+						Car Category
 						<div class="rn-car-type">
 							<a href="cars.html">
 								<span class="rn-car-type-icon">
@@ -569,7 +433,7 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-6 col-md-4">
-						<!-- Car Category-->
+						Car Category
 						<div class="rn-car-type">
 							<a href="cars.html">
 								<span class="rn-car-type-icon">
@@ -580,7 +444,7 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-6 col-md-4">
-						<!-- Car Category-->
+						Car Category
 						<div class="rn-car-type">
 							<a href="cars.html">
 								<span class="rn-car-type-icon">
@@ -592,28 +456,29 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<!-- End Car Categories-->
 
+
 		<!-- Testimonials & Fun Fact-->
-		<section class="rn-section rn-fun-fact">
+	<!-- 	<section class="rn-section rn-fun-fact">
 			<div class="rn-section-overlayer"></div>
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
 
-						<!-- Section Title-->
+						Section Title
 						<div class="rn-section-title rn-title-pos-left rn-title-bg-color-white-10 rn-title-color-white">
 							<h2 class="rn-title">Testimonials</h2>
 							<span class="rn-title-bg">Testimonials</span>
 						</div>
 
-						<!-- Testimonials-->
+						Testimonials
 						<div class="rn-testimonials rn-testimonials2">
 							<div class="rn-testimonials-carousel carousel slide" id="rn-testimonials" data-ride="carousel">
 								<div class="carousel-inner">
 
-									<!-- Testimonial Item 1-->
+									Testimonial Item 1
 									<div class="carousel-item active">
 										<blockquote class="rn-testimonial2-item">
 											<p>Curabitur neque turpis, pellentesque vel semper ut, tempor vel arcu. Nulla facilisi. Phasellus feugiat nunc eget eros varius, et mollis magna elementum.</p>
@@ -625,7 +490,7 @@
 										</blockquote>
 									</div>
 
-									<!-- Testimonial Item 2-->
+									Testimonial Item 2
 									<div class="carousel-item">
 										<blockquote class="rn-testimonial2-item">
 											<p>Integer aliquam velit ut nibh mattis, et suscipit erat ultrices. Cras aliquam ante vel arcu suscipit, sit amet lobortis elit dignissim tempor vel.</p>
@@ -637,7 +502,7 @@
 										</blockquote>
 									</div>
 
-									<!-- Testimonial Item 3-->
+									Testimonial Item 3
 									<div class="carousel-item">
 										<blockquote class="rn-testimonial2-item">
 											<p>Suspendisse semper urna nec massa imperdiet consequat. Phasellus a hendrerit elit, vel maximus lacus. Sed eu quam laoreet, faucibus lorem non, aliquet diam.</p>
@@ -649,7 +514,7 @@
 										</blockquote>
 									</div>
 
-									<!-- Testimonial Item 4-->
+									Testimonial Item 4
 									<div class="carousel-item">
 										<blockquote class="rn-testimonial2-item">
 											<p>Quisque ut arcu vitae elit egestas lobortis. Vivamus vehicula tortor molestie urna laoreet congue. Fusce iaculis eros id neque maximus tristique.</p>
@@ -662,7 +527,7 @@
 									</div>
 
 								</div>
-								<!-- Testimonials Slider Controls-->
+								Testimonials Slider Controls
 								<ol class="carousel-indicators">
 									<li class="active" data-target="#rn-testimonials" data-slide-to="0"></li>
 									<li data-target="#rn-testimonials" data-slide-to="1"></li>
@@ -671,14 +536,14 @@
 								</ol>
 							</div>
 						</div>
-						<!-- End Testimonials-->
+						End Testimonials
 
 					</div>
 					<div class="col-lg-6">
 						<div class="row">
 							<div class="col-6">
 
-								<!-- CountUp Item-->
+								CountUp Item
 								<div class="rn-counter-item">
 									<div class="rn-counter-number-container">
 										<span class="rn-counter-number">350</span>
@@ -690,7 +555,7 @@
 							</div>
 							<div class="col-6">
 
-								<!-- CountUp Item-->
+								CountUp Item
 								<div class="rn-counter-item">
 									<div class="rn-counter-number-container">
 										<span class="rn-counter-number">6500</span>
@@ -702,7 +567,7 @@
 							</div>
 							<div class="col-6">
 
-								<!-- CountUp Item-->
+								CountUp Item
 								<div class="rn-counter-item">
 									<div class="rn-counter-number-container">
 										<span class="rn-counter-number">5000</span>
@@ -714,7 +579,7 @@
 							</div>
 							<div class="col-6">
 
-								<!-- CountUp Item-->
+								CountUp Item
 								<div class="rn-counter-item">
 									<div class="rn-counter-number-container">
 										<span class="rn-counter-number">600+</span>
@@ -728,7 +593,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<!-- End Testimonials & Fun Fact-->
 
 		<!-- Recent New/Posts-->
