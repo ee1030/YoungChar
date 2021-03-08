@@ -33,7 +33,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
-import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.member.model.service.MemberService;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
@@ -80,7 +79,7 @@ public class MemberController {
 	
 	//네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "callback")
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	public String callback(@ModelAttribute Member loginMember, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 	System.out.println("여기는 callback");
 	OAuth2AccessToken oauthToken;
 	oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -103,7 +102,13 @@ public class MemberController {
 	String nickName = (String)response_obj.get("nickname");
 	String memberNm = (String)response_obj.get("name");
 	String memberEmail = (String)response_obj.get("email");
-	System.out.println(nickName+ memberId+ memberNm + memberEmail);
+	
+	loginMember.setMemberId(memberId);
+	loginMember.setNickName(nickName);
+	loginMember.setMemberNm(memberNm);
+	loginMember.setMemberEmail(memberEmail);
+	
+	model.addAttribute("loginMember", loginMember);
 	
 	/*
 	 * Member member = null;
@@ -381,8 +386,13 @@ public class MemberController {
 	@RequestMapping("mypageUpdate")
 	public String mypageUpdate(@ModelAttribute Member member,
 							   @ModelAttribute(name="loginMember", binding=false) Member loginMember,
+							   @RequestParam(value="image", required=false) List<MultipartFile> images,
 							   RedirectAttributes ra, Model model,
+							   HttpServletRequest request,
 							   @RequestParam("memberPwd1") String memberPwd1){
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/memberFile");
+		System.out.println(images);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberPwd", member.getMemberPwd());
@@ -393,7 +403,7 @@ public class MemberController {
 		map.put("memberNo", loginMember.getMemberNo());
 		
 		
-		int result = service.mypageUpdate(map);
+		int result = service.mypageUpdate(map, images, savePath);
 		
 		String url = null;
 		
@@ -609,6 +619,41 @@ public class MemberController {
 	}
 	
 	
+	// ---------------------------------------------------
+	// 회원 탈퇴 Controller
+	// ---------------------------------------------------
+	@RequestMapping("deleteMember")
+	public String deleteMember(@ModelAttribute("loginMember") Member loginMember,
+								RedirectAttributes ra,
+								SessionStatus status) {
+
+		int result = service.deleteMember(loginMember);
+		
+		String url = "";
+		
+		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "회원 탈퇴 성공";
+			url = "/";
+			// 회원 탈퇴 성공 시 로그 아웃
+			status.setComplete();
+			
+		}else if(result == 0) {
+			swalIcon = "error";
+			swalTitle = "회원 탈퇴 과정에서 문제 발생";
+			url = "session";
+			
+		}else {
+			swalIcon = "warning";
+			swalTitle = "현재 비밀번호가 틀렸습니다.";
+			url = "session";
+		}
+		ra.addFlashAttribute("swalIcon", swalIcon);
+		ra.addFlashAttribute("swalTitle", swalTitle);
+		
+		
+		return "redirect:" + url;
+	}
 	
 	
 	

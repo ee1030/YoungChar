@@ -201,6 +201,13 @@ public class MemberDAO {
 	}
 
 
+	// 회원 탈퇴 DAO
+	public int deleteMember(int memberNo) {
+		return sqlSession.update("memberMapper.deleteMember", memberNo);
+		
+	}
+
+
 
 
 	
