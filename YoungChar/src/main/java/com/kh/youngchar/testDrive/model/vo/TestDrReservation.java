@@ -14,12 +14,12 @@ public class TestDrReservation {
 	private String carName;
 	private String carModel;
 	private String brand;
-	private int fileNo;
-	private String filePath;
-	private String fileName;
+	private int fileNo; //X
+	private String filePath; //X
+	private String fileName; //X
 	private int memNo2;
-	private String cooName; // 지점명
-	private String memAdress; //대리점 위치
+	private String cooName; // X
+	private String memAdress; //X
 	
 	public TestDrReservation() {
 		// TODO Auto-generated constructor stub

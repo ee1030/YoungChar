@@ -1,15 +1,15 @@
 package com.kh.youngchar.company.model.vo;
 
 public class TestCars {
-	private int testDrivecCarNo ;
-	private int carNo ;
-	private String carName;
-	private String carModel;
-	private int fileNo;
+	private int testDrivecCarNo ; 
+	private int carNo ; //자동차 번호
+	private String carName; //자동차이름
+	private String carModel; //모델
+	private int fileNo; //사진
 	private String filePath;
 	private String fileName;
-	private int memNo2;
-	private String brand;
+	private int memNo2; //업체 회원번호
+	private String brand; //브랜드
 	
 	public TestCars() {}
 
