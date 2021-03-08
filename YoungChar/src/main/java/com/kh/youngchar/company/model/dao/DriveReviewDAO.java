@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.Attachment;
-import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
 import com.kh.youngchar.company.model.vo.Report;
-import com.kh.youngchar.member.model.vo.MemberFile;
+import com.kh.youngchar.board.model.vo.Search;
 
+/** 시승 후기 관련 DAO
+ * @author jeonga
+ *
+ */
 @Repository
 public class DriveReviewDAO {
 	
@@ -125,6 +128,16 @@ public class DriveReviewDAO {
 	 */
 	public int updateReviewStatus(Report report) {
 		return sqlSession.update("driveReviewMapper.updateReviewStatus", report);
+	}
+
+	public int getSearchListCount(Search search) {
+		return sqlSession.selectOne("driveReviewMapper.getSearchListCount", search);
+	}
+
+	public List<DriveReview> selectSearchList(Search search, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("driveReviewMapper.selectSearchList", search, rowBounds);
 	}
 
 

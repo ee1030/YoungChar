@@ -83,13 +83,13 @@
 
 
 .reply-row{
-	background-color: #f8f9fa;
+	background-color: #efefef;
 	padding : 10px 20px 10px 20px;
 }
 
 #addReply{
 	width: 100px;
-	height: 60px;
+	height: 63px;
 	padding: 0.375rem 0.75rem !important;
 	font-weight: bold;
 }
@@ -108,6 +108,10 @@
 .childReplyContent{
 	resize: none;  
 	width : 100%; 
+}
+
+textarea{
+	border : 1px solid #d3d3d3b3 !important;
 }
 
 .img-60{
@@ -198,7 +202,7 @@ function selectReplyList(){
          var img = $("<img>").addClass("media-object rounded-circle img-50").attr("src","${contextPath}" + item.memImgPath + "/" + item.memImgName);
          
          }else{
-         var img = $("<img>").addClass("media-object rounded-circle img-50").attr("src","${contextPath}/resources/memberFile/user-basic.png");
+         var img = $("<img>").addClass("media-object rounded-circle img-50").attr("src","${contextPath}/resources/assets/images/user-basic.png");
          }
          
          var rightDiv = $("<div>").addClass("media-body m-l-20");

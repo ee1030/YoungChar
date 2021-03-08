@@ -26,6 +26,7 @@ import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
 import com.kh.youngchar.company.model.vo.Report;
+import com.kh.youngchar.board.model.vo.Search;
 
 /** 시승후기 관련 Controller
  * @author jeonga
@@ -244,6 +245,29 @@ public class DriveReviewController {
 		ra.addFlashAttribute("swalText", swalText);
 		
 		return "redirect:review/" + report.getReportBoardNo();
+	}
+	
+	@RequestMapping("search")
+	public String searchBoard(@RequestParam(value="cp", required = false, defaultValue= "1" ) int cp,
+							  @ModelAttribute Search search, Model model) {
+		
+		// 1) 검색 조건이 포함된 페이징 처리용 객체 얻어오기
+		PageInfo pInfo = service.getSearchPageInfo(search, cp);
+		
+		// 2) 검색 조건이 포함된 게시글 목록 조회
+		List<DriveReview> bList = service.selectSearchList(search, pInfo);
+		
+		// 3) 썸네일 목록 조회
+		if(!bList.isEmpty()) {
+			List<Attachment> thList = service.selectThumbnailList(bList);
+			model.addAttribute("thList", thList);
+		}
+		
+		model.addAttribute("bList", bList);
+		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("search", search);
+		
+		return "company/reviewList";
 	}
 	
 }

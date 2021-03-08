@@ -12,6 +12,7 @@
 	<style>
 			.card{
 				font-family: 'Noto Sans KR', sans-serif;
+				border : 1px solid #d3d3d3b3 !important;
 			}
 			
 			.icon-back-left{
