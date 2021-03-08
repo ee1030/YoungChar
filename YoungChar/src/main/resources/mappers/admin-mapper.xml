@@ -550,4 +550,10 @@
 		WHERE TO_DATE(SUBSTR(FILE_NAME, 0, 8), 'YYMMDDHH24') < SYSDATE-3
 		]]>
 	</select>
+	
+	<!-- 신고된 게시글 내용 조회 -->
+	<select id="selectReportBoard" parameterType="_int" resultMap="board_rm">
+		SELECT BOARD_TITLE, BOARD_CONTENT FROM BOARD
+		WHERE BOARD_NO = #{boardNo}
+	</select>
 </mapper>

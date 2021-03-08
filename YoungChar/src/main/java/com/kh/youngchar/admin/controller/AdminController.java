@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.youngchar.admin.model.service.AdminService;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.Reply;
@@ -331,6 +332,18 @@ public class AdminController {
 		model.addAttribute("sv", sv);
 		
 		return "admin/reportBoardManagement";
+	}
+	
+	// 신고게시글 내용 확인
+	@ResponseBody
+	@RequestMapping("reportBoardManagement/selectReportBoard")
+	public String selectReportBoard(@RequestParam("boardNo") int boardNo) {
+		
+		Board board = service.selectReportBoard(boardNo);
+		
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
+		return gson.toJson(board);
 	}
 
 	// 차량 DB 관리 페이지
