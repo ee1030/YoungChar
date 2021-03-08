@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.youngchar.board.model.vo.Attachment;
+import com.kh.youngchar.board.model.vo.Board;
+import com.kh.youngchar.board.model.vo.Reply;
 import com.kh.youngchar.member.model.dao.MemberDAO;
 import com.kh.youngchar.member.model.exception.InsertAttachmentFailException;
 import com.kh.youngchar.member.model.vo.Member;
@@ -314,6 +317,83 @@ public class MemberServiceImpl implements MemberService{
 		return loginMember;
 		
 	}
+
+
+	@Override
+	public Member naverMem(Member member) {
+		
+		int result = dao.naverMem(member);
+		
+		if(result > 0) {
+			member = dao.loginAction(member);
+			
+		}
+		
+		return member;
+	}
+
+
+	@Override
+	public String findIdAction(Map<String, Object> map) {
+		return dao.findIdAction(map);
+		
+	}
+
+
+	// 비밀번호 찾기
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int findPwdAction(Map<String, Object> map) {
+		
+		String encPwd = enc.encode( (String)map.get("memberPwd") );
+		
+		map.put("memberPwd", encPwd);
+		
+		int result = dao.findPwdAction(map);
+		
+		return result;
+		
+	}
+
+
+	// 마이페이지 내가 쓴 글 조회
+	@Override
+	public List<Board> selectList(String memberNo) {
+		return dao.selectList(memberNo);
+		
+	}
+
+	// 마이페이지 썸네일
+	@Override
+	public List<Attachment> selectThumbnailList(List<Board> bList) {
+		return dao.selectThumbnailList(bList);
+		
+	}
+
+
+	// 전체 게시글 수
+	@Override
+	public int bListNo(String memberNo) {
+		return dao.bListNo(memberNo);
+		
+	}
+
+
+	// 마이페이지 카테고리별 조회
+	@Override
+	public List<Board> chooseList(Map<String, Object> map) {
+		return dao.chooseList(map);
+		
+	}
+
+
+	@Override
+	public int addMem(String memberId) {
+		return dao.addMem(memberId);
+		
+	}
+
+
 
 
 	

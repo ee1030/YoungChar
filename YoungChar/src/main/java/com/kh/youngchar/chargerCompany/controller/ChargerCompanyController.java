@@ -77,7 +77,6 @@ public class ChargerCompanyController {
 				model.addAttribute("chargerCompanyList", chargerCompanyList);
 			}
 
-//			request scope로 board를 세팅한다.
 			model.addAttribute("chargerCompany", chargerCompany);
 
 			url = "chargerCompany/chargerCompanyView";
@@ -214,35 +213,33 @@ public class ChargerCompanyController {
 	
 	
 	
-	
-	@RequestMapping("{companyNo}/deleteAction")
-	public String deleteAction(@PathVariable("companyNo") int companyNo,@ModelAttribute ChargerCompany chargerCompany, Model model,
-			RedirectAttributes ra, HttpServletRequest request) {
+	@RequestMapping("{companyNo}/deleteCompany")
+	public String deleteCompany(@PathVariable("companyNo") int companyNo, @ModelAttribute ChargerCompany chargerCompany, RedirectAttributes ra) {
 		
 		chargerCompany.setCompanyNo(companyNo);
 		
-		int result = service.deleteCompany(companyNo);
-		
+		int result = service.deleteCompany(chargerCompany);
 		
 		String url = null;
 		
-		if (result > 0) {
+		if(result > 0) {
 			swalIcon = "success";
-			swalTitle = "삭제 성공";
-			url = "redirect:..";
-		} else {
+			swalTitle = "삭제 완료";
+			url = "redirect:../introduction";
+		}
+		
+		else {
 			swalIcon = "error";
 			swalTitle = "삭제 실패";
-			url = "redirect:" + request.getHeader("referer");
+			url = "redirect:../"+companyNo;
 		}
-
+		
 		ra.addFlashAttribute("swalIcon", swalIcon);
 		ra.addFlashAttribute("swalTitle", swalTitle);
 
-		return url;
 		
+		return url;
 	}
-	
 	
 	
 	

@@ -7,15 +7,48 @@ public class Reply {
 	private String replyContent; 		// 댓글 내용
 	private Timestamp replyCreateDt;	// 댓글 작성일
 	private String replyStatus;			// 댓글 상태
-	private int boardNo;				// 댓글이 작성된 게시글 번호
+	private int boardNo;			// 댓글이 작성된 게시글 번호
 	private int replyWriter;			// 댓글 작성 회원
 	private String memNickname;			// 댓글 작성 회원 닉네임
 	private int parentReplyNo;			// 부모 댓글 번호
 	private int replyDepth;				// 댓글 깊이
 	private String memImgPath;
 	private String memImgName;
+	private int boardCode;
 
 	public Reply() {}
+
+	
+	
+	public Reply(int replyNo, String replyContent, Timestamp replyCreateDt, String replyStatus, int boardNo,
+			int replyWriter, String memNickname, int parentReplyNo, int replyDepth, String memImgPath,
+			String memImgName, int boardCode) {
+		super();
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyCreateDt = replyCreateDt;
+		this.replyStatus = replyStatus;
+		this.boardNo = boardNo;
+		this.replyWriter = replyWriter;
+		this.memNickname = memNickname;
+		this.parentReplyNo = parentReplyNo;
+		this.replyDepth = replyDepth;
+		this.memImgPath = memImgPath;
+		this.memImgName = memImgName;
+		this.boardCode = boardCode;
+	}
+
+
+
+	public int getBoardCode() {
+		return boardCode;
+	}
+
+
+	public void setBoardCode(int boardCode) {
+		this.boardCode = boardCode;
+	}
+
 
 	public int getReplyNo() {
 		return replyNo;
@@ -105,18 +138,14 @@ public class Reply {
 		this.memImgName = memImgName;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDt=" + replyCreateDt
 				+ ", replyStatus=" + replyStatus + ", boardNo=" + boardNo + ", replyWriter=" + replyWriter
 				+ ", memNickname=" + memNickname + ", parentReplyNo=" + parentReplyNo + ", replyDepth=" + replyDepth
-				+ ", memImgPath=" + memImgPath + ", memImgName=" + memImgName + "]";
+				+ ", memImgPath=" + memImgPath + ", memImgName=" + memImgName + ", boardCode=" + boardCode + "]";
 	}
 
-
-	
-	
-
-	
 	
 }

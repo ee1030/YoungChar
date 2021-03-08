@@ -77,9 +77,6 @@
 											<a href="${contextPath}/company/dashboard">Dash board</a>
 										</li>
 										<li>
-											<a href="${contextPath}/company/#">Schedule</a>
-										</li>
-										<li>
 											<a href="${contextPath}/company/applicationlist/all">Application list</a>
 										</li>
 										<li>

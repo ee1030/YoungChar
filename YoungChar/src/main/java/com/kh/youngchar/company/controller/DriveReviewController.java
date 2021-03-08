@@ -65,6 +65,8 @@ public class DriveReviewController {
 		
 		String url = null;
 		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "게시글이 등록되었습니다.";
 			
             url = "redirect:../review/" + result;
 			
@@ -114,16 +116,19 @@ public class DriveReviewController {
 		
 		String url = null;
 		if(result > 0) {
+			swalIcon = "success";
+			swalTitle = "게시글이 수정되었습니다.";
 		
-		url = "redirect:../review/" + board.getBoardNo();
-		
-		// 수정한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
-		request.getSession().setAttribute("returnListURL", "../reviewlist");
+			url = "redirect:../review/" + board.getBoardNo();
+			
+			// 수정한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
+			request.getSession().setAttribute("returnListURL", "../reviewlist");
 		}else {
-		swalIcon = "error";
-		swalTitle = "게시글 수정 실패";
-		url = "redirect:../update/" + board.getBoardNo();
+			swalIcon = "error";
+			swalTitle = "게시글 수정 실패";
+			url = "redirect:../update/" + board.getBoardNo();
 		}
+		
 		ra.addFlashAttribute("swalIcon", swalIcon);
 		ra.addFlashAttribute("swalTitle", swalTitle);
 		
@@ -192,6 +197,13 @@ public class DriveReviewController {
 		
 		List<DriveReview> bList = service.selectList(pInfo);
 		
+		if(bList != null && !bList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<Attachment> thumbnailList = service.selectThumbnailList(bList);
+		
+			if(thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+		}
 		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pInfo", pInfo);

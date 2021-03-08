@@ -33,6 +33,7 @@
 		<result property="boardStatus" column="BOARD_STATUS"/>
 		<result property="boardCode" column="BOARD_CD"/>
 		<result property="boardName" column="BOARD_NM"/>
+		<result property="reportCount" column="REPORT_COUNT"/>
 	
 	</resultMap>
 	
@@ -56,16 +57,40 @@
 		<result property="performance" column="PERFORMANCE"/>
 		<result property="categoryCode" column="CATEGORY_CD"/>
 		<result property="categoryName" column="CATEGORY_NM"/>
+		<result property="carStatus" column="CAR_STATUS"/>
 
 	</resultMap>
+	
+	<resultMap type="Reply" id="reply_rm">
+		<id property="replyNo" column="REPLY_NO" />
 
-   	<resultMap type="CAttachment" id="cAttachment_rm">
-			<id property="fileNo" column="FILE_NO"/>
-			<result property="filePath" column="FILE_PATH"/>
-			<result property="fileName" column="FILE_NAME"/>
-			<result property="fileLevel" column="FILE_LEVEL"/>
-			<result property="carNo" column="CAR_NO"/>
-		</resultMap>
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="replyCreateDate" column="REPLY_CREATE_DT" />
+		<result property="replyModifyDate" column="REPLY_MODIFY_DT" />
+		<result property="replyStatus" column="REPLY_STATUS" />
+		<result property="memberId" column="MEM_NICKNAME" />
+		<result property="parentBoardNo" column="BOARD_NO" />
+		<result property="parentReplyNo" column="PARENT_REPLY_NO" />
+		<result property="replyDepth" column="REPLY_DEPTH" />
+		<result property="reportCount" column="REPORT_COUNT" />
+		<result property="boardCode" column="BOARD_CD" />
+	</resultMap>
+
+  <resultMap type="CAttachment" id="cAttachment_rm">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileLevel" column="FILE_LEVEL"/>
+		<result property="carNo" column="CAR_NO"/>
+	</resultMap>
+	
+  <resultMap type="MemberFile" id="memberFile_rm">
+		<id property="memImgNo" column="MEM_IMG_NO"/>
+		<result property="memImgPath" column="MEM_IMG_PATH"/>
+		<result property="memImgName" column="MEM_IMG_NAME"/>
+		<result property="memImgLevel" column="MEM_IMG_LEVEL"/>
+		<result property="memNo" column="MEM_NO"/>
+	</resultMap>
 	
 	<!-- 신규 회원 수 조회 -->
 	<select id="getNewMember" resultType="_int">
@@ -99,7 +124,13 @@
 		SELECT * FROM MEMBER
 		WHERE SIGN_STATUS = 'N'
 		AND ROWNUM &lt; 7
-		ORDER BY SIGN_DT DESC
+		ORDER BY MEM_NO DESC
+	</select>
+	
+	<!-- 신규 회원 프로필사진 조회 -->
+	<select id="getNewMfList" resultMap="memberFile_rm">
+		SELECT * FROM MEMBER_FILE
+		WHERE MEM_IMG_LEVEL = 0
 	</select>
 	
 	<!-- 차트데이터 조회 -->
@@ -258,14 +289,20 @@
 		ORDER BY MEM_NO DESC
 	</select>
 	
-	<!-- 전체 게시글 수 조회 -->
-	<select id="getAllBoardListCount" resultType="_int">
+	<!-- 게시글 수 조회 -->
+	<select id="getBoardListCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
+		<if test="type != 0">
+			WHERE BOARD_CD = #{type}
+		</if>
 	</select>
 	
-	<!-- 전체 게시글 목록 조회 -->
-	<select id="selectAllBoardList" resultMap="board_rm">
+	<!-- 게시글 목록 조회 -->
+	<select id="selectBoardList" parameterType="_int" resultMap="board_rm">
 		SELECT * FROM V_BOARD
+		<if test="type != 0">
+			WHERE BOARD_CD = #{type}
+		</if>
 		ORDER BY BOARD_NO DESC
 	</select>
 	
@@ -289,15 +326,35 @@
 			</foreach>
 	</update>
 	
+	<!-- 게시글 관리 검색 페이징 정보 조회 -->
+	<select id="getSearchBoardPageInfo" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM BOARD
+		WHERE BOARD_TITLE LIKE '%' || #{sv} || '%'
+		<if test="type != 0">
+			AND BOARD_CD = #{type}
+		</if>
+	</select>
+	
+	<!-- 게시글 관리 검색 페이징 정보 조회 -->
+	<select id="selectSearchBoard" parameterType="map" resultMap="board_rm">
+		SELECT * FROM BOARD
+		WHERE BOARD_TITLE LIKE '%' || #{sv} || '%'
+		<if test="type != 0">
+			AND BOARD_CD = #{type}
+		</if>
+	</select>
+	
 	<!-- 차량 DB 목록 개수 조회 -->
 	<select id="getCarsListCount" resultType="_int">
 		SELECT COUNT(*) FROM CAR_INFO
+		WHERE CAR_STATUS = 'Y'
 	</select>
 	
 	<!-- 차량 DB 목록 조회 -->
 	<select id="selectCarsList" resultMap="cars_rm">
 		SELECT * FROM CAR_INFO
 		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE CAR_STATUS = 'Y'
 		ORDER BY CAR_NO DESC
 	</select>
 	
@@ -315,7 +372,7 @@
 	<insert id="insertCar" parameterType="Cars">
 		INSERT INTO CAR_INFO
 		VALUES(#{carNo}, #{carName}, #{carModel}, #{drivingSystem}, #{personnel}, #{consumpt}, #{minPrice}, #{maxPrice},
-						#{fuel}, #{mileage}, #{capacity}, #{maxPower}, #{maxTorque}, #{maxSpeed}, #{performance}, #{categoryCode})
+						#{fuel}, #{mileage}, #{capacity}, #{maxPower}, #{maxTorque}, #{maxSpeed}, #{performance}, #{categoryCode}, DEFAULT)
 	</insert>
 	
 	<!-- 차량 이미지 등록 -->
@@ -332,4 +389,165 @@
 		)A 
 	</insert>
 	
+	<!-- 선택된 차량 정보 삭제 -->
+	<update id="selectedCarDelete" parameterType="list">
+		UPDATE CAR_INFO SET
+		CAR_STATUS = 'N'
+		WHERE CAR_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 댓글 목록 페이지정보 조회 -->
+	<select id="getReplyListCount" resultType="_int">
+		SELECT COUNT(*) FROM REPLY
+	</select>
+	
+	<!-- 댓글 목록 조회 -->
+	<select id="selectReplyList" resultMap="reply_rm">
+		SELECT REPLY_NO, REPLY_CONTENT, REPLY_CREATE_DT, a.MEM_NO, MEM_NICKNAME, BOARD_NO, PARENT_REPLY_NO, REPLY_DEPTH, REPLY_STATUS, BOARD_CD
+		FROM REPLY
+		JOIN MEMBER a ON(MEM_NO = REPLY_WRITER)
+		JOIN BOARD USING(BOARD_NO)
+		ORDER BY REPLY_NO DESC
+	</select>
+	
+	<!-- 선택 댓글 삭제 기능 -->
+	<update id="replyDelete" parameterType="list">
+		UPDATE REPLY SET
+		REPLY_STATUS = 'N'
+		WHERE REPLY_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 선택 댓글 복구 기능 -->
+	<update id="replyRestore" parameterType="list">
+		UPDATE REPLY SET
+		REPLY_STATUS = 'Y'
+		WHERE REPLY_NO IN 
+			<foreach collection="list" item="item" open="(" close=")" separator="," >
+				#{item}
+			</foreach>
+	</update>
+	
+	<!-- 댓글 검색 페이징 정보 조회 -->
+	<select id="getSearchReplyCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM REPLY
+		JOIN MEMBER ON(MEM_NO = REPLY_WRITER)
+		WHERE MEM_NICKNAME LIKE '%' || #{sv} || '%'
+	</select>
+	
+	<!-- 댓글 검색 조회 -->
+	<select id="selectSearchReply" parameterType="string" resultMap="reply_rm">
+		SELECT REPLY_NO, REPLY_CONTENT, REPLY_CREATE_DT, MEM_NO, MEM_NICKNAME, BOARD_NO, PARENT_REPLY_NO, REPLY_DEPTH, REPLY_STATUS
+		FROM REPLY
+		JOIN MEMBER ON(MEM_NO = REPLY_WRITER)
+		WHERE MEM_NICKNAME LIKE '%' || #{sv} || '%'
+		ORDER BY REPLY_NO DESC
+	</select>
+	
+	<!-- 차량정보 수정용 데이터 조회 -->
+	<select id="selectUpdateCar" parameterType="_int" resultMap="cars_rm">
+		SELECT * FROM CAR_INFO
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE CAR_NO = #{carNo}
+	</select>
+	
+	<!-- 차량 정보 수정 -->
+	<update id="updateCarAction" parameterType="Cars">
+		UPDATE CAR_INFO SET
+		CAR_NAME = #{carName}, CAR_MODEL = #{carModel}, DRIVING_SYSTEM = #{drivingSystem},
+		PERSONNEL = #{personnel}, CONSUMPT = #{consumpt}, MIN_PRICE = #{minPrice}, MAX_PRICE = #{maxPrice},
+		FUEL = #{fuel}, MILEAGE = #{mileage}, CAPACITY = #{capacity}, MAX_POWER = #{maxPower},
+		MAX_TORQUE = #{maxTorque}, MAX_SPEED = #{maxSpeed}, PERFORMANCE = #{performance}, CATEGORY_CD = #{categoryCode}
+		WHERE CAR_NO = #{carNo}
+	</update>
+	
+	<!-- 차량 정보 검색 갯수 조회 -->
+	<select id="getSearchCarCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM CAR_INFO
+		JOIN CATEGORY USING(CATEGORY_CD)
+		WHERE CAR_STATUS = 'Y'
+		AND CATEGORY_NM LIKE '%' || #{sv} || '%'
+	</select>
+	
+	<!-- 차량 정보 검색 목록 조회 -->
+	<select id="selectSearchCarInfo" parameterType="string" resultMap="cars_rm">
+		SELECT * FROM CAR_INFO
+		JOIN CATEGORY USING(CATEGORY_CD)
+		WHERE CAR_STATUS = 'Y'
+		AND CATEGORY_NM LIKE '%' || #{sv} || '%'
+		ORDER BY CAR_NO DESC
+	</select>
+	
+	<!-- 신고 게시글 갯수 조회 -->
+	<select id="getRBCount" resultType="_int">
+		SELECT COUNT(*) FROM R_BOARD
+		WHERE REPORT_COUNT > 0
+	</select>
+	
+	<!-- 신고 게시글 목록 조회 -->
+	<select id="selectRBList" resultMap="board_rm">
+		SELECT * FROM R_BOARD
+		WHERE REPORT_COUNT > 0
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 신고 게시글 검색 목록 갯수 조회 DAO -->
+	<select id="getSearchRBCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM R_BOARD
+		WHERE REPORT_COUNT > 0
+		AND MEM_ID LIKE '%' || #{sv} || '%'
+	</select>
+	
+	<!-- 신고 게시글 검색 목록 조회 DAO -->
+	<select id="selectSearchRB" parameterType="string" resultMap="board_rm">
+		SELECT * FROM R_BOARD
+		WHERE REPORT_COUNT > 0
+		AND MEM_ID LIKE '%' || #{sv} || '%'
+	</select>
+	
+	<!-- 디비에 저장된 모든 이미지 파일 이름 조회 -->
+	<select id="getDbList" resultType="string">
+		SELECT FILE_NAME 
+		FROM ATTACHMENT
+		<![CDATA[
+		WHERE TO_DATE(SUBSTR(FILE_NAME, 0, 8), 'YYMMDDHH24') < SYSDATE-3
+		]]>
+		
+		UNION ALL
+		
+		SELECT FILE_NAME
+		FROM C_ATTACHMENT
+		<![CDATA[
+		WHERE TO_DATE(SUBSTR(FILE_NAME, 0, 8), 'YYMMDDHH24') < SYSDATE-3
+		]]>
+		
+		UNION ALL
+		
+		SELECT FILE_NAME
+		FROM COMPANY_IMAGE
+		<![CDATA[
+		WHERE TO_DATE(SUBSTR(FILE_NAME, 0, 8), 'YYMMDDHH24') < SYSDATE-3
+		]]>
+		
+		UNION ALL
+		
+		SELECT MEM_IMG_NAME FILE_NAME
+		FROM MEMBER_FILE
+		<![CDATA[
+		WHERE TO_DATE(SUBSTR(MEM_IMG_NAME, 0, 8), 'YYMMDDHH24') < SYSDATE-3
+		]]>
+		
+		UNION ALL
+		
+		SELECT FILE_NAME
+		FROM NEWS_IMAGE
+		<![CDATA[
+		WHERE TO_DATE(SUBSTR(FILE_NAME, 0, 8), 'YYMMDDHH24') < SYSDATE-3
+		]]>
+	</select>
 </mapper>

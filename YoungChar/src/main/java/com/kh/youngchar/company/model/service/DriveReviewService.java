@@ -22,6 +22,8 @@ public interface DriveReviewService{
 
 	List<DriveReview> selectList(PageInfo pInfo);
 
+	List<Attachment> selectThumbnailList(List<DriveReview> bList);
+
 	DriveReview selectBoard(int boardNo);
 
 	DriveReview driveReview(int boardNo);
@@ -40,6 +42,7 @@ public interface DriveReviewService{
 
 
 	int reportBoard(Report report);
+
 
 
 

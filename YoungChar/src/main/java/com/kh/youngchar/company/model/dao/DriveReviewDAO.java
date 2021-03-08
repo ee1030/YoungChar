@@ -38,6 +38,10 @@ public class DriveReviewDAO {
 		return sqlSession.selectOne("driveReviewMapper.selectBoard", boardNo);
 	}
 
+	public List<Attachment> selectThumbnailList(List<DriveReview> bList) {
+		return sqlSession.selectList("driveReviewMapper.selectThumbnailList", bList);
+	}
+
 
 	public int increaseReadCount(int boardNo) {
 		return sqlSession.update("driveReviewMapper.increaseReadCount", boardNo);
@@ -105,6 +109,7 @@ public class DriveReviewDAO {
 	public int insertReport(Report report) {
 		return sqlSession.insert("driveReviewMapper.insertReport", report);
 	}
+
 
 
 

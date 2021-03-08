@@ -135,8 +135,7 @@ to {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="rn-page-title-inner">
-						<h1>All Cars</h1>
-						<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
+						<h1>CHARGER COMPANY</h1>
 					</div>
 				</div>
 			</div>
@@ -159,14 +158,14 @@ to {
 									<a href="car-single.html">
 									<c:forEach items="${thList}" var="th">
 										<c:if test="${th.companyNo  == chargerCompany.companyNo}">
-											<img src="${contextPath}${th.filePath}/${th.fileName}">
+											<a href="../chargerCompany/${chargerCompany.companyNo}"><img src="${contextPath}${th.filePath}/${th.fileName}"></a>
 										</c:if>
 									</c:forEach>
 									</a>
 								</div>
 								<div class="rn-car-item-info">
 									<h3>
-										<a href="car-single.html">${chargerCompany.companyName}</a>
+										<a href="../chargerCompany/${chargerCompany.companyNo}">${chargerCompany.companyName}</a>
 									</h3>
 									<p>업체 간단한 소개 글 등등..</p>
 									<div class="rn-car-list-n-price">

@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,21 +16,35 @@
 				font-family: 'Noto Sans KR', sans-serif;
 			}
 			
-			#select1{
-				height: 40px;
-			}
-			
-			.fa-arrow-left{
-				font-size: 30px;
+			.icon-back-left{
+				font-size: 40px;
 				color: black;
 			}
 			
 			.btn-success{
 				width: 100%;
 			}
+			
+			.title{
+				font-size: 16px;
+			}
+			
+			.icofont-ui-rating{
+		    color: #ffa800;
+				}
+			
+			.white-star{
+	    	color: #d2d2d2;
+			}
+			
+			.rating-container{
+				display: inline-block;
+			}
+			
 	</style>
 	
 	<link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/rating.css">
 	
 </head>
 
@@ -63,7 +79,7 @@
 	<form action="updateAction" method="post" role="form" onsubmit="return validate();">
 	<section class="rn-section">
 		<div class="container">
-			<a href="${header.referer}"><i class="fas fa-arrow-left" ></i></a><br><br>
+			<a href="${header.referer}"><i class="icon-back-left" ></i></a><br><br>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="card">
@@ -72,30 +88,35 @@
 							  <div>
 								<div>
 								  <div class="row">
-									<div class="col-sm-3">
-										<h5>브랜드: ${board.categoryNm}</h5>
+									<div class="title col-sm-3">
+										<span class="f-w-600 font-success">BRAND</span> ${board.categoryNm}
 									</div>
-									<div class="col-sm-3">
-										<h5>센터: ${board.cooName} </h5>
+									<div class="title col-sm-3">
+										<span class="f-w-600 font-success">CENTER</span> ${board.cooName}
 									</div>
-									<div class="col-sm-3">
-										<h5>차명: ${board.carName} </h5>
+									<div class="title col-sm-3">
+										<span class="f-w-600 font-success">PRODUCT</span> ${board.carName}
 									</div>
-									<div class="col-sm-3">
-										<select id="select1" name="csat">
-											<option value="5">★★★★★</option>
-											<option value="4">★★★★☆</option>
-											<option value="3">★★★☆☆</option>
-											<option value="2">★★☆☆☆</option>
-											<option value="1">★☆☆☆☆</option>
-										</select>
+									<div class="title col-sm-3">
+										<span class="f-w-600 font-success">RATING </span> 
+	                    <div class="rating-container">
+												<div class="br-wrapper br-theme-fontawesome-stars">
+		                      <select id="u-rating-fontawesome" name="csat">
+		                        <option value="1">1</option>
+		                        <option value="2">2</option>
+		                        <option value="3">3</option>
+		                        <option value="4">4</option>
+		                        <option value="5">5</option>
+		                      </select>
+		                    </div>
+	                    </div>
 									</div>
 								  </div>
-								</div><br>
+								</div><br><br>
 								<!-- End InvoiceTop-->
 								<div class="row">
 								  <div class="col-md-12">
-									<input type="text" class="form-control" id="title" name="boardTitle" size="70" value="${board.boardTitle}">
+									<input type="text" class="form-control" id="title" name="boardTitle" size="70" maxlength="50" value="${board.boardTitle}">
 								  </div>
 								</div>
 								<!-- End Invoice Mid-->
@@ -110,7 +131,7 @@
 								<!-- End InvoiceBot-->
 							  </div><br>
 							  <div class="col-sm-12 text-center mt-3">
-								<button class="btn btn-success btn-lg" type="submit">시승 후기 남기기</button>
+								<button class="btn btn-success btn-lg" type="submit"><i class="icon-pencil-alt"></i> 시승 후기 수정하기</button>
 							  </div>
 							  <!-- End Invoice-->
 							  <!-- End Invoice Holder-->
@@ -149,14 +170,24 @@
 			}
 		}
 		
-		$.each($("#select1 > option"), function(index, item){
-			
-			if($(item).val() == ${board.csat}){
-				$(item).prop("selected", "true");
+		$("#title").on("input", function() {
+			if ($(this).val().length > $(this).prop("maxLength")) {
+				$(this).val($(this).val().slice(0, $(this).prop("maxLength")));
+				alert("제한 글자수에 초과되었습니다.")
 			}
 		});
 		
 		$(document).ready(function() {
+	
+			$("#u-rating-fontawesome > option").each(function(index, item){
+					
+					if($(item).text() == "${board.csat}"){
+						$(item).prop("selected", true);
+					}
+				});
+
+		
+		
 		    $('#summernote').summernote({
 		        width : 1200, // 에디터 넓이
 		        height: 400, // 에디터 높이
@@ -214,6 +245,10 @@
 		}
 		
 		</script>
+		
+		<script src="${contextPath}/resources/assets/js/rating/jquery.barrating.js"></script>
+    <script src="${contextPath}/resources/assets/js/rating/rating-script.js"></script>
+		
 
 </body>
 

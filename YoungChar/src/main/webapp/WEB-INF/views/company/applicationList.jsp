@@ -134,7 +134,7 @@
 												<td>${apl.memNm}</td>
 									  		<td>${apl.memPhone}</td>
 									  		<td>${apl.carName}</td>
-												<fmt:formatDate var="testDriveDt" value="${apl.testDriveDt}" pattern="HH:mm"/>
+												<fmt:formatDate var="testDriveDt" value="${apl.testDriveDt}" pattern="yy-MM-dd HH:mm"/>
 									  		<td>${testDriveDt}</td>
 									  		<td id="statusBox">
 									  			<c:choose>

@@ -23,16 +23,17 @@
 		#date-area>p{margin: 0}
 	
 		.icofont-ui-rating{
-	    color: #f8d62b;
+	    color: #ffa800;
 			}
 		
 		.white-star{
-    	color: #b5b5b5;
+    	color: #d2d2d2;
 		}
 		
 		.img-60{
 			height: 60px;
 		}
+		
 			
 	</style>
 
@@ -69,18 +70,14 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-				
-				
-				
-				
-				
 					<div class="card">
 						<div class="card-body">
 							<div class="invoice">
 							  <div>
 								<!-- End InvoiceTop-->
 								<div class="row">
-									<div class="col-md-10">
+									<div class="col-md-8">
+											<br><br>
 										  <h3 class="media-heading">${board.boardTitle}</h3>
 										  <br>
 									  <div class="media">
@@ -98,7 +95,7 @@
 										</div>
 										<div class="media-body m-l-20">
 										  <h5 class="media-heading">${board.memNickname} </h5>
-										  <p><i class="icon-eye"></i> ${board.readCount} &nbsp;&nbsp;&nbsp; <i class="fa fa-comment-o"></i> ${board.replyCount} &nbsp;&nbsp;&nbsp;  
+										  <p><i class="icon-eye"></i> ${board.readCount} &nbsp;&nbsp;&nbsp; <i class="icon-comment"></i> ${board.replyCount} &nbsp;&nbsp;&nbsp;  
 													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yy-MM-dd HH:mm"/>
 													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yy-MM-dd HH:mm"/> 
 													<c:choose>
@@ -113,39 +110,52 @@
 										</div>
 									  </div>
 									</div>
-									<div class="col-md-2">
-									  <div class="text-md-end" id="project">
-										  <c:if test="${(loginMember != null) && (board.memId != loginMember.memberId)}">
-												<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger">신고</button>
-											</c:if>
-									  </div>
-									</div>
-								  </div>
-								  <div>
-								  <br>
-								  <hr>
-								  <div class="row">
-										<div class="col-sm-3">
-											<h5>브랜드: ${board.categoryNm} </h5>
-										</div>
-										<div class="col-sm-3">
-											<h5>센터: ${board.cooName} </h5>
-										</div>
-										<div class="col-sm-3">
-											<h5>차명: ${board.carName} </h5>
-										</div>
-										<div class="col-sm-3">
-											<h5>별점: 
-													<c:forEach begin="1" end="${board.csat}">
+									<div class="col-md-4">
+									
+									
+									<div class="card o-hidden">
+                  <div class="chart-widget-top">
+                    <div class="row card-body">
+                      <div class="col-8">
+                        <h6 class="f-w-600 font-success">BRAND</h6>
+                      </div>
+                      <div class="col-4 text-end">
+                        <h6 class="num total-value"><span class="counter">${board.categoryNm}</span></h6>
+                      </div>
+                      <div class="col-8">
+                        <h6 class="f-w-600 font-success">CENTER</h6>
+                      </div>
+                      <div class="col-4 text-end">
+                        <h6 class="num total-value"><span class="counter">${board.cooName}</span></h6>
+                      </div>
+                      <div class="col-8">
+                        <h6 class="f-w-600 font-success">PRODUCT</h6>
+                      </div>
+                      <div class="col-4 text-end">
+                        <h6 class="num total-value"><span class="counter">${board.carName}</span></h6>
+                      </div>
+                      <div class="col-8">
+                        <h6 class="f-w-600 font-success">RATING</h6>
+                      </div>
+                      <div class="col-4 text-end">
+                        <h6 class="num total-value"><span class="counter">
+                        	<c:forEach begin="1" end="${board.csat}">
 														<i class="icofont icofont-ui-rating"></i>
 													</c:forEach>
 													<c:forEach begin="1" end="${5 - board.csat}">
 														<i class="icofont icofont-ui-rating white-star"></i>
-													</c:forEach>
-											</h5>
-										</div>
+													</c:forEach></span></h6>
+                      </div>
+                    </div>
+                    <div id="chart-widget3">
+                      <div class="flot-chart-placeholder" id="chart-widget-top-third"></div>
+                    </div>
+                  </div>
+                </div>
+
+									</div>
 								  </div>
-								</div>
+								  <hr>
 								<!-- End Invoice Mid-->
 								<div>
 								  <div class="table-responsive invoice-table" id="table">
@@ -159,10 +169,21 @@
 									<hr>
 									<div>
 										<div class="float-right">
+											  <c:if test="${(loginMember != null) && (board.memId != loginMember.memberId)}">
+													<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger">신고</button>
+												</c:if>
 											<c:if test="${empty sessionScope.returnListURL}">
 												<c:set var="returnListURL" value="../reviewlist" scope="session"/>
 											</c:if>
-											<a class="btn btn-light" href="${sessionScope.returnListURL}">목록으로</a>
+											
+											<c:choose>
+												<c:when test="${!empty param.adm}">
+													<a class="btn btn-light" href="javascript:history.back();">목록으로</a>
+												</c:when>
+												<c:otherwise>
+													<a class="btn btn-light" href="${sessionScope.returnListURL}">목록으로</a>
+												</c:otherwise>
+											</c:choose>
 											
 											<c:url var="updateUrl" value="../update/${board.boardNo}" />
 											<c:if test="${(loginMember != null) && (board.memId == loginMember.memberId)}">
