@@ -110,6 +110,23 @@ public class DriveReviewDAO {
 		return sqlSession.insert("driveReviewMapper.insertReport", report);
 	}
 
+	/** 현재 게시글 신고 수 조회
+	 * @param report
+	 * @return reportCount
+	 */
+	public int selectReportCount(Report report) {
+		return sqlSession.selectOne("driveReviewMapper.selectReportCount", report);
+	
+	}
+
+	/** 신고 누적으로 상태 업데이트
+	 * @param report
+	 * @return result
+	 */
+	public int updateReviewStatus(Report report) {
+		return sqlSession.update("driveReviewMapper.updateReviewStatus", report);
+	}
+
 
 
 
