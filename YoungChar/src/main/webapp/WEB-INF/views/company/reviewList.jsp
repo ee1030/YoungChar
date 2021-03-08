@@ -86,7 +86,6 @@
 
 <body class="rn-preloader">
 
-
 	<!-- Header-->
 		<jsp:include page="../common/header.jsp"/>
 	<!-- End Header-->
