@@ -14,7 +14,7 @@ import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
-/** 업체페이지 DAO
+/** 업체페이지 관련 DAO
  * @author jeonga
  *
  */
@@ -27,9 +27,17 @@ public class CompanyDAO {
 	public Company getCompanyProfile(int memberNo) {
 		return sqlSession.selectOne("companyMapper.getCompanyProfile", memberNo);
 	}
+	
+	public int selectWatingCount(int memberNo) {
+		return sqlSession.selectOne("companyMapper.selectWatingCount", memberNo);
+	}
 
-	public List<Application> selectTodayApl(int memberNo) {
-		return sqlSession.selectList("companyMapper.selectTodayApl", memberNo);
+	public int selectReviewCount(int memberNo) {
+		return sqlSession.selectOne("companyMapper.selectReviewCount", memberNo);
+	}
+
+	public List<Application> selectSchedule(Map<String, Object> map) {
+		return sqlSession.selectList("companyMapper.selectSchedule", map);
 	}
 
 
@@ -90,6 +98,9 @@ public class CompanyDAO {
 	public int selectAplCount(int memberNo) {
 		return sqlSession.selectOne("companyMapper.selectAplCount", memberNo);
 	}
+
+
+
 
 
 }

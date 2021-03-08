@@ -127,7 +127,7 @@
 													<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
 												</c:when>
 												<c:otherwise>
-													<div class="img" style="background-image: url(${contextPath}/resources/memberFile/user-basic.png);"></div>
+													<div class="img" style="background-image: url(${contextPath}/resources/assets/images/user-basic.png);"></div>
 												</c:otherwise>
 											</c:choose>											
 											<h4 class="card-title mb-0">${company.categoryNm}&nbsp;${company.cooName}</h4>

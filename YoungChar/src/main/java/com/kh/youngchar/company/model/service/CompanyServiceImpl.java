@@ -16,7 +16,7 @@ import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
-/** 업체페이지 Service
+/** 업체페이지 관련 Service
  * @author jeonga
  *
  */
@@ -35,11 +35,22 @@ public class CompanyServiceImpl implements CompanyService {
 		return dao.getCompanyProfile(memberNo);
 	}
 
+	@Override
+	public int selectWatingCount(int memberNo) {
+		return dao.selectWatingCount(memberNo);
+	}
 
 	@Override
-	public List<Application> selectTodayApl(int memberNo) {
-		return dao.selectTodayApl(memberNo);
+	public int selectReviewCount(int memberNo) {
+		return dao.selectReviewCount(memberNo);
 	}
+
+
+	@Override
+	public List<Application> selectSchedule(Map<String, Object> map) {
+		return dao.selectSchedule(map);
+	}
+
 
 	@Override
 	public List<Application> selectAplList(Map<String, Object> map) {
@@ -104,5 +115,7 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return result;
 	}
+
+
 
 }

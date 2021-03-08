@@ -43,7 +43,6 @@
 			WHERE MEM_NO2 = #{memberNo}
 			AND APPROVAL_STATUS = #{status}
    </select>
-  
    
    <select id="getCompanyProfile" parameterType="_int" resultMap="company_rm">
 			SELECT MEM_NO, MEM_ID, COO_NAME, CATEGORY_NM, COO_NUM, MEM_IMG_PATH, MEM_IMG_NAME
@@ -55,15 +54,32 @@
 			AND (MEM_IMG_LEVEL IS NULL OR MEM_IMG_LEVEL=0)
    </select>   
    
-   <select id="selectTodayApl" parameterType="_int" resultMap="application_rm">
-			SELECT RESERVATION_NO, MEM_NAME, MEM_PHONE, CAR_NAME, TEST_DRIVE_DATE
+   <select id="selectWatingCount" parameterType="_int" resultType="_int">
+   		SELECT COUNT(*)
+			FROM TES_DR_RESERVATION
+			JOIN MEMBER USING(MEM_NO)
+      JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+			WHERE MEM_NO2 = #{memberNo}
+			AND APPROVAL_STATUS = 'N'
+   </select>
+   
+   <select id="selectReviewCount" parameterType="_int" resultType="_int">
+       SELECT COUNT(*)
+       FROM DRIVE_REVIEW
+       JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
+       JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+       WHERE MEM_NO2 = #{memberNo}
+   </select>
+   
+   <select id="selectSchedule" parameterType="map" resultMap="application_rm">
+   		SELECT RESERVATION_NO, MEM_NAME, MEM_PHONE, CAR_NAME, TEST_DRIVE_DATE
 			FROM TES_DR_RESERVATION
 			JOIN MEMBER USING(MEM_NO)
 			JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
 			JOIN CAR_INFO USING(CAR_NO)
 			WHERE MEM_NO2 = #{memberNo}
 			AND APPROVAL_STATUS = 'A'
-			AND TO_CHAR(TEST_DRIVE_DATE,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
+			AND TO_DATE(TEST_DRIVE_DATE, 'YY-MM-DD') = TO_DATE(#{date}, 'YY-MM-DD')
 			ORDER BY TEST_DRIVE_DATE
    </select>
    

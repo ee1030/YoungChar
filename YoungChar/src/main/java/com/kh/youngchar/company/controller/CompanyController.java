@@ -1,5 +1,6 @@
 package com.kh.youngchar.company.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.youngchar.company.model.service.CompanyService;
 import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.Company;
@@ -47,20 +50,55 @@ public class CompanyController {
 	public String dashBoard(Model model,
 							@ModelAttribute("loginMember") Member loginMember) {
 		
-		Company company = service.getCompanyProfile(loginMember.getMemberNo());
+		// 대시보드
+		int memberNo = loginMember.getMemberNo();
+		
+		Company company = service.getCompanyProfile(memberNo);
 		
 		if(company != null) {
 			model.addAttribute("company", company);
 		}
 		
-		List<Application> apl = service.selectTodayApl(loginMember.getMemberNo());
+		// 시승 예약 목록
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		map.put("date", format.format(System.currentTimeMillis()));
+		map.put("memberNo", memberNo);
+		
+		List<Application> apl = service.selectSchedule(map);
 		
 		if(apl != null) {
 			model.addAttribute("apl", apl);
+			model.addAttribute("aplCount", apl.size());
 		}
 		
+		// 승인 대기 개수, 시승 후기 개수
+		int waitingCount = service.selectWatingCount(memberNo);
+		int reviewCount = service.selectReviewCount(memberNo);
+		
+		model.addAttribute("waitingCount", waitingCount);
+		model.addAttribute("reviewCount", reviewCount);
+
 		
 		return "company/dashBoard";
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectSchedule/{searchDate}")
+	public String selectSchedule(@PathVariable("searchDate") String date,
+								 @ModelAttribute("loginMember") Member loginMember) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("date", date);
+		map.put("memberNo", loginMember.getMemberNo());
+		
+		List<Application> aList = service.selectSchedule(map);
+		
+		Gson gson = new GsonBuilder().setDateFormat("HH:mm").create();
+		
+		return gson.toJson(aList);
 	}
 	
 	@RequestMapping("applicationlist/{status}")

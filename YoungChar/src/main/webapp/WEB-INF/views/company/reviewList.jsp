@@ -17,7 +17,21 @@
 		.card{
 			font-family: 'Noto Sans KR', sans-serif;
 			}
-	
+			
+		#list-table{
+			table-layout:fixed;
+		}
+			
+		.boardTitle>img {
+			width: 35px;
+			height: 35px;
+		}
+		
+		.boardTitle {
+			text-overflow:ellipsis; 
+			overflow:hidden;
+			white-space:nowrap;
+		}
 
 		#head {
 			display: inline-block;
@@ -34,16 +48,25 @@
 			width: 300px !important;
 		}
 		
-		.td{
-			width: 10%;
+		.badge{
+			padding: 0.3em 0.5em !important;
 		}
 		
-		.icofont-ui-rating{
-    color: #f8d62b;
+		.d-block{
+			text-align: center;
 		}
+		
+		.td{
+			width: 9%
+		}
+		
+	
+		.icofont-ui-rating{
+	    color: #ffa800;
+			}
 		
 		.white-star{
-    color: #b5b5b5;
+    	color: #d2d2d2;
 		}
 		
 		.pagination {
@@ -98,16 +121,28 @@
 								<div id="search-form" class="theme-form">
 									<div class="d-block">
 										<label for="chk-ani1">
-											<input class="checkbox_animated" id="chk-ani1" type="checkbox">Option 1
+											<input class="checkbox_animated" id="chk-ani1" type="checkbox">테슬라
 										</label>
 										<label for="chk-ani2">
-											<input class="checkbox_animated" id="chk-ani2" type="checkbox">Option 2
+											<input class="checkbox_animated" id="chk-ani2" type="checkbox">현대
 										</label>
 										<label for="chk-ani3">
-											<input class="checkbox_animated" id="chk-ani3" type="checkbox">Option 3
+											<input class="checkbox_animated" id="chk-ani3" type="checkbox">기아
 										</label>
 										<label for="chk-ani4">
-											<input class="checkbox_animated" id="chk-ani4" type="checkbox">Option 4
+											<input class="checkbox_animated" id="chk-ani4" type="checkbox">벤츠
+										</label><br>
+										<label for="chk-ani4">
+											<input class="checkbox_animated" id="chk-ani4" type="checkbox">BMW
+										</label>
+										<label for="chk-ani4">
+											<input class="checkbox_animated" id="chk-ani4" type="checkbox">아우디
+										</label>
+										<label for="chk-ani4">
+											<input class="checkbox_animated" id="chk-ani4" type="checkbox">포르쉐
+										</label>
+										<label for="chk-ani4">
+											<input class="checkbox_animated" id="chk-ani4" type="checkbox">르노
 										</label>
 									</div>
 									<br>
@@ -159,11 +194,28 @@
 												</td>
 												<td class="td">${board.categoryNm}</td>
 												<td class="td">${board.cooName}</td>
-												<td colspan="3">${board.boardTitle}</td>
+													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yy-MM-dd"/>
+													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yy-MM-dd"/> 
+												<td class="boardTitle" colspan="3">
+													<c:forEach items="${thList}" var="th">
+														<c:if test="${th.parentBoardNo == board.boardNo}">
+															<img src="${contextPath}${th.filePath}/${th.fileName}">
+														</c:if>
+													</c:forEach>
+												${board.boardTitle}
+													<c:choose>
+														<c:when test="${createDate == now}">
+															<label class="badge badge-warning text-dark">N</label>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${board.readCount > 50}">
+															<label class="badge badge-danger">HOT</label>
+														</c:when>
+													</c:choose>
+												</td>
 												<td class="td">${board.memNickname}</td>
 												<td class="td">
-													<fmt:formatDate var="createDate" value="${board.boardCreateDt }" pattern="yyyy-MM-dd"/>
-													<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd"/> 
 													<c:choose>
 														<c:when test="${createDate != now}">
 															${createDate }
@@ -175,8 +227,6 @@
 												</td>
 												<td class="td">${board.replyCount}</td>
 												<td class="td">${board.readCount}</td>								
-												<td style="visibility:hidden;position:absolute;" class="td">${board.carName}</td>								
-												<td style="visibility:hidden;position:absolute;" class="td">${board.csat}</td>								
 										</c:forEach>
 									</c:if>
 								</tbody>

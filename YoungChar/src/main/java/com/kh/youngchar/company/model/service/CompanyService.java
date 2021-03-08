@@ -9,7 +9,7 @@ import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
-/** 업체페이지 Service
+/** 업체페이지 관련 Service
  * @author jeonga
  *
  */
@@ -17,7 +17,11 @@ public interface CompanyService {
 	
 	Company getCompanyProfile(int memberNo);
 
-	List<Application> selectTodayApl(int memberNo);
+	int selectWatingCount(int memberNo);
+	
+	int selectReviewCount(int memberNo);
+
+	List<Application> selectSchedule(Map<String, Object> map);
 
 	List<Application> selectAplList(Map<String, Object> map);
 
@@ -28,6 +32,8 @@ public interface CompanyService {
 	int updateMember(Member updateMember, String newPwd);
 
 	int updateMemberStatus(Member member);
+
+
 
 
 }
