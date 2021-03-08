@@ -62,19 +62,19 @@
 	</div>
 	
 	
-	<div class="container" id="content-main">
+	<div class="container card" id="content-main">
 
 		<div>
-			<h1 class="rn-widget-title">${board.boardName }</h1>
+			
 			<br>
 			<br>
 			<div id="board-area">
+				<!-- Title -->
+				<h1 class="mt-4 ">Title : ${board.boardTitle }</h1>
 
 				<!-- Category -->
-				<h5 class="mt-4">카테고리 : ${board.categoryName }</h5>
+				<h5 class="mt-4">category : ${board.categoryName }</h5>
 				
-				<!-- Title -->
-				<h1 class="mt-4 ">제목 : ${board.boardTitle }</h1>
 	
 				<br>
 				<br>
@@ -138,6 +138,10 @@
 					<%-- 	<c:if test="${empty sessionScope.returnListURL}">
 							<c:set var="returnListURL" value="../list/${board.boardCode}" scope="session"/>
 						</c:if> --%>
+						<c:if test="${(loginMember != null) && (board.memberId != loginMember.memberId)}">
+							<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger">신고</button>
+						</c:if>
+
 						<c:choose>
 							<c:when test="${!empty param.adm}">
 								<a class="btn btn-success" href="javascript:history.back();">목록으로</a>
@@ -162,30 +166,75 @@
 			
 
 			<!-- 댓글 부분 -->
-			 <jsp:include page="reply.jsp"/> -
+			 <jsp:include page="reply.jsp"/> 
 			
 		</div>
 	</div>
-	 <jsp:include page="../common/footer.jsp"/> 
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form class="form-signin" method="POST" action="${contextPath}/board/${board.boardCode}/reportBoard" onsubmit="return validate();">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">게시글 신고</h5>
+						<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" name="reportBoardNo" value="${board.boardNo}"> <input type="hidden" name="memNo" value="${loginMember.memberNo}"> <input id="report1" name="reportType" type="radio" value="1" class="radio_animated"> <label for="report1">허위 사실 유포</label> <br>
+						<br> <input id="report2" name="reportType" type="radio" value="2" class="radio_animated"> <label for="report2">비속어 / 폭언 / 불쾌감 조성</label> <br>
+						<br> <input id="report3" name="reportType" type="radio" value="3" class="radio_animated"> <label for="report3">게시판 목적에 맞지 않는 글</label> <br>
+						<br> <input id="report4" name="reportType" type="radio" value="4" class="radio_animated"> <label for="report4">기타</label> <br>
+						<br> <label for="reason">요청 사유</label> <input type="text" class="form-control" id="reportContent" name="reportContent" placeholder="기타 항목 선택 시 필수로 작성하셔야합니다."> <br>
+						<br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
+						<button type="submit" class="btn btn-secondary">신고</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<jsp:include page="../common/footer.jsp"/> 
 	
-	<script>	
+	<script>
+	
+		function validate() {
+			if ($('input[name="reportType"]:checked').val() == "4"
+					&& $("#reportContent").val().trim().length == 0) {
+				alert("신고 내용을 입력해 주세요.");
+				$("#reportContent").focus();
+				return false;
+			}
+		}
+
 		// 목록으로
-		$(".returnUrl").on('click',function(){
-			
-			var boardCode = ${board.boardCode};
+		$(".returnUrl").on('click', function() {
+
+			var boardCode = $
+			{
+				board.boardCode
+			}
+			;
 			var returnURL = "../list/" + boardCode;
-			
+
 			location.href = returnURL;
-			
-			
+
 		});
-		
-		
-	
-	
+
+		$("#deleteBtn").click(function() {
+
+			if (confirm("정말 삭제하시겠습니까?")) {
+
+				location.href = "../delete/${board.boardCode}/" + ${board.boardNo};
+
+			}
+
+		});
+
 		// 게시글 삭제
-		
-		
 	</script>
 </body>
 </html>

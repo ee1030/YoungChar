@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,146 +39,78 @@
 			<div class="row product-page-main">
 				<div class="col-xl-6 xl-cs-65 box-col-12">
 					<div class="card">
-						<div class="card-body">
-							<div class="product-slider owl-carousel owl-theme sync1" id="sync1">
+					<div class="card-body">
+							<div class="product-slider owl-carousel owl-theme" id="sync1">
+							<c:forEach var="at" items="${attachmentList1}" varStatus="vs">
+								<c:set var="src" value="${contextPath}${at.filePath}/${at.fileName}" />
 								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
+									<img src="${src}" /> <input type="hidden" value="${at.fileNo}">
 								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
+							</c:forEach>
 							</div>
-							<div class="owl-carousel owl-theme sync2" id="sync2">
+							
+							<div class="owl-carousel owl-theme" id="sync2">
+							<c:forEach var="at" items="${attachmentList1}" varStatus="vs">
+								<c:set var="src" value="${contextPath}${at.filePath}/${at.fileName}" />
 								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/01.jpg" alt="">
+									<img src="${src}" /> <input type="hidden" value="${at.fileNo}">
 								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/02.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/03.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/04.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/05.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/06.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/07.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/08.jpg" alt="">
-								</div>
+							</c:forEach>
 							</div>
 						</div>
 					</div>
 					
 					
 				</div>
-				
-				
-				
-						<div class="col-xl-6 xl-cs-65 box-col-12">
+
+
+
+				<div class="col-xl-6 xl-cs-65 box-col-12">
 					<div class="card">
 						<div class="card-body">
 							<div class="product-slider owl-carousel owl-theme sync3" id="sync3">
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/tesla-roadster.jpg" alt="">
-								</div>
+							
+								<c:forEach var="at2" items="${attachmentList2}" varStatus="vs">
+									<c:set var="src2" value="${contextPath}${at2.filePath}/${at2.fileName}" />
+									<div class="item">
+										<img src="${src2}" /> <input type="hidden" value="${at2.fileNo}">
+									</div>
+								</c:forEach>
 							</div>
+
 							<div class="owl-carousel owl-theme sync3" id="sync4">
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/01.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/02.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/03.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/04.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/05.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/06.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/07.jpg" alt="">
-								</div>
-								<div class="item">
-									<img src="${contextPath}/resources/assets/images/ecommerce/08.jpg" alt="">
-								</div>
+								<c:forEach var="at2" items="${attachmentList2}" varStatus="vs">
+									<c:set var="src2" value="${contextPath}${at2.filePath}/${at2.fileName}" />
+									<div class="item">
+										<img src="${src2}" /> <input type="hidden" value="${at2.fileNo}">
+									</div>
+								</c:forEach>
 							</div>
+							
 						</div>
 					</div>
-					
-					
+
+
 				</div>
-				
-			
-				
-			
-				
-				
-				
+
+
+
+
+
+
+
 				<div class="col-xl-6 xl-100 box-col-12">
 					<div class="card">
 						<div class="card-body">
 							<div class="product-page-details">
-								<h3>${carInfo.carName }</h3>
+								<h3>${carInfo1.carName }</h3>
 							</div>
 							<div class="product-page-details">
-								<h3>${carInfo.carModel }</h3>
+								<h3>${carInfo1.carModel }</h3>
 							</div>
 							<br>
 							<div class="product-price f-28">
-								<p>(최소) ${carInfo.minPrice }만원 ~  (최대) ${carInfo.maxPrice }만원
+								<p>(최소) ${carInfo1.minPrice }만원 ~  (최대) ${carInfo1.maxPrice }만원
 							</div>
 					
 							<br>
@@ -191,31 +125,31 @@
 									<tbody>
 										<tr>
 											<td><b> Brand &nbsp;&nbsp;&nbsp;:</b></td>
-											<td>${carInfo.categoryName }</td>
+											<td>${carInfo1.categoryName }</td>
 										</tr>
 										<tr>
 											<td><b>연료 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td> 
-											<td class="txt-success">${carInfo.fuel }</td>
+											<td class="txt-success">${carInfo1.fuel }</td>
 										</tr>
 										<tr>
 											<td><b>연비 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>CVY ${carInfo.consumpt }km/kWh</td>
+											<td>CVY ${carInfo1.consumpt }km/kWh</td>
 										</tr>
 										<tr>
 											<td><b>에너지 용량 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.capacity } kWh</td>
+											<td>${carInfo1.capacity } kWh</td>
 										</tr>
 										<tr>
 											<td><b>모터 최대 출력 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.maxPower } Kw</td>
+											<td>${carInfo1.maxPower } Kw</td>
 										</tr>
 										<tr>
 											<td><b>모터 최대 토크 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.maxTorque } Nm</td>
+											<td>${carInfo1.maxTorque } Nm</td>
 										</tr>
 										<tr>
 											<td><b>1회 충전 주행 가능 거리 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.mileage } Km</td>
+											<td>${carInfo1.mileage } Km</td>
 										</tr>
 									</tbody>
 								</table>
@@ -234,14 +168,14 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="product-page-details">
-								<h3>${carInfo.carName }</h3>
+								<h3>${carInfo2.carName }</h3>
 							</div>
 							<div class="product-page-details">
-								<h3>${carInfo.carModel }</h3>
+								<h3>${carInfo2.carModel }</h3>
 							</div>
 							<br>
 							<div class="product-price f-28">
-								<p>(최소) ${carInfo.minPrice }만원 ~  (최대) ${carInfo.maxPrice }만원
+								<p>(최소) ${carInfo2.minPrice }만원 ~  (최대) ${carInfo2.maxPrice }만원
 							</div>
 					
 							<br>
@@ -256,31 +190,31 @@
 									<tbody>
 										<tr>
 											<td><b> Brand &nbsp;&nbsp;&nbsp;:</b></td>
-											<td>${carInfo.categoryName }</td>
+											<td>${carInfo2.categoryName }</td>
 										</tr>
 										<tr>
 											<td><b>연료 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td> 
-											<td class="txt-success">${carInfo.fuel }</td>
+											<td class="txt-success">${carInfo2.fuel }</td>
 										</tr>
 										<tr>
 											<td><b>연비 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>CVY ${carInfo.consumpt }km/kWh</td>
+											<td>CVY ${carInfo2.consumpt }km/kWh</td>
 										</tr>
 										<tr>
 											<td><b>에너지 용량 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.capacity } kWh</td>
+											<td>${carInfo2.capacity } kWh</td>
 										</tr>
 										<tr>
 											<td><b>모터 최대 출력 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.maxPower } Kw</td>
+											<td>${carInfo2.maxPower } Kw</td>
 										</tr>
 										<tr>
 											<td><b>모터 최대 토크 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.maxTorque } Nm</td>
+											<td>${carInfo2.maxTorque } Nm</td>
 										</tr>
 										<tr>
 											<td><b>1회 충전 주행 가능 거리 &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
-											<td>${carInfo.mileage } Km</td>
+											<td>${carInfo2.mileage } Km</td>
 										</tr>
 									</tbody>
 								</table>

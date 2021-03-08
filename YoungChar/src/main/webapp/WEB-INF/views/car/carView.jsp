@@ -54,6 +54,7 @@
 							</c:forEach>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 				<div class="col-xl-7 xl-100 box-col-7">

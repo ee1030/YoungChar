@@ -13,6 +13,7 @@ import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.Board;
 import com.kh.youngchar.board.model.vo.PageInfo2;
 import com.kh.youngchar.board.model.vo.Search;
+import com.kh.youngchar.company.model.vo.Report;
 
 @Repository // 저장소 (DB) 연결 객체임을 알려줌 + bean 등록
 public class BoardDAO {
@@ -206,6 +207,23 @@ public class BoardDAO {
 			
 		}
 		return sqlSession.selectList("boardMapper.selectSearchList", search, rowBounds);
+	}
+
+	/** 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	public int delBoard(int boardNo) {
+		return sqlSession.update("boardMapper.delBoard",boardNo);
+	}
+
+	
+	public int selectReport(Report report) {
+		return sqlSession.selectOne("boardMapper.selectReport", report);
+	}
+
+	public int insertReport(Report report) {
+		return sqlSession.insert("boardMapper.insertReport", report);
 	}
 
 	

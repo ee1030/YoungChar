@@ -51,5 +51,29 @@ public class CarsServiceImpl implements CarsService{
 		return dao.selectAttachmentList(carNo);
 	}
 	
+//	검색차량 조회 1
+	@Override
+	public Cars selectSearchCar1(int carNo1) {
+		return dao.selectSearchCar1(carNo1);
+	}
+	
+//	검색 차량 조회 2
+	@Override
+	public Cars selectSearchCar2(int carNo2) {
+		return dao.selectSearchCar2(carNo2);
+	}
+	
+//	차량 이미지 조회 1
+	@Override
+	public List<CAttachment> selectAtList1(int carNo1) {
+		return dao.selectAtList1(carNo1);
+	}
+	
+//	차량 이미지 조회 2
+	@Override
+	public List<CAttachment> selectAtList2(int carNo2) {
+		return dao.selectAtList2(carNo2);
+	}
+	
 
 }

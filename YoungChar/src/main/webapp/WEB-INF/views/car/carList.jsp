@@ -172,6 +172,9 @@
 				
 
 							<div class="rn-car-search-item">
+							
+							<input class="inputBox" type="checkbox" name="car" value="${list.carNo }" />
+							
 								<div class="rn-car-search-item-thumb">
 									<c:forEach items="${thList}" var="th">
 											<c:if test="${th.carNo  == list.carNo}">
@@ -297,6 +300,45 @@
 				
 				
 			});
+			
+			$(".inputBox").on("click" , function(){
+				
+			var carNo1;
+			var carNo2;
+			
+			var checkArr = [];
+			
+		  var len = $("input:checkbox[name='car']:checked").length;
+			
+			
+		  console.log(len)
+			
+		  if(len < 3){
+			  $("input[name='car']:checked").each(function(e){
+				  
+				checkArr.push($(this).val());
+				
+				  for(var i=0; i < 2; i++){
+					 	carNo1 = checkArr[0];
+					 	carNo2 = checkArr[1];
+				  } 
+			  });
+		  }
+		  
+		  console.log("carNo1 : " + carNo1);
+		  console.log("carNo2 : " + carNo2);
+		  
+		  if(len == 2){
+			  var searchCarURL = "carSearch/" + carNo1 +"/" + carNo2;
+				location.href = searchCarURL;
+		  }
+			
+		  
+		
+				
+				
+			});
+			
 		
 		</script>
 
@@ -304,7 +346,7 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-		<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
+		
 		<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 		<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>

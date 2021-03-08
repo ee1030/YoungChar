@@ -84,11 +84,11 @@ li {
 				
 				<div class="row">
 					<c:if test = "${pInfo.boardType == 1 }">
-						<h1>리뷰 게시판</h1>
+						<h1>REVIEW</h1>
 					</c:if>
 					<c:if test = "${pInfo.boardType == 2 }">
 					
-						<h1>정보 공유 게시판</h1>
+						<h1>INFORMATION</h1>
 					</c:if>
 
 					<div id="ssss">

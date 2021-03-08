@@ -103,6 +103,40 @@
 			ORDER BY FILE_LEVEL
 			
 	</select>
+	
+		<!-- 검색차량1 -->
+	<select id="selectSearchCar1" parameterType="Cars" resultMap="cars_rm">
+		
+		SELECT * FROM CAR_INFO
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE CAR_NO = #{carNo}
+		
+	</select>
+		<!-- 검색차량2 -->
+	<select id="selectSearchCar2" parameterType="Cars" resultMap="cars_rm">
+		
+		SELECT * FROM CAR_INFO
+		JOIN CATEGORY USING (CATEGORY_CD)
+		WHERE CAR_NO = #{carNo}
+		
+	</select>
+	
+		<!-- 검색차량이미지1 -->
+	<select id="selectAtList1" parameterType="_int"  resultMap="cAttachment_rm">
+			
+			SELECT * FROM C_ATTACHMENT
+			WHERE CAR_NO = #{carNo}
+			ORDER BY FILE_LEVEL
+			
+	</select>
+		<!-- 검색차량이미지2 -->
+	<select id="selectAtList2" parameterType="_int"  resultMap="cAttachment_rm">
+			
+			SELECT * FROM C_ATTACHMENT
+			WHERE CAR_NO = #{carNo}
+			ORDER BY FILE_LEVEL
+			
+	</select>
 
 
 
