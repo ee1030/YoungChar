@@ -178,7 +178,7 @@
 								<div class="rn-car-search-item-thumb">
 									<c:forEach items="${thList}" var="th">
 											<c:if test="${th.carNo  == list.carNo}">
-												<img style="height: 250px" src="${contextPath}${th.filePath}/${th.fileName}">
+												<img style="height: 250px; width: 210px;" src="${contextPath}${th.filePath}/${th.fileName}">
 											</c:if>
 										</c:forEach>
 								</div>
