@@ -19,9 +19,8 @@
 				<!-- Slider Item 1-->
 				<div class="carousel-item beactive">
 					<div class="carousel-caption">
-						<h2 class="rn-fade-bottom mb-25">#1 Car Rent Service In Your City</h2>
-						<p class="rn-fade-bottom rn-caption-item-2 mb-35">Maecenas viverra porta eros, id tincidunt lorem rhoncus eget. Aliquam erat volutpat. Sed ultricies elementum egestas.</p>
-						<a class="btn btn-main btn-lg rn-fade-bottom rn-caption-item-3" href="#">Book Now</a>
+						<h2 class="rn-fade-bottom mb-25">앙 영차띠</h2>
+						<p class="rn-fade-bottom rn-caption-item-2 mb-35">라면먹고싶다 갑자기</p>
 					</div>
 					<div class="rn-slider-overlayer"></div>
 					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인1.jpg" alt="slide">
@@ -30,9 +29,8 @@
 				<!-- Slider Item 2-->
 				<div class="carousel-item">
 					<div class="carousel-caption">
-						<h2 class="rn-fade-bottom mb-25">Quality Cars with Unlimited Miles</h2>
-						<p class="rn-fade-bottom rn-caption-item-2 mb-35">Maecenas viverra porta eros, id tincidunt lorem rhoncus eget. Aliquam erat volutpat. Sed ultricies elementum egestas.</p>
-						<a class="btn btn-main btn-lg rn-fade-bottom rn-caption-item-3" href="#">Book Now</a>
+						<h2 class="rn-fade-bottom mb-25">테슬라 떡상을 위한 기도 132일차</h2>
+						<p class="rn-fade-bottom rn-caption-item-2 mb-35">오늘도 소리는 떡상을 기원한다.</p>
 					</div>
 					<div class="rn-slider-overlayer"></div>
 					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인2.jpg" alt="slide">
