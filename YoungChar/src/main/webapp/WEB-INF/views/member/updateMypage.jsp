@@ -145,12 +145,12 @@
 
 					
 						<div class="col-xl-8">
-							<form class="card" action="mypageUpdate" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
+							<form class="card" action="mypageUpdate" method="post" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
 							  <div class="card-header">
 									<div class="img bg-wrap text-center">
 										<div class="user-logo content1" data-toggle="modal" data-target="#exampleModal">
 											<img class="img" id="contentImg1" src="${contextPath}${memFile.memImgPath}/${memFile.memImgName}">
-												<input type="file" id="img0" name="images" onchange="LoadImg(this,0)">
+												<input type="file" id="img0" name="image" onchange="LoadImg(this,0)">
 											<h4 class="card-title mb-0">${loginMember.memberNm}</h4>
 										</div>
 									</div>
@@ -311,7 +311,7 @@
 							
 							$(".content1").eq(num).children("img").attr("src", e.target.result);
 							// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
-							
+							console.log($(".content1").eq(num).children("img").attr("src", e.target.result));
 		      	}
 					}
 				}
@@ -435,18 +435,17 @@
 
 				$("form[name='signUpForm']").append($memberAddress);
 					
-					
-					
 				}
+				
+				
+				
 				
 				var $beforeImg = $('#contentImg1');
 				
-				var $newImg = $("<img class='img'>", {id : $beforeImg.attr("id")
-					} );
+				var $newImg = $("<img class='img' id='contentImg1'>")
 				
 				var memImgNo = ${memFile.memImgNo};
 				$("#clearImg, #otherImg").on("click", function() {
-					$beforeImg.remove();
 					
 					$.ajax({
 						url : "deleteProfile",
@@ -455,10 +454,9 @@
 						success : function(result){
 							
 							if(result == 1){	
-								alert("프로필 이미지 삭제");
+								$beforeImg.remove();
 								$(".content1").prepend($newImg);
 							}else{
-								alert("프로필 이미지 삭제 실패");
 							}
 							
 						},
@@ -466,7 +464,7 @@
 							console.log("ajax 통신 실패");
 						}
 						
-					});
+					}); 
 					
 				});
 				

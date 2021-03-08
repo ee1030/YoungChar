@@ -52,7 +52,7 @@ public interface MemberService {
 	//---------------------------------------------------
 	//				내 정보 수정 Service
 	//---------------------------------------------------
-	int mypageUpdate(Map<String, Object> map);
+	int mypageUpdate(Map<String, Object> map, List<MultipartFile> images, String savePath);
 
 	
 	
@@ -107,6 +107,12 @@ public interface MemberService {
 
 
 	int addMem(String memberId);
+
+
+	//---------------------------------------------------
+	//	회원 탈퇴 Service
+	//---------------------------------------------------
+	int deleteMember(Member loginMember);
 
 
 

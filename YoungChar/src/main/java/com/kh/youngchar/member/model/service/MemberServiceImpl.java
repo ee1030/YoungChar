@@ -251,7 +251,7 @@ public class MemberServiceImpl implements MemberService{
 	// 내 정보 수정 Service 구현
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int mypageUpdate(Map<String, Object> map) {
+	public int mypageUpdate(Map<String, Object> map, List<MultipartFile> images, String savePath) {
 		
 		String savePwd = dao.selectPwd((int)map.get("memberNo"));
 		
@@ -283,6 +283,50 @@ public class MemberServiceImpl implements MemberService{
 			result = 0;
 			
 			result = dao.updateAction(map);
+			
+			List<MemberFile> uploadImages = new ArrayList<MemberFile>();
+			
+			String memImgPath = "/resources/memberFile";
+			
+			for(int i=0 ; i<images.size() ; i++) {
+				
+				if( !images.get(i).getOriginalFilename().equals("") ) {
+					String memImgName = rename(images.get(i).getOriginalFilename());
+					MemberFile mf = new MemberFile(memImgPath, memImgName, i, (int)map.get("memberNo"));
+					
+					uploadImages.add(mf);
+				}
+				
+			}
+			
+			if(!uploadImages.isEmpty()) {
+				
+				result = dao.insertMemberFile(uploadImages);
+				
+				if(result == uploadImages.size()) {
+					
+					int size = uploadImages.size();
+					
+					for(int i=0 ; i<size ; i++) {
+						try {
+							images.get(uploadImages.get(i).getMemImgLevel())
+							.transferTo(new File(savePath + "/" + uploadImages.get(i).getMemImgName()));
+							
+						}catch (Exception e) {
+							e.printStackTrace();
+							
+							throw new InsertAttachmentFailException("파일 서버 저장 실패");
+						}
+						
+					}
+					
+					
+				}else {// 파일 정보를 DB에 삽입하는데 실패했을 때
+					throw new InsertAttachmentFailException("파일 정보 DB 삽입 실패");
+				}
+				
+			}
+			
 			
 		}
 		
@@ -390,6 +434,32 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int addMem(String memberId) {
 		return dao.addMem(memberId);
+		
+	}
+
+
+	
+	// 회원 탈퇴 Service 구현
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteMember(Member loginMember) {
+		
+		String savePwd = dao.selectPwd(loginMember.getMemberNo());
+		
+		int result = 0;
+		
+		if(savePwd != null) {
+			
+			if(enc.matches(loginMember.getMemberPwd(), savePwd )) {
+			
+				result = dao.deleteMember(loginMember.getMemberNo());
+			}else {
+				result = -1;
+			}
+		}
+		
+		
+		return result;
 		
 	}
 
