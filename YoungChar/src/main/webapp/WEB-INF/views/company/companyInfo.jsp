@@ -30,6 +30,7 @@
 				border-radius: 50%;
 				margin: 0 auto;
 				margin-bottom: 10px; }
+				
 			.bg-wrap .user-logo h3 {
 				color: black;
 				font-size: 18px; }
@@ -99,6 +100,31 @@
 				font-size: 8px;
 				margin-right: 5px;
 			}
+			
+			.icon-wrapper{
+				position: absolute;
+		    bottom: 90px;
+		    left: 52%;
+		    display: -webkit-box;
+		    display: -ms-flexbox;
+		    display: flex;
+		    -webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		    justify-content: center;
+		    -webkit-box-align: center;
+		    -ms-flex-align: center;
+		    align-items: center;
+		    height: 40px;
+		    width: 40px;
+		    border-radius: 50%;
+		    background-color: #fff;
+		    cursor: pointer;
+		    overflow: hidden;
+		    margin: 0 auto;
+		    font-size: 17px;
+		    -webkit-box-shadow: 0 0 6px 3px rgb(68 102 242 / 10%);
+				border : 1px solid #d3d3d3b3 !important;
+			}
 		
 		</style>
 
@@ -122,14 +148,20 @@
 							  <div class="card-header">
 									<div class="img bg-wrap text-center">
 										<div class="user-logo">
+										
 											<c:choose>
-												<c:when test="${!empty company.memImgPath}">
-													<div class="img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+												<c:when test="${!empty memFile.memImgPath}">
+													<div class="loadImg img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
 												</c:when>
 												<c:otherwise>
-													<div class="img" style="background-image: url(${contextPath}/resources/assets/images/user-basic.png);"></div>
+													<div class="loadImg img" style="background-image: url(${contextPath}/resources/assets/images/user-basic.png);"></div>
 												</c:otherwise>
-											</c:choose>											
+											</c:choose>		
+											
+											
+											<input type="file" id="fileArea" name="image" onchange="LoadImg(this)"> 
+											<div id="insertImage" class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div>
+
 											<h4 class="card-title mb-0">${company.categoryNm}&nbsp;${company.cooName}</h4>
 											<h6 class="card-title mb-0">${company.memId}</h6>
 										</div>
@@ -195,7 +227,7 @@
 								</div>
 							  </div>
 							  <div class="card-footer text-end">
-								<button class="left btn btn-light" type="button" id="secession">계정 탈퇴</button>
+								<button class="left btn btn-light active text-dark" type="button" id="secession">계정 탈퇴</button>
 								<button class="right btn btn-success" type="submit">정보 수정</button>
 							  </div>
 							</form>
@@ -221,6 +253,61 @@
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	<script>
 	
+		// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+		$(function(){
+			$("#fileArea").hide(); // #fileArea 요소를 숨김.		
+			
+			$("#insertImage").on("click", function(){ // 이미지 영역이 클릭 되었을 때
+				
+				// 클릭한 이미지 영역 인덱스 얻어오기
+				var index = $(".boardImg").index(this);
+						// -> 클릭된 요소가 .boardImg 중 몇번째 인덱스인지 반환
+						
+				// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+				$("#fileArea").click();
+			});
+		});
+		
+		
+		  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+		  function LoadImg(value) {
+			  
+			  console.log("로드이미지")
+			  // value.files : 파일이 업로드되어 있으면 true
+			  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+			  
+				if(value.files){ // 해당 요소에 업로드된 파일이 있을 경우
+					
+					var reader = new FileReader();
+	       	// 자바스크립트 FileReader
+	      	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
+	      	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
+	      	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+	      	
+	      	reader.readAsDataURL(value.files[0]);
+	        // FileReader.readAsDataURL()
+	      	// 지정된의 내용을 읽기 시작합니다. 
+	      	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.	
+	      		console.log("하이")
+	      	
+	      	reader.onload = function(e){
+	        	// FileReader.onload
+						// load 이벤트의 핸들러. 
+						// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
+	      		
+						// 읽어들인 내용(이미지 파일)을 화면에 출력
+						
+						console.log(e.target.result);
+						
+						$(".loadImg").attr("background-image", e.target.result);
+						// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
+						
+	      	}
+				}
+			}
+		
+		
+	
 		// 도로명 주소 API
 		// 검색 단추를 누르면 팝업 레이어가 열리도록 설정한다.
 		$(function() {
@@ -233,8 +320,6 @@
 				$(this).val($(this).val().slice(0, $(this).prop("maxLength")));
 			}
 		});
-		
-		
 
 		// 각 유효성 검사 결과를 저장할 객체
 		var validateCheck = {

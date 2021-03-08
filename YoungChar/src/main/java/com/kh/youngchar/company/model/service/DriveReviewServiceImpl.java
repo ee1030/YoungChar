@@ -24,6 +24,7 @@ import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
 import com.kh.youngchar.company.model.vo.Report;
+import com.kh.youngchar.board.model.vo.Search;
 import com.kh.youngchar.member.model.vo.MemberFile;
 
 /** 시승후기 관련 ServiceImpl
@@ -393,8 +394,6 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 			if(reportCount > 9) {
 				// 신고수 10개 이상이면 상태 업데이트
 				result = dao.updateReviewStatus(report);
-				
-				System.out.println(result);
 			}
 			
 		}else {
@@ -402,6 +401,19 @@ public class DriveReviewServiceImpl implements DriveReviewService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public PageInfo getSearchPageInfo(Search search, int cp) {
+		
+		int listCount = dao.getSearchListCount(search);
+		
+		return new PageInfo(cp, listCount);
+	}
+
+	@Override
+	public List<DriveReview> selectSearchList(Search search, PageInfo pInfo) {
+		return dao.selectSearchList(search, pInfo);
 	}
 
 

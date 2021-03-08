@@ -46,6 +46,7 @@
 
 		#search-bar{
 			width: 300px !important;
+			padding: 5px;
 		}
 		
 		.badge{
@@ -77,6 +78,10 @@
 
 		#list-table td:hover {
 			cursor: pointer;
+		}
+		
+		.checkbox_animated:after, .form-control, .form-control-plaintext{
+			border: 1px solid #c1c1c182 !important;
 		}
 
 		
@@ -116,46 +121,50 @@
 
 					<div class="card">
 						<div class="card-header">
-							<h2>R E V I E W</h2>
+							<h2><a style="color:black" href="${contextPath}/driveReview/reviewlist">R E V I E W</a></h2>
 								<div id="search-form" class="theme-form">
+									<form action="search" id="searchForm">
 									<div class="d-block">
 										<label for="chk-ani1">
-											<input class="checkbox_animated" id="chk-ani1" type="checkbox">테슬라
+											<input class="checkbox_animated" value="테슬라" name="ct" type="checkbox">테슬라
 										</label>
 										<label for="chk-ani2">
-											<input class="checkbox_animated" id="chk-ani2" type="checkbox">현대
+											<input class="checkbox_animated" value="현대자동차" name="ct" type="checkbox">현대자동차
 										</label>
 										<label for="chk-ani3">
-											<input class="checkbox_animated" id="chk-ani3" type="checkbox">기아
+											<input class="checkbox_animated" value="기아" name="ct" type="checkbox">기아
 										</label>
 										<label for="chk-ani4">
-											<input class="checkbox_animated" id="chk-ani4" type="checkbox">벤츠
+											<input class="checkbox_animated" value="벤츠" name="ct" type="checkbox">벤츠
 										</label><br>
-										<label for="chk-ani4">
-											<input class="checkbox_animated" id="chk-ani4" type="checkbox">BMW
+										<label for="chk-ani5">
+											<input class="checkbox_animated" value="BMW" name="ct" type="checkbox">BMW
 										</label>
-										<label for="chk-ani4">
-											<input class="checkbox_animated" id="chk-ani4" type="checkbox">아우디
+										<label for="chk-ani6">
+											<input class="checkbox_animated" value="아우디" name="ct" type="checkbox">아우디
 										</label>
-										<label for="chk-ani4">
-											<input class="checkbox_animated" id="chk-ani4" type="checkbox">포르쉐
+										<label for="chk-ani7">
+											<input class="checkbox_animated" value="포르쉐" name="ct" type="checkbox">포르쉐
 										</label>
-										<label for="chk-ani4">
-											<input class="checkbox_animated" id="chk-ani4" type="checkbox">르노
+										<label for="chk-ani8">
+											<input class="checkbox_animated" value="르노" name="ct" type="checkbox">르노
 										</label>
 									</div>
 									<br>
 									<div class="input-group m-0">
-													<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
-					<option value="tit">글제목</option>
-					<option value="con">내용</option>
-					<option value="titcont">제목+내용</option>
-				</select> 
-										<input id="search-bar" class="form-control-plaintext" type="search" placeholder="검색어를 입력해주세요.">
-										<span class="btn btn-success input-group-text">Search</span>
+									
+										<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
+											<option value="tit">글제목</option>
+											<option value="con">내용</option>
+											<option value="titcont">제목+내용</option>
+											<option value="sc">센터</option>
+										</select> 
+										<input id="search-bar" name="sv" class="form-control-plaintext" type="search" placeholder="검색어를 입력해주세요.">
+										<button type="submit" class="btn btn-success input-group-text">Search</button>
+									</form>
+									
 									</div>
 									</div>
-
 
 						</div>
 						<div class="table-responsive">
@@ -230,7 +239,6 @@
 									</c:if>
 								</tbody>
 							</table>
-						</div>
 					</div>
 				</div>
 
@@ -240,17 +248,47 @@
 							<nav class="rn-pagination">
 										<ul class="pagination pagination-light">
 										
-										<c:set var="firstPage" value="?cp=1"/>
-										<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
+										<c:choose>
+											<c:when test="${!empty search}">
+											
+												<%-- 선택된 카테고리를 하나의 쿼리스트링으로 조합 --%>
+												<c:forEach items="${search.ct}" var="c">
+													<c:set var="category" value="${category}ct=${c}&" />
+												</c:forEach>
+												
+												<c:set var="searchStr" value="${category}" />
+												
+												<%-- 검색된 내용이 있다면 --%>
+												<c:if test="${!empty search.sv}">
+													<c:set var="searchStr" value="${category}sk=${search.sk}&sv=${search.sv}"/>
+												</c:if>
+												
+												<c:url var="pageUrl" value="search?${searchStr}" />
+												
+													<c:set var="returnListURL" 
+															 value="${contextPath}/driveReview/search/${pageUrl}&cp=${pInfo.currentPage}"
+															 scope="session"/>
+															 
+											</c:when>
+											<c:otherwise>
+													<c:url var="pageUrl" value="?" />
+													<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+													<c:set var="returnListURL" 
+															 value="${contextPath}/driveReview/reviewlist/${pageUrl}&cp=${pInfo.currentPage}"
+															 scope="session"/>
+											</c:otherwise>
+										</c:choose>
 										
+										<c:set var="firstPage" value="${pageUrl}&cp=1"/>
+										<c:set var="lastPage" value="${pageUrl}&cp=${pInfo.maxPage}"/>
 										
 										<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }"  integerOnly="true" />
 										<fmt:parseNumber var="prev" value="${ c1 * 5 }"  integerOnly="true" />
-										<c:set var="prevPage" value="?cp=${prev}" />
+										<c:set var="prevPage" value="${pageUrl}&cp=${prev}" />
 					
 										<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
 										<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
-										<c:set var="nextPage" value="?cp=${next}" />
+										<c:set var="nextPage" value="${pageUrl}&cp=${next}" />
 											
 											
 										<c:if test="${pInfo.currentPage > pInfo.pageSize}">
@@ -274,7 +312,7 @@
 											
 												<c:otherwise>
 													<li  class="page-item">	
-														<a class="page-link" href="?cp=${page}">${page}</a>
+														<a class="page-link" href="${pageUrl}&cp=${page}">${page}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
@@ -307,10 +345,6 @@
 		Ex: jquery, bootstrap, etc.
 		-->
 		
-		<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
-		<c:set var="returnListURL" 
-				 value="${contextPath}/driveReview/reviewlist?cp=${pInfo.currentPage}"
-				 scope="session"/>
 		
 		<script>
 		$("#list-table td").on("click", function(){

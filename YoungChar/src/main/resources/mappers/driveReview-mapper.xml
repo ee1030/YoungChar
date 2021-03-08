@@ -113,9 +113,9 @@
    </select>
    
    <select id="selectReservation" parameterType="_int" resultMap="driveReview_rm">
-			SELECT CATEGORY_NM, COO_NAME, CAR_NAME, C.CATEGORY_CD, M.MEM_NO
+			SELECT CATEGORY_NM, COO_NAME, CAR_NAME, C.CATEGORY_CD, R.MEM_NO
 			FROM TES_DR_RESERVATION R
-			JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+			JOIN TEST_DRIVE_CAR T USING(TEST_DRIVE_CAR_NO)
 			JOIN COO_MEMBER M ON(M.MEM_NO = MEM_NO2)
 			JOIN CAR_INFO USING(CAR_NO)
 			JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD)
@@ -216,5 +216,80 @@
 		BOARD_STATUS = 'B'
 		WHERE BOARD_NO = #{reportBoardNo}
 	</update>
+	
+	<select id="getSearchListCount" parameterType="Search" resultType="_int">
+		SELECT COUNT(*)
+		FROM V_BOARD
+		JOIN DRIVE_REVIEW USING(BOARD_NO)
+		JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
+		JOIN TEST_DRIVE_CAR T USING(TEST_DRIVE_CAR_NO)
+		JOIN COO_MEMBER C ON(C.MEM_NO = T.MEM_NO2)
+		WHERE
+		
+		<if test="sv != null"> <!--  검색한 내용이 있다면 -->
+			<bind name="val" value = "'%' + sv + '%'"/><!-- bind : 변수처럼 사용 가능한 동적 SQL -->
+			<choose>
+				<when test="sk == 'tit'">
+					BOARD_TITLE LIKE #{val}
+				</when>
+				<when test="sk == 'con'">
+					BOARD_CONTENT LIKE #{val}
+				</when>
+				<when test="sk == 'sc'">
+					COO_NAME LIKE #{val}
+				</when>
+				<when test="sk == 'titcont'">
+					(BOARD_TITLE LIKE #{val} OR BOARD_CONTENT LIKE #{val} )
+				</when>
+			</choose>
+		</if>
+		
+		<if test="ct != null">
+			AND CATEGORY_NM IN 
+			<foreach collection="ct" item="ctName" open="(" close=")" separator=",">
+				#{ctName}
+			</foreach>
+		</if>
+	</select>
+	
+	<select id="selectSearchList" parameterType="Search" resultMap="driveReview_rm">
+		SELECT *
+		FROM(SELECT BOARD_NO, CSAT, CATEGORY_NM, COO_NAME, CAR_NAME, BOARD_TITLE, BOARD_CONTENT, 
+								MEM_NICKNAME, BOARD_CREATE_DT,  REPLY_COUNT, READ_COUNT
+		        FROM V_DRIVE_REVIEW
+		        JOIN MEMBER USING(MEM_NO)
+		        JOIN DRIVE_REVIEW USING(BOARD_NO)
+		        JOIN TES_DR_RESERVATION USING(RESERVATION_NO)
+		        JOIN TEST_DRIVE_CAR USING(TEST_DRIVE_CAR_NO)
+		        JOIN CAR_INFO USING(CAR_NO)
+		        JOIN COO_MEMBER M ON(MEM_NO2 = M.MEM_NO)
+		        JOIN CATEGORY C ON(C.CATEGORY_CD = M.CATEGORY_CD))
+		WHERE        
+		<if test="sv != null"> <!--  검색한 내용이 있다면 -->
+			<bind name="val" value = "'%' + sv + '%'"/><!-- bind : 변수처럼 사용 가능한 동적 SQL -->
+			<choose>
+				<when test="sk == 'tit'">
+					BOARD_TITLE LIKE #{val}
+				</when>
+				<when test="sk == 'con'">
+					BOARD_CONTENT LIKE #{val}
+				</when>
+				<when test="sk == 'sc'">
+					COO_NAME LIKE #{val}
+				</when>
+				<when test="sk == 'titcont'">
+					(BOARD_TITLE LIKE #{val} OR BOARD_CONTENT LIKE #{val} )
+				</when>
+			</choose>
+		</if>
+		
+		<if test="ct != null">
+			AND CATEGORY_NM IN 
+			<foreach collection="ct" item="ctName" open="(" close=")" separator=",">
+				#{ctName}
+			</foreach>
+		</if>
+		ORDER BY BOARD_NO DESC
+	</select>
 	
 </mapper>
