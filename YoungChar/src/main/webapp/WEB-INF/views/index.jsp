@@ -10,7 +10,7 @@
 
 		<title>영차영차 메인</title>
 	</head>
-<jsp:include page="common/header.jsp"></jsp:include>
+	<jsp:include page="common/header.jsp"></jsp:include>
 
 		<!-- Slider-->
 		<div class="rn-carousel carousel slide" id="carouselExampleControls" data-ride="carousel">
@@ -24,7 +24,7 @@
 						<a class="btn btn-main btn-lg rn-fade-bottom rn-caption-item-3" href="#">Book Now</a>
 					</div>
 					<div class="rn-slider-overlayer"></div>
-					<img class="d-block w-100" src="${contextPath}/resources/assets/images/slide1.jpg" alt="slide">
+					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인1.jpg" alt="slide">
 				</div>
 
 				<!-- Slider Item 2-->
@@ -35,18 +35,7 @@
 						<a class="btn btn-main btn-lg rn-fade-bottom rn-caption-item-3" href="#">Book Now</a>
 					</div>
 					<div class="rn-slider-overlayer"></div>
-					<img class="d-block w-100" src="${contextPath}/resources/assets/images/slide2.jpg" alt="slide">
-				</div>
-
-				<!-- Slider Item 3-->
-				<div class="carousel-item">
-					<div class="carousel-caption">
-						<h2 class="rn-fade-bottom mb-25">24/7 Customer Support Guarantee</h2>
-						<p class="rn-fade-bottom rn-caption-item-2 mb-35">Maecenas viverra porta eros, id tincidunt lorem rhoncus eget. Aliquam erat volutpat. Sed ultricies elementum egestas.</p>
-						<a class="btn btn-main btn-lg rn-fade-bottom rn-caption-item-3" href="#">Book Now</a>
-					</div>
-					<div class="rn-slider-overlayer"></div>
-					<img class="d-block w-100" src="${contextPath}/resources/assets/images/slide3.jpg" alt="slide">
+					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인2.jpg" alt="slide">
 				</div>
 
 			</div>
