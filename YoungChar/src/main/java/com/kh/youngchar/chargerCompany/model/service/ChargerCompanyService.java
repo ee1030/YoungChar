@@ -8,14 +8,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
 import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
-import com.kh.youngchar.company.model.vo.PageInfo;
+import com.kh.youngchar.chargerCompany.model.vo.PageInfo5;
 
 @Service
 public interface ChargerCompanyService {
 
-	PageInfo getPageInfo(int cp);
+	PageInfo5 getPageInfo(int cp);
 
-	List<ChargerCompany> selectList(PageInfo pInfo);
+	List<ChargerCompany> selectList(PageInfo5 pInfo);
 
 	List<CompanyImage> selectThumbnailList(List<ChargerCompany> cList);
 	

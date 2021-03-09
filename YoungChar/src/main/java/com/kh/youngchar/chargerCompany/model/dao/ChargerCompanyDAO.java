@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
 import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
-import com.kh.youngchar.company.model.vo.PageInfo;
+import com.kh.youngchar.chargerCompany.model.vo.PageInfo5;
 
 @Repository
 public class ChargerCompanyDAO {
@@ -31,7 +31,7 @@ public class ChargerCompanyDAO {
 	 * @param pInfo
 	 * @return
 	 */
-	public List<ChargerCompany> selectList(PageInfo pInfo) {
+	public List<ChargerCompany> selectList(PageInfo5 pInfo) {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		

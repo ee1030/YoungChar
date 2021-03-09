@@ -271,8 +271,7 @@ to {
 								<div class="rn-post-item-header">
 									<div class="rn-post-date">
 										<div class="rn-post-date-inner">
-											<div class="rn-post-date-d">15</div>
-											<div class="rn-post-date-m-y">May, 2018</div>
+											<div class="rn-post-date-m-y">${news.newsCreateDate}</div>
 										</div>
 									</div>
 									<div class="rn-post-item-title-meta">
@@ -358,7 +357,7 @@ to {
 											<div class="rn-recent-post-item-info">
 												<div class="rn-recent-post-item-meta">
 													<span class="rn-recent-post-item-categories">${news.reporter}</a>
-													</span> <span class="rn-recent-post-item-author">At 15 May, 2018
+													</span> <span class="rn-recent-post-item-author">${news.newsCreateDate }
 													</span>
 												</div>
 												<div class="rn-recent-post-item-title">

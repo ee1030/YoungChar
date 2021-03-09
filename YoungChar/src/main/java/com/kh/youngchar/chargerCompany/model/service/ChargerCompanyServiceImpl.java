@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.youngchar.chargerCompany.model.dao.ChargerCompanyDAO;
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
 import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
-import com.kh.youngchar.company.model.vo.PageInfo;
+import com.kh.youngchar.chargerCompany.model.vo.PageInfo5;
 
 @Service
 public class ChargerCompanyServiceImpl implements ChargerCompanyService{
@@ -23,14 +23,14 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 	private ChargerCompanyDAO dao;
 
 	@Override
-	public PageInfo getPageInfo(int cp) {
+	public PageInfo5 getPageInfo(int cp) {
 		int listCount = dao.getListCount(cp);
 
-		return new PageInfo(cp, listCount);
+		return new PageInfo5(cp, listCount);
 	}
 
 	@Override
-	public List<ChargerCompany> selectList(PageInfo pInfo) {
+	public List<ChargerCompany> selectList(PageInfo5 pInfo) {
 		return dao.selectList(pInfo);
 	}
 

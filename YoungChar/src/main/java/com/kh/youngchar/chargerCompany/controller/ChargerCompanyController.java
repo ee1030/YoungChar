@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.youngchar.chargerCompany.model.service.ChargerCompanyService;
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
 import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
-import com.kh.youngchar.company.model.vo.PageInfo;
+import com.kh.youngchar.chargerCompany.model.vo.PageInfo5;
 import com.kh.youngchar.member.model.vo.Member;
 
 @Controller
@@ -39,7 +39,7 @@ public class ChargerCompanyController {
 	public String chargerCompanyList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			Model model) {
 
-		PageInfo pInfo = service.getPageInfo(cp);
+		PageInfo5 pInfo = service.getPageInfo(cp);
 
 		List<ChargerCompany> cList = service.selectList(pInfo);
 
