@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>car management</title>
+<title>차량 등록</title>
 
 <!-- Preloader CSS-->
       <style>
@@ -84,6 +84,10 @@
 				color : #B4B4B4 !important;
 			}
          
+      .img-fluid{
+      	max-width: 200px !important;
+      	max-height : 120px !important;
+      }
          
          
 </style>
@@ -229,7 +233,19 @@
 					var rn = $("<div>").addClass("rn-car-item");
 					var span = $("<span>").addClass("rn-car-item-review delete").text("X");
 					var thumb = $("<div>").addClass("rn-car-item-thumb");
-					var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+					
+					
+					var img = $("<img>").addClass("img-fluid");
+					
+					if(value.fileNo != 0){
+						var srcset = "${contextPath}"+value.filePath +"/" + value.fileName+" 1x," +"${contextPath}"+value.filePath +"/" + value.fileName+" 2x,";
+						//img.attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+						img.attr("alt", "자동차 이미지").attr("src", srcset).attr("srcset", srcset );
+					}else{
+						img.attr("alt", "자동차 이미지").attr("src", "${contextPath}/resources/assets/images/teslaCar.jpg ").attr("srcset", "${contextPath}/resources/assets/images/teslaCar.jpg 1x, ${contextPath}/resources/assets/images/teslaCar.jpg 2x");
+					}
+					
+					
 					thumb.append(img);
 					rn.append(span);
 					rn.append(thumb);
@@ -263,48 +279,57 @@
     	  	
           var carName = $("#carSearch").val();
          	console.log(carName);
-          $.ajax({
-        	   type: "post",
-             url : "carSearch",
-             data : {"carName1" : carName},
-             success(result){
-            	 if(result != null){
+         	
+			          $.ajax({
+			        	   type: "post",
+			             url : "carSearch",
+			             data : {"carName1" : carName},
+			             success(result){
+			            	 if(result != null){
+								
+								console.log(result);
+								$.each(result, function(index, value){
+										console.log(result);
+									 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
+										var rn = $("<div>").addClass("rn-car-item");
+										var span = $("<span>").addClass("rn-car-item-review plus").text("+");
+										var thumb = $("<div>").addClass("rn-car-item-thumb");
+										//var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+										var img = $("<img>").addClass("img-fluid");
+										if(value.filePath != ""){
+											var srcset = "${contextPath}"+value.filePath +"/" + value.fileName+" 1x," +"${contextPath}"+value.filePath +"/" + value.fileName+" 2x,";
+											//img.attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+											img.attr("alt", "자동차 이미지").attr("src", srcset).attr("srcset", srcset );
+										}else{
+											img.attr("alt", "자동차 이미지").attr("src", "${contextPath}/resources/assets/images/teslaCar.jpg ").attr("srcset", "${contextPath}/resources/assets/images/teslaCar.jpg 1x, ${contextPath}/resources/assets/images/teslaCar.jpg 2x");
+										}
+										
+										thumb.append(img);
+										rn.append(span);
+										rn.append(thumb);
 					
-					console.log(result);
-					$.each(result, function(index, value){
-							console.log(result);
-						 	var col =$("<div>").addClass("col-lg-3 col-md-2 carNo" + value.carNo);
-							var rn = $("<div>").addClass("rn-car-item");
-							var span = $("<span>").addClass("rn-car-item-review plus").text("+");
-							var thumb = $("<div>").addClass("rn-car-item-thumb");
-							var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
-							thumb.append(img);
-							rn.append(span);
-							rn.append(thumb);
-		
-							var info = $("<div>").addClass("rn-car-item-info");
-							var h3 = $("<h3>").text(value.carName);
-							var model = $("<p>").addClass("modelName").text(value.carModel);
-							var brand = $("<p>").addClass("brandName").text(value.brand);
-					
-							var carNo = $("<span>").css("display","none").text(value.carNo);
-							info.append(carNo);
-							info.append(h3);
-							info.append(model);
-							info.append(brand);
-							rn.append(info);
-							col.append(rn);
-							addedCar.append(col); 
-					});
-					
-				}
-             },
-             error(){
-            	 console.log("차량 검색 실패");
-             }
-          
-          });
-          
+										var info = $("<div>").addClass("rn-car-item-info");
+										var h3 = $("<h3>").text(value.carName);
+										var model = $("<p>").addClass("modelName").text(value.carModel);
+										var brand = $("<p>").addClass("brandName").text(value.brand);
+								
+										var carNo = $("<span>").css("display","none").text(value.carNo);
+										info.append(carNo);
+										info.append(h3);
+										info.append(model);
+										info.append(brand);
+										rn.append(info);
+										col.append(rn);
+										addedCar.append(col); 
+								});
+								
+							}
+			             },
+			             error(){
+			            	 console.log("차량 검색 실패");
+			             }
+			          
+			          });
       });
       
       

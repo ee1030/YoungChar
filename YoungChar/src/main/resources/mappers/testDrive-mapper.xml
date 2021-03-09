@@ -77,27 +77,20 @@
 		WHERE MEM_NO = #{memNo}
 	</select>
 
-
-	<!-- 
-	<select id="selectReservation" parameterType="_int" resultMap="testDrReservation_rm">
-		SELECT *
-		FROM TES_DR_RESERVATION
-		WHERE MEM_NO = #{memNo}
-	</select>
-	
-	예약 차량 정보 조회 
-	<select id="selectRCarList" parameterType="list" resultMap="testCars_rm">
-		SELECT DISTINCT(CAR_NO), CAR_NAME, CAR_MODEL, CATEGORY_NM 
-		FROM CAR_INFO 
-		JOIN TEST_DRIVE_CAR t USING(CAR_NO)
-		JOIN "CATEGORY" USING(CATEGORY_CD)
-		WHERE t.CAR_STATUS = 'Y'
-    AND TEST_DRIVE_CAR_NO IN
+	<!-- 예약 목록 사진 조회 -->
+	<select id="selectCarImgs" parameterType="list" resultMap="testDrReservation_rm">
+		SELECT CAR_NO, FILE_NO, FILE_PATH, FILE_NAME
+		FROM C_ATTACHMENT 
+		JOIN TEST_DRIVE_CAR USING(CAR_NO)
+		JOIN TES_DR_RESERVATION USING(TEST_DRIVE_CAR_NO)
+		WHERE FILE_LEVEL = 0
+		AND RESERVATION_NO IN
     <foreach collection="list" item="rList" open="(" close=")" separator=",">
-  		#{rList.testDriveCarNo}
+  		#{rList.reservationNo}
   	</foreach>
-		ORDER BY CAR_NO
-	</select>-->
+		ORDER BY CAR_NO,FILE_LEVEL
+	</select>
+
 	
 	<!-- 대리점 정보 조회 -->
 	<select id="selectRcompanyList" parameterType="list" resultMap="companyMember_rm">

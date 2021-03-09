@@ -1091,7 +1091,7 @@ select:focus {
   position: relative;
   padding-top: 270px;
   padding-bottom: 60px;
-  background-image: url(../images/page-titlebar.jpg);
+  /* background-image: url(../images/page-titlebar.jpg); */
   background-attachment: fixed;
   background-size: cover;
 }
@@ -1349,7 +1349,7 @@ select:focus {
 
 .rn-service-c2a {
   background-color: #112E3B;
-  background-image: url(../images/c2a-bg.jpg);
+  /* background-image: url(../images/c2a-bg.jpg); */
   background-attachment: fixed;
   text-align: center;
   padding-bottom: 100px;

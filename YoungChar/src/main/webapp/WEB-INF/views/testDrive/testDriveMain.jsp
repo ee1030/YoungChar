@@ -7,10 +7,31 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>시승 센터</title>
+		<title>시승 메인 페이지</title>
 
 		<!-- Preloader CSS-->
-		<style>#preloader:after,#preloader:before{content:"";display:block;left:-1px;top:-1px}#preloader-overlayer,#preloader:after,#preloader:before{position:absolute;height:100%;width:100%}#preloader-overlayer{position:fixed;top:0;left:0;background-color:#112E3B;z-index:999}#preloader{height:40px;width:40px;position:fixed;top:50%;left:50%;margin-top:-20px;margin-left:-20px;z-index:9999}#preloader:before{-webkit-animation:rotation 1s linear infinite;animation:rotation 1s linear infinite;border:2px solid #42DB0C;border-top:2px solid transparent;border-radius:100%}#preloader:after{border:1px solid rgba(255,255,255,.1);border-radius:100%}@media only screen and (min-width:768px){#preloader{height:60px;width:60px;margin-top:-30px;margin-left:-30px}#preloader:before{left:-2px;top:-2px;border-width:2px}}@media only screen and (min-width:1200px){#preloader{height:80px;width:80px;margin-top:-40px;margin-left:-40px}}@-webkit-keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}</style>
+		<style>#preloader:after,#preloader:before{content:"";display:block;left:-1px;top:-1px}#preloader-overlayer,#preloader:after,#preloader:before{position:absolute;height:100%;width:100%}#preloader-overlayer{position:fixed;top:0;left:0;background-color:#112E3B;z-index:999}#preloader{height:40px;width:40px;position:fixed;top:50%;left:50%;margin-top:-20px;margin-left:-20px;z-index:9999}#preloader:before{-webkit-animation:rotation 1s linear infinite;animation:rotation 1s linear infinite;border:2px solid #42DB0C;border-top:2px solid transparent;border-radius:100%}#preloader:after{border:1px solid rgba(255,255,255,.1);border-radius:100%}@media only screen and (min-width:768px){#preloader{height:60px;width:60px;margin-top:-30px;margin-left:-30px}#preloader:before{left:-2px;top:-2px;border-width:2px}}@media only screen and (min-width:1200px){#preloader{height:80px;width:80px;margin-top:-40px;margin-left:-40px}}@-webkit-keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}
+		
+		/* .buttonColor{
+			 background-color : grey !important; 
+		} */
+		
+		.btn-main {
+		background-color: #00b92b !important;
+  border-color: #00b92b !important;
+  color: #fff !important;
+	
+}
+
+.btn-main:hover {
+  	
+  background-color: #00D231 !important;
+  border-color: #00D231 !important;
+  color: #fff !important;
+}
+		
+		
+		</style>
 
 		<!--
 		All CSS Codes Loaded
@@ -24,8 +45,6 @@
 		<link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
 		<link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 
-		<!-- Google Map JS-->
-		<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
 	</head>
 	
 
@@ -107,13 +126,15 @@
 
 		<!-- Call To Action-->
 		<section class="rn-section rn-service-c2a">
-			<div class="rn-section-overlayer"></div>
+			<div class="rn-section-overlayer" >
+				<!-- <div id="background"></div> -->
+			</div>
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
 						<h2>자동차 시승 후기가 궁금하신가요?</h2>
 						<p>시승 후기 게시판에서 시승 후기를 확인하세요.</p>
-						<a class="btn btn-main btn-lg btn-shadow" href="#">시승 후기 게시판</a>
+						<a class="btn btn-main btn-lg btn-shadow buttonColor" href="${contextPath}/driveReview/reviewlist">시승 후기 게시판</a>
 					</div>
 				</div>
 			</div>
@@ -164,60 +185,9 @@
 										<!-- End Testimonial Item-->
 
 									</div>
-									<div class="carousel-item">
+									
 
-										<!-- Testimonial Item-->
-										<blockquote class="rn-testimonial-item">
-											<div class="rn-testimonial-author">
-												<div class="rn-testimonial-author-thumb">
-													<img src="${contextPath}/resources/assets/images/author-2.jpg" alt="John Doe" srcset="${contextPath}/resources/assets/images/author-2.jpg 1x, ${contextPath}/resources/assets/images/author-2@2x.jpg 2x"/>
-												</div>
-												<div class="rn-testimonial-author-info"><strong>페페</strong>
-													<p>Elsa PePe</p>
-												</div>
-											</div>
-											<p>개굴개굴개굴 페페페페
-												렛잇고~!
-											</p>
-											<footer>
-												<div class="rn-testimonial-rating">
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-												</div>
-											</footer>
-										</blockquote>
-										<!-- End Testimonial Item-->
 
-									</div>
-									<div class="carousel-item">
-
-										<!-- Testimonial Item-->
-										<blockquote class="rn-testimonial-item">
-											<div class="rn-testimonial-author">
-												<div class="rn-testimonial-author-thumb">
-													<img src="${contextPath}/resources/assets/images/author-3.jpg" alt="John Doe" srcset="${contextPath}/resources/assets/images/author-3.jpg 1x, ${contextPath}/resources/assets/images/author-3@2x.jpg 2x"/>
-												</div>
-												<div class="rn-testimonial-author-info"><strong>주얼리알파고</strong>
-													<p>Alphago </p>
-												</div>
-											</div>
-											<p>감자빵 사와라</p>
-											<footer>
-												<div class="rn-testimonial-rating">
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-													<i class="fas fa-star"></i>
-												</div>
-											</footer>
-										</blockquote>
-										<!-- End Testimonial Item-->
-
-									</div>
 								</div>
 								<a class="carousel-control-prev" href="#rn-testimonials" role="button" data-slide="prev">
 									<i class="fas fa-angle-left" aria-hidden="true"></i>

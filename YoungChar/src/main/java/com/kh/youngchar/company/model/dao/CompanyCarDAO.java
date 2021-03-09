@@ -76,6 +76,14 @@ public class CompanyCarDAO {
 		return sqlSession.update("companyCarMapper.updateStatus", map);
 	}
 
+	/** 차량 이미지
+	 * @param cList
+	 * @return images
+	 */
+	public List<TestCars> carImages(List<TestCars> cList) {
+		return sqlSession.selectList("companyCarMapper.carImages", cList);
+	}
+
 
 	
 }

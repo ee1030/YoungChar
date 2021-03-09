@@ -38,12 +38,33 @@ public class TestDriveController {
 		return "testDrive/testDriveMain";
 	}
 	
+	//차량 이미지 조회 Controller
+	public List<TestCars> carImages(List<TestCars> cList){
+		
+		List<TestCars> images = service.carImages(cList);
+		
+		return images;
+	}
+	
 	//시승예약페이지 전환 Controller
 	@RequestMapping("reservation")
 	public String reservationView(Model model) {
 		
 		//모델가져오기
 		List<TestCars> cList = service.selectCarList();
+		
+		//이미지 추가하기
+		List<TestCars> imgs = carImages(cList);
+				
+		for(TestCars c : cList) {
+			for(TestCars img : imgs) {
+				if(c.getCarNo() == img.getCarNo()) {
+					c.setFileNo(img.getFileNo());
+					c.setFilePath(img.getFilePath());
+					c.setFileName(img.getFileName());
+				}
+			}
+		}
 		
 		//브랜드 리스트 중복제거
 		List<String> brandList = new ArrayList<String>();
@@ -134,11 +155,26 @@ public class TestDriveController {
 		
 		//예약 목록 조회하기
 		List<TestDrReservation> rList = service.selectReservation(memNo);
+		System.out.println(rList);
 		
-		if(rList != null) { //예약 있다면 (예약중/시승완료)
+		if(rList != null && !rList.isEmpty()) { //예약 있다면 (예약중/시승완료)
 			
 			//예약목록들의 자동차 사진 가져오기
-			//List<TestCars> cList = service.selectRCarList(rList);
+			List<TestCars> cList = service.selectCarImgs(rList);
+			
+			//이미지 추가하기
+			List<TestCars> imgs = carImages(cList);
+					
+			for(TestCars c : cList) {
+				for(TestCars img : imgs) {
+					if(c.getCarNo() == img.getCarNo()) {
+						c.setFileNo(img.getFileNo());
+						c.setFilePath(img.getFilePath());
+						c.setFileName(img.getFileName());
+					}
+				}
+			}
+			
 			
 			//대리점 정보 가져오기
 			List<CompanyMember> comList = service.selectRcompanyList(rList);
@@ -158,6 +194,8 @@ public class TestDriveController {
 			
 			//model.addAttribute("cList", cList);
 			model.addAttribute("comList", comList);
+		}else {
+			rList = null;
 		}
 		
 		model.addAttribute("rList", rList);

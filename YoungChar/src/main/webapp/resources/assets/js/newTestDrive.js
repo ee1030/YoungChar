@@ -78,7 +78,9 @@ console.log(company.length);
                 //선택시 테두리 색 추가
                 $(this).addClass("carSelect");
                 $(this).siblings().removeClass("carSelect"); 
-
+								
+								$("#Bar3-1").hide();
+								$(".dt").slideDown();
                 
 
 				addr = $(this).children().children("h5").text();
