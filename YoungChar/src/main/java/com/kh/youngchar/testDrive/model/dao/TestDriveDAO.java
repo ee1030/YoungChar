@@ -80,6 +80,7 @@ public class TestDriveDAO {
 		return sqlSession.insert("testDriveMapper.makeReservation",reservation);
 	}
 
+
 	/** 예약 정보 가져오기
 	 * @param reservationNo
 	 * @return rs
@@ -87,4 +88,5 @@ public class TestDriveDAO {
 	public TestDrReservation getReservation(int reservationNo) {
 		return sqlSession.selectOne("testDriveMapper.getReservation",reservationNo);
 	}
+
 }

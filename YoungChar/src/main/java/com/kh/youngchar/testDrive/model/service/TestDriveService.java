@@ -83,6 +83,7 @@ public class TestDriveService {
 		return dao.makeReservation(reservation);
 	}
 
+
 	/** 예약 정보 가져오기
 	 * @param reservationNo
 	 * @return rs
@@ -91,6 +92,7 @@ public class TestDriveService {
 	 * public TestDrReservation getReservation(int reservationNo) { return
 	 * dao.getReservation(reservationNo); }
 	 */
+
 	
 	
 }
