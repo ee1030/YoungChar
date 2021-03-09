@@ -242,7 +242,7 @@ label.light {
 
       <form action="cooSignUpAction" method="post" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
       <div id="logo">
-      <img class="img-fluid" src="${contextPath}/resources/assets/images/영차로고.png" alt="Logo">
+      <img class="img-fluid" src="${contextPath}/resources/assets/images/테두리로고.png" alt="Logo">
       </div>
       
         <h1>업체 회원가입</h1>
@@ -523,16 +523,14 @@ label.light {
 						if (!signUpCheck[key]) {
 							var str;
 							switch (key) {
-							case "id" : str = "아이디"; break;
+							case "id": str = "아이디"; break;
 							case "pwd1": str = "비밀번호";	break;
 							case "pwd2": str = "비밀번호 확인";break;
 							case "email": str = "이메일"; break;
 							}
-							
-							
 
 							swal({icon:"warning", title:str+" 형식이 유효하지 않습니다."});
-							
+							return false;
 						}
 					}
 					

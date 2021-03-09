@@ -130,6 +130,16 @@
 
 	</head>
 	<body class="rn-preloader">
+	<c:if test="${!empty swalTitle}">
+		<script>
+			swal({icon : "${swalIcon}",
+				 title : "${swalTitle}",
+				 text : "${swalText}"});
+		</script>
+		<%-- <c:remove var="swalIcon"/>
+		<c:remove var="swalTitle"/>
+		<c:remove var="swalText"/> --%>
+	</c:if>
 <c:set var="address" value="${fn:split(loginMember.memberAddr, ',') }" />
 		<!-- Header-->
 		<jsp:include page="../common/header.jsp"/>
@@ -150,7 +160,7 @@
 							  <div class="card-body">
 								<div class="row">
 								  
-								  <h2 style="text-align: center">아이디 찾기</h2><br><br>
+								  <h2 style="text-align: center">아이디 찾기</h2><br><br><hr> <br><br>
 								  <div class="col-sm-6 col-md-6">
 									<div class="mb-3" id="checkPwd1">
 									  <label class="form-label">이메일</label>

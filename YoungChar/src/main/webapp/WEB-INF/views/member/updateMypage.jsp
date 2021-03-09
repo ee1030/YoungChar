@@ -410,7 +410,7 @@
 				
 				
 				// 닉네임 유효성 검사
-				$nickName.on("input", function() {
+				$nickName.on("change", function() {
 					var regExp = /^[가-힣A-Za-z\d]{3,12}$/; 
 
 					if (!regExp.test($(this).val())) { 
@@ -463,7 +463,7 @@
 							
 
 							swal({icon:"warning", title:str+" 형식이 유효하지 않습니다."});
-							
+							return false;
 						}
 					}
 					

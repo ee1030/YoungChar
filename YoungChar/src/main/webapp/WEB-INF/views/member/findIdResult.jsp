@@ -130,6 +130,10 @@
 #contentImg1:hover{
 	cursor: pointer;
 }
+
+#t4{
+	color: gray;
+}
 		
 		</style>
 		
@@ -156,10 +160,11 @@
 							  <div class="card-body">
 								<div class="row">
 								  
-								  <h2 style="text-align: center">아이디 찾기 결과</h2><br><br>
+								  <h2 style="text-align: center">아이디 찾기 결과</h2><br><br><br><hr>
 								  
 								  <div class="mb-3" id="resultId">
-								  <h2 id="t3">아이디 : ${memberId}</h2>
+								  <h3 id="t3">회원님께서 가입하신 아이디</h3>
+								  <h4 id="t4" style="text-align: center;">${memberId}</h4>
 								  
 									</div>
 								  

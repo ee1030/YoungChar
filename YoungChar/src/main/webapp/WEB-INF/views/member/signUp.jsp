@@ -227,7 +227,7 @@ a{
       <form action="SignUpAction" method="post" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
         <a href="${contextPath}/member/cooSignUp"><button type="button" class="sendBtn" id="moveCoo">업체 회원가입</button></a>
       <div id="logo">
-      <img class="img-fluid" src="${contextPath}/resources/assets/images/영차로고.png" alt="Logo">
+      <img class="img-fluid" src="${contextPath}/resources/assets/images/테두리로고.png" alt="Logo">
       </div>
         <h1>회원가입</h1>
         <fieldset>
@@ -524,7 +524,7 @@ a{
 						// 유효성 검사 
 						function memberJoinvalidate() {
 
-							for ( var key in signUpCheck) {
+							for (var key in signUpCheck) {
 								if (!signUpCheck[key]) {
 									var str;
 									switch (key) {
@@ -539,7 +539,7 @@ a{
 									
 
 									swal({icon:"warning", title:str+" 형식이 유효하지 않습니다."});
-									
+									return false;
 								}
 							}
 							

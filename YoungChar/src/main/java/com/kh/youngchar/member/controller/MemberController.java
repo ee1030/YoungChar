@@ -482,7 +482,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("findIdAction")
-	public String findIdAction(@RequestParam("memberNm") String memberNm, @RequestParam("memberEmail") String memberEmail, Model model) {
+	public String findIdAction(@RequestParam("memberNm") String memberNm, @RequestParam("memberEmail") String memberEmail, Model model, RedirectAttributes ra) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNm", memberNm);
@@ -490,9 +490,20 @@ public class MemberController {
 		
 		String memberId = service.findIdAction(map);
 		
-		model.addAttribute("memberId", memberId);
 		
-		return "member/findIdResult";
+		String url = "";
+		if(memberId != null) {
+			model.addAttribute("memberId", memberId);
+			url = "member/findIdResult";
+		}else {
+			swalIcon = "error";
+			swalTitle = "아이디 또는 이메일을 확인해주세요";
+			url = "redirect:findId";
+			ra.addFlashAttribute("swalIcon", swalIcon);
+			ra.addFlashAttribute("swalTitle", swalTitle);
+		}
+		
+		return url;
 	}
 	
 	
