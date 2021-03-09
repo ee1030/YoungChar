@@ -495,6 +495,8 @@
 								$beforeImg.remove();
 								$(".content1").prepend($newImg);
 							}else{
+								$beforeImg.remove();
+								$(".content1").prepend($newImg);
 							}
 							
 						},

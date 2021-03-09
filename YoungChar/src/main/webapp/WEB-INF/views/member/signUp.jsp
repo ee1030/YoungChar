@@ -209,17 +209,27 @@ a{
 	height: 150px;
 }
 
+#moveCoo{
+	display: block;
+	float: right;
+	border-radius: 5px;
+}
+#logo{
+	clear: both;
+}
+
+
     </style>
 </head>
 <body>
    
 
       <form action="SignUpAction" method="post" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
+        <a href="${contextPath}/member/cooSignUp"><button type="button" class="sendBtn" id="moveCoo">업체 회원가입</button></a>
       <div id="logo">
-      <img class="img-fluid" src="${contextPath}/resources/assets/images/0char_logo(200).png" alt="Logo">
+      <img class="img-fluid" src="${contextPath}/resources/assets/images/영차로고.png" alt="Logo">
       </div>
         <h1>회원가입</h1>
-        
         <fieldset>
           <legend><span class="number">1</span>기본 정보</legend>
 					<div id="content1" class="content1">
@@ -288,7 +298,7 @@ a{
 
         
         <button type="submit" id="nextBtn" class="signUp">회원가입</button>
-        <h3><a href="${contextPath}/member/cooSignUp">업체 회원가입으로 이동</a></h3>
+        
       </form>
       
       
