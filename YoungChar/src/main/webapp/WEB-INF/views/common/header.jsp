@@ -131,8 +131,8 @@
 									</div>
 									<div class="rn-info">
 										<ul>
-											<li>(954)-944-1250</li>
-											<li>(954)-944-1251</li>
+											<li>(02)-942-1250</li>
+											<li>(033)-244-7415</li>
 										</ul>
 									</div>
 								</div>
@@ -142,8 +142,8 @@
 									</div>
 									<div class="rn-info">
 										<ul>
-											<li>support@example.coms</li>
-											<li>sale@example.com</li>
+											<li>qhrje12@naver.com</li>
+											<li>gopseok2@gmail.com</li>
 										</ul>
 									</div>
 								</div>
@@ -153,8 +153,8 @@
 									</div>
 									<div class="rn-info">
 										<ul>
-											<li>1425 Pointe Lane, Miami</li>
-											<li>Florida – 33169, USA</li>
+											<li>서울특별시 중구 남대문로 120  </li>
+											<li> 대일빌딩 2F , Aclass</li>
 										</ul>
 									</div>
 								</div>
@@ -228,12 +228,12 @@
 										<a href="${contextPath }">Home</a>
 									</li>
 									<li>
-									<a href="#">Charging 
+									<a href="#">충전소
 											<i class="lnr lnr-chevron-down"></i>
 										</a>
 										<ul>
 										<li>
-										<a href="${contextPath}/chargerLocation/location">충전소</a>
+										<a href="${contextPath}/chargerLocation/location">위치</a>
 										</li>
 										
 										<li>
@@ -243,28 +243,27 @@
 									</li>
 									
 										<li>
-										<a href="#">Cars 
+										<a href="${contextPath }/car/list">차량 검색</a>
+									</li>
+									
+										<li>
+										<a href="#">게시판 
 											<i class="lnr lnr-chevron-down"></i>
 										</a>
 										<ul>
 											<li>
-												<a href="${contextPath }/car/list">SEARCH CAR</a>
+												<a href="${contextPath}/board/list/1">리뷰 게시판</a>
 											</li>
 											<li>
-												<a href="${contextPath}/board/list/1">REVIEW</a>
+												<a href="${contextPath}/board/list/2">정보 게시판</a>
 											</li>
 											<li>
-												<a href="${contextPath}/board/list/2">INFORMATION</a>
-											</li>
-											<li>
-												<a href="${contextPath}/board/list/3">FREE CHAT</a>
+												<a href="${contextPath}/board/list/3">잡담 게시판</a>
 											</li>
 										</ul>
 									</li>
 									
-									<li>
-										<a href="service.html">Service</a>
-									</li>
+									
 									<li>
 										<a href="${contextPath}/news/newsMain">뉴스</a>
 									</li>

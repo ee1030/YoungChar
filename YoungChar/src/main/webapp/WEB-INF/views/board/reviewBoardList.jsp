@@ -25,6 +25,12 @@ li {
 	color : green;
 } 
 
+.listView :hover {
+
+ cursor: pointer;
+
+}
+
 </style>
 
 
@@ -70,6 +76,7 @@ li {
 					<div class="col-lg-12">
 						<div class="rn-page-title-inner">
 							<h1>게시판 &amp; 게시판</h1>
+							<p>사랑합니다. 고객님 이용해주셔서 갑사합니다.</p>
 						</div>
 					</div>
 				</div>
@@ -84,11 +91,11 @@ li {
 				
 				<div class="row card">
 					<c:if test = "${pInfo.boardType == 1 }">
-						<h1>REVIEW</h1>
+						<h1 class="card" style="width:160px;">REVIEW</h1>
 					</c:if>
 					<c:if test = "${pInfo.boardType == 2 }">
 					
-						<h1>INFORMATION</h1>
+						<h1 class="card" style="width:280px;">INFORMATION</h1>
 					</c:if>
 
 					<div >
@@ -138,7 +145,7 @@ li {
 				<div class="col-md-2" style="float: left;">
 					<section class="rn-widget">
 						<h2 class="rn-widget-title">Categories</h2>
-						<div class="rn-widget-content card" id="categoryNm">
+						<div class="rn-widget-content " id="categoryNm">
 							<ul>
 								<li>테슬라</li>
 								<li>현대자동차</li>
@@ -175,7 +182,7 @@ li {
 				<div class="row">
 					<c:if test="${!empty bList }">
 						<c:forEach var="board" items="${bList}" varStatus="vs">
-							<div class="col-md-4">
+							<div class="col-md-4 listView">
 
 								<!-- Blog Post Item (Small Size)-->
 								<div class="rn-post-item rn-post-size-sm list-view" >

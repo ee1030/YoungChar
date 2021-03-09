@@ -34,6 +34,11 @@ public class CarsServiceImpl implements CarsService{
 		return dao.selectCarList(pInfo);
 	}
 	
+	@Override
+	public List<Cars> selectList() {
+		return dao.selectList();
+	}
+	
 //	차량 상세조회 Service 구현 
 	@Override
 	public Cars selectCar(int carNo) {

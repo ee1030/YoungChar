@@ -18,12 +18,9 @@
 
 							<!-- Widget Item-->
 							<section class="rn-widget">
-								<h2 class="rn-widget-title">About Us</h2>
 								<div class="rn-widget-content">
-									<a class="brand-name" href="index.html">
-										<img src="assets/images/logo.svg" alt="Logo">
-									</a>
-									<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
+								<a class="brand-name" href="${contextPath}"> <img class="img-fluid" src="${contextPath}/resources/assets/images/영차로고.png" alt="Logo">
+								</a>
 									<ul class="rn-widget-social">
 										<li>
 											<a href="#">
@@ -55,47 +52,44 @@
 
 							<!-- Widget Item-->
 							<section class="rn-widget">
-								<h2 class="rn-widget-title">Quick Links</h2>
 								<div class="rn-widget-content">
 									<div class="row rn-quick-links">
 										<div class="col-6">
 											<ul>
 												<li>
-													<a href="#">About Us</a>
+													믿음
 												</li>
 												<li>
-													<a href="#">Contact Us</a>
+												   	소망
 												</li>
 												<li>
-													<a href="#">Support</a>
+													 사랑
 												</li>
 												<li>
-													<a href="#">View Booking</a>
 												</li>
 												<li>
-													<a href="#">Affiliate Programme</a>
+													 
 												</li>
 												<li>
-													<a href="#">Marketplace</a>
 												</li>
 											</ul>
 										</div>
 										<div class="col-6">
 											<ul>
 												<li>
-													<a href="#">Site Map</a>
+													신뢰
 												</li>
 												<li>
-													<a href="#">Careers</a>
+												정직
 												</li>
 												<li>
-													<a href="#">Press</a>
+													축복
 												</li>
 												<li>
-													<a href="#">Get a Receipt</a>
+													
 												</li>
 												<li>
-													<a href="#">Community</a>
+													
 												</li>
 											</ul>
 										</div>
@@ -109,7 +103,6 @@
 
 							<!-- Widget Item-->
 							<section class="rn-widget">
-								<h2 class="rn-widget-title">Contact Us</h2>
 								<div class="rn-widget-content">
 									<div class="rn-icon-contents">
 										<div class="rn-phone rn-icon-content">
@@ -118,8 +111,8 @@
 											</div>
 											<div class="rn-info">
 												<ul>
-													<li>(954)-944-1250</li>
-													<li>(954)-944-1251</li>
+													<li>(02)-942-1250</li>
+													<li>(033)-244-7415</li>
 												</ul>
 											</div>
 										</div>
@@ -129,8 +122,8 @@
 											</div>
 											<div class="rn-info">
 												<ul>
-													<li>support@example.coms</li>
-													<li>sale@example.com</li>
+													<li>qhrje12@naver.com</li>
+													<li>gopseok2@gmail.com</li>
 												</ul>
 											</div>
 										</div>
@@ -140,8 +133,8 @@
 											</div>
 											<div class="rn-info">
 												<ul>
-													<li>1425 Pointe Lane, Miami</li>
-													<li>Florida – 33169, USA</li>
+													<li>서울특별시 중구 남대문로 120  </li>
+													<li> 대일빌딩 2F , Aclass</li>
 												</ul>
 											</div>
 										</div>
@@ -157,21 +150,7 @@
 			<!-- End Footer Widgets-->
 
 			<!-- Footer Copyright-->
-			<div class="rn-footer-copyright">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-md-6">
-							<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
-						</div>
-						<div class="col-md-6 text-right">
-							<span class="rn-pyament-methods">
-								<span>We Accept</span>
-								<img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 			<!-- End Footer Copyright-->
 
 		</footer>

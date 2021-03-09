@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -58,7 +60,7 @@
 						<!-- Section Title-->
 						<div class="rn-section-title   ">
 							<h2 class="rn-title">Why People Like Us?</h2>
-							<p>Inbecilloque elegans errorem concedo etsi electram.</p>
+							<p>영차영차에는 이 모든 것이 있습니다.</p>
 							<span class="rn-title-bg">Why RentNow</span>
 						</div>
 
@@ -71,8 +73,8 @@
 						<div class="rn-dot-feature">
 							<div class="rn-the-dot"></div>
 							<div class="rn-dot-feature-info">
-								<h3>Best Price Guarantee</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
+								<h3>충전소</h3>
+								<p>전국 1000여곳 이상의 충전소 위치 제공</p>
 							</div>
 						</div>
 						<!-- End Feature with dot-->
@@ -84,8 +86,8 @@
 						<div class="rn-dot-feature">
 							<div class="rn-the-dot"></div>
 							<div class="rn-dot-feature-info">
-								<h3>No Cancellation Fees</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
+								<h3>회원 수</h3>
+								<p>60,000명 이상의 국내 최다 이용자 보유</p>
 							</div>
 						</div>
 						<!-- End Feature with dot-->
@@ -97,8 +99,9 @@
 						<div class="rn-dot-feature">
 							<div class="rn-the-dot"></div>
 							<div class="rn-dot-feature-info">
-								<h3>Best Quality Cars</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
+								<h3>전기차 정보</h3>
+								<p>매일 새로운 신차 출시 정보 <br>
+								</p>
 							</div>
 						</div>
 						<!-- End Feature with dot-->
@@ -110,8 +113,8 @@
 						<div class="rn-dot-feature">
 							<div class="rn-the-dot"></div>
 							<div class="rn-dot-feature-info">
-								<h3>Reservation Anytime</h3>
-								<p>Duis placerat tempus odio vel pretium. Vestibulum mattis viverra justo vel consequat.</p>
+								<h3>시승 예약</h3>
+								<p>출시 예정인 신차 사전 시승 예약 가능 </p>
 							</div>
 						</div>
 						<!-- End Feature with dot-->
@@ -124,477 +127,67 @@
 		<!-- End Why People Like Us Section-->
 
 		<!-- Popular Cars Section-->
-		<section class="rn-section rn-section-light-gray">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
+<section class="rn-section rn-section-light-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
 
-						<!-- Section Title-->
-						<div class="rn-section-title  rn-title-bg-color-white ">
-							<h2 class="rn-title">Popular Cars</h2>
-							<p>Inbecilloque elegans errorem concedo etsi electram.</p>
-							<span class="rn-title-bg">Most Popular Cars</span>
-						</div>
-
-					</div>
+				<!-- Section Title-->
+				<div class="rn-section-title  rn-title-bg-color-white ">
+					<h2 class="rn-title">New Cars</h2>
+					<p>새로운 전기차들을 만나보세요.</p>
+					<span class="rn-title-bg">New Cars</span>
 				</div>
-				<div class="row">
-					<div class="col-lg-4 col-md-6">
 
-						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-1.jpg" alt="Black Sedan" srcset="${contextPath}/resources/assets/images/car-1.jpg 1x, ${contextPath}/resources/assets/images/car-1@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">Black Sedan</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$800</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Car Item-->
-
-					</div>
-					<div class="col-lg-4 col-md-6">
-
-						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-2.jpg" alt="Toyota Etios" srcset="${contextPath}/resources/assets/images/car-2.jpg 1x, ${contextPath}/resources/assets/images/car-2@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">Toyota Etios</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$600</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Car Item-->
-
-					</div>
-					<div class="col-lg-4 col-md-6">
-
-						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-3.jpg" alt="Mercedes AMG E63" srcset="${contextPath}/resources/assets/images/car-3.jpg 1x, ${contextPath}/resources/assets/images/car-3@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">Mercedes AMG E63</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$650</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Car Item-->
-
-					</div>
-					<div class="col-lg-4 col-md-6">
-
-						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-4.jpg" alt="BMW X5" srcset="${contextPath}/resources/assets/images/car-4.jpg 1x, ${contextPath}/resources/assets/images/car-4@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">BMW X5</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$900</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Car Item-->
-
-					</div>
-					<div class="col-lg-4 col-md-6">
-
-						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-7.jpg" alt="Toyota Avalon" srcset="${contextPath}/resources/assets/images/car-7.jpg 1x, ${contextPath}/resources/assets/images/car-7@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">Toyota Avalon</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$850</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Car Item-->
-
-					</div>
-					<div class="col-lg-4 col-md-6">
-
-						<!-- Car Item-->
-						<div class="rn-car-item">
-							<div class="rn-car-item-review">
-								<div class="fas fa-star"></div> 5.0
-							</div>
-							<div class="rn-car-item-thumb">
-								<a href="car-single.html">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/car-8.jpg" alt="Audi A8" srcset="${contextPath}/resources/assets/images/car-8.jpg 1x, ${contextPath}/resources/assets/images/car-8@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-car-item-info">
-								<h3>
-									<a href="car-single.html">Audi A8</a>
-								</h3>
-								<p>Mauris semper nisl a massa convallis</p>
-								<div class="rn-car-list-n-price">
-									<ul>
-										<li>Aliqua venandi mutat</li>
-										<li>Plerisque nostrum</li>
-										<li>Intellegimus percurri</li>
-									</ul>
-									<div class="rn-car-price-wrap">
-										<a class="rn-car-price" href="car-single.html">
-											<span class="rn-car-price-from">From</span>
-											<span class="rn-car-price-format">
-												<span class="rn-car-price-amount">$800</span>
-												<span class="rn-car-price-per">/day</span>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Car Item-->
-
-					</div>
-				</div>
 			</div>
-		</section>
-		<!-- End Popular Cars Section-->
+		</div>
+		<div class="row">
+				<c:if test="${!empty carList }">
+					<c:forEach var="list" items="${carList}" begin="0" end="5" varStatus="vs">
+				<!-- Car Item-->
 
-		<!-- Car Categories-->
-<!-- 		<section class="rn-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
+						<div class="col-md-4 listView">
 
-						Section Title
-						<div class="rn-section-title   ">
-							<h2 class="rn-title">Car by Types</h2>
-							<p>Inbecilloque elegans errorem concedo etsi electram.</p>
-							<span class="rn-title-bg">Car by Types</span>
-						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-2 col-6 col-md-4">
-						Car Category
-						<div class="rn-car-type">
-							<a href="cars.html">
-								<span class="rn-car-type-icon">
-									<i class="rni-car-type-sedan"></i>
-								</span>
-								<span class="rn-car-type-title">Sedan</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-2 col-6 col-md-4">
-						Car Category
-						<div class="rn-car-type">
-							<a href="cars.html">
-								<span class="rn-car-type-icon">
-									<i class="rni-car-type-roadster"></i>
-								</span>
-								<span class="rn-car-type-title">Roadster</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-2 col-6 col-md-4">
-						Car Category
-						<div class="rn-car-type">
-							<a href="cars.html">
-								<span class="rn-car-type-icon">
-									<i class="rni-car-type-coupe"></i>
-								</span>
-								<span class="rn-car-type-title">Coupe</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-2 col-6 col-md-4">
-						Car Category
-						<div class="rn-car-type">
-							<a href="cars.html">
-								<span class="rn-car-type-icon">
-									<i class="rni-car-type-minivan"></i>
-								</span>
-								<span class="rn-car-type-title">Minivan</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-2 col-6 col-md-4">
-						Car Category
-						<div class="rn-car-type">
-							<a href="cars.html">
-								<span class="rn-car-type-icon">
-									<i class="rni-car-type-statio-wagon"></i>
-								</span>
-								<span class="rn-car-type-title">Station Wagon</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-2 col-6 col-md-4">
-						Car Category
-						<div class="rn-car-type">
-							<a href="cars.html">
-								<span class="rn-car-type-icon">
-									<i class="rni-car-type-limousine"></i>
-								</span>
-								<span class="rn-car-type-title">Limousine</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
-		<!-- End Car Categories-->
-
-
-		<!-- Testimonials & Fun Fact-->
-	<!-- 	<section class="rn-section rn-fun-fact">
-			<div class="rn-section-overlayer"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6">
-
-						Section Title
-						<div class="rn-section-title rn-title-pos-left rn-title-bg-color-white-10 rn-title-color-white">
-							<h2 class="rn-title">Testimonials</h2>
-							<span class="rn-title-bg">Testimonials</span>
-						</div>
-
-						Testimonials
-						<div class="rn-testimonials rn-testimonials2">
-							<div class="rn-testimonials-carousel carousel slide" id="rn-testimonials" data-ride="carousel">
-								<div class="carousel-inner">
-
-									Testimonial Item 1
-									<div class="carousel-item active">
-										<blockquote class="rn-testimonial2-item">
-											<p>Curabitur neque turpis, pellentesque vel semper ut, tempor vel arcu. Nulla facilisi. Phasellus feugiat nunc eget eros varius, et mollis magna elementum.</p>
-											<footer>
-												<div class="rn-testimonial-author"><strong>Catherine Beck</strong>
-													<p>CEO, Example Inc.</p>
-												</div>
-											</footer>
-										</blockquote>
-									</div>
-
-									Testimonial Item 2
-									<div class="carousel-item">
-										<blockquote class="rn-testimonial2-item">
-											<p>Integer aliquam velit ut nibh mattis, et suscipit erat ultrices. Cras aliquam ante vel arcu suscipit, sit amet lobortis elit dignissim tempor vel.</p>
-											<footer>
-												<div class="rn-testimonial-author"><strong>Kevin Little</strong>
-													<p>CEO, Example Inc.</p>
-												</div>
-											</footer>
-										</blockquote>
-									</div>
-
-									Testimonial Item 3
-									<div class="carousel-item">
-										<blockquote class="rn-testimonial2-item">
-											<p>Suspendisse semper urna nec massa imperdiet consequat. Phasellus a hendrerit elit, vel maximus lacus. Sed eu quam laoreet, faucibus lorem non, aliquet diam.</p>
-											<footer>
-												<div class="rn-testimonial-author"><strong>John Roberts</strong>
-													<p>CEO, Example Inc.</p>
-												</div>
-											</footer>
-										</blockquote>
-									</div>
-
-									Testimonial Item 4
-									<div class="carousel-item">
-										<blockquote class="rn-testimonial2-item">
-											<p>Quisque ut arcu vitae elit egestas lobortis. Vivamus vehicula tortor molestie urna laoreet congue. Fusce iaculis eros id neque maximus tristique.</p>
-											<footer>
-												<div class="rn-testimonial-author"><strong>Patricia Torres</strong>
-													<p>CEO, Example Inc.</p>
-												</div>
-											</footer>
-										</blockquote>
-									</div>
-
+							<!-- Blog Post Item (Small Size)-->
+							<div class="rn-post-item rn-post-size-sm list-view">
+								<div class="rn-post-item-thumb">
+									<c:forEach items="${thList}" var="th">
+										<c:if test="${th.carNo  == list.carNo}">
+											<img style="height: 250px" src="${contextPath}${th.filePath}/${th.fileName}">
+										</c:if>
+									</c:forEach>
 								</div>
-								Testimonials Slider Controls
-								<ol class="carousel-indicators">
-									<li class="active" data-target="#rn-testimonials" data-slide-to="0"></li>
-									<li data-target="#rn-testimonials" data-slide-to="1"></li>
-									<li data-target="#rn-testimonials" data-slide-to="2"></li>
-									<li data-target="#rn-testimonials" data-slide-to="3"></li>
-								</ol>
+								<div class="rn-post-item-header">
+									<div class="rn-post-date">
+										<div class="rn-post-date-inner">
+											No.<span class="rn-post-item-categories bno">${list.carNo }</span>
+										</div>
+									</div>
+									<div class="rn-post-item-title-meta">
+										<div class="rn-post-item-title-meta-inner">
+											<div class="rn-post-item-meta">
+												<span class="rn-post-item-author"> ${list.carName } </span> <br> <span class="rn-post-item-categories">제조사 : ${list.categoryName } </span>
+												 <span class="rn-post-item-categories">모델명 ${list.carModel } </span>
+											</div>
+											<span>
+												<h5>${list.minPrice}만원~${list.maxPrice}만원</h5>
+											</span>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						End Testimonials
+				<!-- End Car Item-->
+				
+					
+					</c:forEach>
+				</c:if>
 
-					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-6">
+		</div>
+	</div>
 
-								CountUp Item
-								<div class="rn-counter-item">
-									<div class="rn-counter-number-container">
-										<span class="rn-counter-number">350</span>
-										<span class="rn-counter-postfix">+</span>
-									</div>
-									<div class="rn-counter-text">Cars For Rent</div>
-								</div>
+</section>
 
-							</div>
-							<div class="col-6">
-
-								CountUp Item
-								<div class="rn-counter-item">
-									<div class="rn-counter-number-container">
-										<span class="rn-counter-number">6500</span>
-										<span class="rn-counter-postfix">+</span>
-									</div>
-									<div class="rn-counter-text">Happy Clients</div>
-								</div>
-
-							</div>
-							<div class="col-6">
-
-								CountUp Item
-								<div class="rn-counter-item">
-									<div class="rn-counter-number-container">
-										<span class="rn-counter-number">5000</span>
-										<span class="rn-counter-postfix">+</span>
-									</div>
-									<div class="rn-counter-text">Positive Reviws</div>
-								</div>
-
-							</div>
-							<div class="col-6">
-
-								CountUp Item
-								<div class="rn-counter-item">
-									<div class="rn-counter-number-container">
-										<span class="rn-counter-number">600+</span>
-										<span class="rn-counter-postfix">+</span>
-									</div>
-									<div class="rn-counter-text">Drivers</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
-		<!-- End Testimonials & Fun Fact-->
 
 		<!-- Recent New/Posts-->
 		<section class="rn-section">
@@ -726,175 +319,26 @@
 		<!-- End Recent New/Posts-->
 
 		<!-- Site Footer-->
-		<footer class="rn-footer">
-
-			<!-- Footer Widgets-->
-			<div class="rn-footer-widgets">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">About Us</h2>
-								<div class="rn-widget-content">
-									<a class="brand-name" href="index.html">
-										<img src="${contextPath}/resources/assets/images/logo.svg" alt="Logo">
-									</a>
-									<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
-									<ul class="rn-widget-social">
-										<li>
-											<a href="#">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-twitter"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-instagram"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fab fa-linkedin-in"></i>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-						<div class="col-md-5">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Quick Links</h2>
-								<div class="rn-widget-content">
-									<div class="row rn-quick-links">
-										<div class="col-6">
-											<ul>
-												<li>
-													<a href="#">About Us</a>
-												</li>
-												<li>
-													<a href="#">Contact Us</a>
-												</li>
-												<li>
-													<a href="#">Support</a>
-												</li>
-												<li>
-													<a href="#">View Booking</a>
-												</li>
-												<li>
-													<a href="#">Affiliate Programme</a>
-												</li>
-												<li>
-													<a href="#">Marketplace</a>
-												</li>
-											</ul>
-										</div>
-										<div class="col-6">
-											<ul>
-												<li>
-													<a href="#">Site Map</a>
-												</li>
-												<li>
-													<a href="#">Careers</a>
-												</li>
-												<li>
-													<a href="#">Press</a>
-												</li>
-												<li>
-													<a href="#">Get a Receipt</a>
-												</li>
-												<li>
-													<a href="#">Community</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-						<div class="col-md-3">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<h2 class="rn-widget-title">Contact Us</h2>
-								<div class="rn-widget-content">
-									<div class="rn-icon-contents">
-										<div class="rn-phone rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-phone"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>(954)-944-1250</li>
-													<li>(954)-944-1251</li>
-												</ul>
-											</div>
-										</div>
-										<div class="rn-email rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-envelope"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>support@example.coms</li>
-													<li>sale@example.com</li>
-												</ul>
-											</div>
-										</div>
-										<div class="rn-address rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-map-marker"></i>
-											</div>
-											<div class="rn-info">
-												<ul>
-													<li>1425 Pointe Lane, Miami</li>
-													<li>Florida – 33169, USA</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Footer Widgets-->
-
-			<!-- Footer Copyright-->
-			<div class="rn-footer-copyright">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-md-6">
-							<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
-						</div>
-						<div class="col-md-6 text-right">
-							<span class="rn-pyament-methods">
-								<span>We Accept</span>
-								<img src="${contextPath}/resources/assets/images/payments.png" alt="payments" srcset="${contextPath}/resources/assets/images/payments.png 1x, ${contextPath}/resources/assets/images/payments@2x.png 2x">
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- End Footer Copyright-->
-
-		</footer>
+		<jsp:include page="common/footer.jsp"/>
 		<!-- End Site Footer-->
+	
+	
+	
+		<script >
+		
+		
+		$(".list-view").on("click", function() {
 
+			var carNo = $(this).find('.bno').text();
+			
+			console.log(carNo);
+			
+			var carViewURL = "${contextPath}/car/carView/" + carNo;
+
+			location.href = carViewURL;
+		});
+		
+		</script>
 		<!--
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.

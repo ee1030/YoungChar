@@ -7,9 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
+<style type="text/css">
+
+
+</style>
 </head>
 
-	
 
 			
 <body>
@@ -32,6 +38,7 @@
 		</div>
 		<!-- End Page Title-->
 		<div>
+			<div class="row" >
 			<div class="row product-page-main">
 				<div class="col-xl-4 xl-cs-65 box-col-12">
 					<div class="card">
@@ -119,26 +126,35 @@
 							<br>
 					
 							<hr>
-							<div class="m-t-15">
-								<button class="btn btn-primary m-r-10" type="button" title="">
-									<i class="fa fa-shopping-basket me-1"></i>Add To Cart
-								</button>
-								<button class="btn btn-success m-r-10" type="button" title="">
-									<i class="fa fa-shopping-cart me-1"></i>Buy Now
-								</button>
-								<a class="btn btn-secondary" href="#"> <i class="fa fa-heart me-1"></i>Add To WishList
-								</a>
-							</div>
+							
 						</div>
 					</div>
 				</div>
+					<div class="float-right" style="margin-bottom:50px;">
+					 <a class="btn btn-success returnUrl" style="color: ghostwhite;">목록으로</a>
+					</div>
 			
+			</div>
 			</div>
 		</div>
 		
 		<jsp:include page="../common/footer.jsp"/> 
 		
 	</div>
+	
+	
+	<script type="text/javascript">
+	
+		// 목록으로
+		$(".returnUrl").on('click', function() {
+	
+			
+			var returnURL = "../list";
+	
+			location.href = returnURL;
+		});
+	
+	</script>
 	
 	
 
