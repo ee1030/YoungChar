@@ -25,15 +25,14 @@
 		ORDER BY CAR_NAME
 	</select>	
 	
-	<!-- 차량 검색 -->
-	<!-- <select id="carSearchList" parameterType="string" resultMap="testCars_rm">
-		SELECT  CAR_NO, CAR_NAME, CAR_MODEL, FILE_NO, FILE_PATH, FILE_NAME
-		FROM CAR_INFO
-		JOIN TEST_DRIVE_CAR USING(CAR_NO)
-		JOIN C_ATTACHMENT USING(CAR_NO)
-		WHERE CAR_NAME LIKE '%' || #{carName}  || '%'
-		OR CAR_MODEL LIKE '%' || #{carName}  || '%'
-	</select>	 -->
+	<!-- 자동차 이미지 불러오기 -->
+	<select id="carImages" parameterType="list" resultMap="testCars_rm">
+		SELECT CAR_NO, FILE_NO, FILE_PATH, FILE_NAME
+		FROM C_ATTACHMENT 
+		WHERE FILE_LEVEL = 0
+		ORDER BY CAR_NO,FILE_LEVEL
+	</select>
+	
 	<!-- 차량검색 -->
 	<select id="carSearchList" parameterType="string" resultMap="testCars_rm">
 		SELECT CAR_NO, CAR_NAME, CAR_MODEL, CATEGORY_NM 

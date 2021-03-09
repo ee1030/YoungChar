@@ -24,6 +24,14 @@ public class TestDriveDAO {
 		return sqlSession.selectList("testDriveMapper.selectCarList");
 	}
 	
+	/** 차량 이미지
+	 * @param cList
+	 * @return images
+	 */
+	public List<TestCars> carImages(List<TestCars> cList) {
+		return sqlSession.selectList("companyCarMapper.carImages", cList);
+	}
+	
 	/**전국 대리점 목록 불러오기
 	 * @return
 	 */
@@ -87,6 +95,14 @@ public class TestDriveDAO {
 	 */
 	public TestDrReservation getReservation(int reservationNo) {
 		return sqlSession.selectOne("testDriveMapper.getReservation",reservationNo);
+	}
+
+	/** 예약 차 이미지 가졍괴
+	 * @param rList
+	 * @return cList
+	 */
+	public List<TestCars> selecCarImgs(List<TestDrReservation> rList) {
+		return sqlSession.selectList("testDriveMapper.selectCarImgs", rList);
 	}
 
 }

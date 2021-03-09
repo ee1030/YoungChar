@@ -47,7 +47,34 @@ public class CompanyCarController {
 		int memNo = loginMember.getMemberNo();
 		List<TestCars> cList = service.carList(memNo);
 		
+		System.out.println("이미지 추가 전" +cList);
+		
+		if(cList != null && !cList.isEmpty()) {
+			List<TestCars> imgs = carImages(cList);
+			
+			for(TestCars c : cList) {
+				for(TestCars img : imgs) {
+					if(c.getCarNo() == img.getCarNo()) {
+						c.setFileNo(img.getFileNo());
+						c.setFilePath(img.getFilePath());
+						c.setFileName(img.getFileName());
+					}
+				}
+			}
+			
+		}
+		
+		System.out.println("이미지 추가 후" +cList);
+		
 		return cList;
+	}
+	
+	//차량 이미지 조회 Controller
+	public List<TestCars> carImages(List<TestCars> cList){
+		
+		List<TestCars> images = service.carImages(cList);
+		
+		return images;
 	}
 	
 	//시승 가능 차량 추가 검색 Controller
@@ -58,6 +85,19 @@ public class CompanyCarController {
 		System.out.println(carName1);
 		List<TestCars> cars = service.carSearch(carName1);
 		
+		if(cars != null && !cars.isEmpty()) {
+			List<TestCars> imgs = carImages(cars);
+					
+			for(TestCars c : cars) {
+				for(TestCars img : imgs) {
+					if(c.getCarNo() == img.getCarNo()) {
+						c.setFileNo(img.getFileNo());
+						c.setFilePath(img.getFilePath());
+						c.setFileName(img.getFileName());
+					}
+				}
+			}
+		}
 		return cars;
 	}
 	

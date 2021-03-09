@@ -10,7 +10,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Cart | RentNow - Responsive Car Rental Template</title>
+		<title>시승 예약 확인</title>
 
 		<style>
 			.completion{
@@ -33,6 +33,15 @@
 			
 			.click-green{
 				background-color : #00D231 !important;
+			}
+			
+			#noRs{
+				text-align : center;
+				font-size : 25px;
+			}
+			
+			.img-fluid{
+				max-width: 300px !important;
 			}
 			
 			
@@ -88,7 +97,7 @@
 					<div class="col-lg-12">
 					
 							<c:if test='${empty rList}'>
-								<div> 예약 내역이 없습니다.</div>
+								<div id="noRs"> 예약 내역이 없습니다.</div>
 								</c:if>
 								
 						<!--  A:승인완료---------------------------------------------------->
@@ -97,8 +106,18 @@
 					<c:if test='${rs.approvalStatus == "A"}'>
 								<div class="rn-cart-item">
 									<div class="rn-cart-item-thumb">
-										<img class="img-fluid" src="${contextPath}/resources/assets/images/cart-item-1.jpg" alt="Cart Item" srcset="${contextPath}/resources/assets/images/cart-item-1.jpg 1x, ${contextPath}/resources/assets/images/cart-item-1@2x.jpg 2x"/>
-									</div>
+										<!-- 이미지 디비에서 불러오기 -->
+												<c:choose>
+													<c:when test="${empty rs.fileName}">
+														<c:set var="src" value="/youngchar/resources/assets/images/teslaCar.jpg"/>
+													</c:when>
+													<c:otherwise>
+														<c:set var="src" value="${contextPath}${rs.filePath}/${rs.fileName} 1x, ${contextPath}${rs.filePath}/${rs.fileName} 2x "/>
+													</c:otherwise>
+												</c:choose>
+											<img class="img-fluid" alt="자동차 이미지" srcset="${src}">
+										<%-- <img class="img-fluid" src="${contextPath}/resources/assets/images/cart-item-1.jpg" alt="Cart Item" srcset="${contextPath}/resources/assets/images/cart-item-1.jpg 1x, ${contextPath}/resources/assets/images/cart-item-1@2x.jpg 2x"/>
+									 --%></div>
 									<div class="rn-cart-item-info">
 										<div class="rn-cart-item-title-price">
 										<span>승인완료</span> <br>
@@ -130,7 +149,15 @@
 							<c:if test='${rs.approvalStatus == "N"}'>
 								<div class="rn-cart-item">
 									<div class="rn-cart-item-thumb">
-										<img class="img-fluid" src="${contextPath}/resources/assets/images/cart-item-1.jpg" alt="Cart Item" srcset="${contextPath}/resources/assets/images/cart-item-1.jpg 1x, ${contextPath}/resources/assets/images/cart-item-1@2x.jpg 2x"/>
+									<c:choose>
+													<c:when test="${empty rs.fileName}">
+														<c:set var="src" value="/youngchar/resources/assets/images/teslaCar.jpg"/>
+													</c:when>
+													<c:otherwise>
+														<c:set var="src" value="${contextPath}${rs.filePath}/${rs.fileName} 1x, ${contextPath}${rs.filePath}/${rs.fileName} 2x "/>
+													</c:otherwise>
+												</c:choose>
+											<img class="img-fluid" alt="자동차 이미지" srcset="${src}">
 									</div>
 									<div class="rn-cart-item-info">
 										<div class="rn-cart-item-title-price">
@@ -168,7 +195,15 @@
 						<c:if test='${rs.approvalStatus == "Y"}'>
 								<div class="rn-cart-item">
 									<div class="rn-cart-item-thumb">
-										<img class="img-fluid" src="${contextPath}/resources/assets/images/cart-item-1.jpg" alt="Cart Item" srcset="${contextPath}/resources/assets/images/cart-item-1.jpg 1x, ${contextPath}/resources/assets/images/cart-item-1@2x.jpg 2x"/>
+									<c:choose>
+													<c:when test="${empty rs.fileName}">
+														<c:set var="src" value="/youngchar/resources/assets/images/teslaCar.jpg"/>
+													</c:when>
+													<c:otherwise>
+														<c:set var="src" value="${contextPath}${rs.filePath}/${rs.fileName} 1x, ${contextPath}${rs.filePath}/${rs.fileName} 2x "/>
+													</c:otherwise>
+												</c:choose>
+											<img class="img-fluid" alt="자동차 이미지" srcset="${src}">
 									</div>
 									<div class="rn-cart-item-info">
 										<div class="rn-cart-item-title-price">
@@ -189,7 +224,7 @@
 										
 									</div>
 									<div class="rn-cart-item-actions">
-										<a class="btn btn-main btn-primary" id="${rs.reservationNo}" href="${contextPath}/driveReview/insertreview/${rs.reservationNo}">예약 후기 남기기</a>
+										<a class="btn btn-main btn-primary" id="${rs.reservationNo}" href="${contextPath}/driveReview/insertreview/${rs.reservationNo}">시승 후기 남기기</a>
 									</div>
 								</div>
 						</c:if>

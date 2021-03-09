@@ -10,7 +10,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Fullwidth | RentNow - Responsive Car Rental Template</title>
+		<title>시승 예약</title>
 		<style>
 		
 		 .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -72,13 +72,17 @@
 			}
 			
 			.inputs{
-				 display: none; 
+				display: none;
 			}
 			
 			.spanNone{
 				display: none ;
 			}
 
+				.img-fluid{
+				max-height: 200px !important;
+				max-width : 355px !important;
+				}
 		</style>
 		<!-- Preloader CSS-->
 		<style>#preloader:after,#preloader:before{content:"";display:block;left:-1px;top:-1px}#preloader-overlayer,#preloader:after,#preloader:before{position:absolute;height:100%;width:100%}#preloader-overlayer{position:fixed;top:0;left:0;background-color:#112E3B;z-index:999}#preloader{height:40px;width:40px;position:fixed;top:50%;left:50%;margin-top:-20px;margin-left:-20px;z-index:9999}#preloader:before{-webkit-animation:rotation 1s linear infinite;animation:rotation 1s linear infinite;border:2px solid #42DB0C;border-top:2px solid transparent;border-radius:100%}#preloader:after{border:1px solid rgba(255,255,255,.1);border-radius:100%}@media only screen and (min-width:768px){#preloader{height:60px;width:60px;margin-top:-30px;margin-left:-30px}#preloader:before{left:-2px;top:-2px;border-width:2px}}@media only screen and (min-width:1200px){#preloader{height:80px;width:80px;margin-top:-40px;margin-left:-40px}}@-webkit-keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}</style>
@@ -116,7 +120,7 @@
 		<br><br><br>
 		
 		<!-- 선택안했을때 바 -->
-		<div class="row justify-content-md-center selectBar1" >
+		<div class="row justify-content-md-center selectBar1" id="Bar1-1" >
 			<div class="col-lg-10 select1 cursorP"> 
 			<span class="carNameArea area1">모델 선택</span> 
 			</div>
@@ -125,7 +129,7 @@
 		<br>
 
 		<!-- Car Search Form-->
-		<div class="rn-search-form-big rn-section selectBar s2 cursorP">
+		<div class="rn-search-form-big rn-section selectBar s2 cursorP" id="Bar1-2">
 			<div class="container">
 				<div class="row">
 
@@ -189,7 +193,15 @@
 									<div class="rn-car-item">
 										<div class="rn-car-item-thumb">
 												<!-- 이미지 디비에서 불러오기 -->
-											<img class="img-fluid" alt="자동차 이미지" srcset="/youngchar/resources/assets/images/tesla_model3.jpg 1x, /youngchar/resources/assets/images/tesla_model3.jpg 2x">
+												<c:choose>
+													<c:when test="${empty car.fileName}">
+														<c:set var="src" value="/youngchar/resources/assets/images/teslaCar.jpg"/>
+													</c:when>
+													<c:otherwise>
+														<c:set var="src" value="${contextPath}${car.filePath}/${car.fileName} 1x, ${contextPath}${car.filePath}/${car.fileName} 2x "/>
+													</c:otherwise>
+												</c:choose>
+											<img class="img-fluid" alt="자동차 이미지" srcset="${src}">
 										</div>
 										
 										<div class="rn-car-item-info">
@@ -207,10 +219,10 @@
 
 				</div>
 				
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-lg-12">
 
-						<!-- Cars Pagination-->
+						Cars Pagination
 						<nav class="rn-pagination rn-pagination-center">
 							<ul>
 								<li>
@@ -237,23 +249,23 @@
 								</li>
 							</ul>
 						</nav>
-						<!-- End Cars Pagination-->
+						End Cars Pagination
 
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</section>
 	</div>
 		<!-- End Cars-->
 
 
-		<div class="row justify-content-md-center selectBar1 centerBar">
+		<div class="row justify-content-md-center selectBar1 centerBar" id="Bar2-1">
 			<div class="col-lg-10 select1 centerName">센터 선택</div>
 		</div>	
 		<br>
 
 		<!--  Search Form-->
-		<div class="rn-search-form-big rn-section selectBar s2 search center cursorP">
+		<div class="rn-search-form-big rn-section selectBar s2 search center cursorP" id="Bar2-2">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -282,7 +294,7 @@
 
 
 		<!-- 시승 센터 위치-->
-		<section class="rn-section rn-car-list selectBar cursorP">
+		<section class="rn-section rn-car-list selectBar cursorP" >
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 col-md-10">
@@ -303,13 +315,13 @@
 			</div>
 		</section>
 
-		<div class="row justify-content-md-center selectBar1">
+		<div class="row justify-content-md-center selectBar1" id="Bar3-1">
 			<div class="col-lg-10 select1 time"> 날짜 선택</div>
 		</div>	
 		<br>
 
 		<!--  Search Form-->
-		<div class="rn-search-form-big rn-section selectBar s2">
+		<div class="rn-search-form-big rn-section selectBar s2 dt" >
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -337,7 +349,7 @@
 		<!-- End Search Form-->
 
 
-		<section class="rn-section rn-car-list selectBar">
+		<section class="rn-section rn-car-list selectBar dt" >
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-10">
@@ -394,7 +406,6 @@
 		//-------------------------------------------------------------
 			 $(document).ready(function(){
 			  $(".selectBar").hide();
-			  
 			 });
 
 			//바 누르면 열리게 하기
@@ -449,7 +460,17 @@
 							 	var col =$("<div>").addClass("col-lg-4 col-md-6 carNo" + car.carNo);
 								var rn = $("<div>").addClass("rn-car-item");
 								var thumb = $("<div>").addClass("rn-car-item-thumb");
-								var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", car.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+								
+								//var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", car.filePath).attr("srcset", "${contextPath}/resources/assets/images/teslaCar.jpg 1x, ${contextPath}/resources/assets/images/teslaCar.jpg 2x");
+								var img = $("<img>").addClass("img-fluid");
+								if(car.fileNo != 0){
+									var srcset = "${contextPath}"+car.filePath +"/" + car.fileName+" 1x," +"${contextPath}"+car.filePath +"/" + car.fileName+" 2x,";
+									//img.attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
+									img.attr("alt", "자동차 이미지").attr("src", srcset).attr("srcset", srcset );
+								}else{
+									img.attr("alt", "자동차 이미지").attr("src", "${contextPath}/resources/assets/images/teslaCar.jpg ").attr("srcset", "${contextPath}/resources/assets/images/teslaCar.jpg 1x, ${contextPath}/resources/assets/images/teslaCar.jpg 2x");
+								}
+								
 								thumb.append(img);
 								rn.append(thumb);
 
@@ -475,12 +496,13 @@
 			//차 선택시 바에 이름 가져오기-----------------------------------------------------------------------------
 			$(document).on("click",".rn-car-item", function(){
 				openCenterBar();
+				document.querySelector('#Bar2-2').scrollIntoView({ behavior: 'smooth' });
 				
 				//선택된거 테두리 색변경하기
 						$(this).addClass("carSelect");                      //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
 						$(this).parent().siblings().children().removeClass("carSelect");  //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
 
-
+	
 
 
 
@@ -568,13 +590,13 @@
 						text: "차를 선택해주세요"
 					})
 					return false;
-				}else if($("input[name=company]").val() == ""){
+				}else if($("input[name=testDriveCarNo]").val() == ""){
 					swal({
 						icon: "error",
 						text: "대리점을 선택해주세요"
 					})
 					return false;
-				}else if($("input[name=time]").val() == ""){
+				}else if($("input[name=testDriveDate]").val() == ""){
 					swal({
 						icon: "error",
 						text: "시간을 선택해주세요"

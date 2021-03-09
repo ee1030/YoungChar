@@ -83,6 +83,22 @@ public class TestDriveService {
 		return dao.makeReservation(reservation);
 	}
 
+	/** 차량 이미지 목록 조회
+	 * @param cList
+	 * @return images
+	 */
+	public List<TestCars> carImages(List<TestCars> cList) {
+		return dao.carImages(cList);
+	}
+
+	/** 예약목록 사진 가져오기
+	 * @param rList
+	 * @return cList
+	 */
+	public List<TestCars> selectCarImgs(List<TestDrReservation> rList) {
+		return dao.selecCarImgs(rList);
+	}
+
 
 	/** 예약 정보 가져오기
 	 * @param reservationNo

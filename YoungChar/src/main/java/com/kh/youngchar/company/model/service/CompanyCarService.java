@@ -77,6 +77,14 @@ public class CompanyCarService {
 		return dao.updateStatus(map);
 	}
 
+	/** 차량 이미지 목록 조회
+	 * @param cList
+	 * @return images
+	 */
+	public List<TestCars> carImages(List<TestCars> cList) {
+		return dao.carImages(cList);
+	}
+
 	
 
 }
