@@ -100,9 +100,9 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 
 /* Base Styles */
 
-:root {
+/* :root {
     font-size: 10px;
-}
+} */
 
 *,
 *::before,
@@ -598,7 +598,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 						<label for="boardCode1">리뷰 게시판</label>
 						<br><br>
 						<input id="boardCode2" name="boardCode" type="radio" value="2" class="radio_animated">
-						<label for="report2">정보 게시판</label>
+						<label for="boardCode2">정보 게시판</label>
 						<br><br>
 						<input id="boardCode3" name="boardCode" type="radio" value="3" class="radio_animated">
 						<label for="boardCode3">자유 게시판</label>
@@ -609,7 +609,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-secondary">확인</button>
+					<button type="submit" class="right btn btn-success">확인</button>
 				</div>
 					</form>
 			</div>

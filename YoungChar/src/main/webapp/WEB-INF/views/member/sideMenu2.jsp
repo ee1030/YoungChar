@@ -48,15 +48,7 @@
 		
 							<!-- Widget Item-->
 							
-							<div class="rn-widget">
-								<div class="img bg-wrap text-center">
-									<div class="user-logo">
-										<div class="img" style="background-image: url(${contextPath}${memberFile.memImgPath}/${memberFile.memImgName});"></div>
-										<h3>${memberFile.categoryNm}&nbsp;${memberFile.cooName}</h3>
-									</div>
-								</div>
-							</div>
-							<br>
+							
 								
 							<section class="rn-widget">
 								<h2 class="rn-widget-title">Categories</h2>
