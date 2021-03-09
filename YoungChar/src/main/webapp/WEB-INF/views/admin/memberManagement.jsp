@@ -143,7 +143,7 @@
 															</c:choose>
 														</td>											
 														<c:choose>
-															<c:when test="${member.memberStatus == 'N' }">
+															<c:when test="${member.memberStatus == 'Y' }">
 																<td style="color:red;">	
 																	탈퇴
 																</td>

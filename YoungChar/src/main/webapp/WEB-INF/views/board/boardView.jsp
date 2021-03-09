@@ -213,15 +213,10 @@
 		// 목록으로
 		$(".returnUrl").on('click', function() {
 
-			var boardCode = $
-			{
-				board.boardCode
-			}
-			;
+			var boardCode = ${board.boardCode};
 			var returnURL = "../list/" + boardCode;
 
 			location.href = returnURL;
-
 		});
 
 		$("#deleteBtn").click(function() {
