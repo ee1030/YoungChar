@@ -302,7 +302,19 @@
 			VALUES(SEQ_PNO.NEXTVAL, SYSDATE, 'N', #{reportType}, #{reportBoardNo}, #{reportContent}, #{memNo})
 		</insert>
 
+		<select id="selectReportCount" parameterType="Report"
+			resultType="_int">
+			SELECT COUNT(*) FROM REPORT
+			WHERE REPORT_BOARD_NO =
+			#{reportBoardNo}
+		</select>
 
+
+		<update id="updateReviewStatus" parameterType="Report">
+			UPDATE BOARD SET
+			BOARD_STATUS = 'B'
+			WHERE BOARD_NO = #{reportBoardNo}
+		</update>
 
 
 
