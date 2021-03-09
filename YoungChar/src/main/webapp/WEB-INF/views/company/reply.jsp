@@ -96,7 +96,7 @@
 
 /* 답글 */
 .childReply-li{
-	padding-left: 50px;  
+	padding-left: 100px;  
 }
 
 .childReplyArea{

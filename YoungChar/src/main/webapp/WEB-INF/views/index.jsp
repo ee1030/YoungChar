@@ -19,18 +19,18 @@
 				<!-- Slider Item 1-->
 				<div class="carousel-item beactive">
 					<div class="carousel-caption">
-						<h2 class="rn-fade-bottom mb-25">앙 영차띠</h2>
-						<p class="rn-fade-bottom rn-caption-item-2 mb-35">라면먹고싶다 갑자기</p>
+						<h2 class="rn-fade-bottom mb-25">No.1 Electric Cars Community</h2>
+						<p class="rn-fade-bottom rn-caption-item-2 mb-35">전기차 커뮤니티 이용자 수 1위, 영차영차에 오신 것을 환영합니다.</p>
 					</div>
 					<div class="rn-slider-overlayer"></div>
-					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인1.jpg" alt="slide">
+					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인3.jpg" alt="slide">
 				</div>
 
 				<!-- Slider Item 2-->
 				<div class="carousel-item">
 					<div class="carousel-caption">
-						<h2 class="rn-fade-bottom mb-25">테슬라 떡상을 위한 기도 132일차</h2>
-						<p class="rn-fade-bottom rn-caption-item-2 mb-35">오늘도 소리는 떡상을 기원한다.</p>
+						<h2 class="rn-fade-bottom mb-25">Join Us Now!</h2>
+						<p class="rn-fade-bottom rn-caption-item-2 mb-35">영차영차의 회원이 되시고 다양한 정보를 받아보세요.</p>
 					</div>
 					<div class="rn-slider-overlayer"></div>
 					<img class="d-block w-100" src="${contextPath}/resources/assets/images/영차메인2.jpg" alt="slide">
