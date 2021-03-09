@@ -11,6 +11,12 @@
 <title>뉴스 상세페이지</title>
 
 <style>
+#buttonsFam{
+	margin-top: 50px;
+}
+#deleteBtn, #updateBtn {
+	float: right;
+}
 #replyTextArea {
 height:150px;}
 .rn-post-item-footer .text-center {
@@ -135,6 +141,8 @@ height:150px;}
 						</div>
 
 					</article>
+					
+					<hr>
 					
 					<div class="text-center">
 						<a class="btn btn-success float-right" href="javascript:history.back();">이전</a>
