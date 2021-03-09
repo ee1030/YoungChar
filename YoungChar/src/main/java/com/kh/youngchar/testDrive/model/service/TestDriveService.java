@@ -75,6 +75,14 @@ public class TestDriveService {
 		return  dao.cancleReservation(reservationNo);
 	}
 
+	/** 시승 예약
+	 * @param reservation
+	 * @return result
+	 */
+	public int makeReservation(TestDrReservation reservation) {
+		return dao.makeReservation(reservation);
+	}
+
 	
 	
 }

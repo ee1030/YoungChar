@@ -92,6 +92,39 @@ public class TestDriveController {
 		return companyListJSON;
 	}
 	
+	
+	//예약 하기 
+	@RequestMapping("makeReservation")
+	public String makeReservation(@ModelAttribute("loginMember") Member loginMember,
+								Model model, RedirectAttributes ra , TestDrReservation reservation) {
+		
+		int memNo = loginMember.getMemberNo();
+		reservation.setMemNo(memNo);
+		
+		System.out.println("예약"+reservation);
+		System.out.println(memNo);
+		
+		int result = service.makeReservation(reservation);
+		
+		String url = "";
+		if(result>0) { //예약 성공
+			ra.addFlashAttribute("swalIcon", "success");
+			ra.addFlashAttribute("swalTitle", "예약완료 되었습니다.");
+			
+			url = "myReservation";
+			
+		}else {//예약 실패
+			
+			ra.addFlashAttribute("swalIcon", "error");
+			ra.addFlashAttribute("swalTitle", "예약 실패");
+			
+			url ="referer";
+		}
+		
+		return "redirect:"+url;
+	}
+	
+	
 	//예약 확인 페이지 전환 Controller
 	@RequestMapping("myReservation")
 	public String myReservationView(@ModelAttribute("loginMember") Member loginMember,

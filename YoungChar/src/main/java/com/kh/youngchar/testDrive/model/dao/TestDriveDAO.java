@@ -71,4 +71,12 @@ public class TestDriveDAO {
 	public int cancleReservation(int reservationNo) {
 		return sqlSession.update("testDriveMapper.cancleReservation", reservationNo);
 	}
+
+	/** 시승예약
+	 * @param reservation
+	 * @return result
+	 */
+	public int makeReservation(TestDrReservation reservation) {
+		return sqlSession.insert("testDriveMapper.makeReservation",reservation);
+	}
 }

@@ -34,6 +34,7 @@
 	</resultMap>
 	
 	<resultMap type="CompanyMember" id="companyMember_rm">
+			<result property="testDriveNo" column="TEST_DRIVE_CAR_NO"/>
    		<result property="carNo" column="CAR_NO"/>
   		<result property="memberNo" column="MEM_NO"/>
   		<result property="brand" column="CATEGORY_NM"/>
@@ -62,6 +63,12 @@
 		FROM V_CAR_COMPANY
 		WHERE CAR_NO = #{carNumbers}
 	</select>
+	
+	<!-- 시승 예약 하기 -->
+		<insert id="makeReservation" parameterType="TestDrReservation">
+			INSERT INTO TES_DR_RESERVATION
+			VALUES(SEQ_TDR_NO.NEXTVAL, #{testDriveCarNo}, #{memNo}, TO_DATE(#{testDriveDate},'YYYY-MM-DD HH24:Mi'), 'N')
+		</insert>
 
 <!-- ********************************************************************* -->
 <!-- 예약 목록 조회 -->
@@ -109,5 +116,8 @@
 		APPROVAL_STATUS = 'C'
 		WHERE RESERVATION_NO = #{reservationNo}
 	</update>
+	
+	
+	
 </mapper>
 

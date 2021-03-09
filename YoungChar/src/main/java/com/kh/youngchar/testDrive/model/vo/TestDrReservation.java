@@ -1,5 +1,6 @@
 package com.kh.youngchar.testDrive.model.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class TestDrReservation {
@@ -7,8 +8,8 @@ public class TestDrReservation {
 
 	private int reservationNo;
 	private int testDriveCarNo;
-	private String memNo;
-	private Timestamp testDriveDate  ;
+	private int memNo;
+	private String testDriveDate  ;
 	private String approvalStatus;
 	private int carNo;
 	private String carName;
@@ -24,56 +25,6 @@ public class TestDrReservation {
 	public TestDrReservation() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-
-	public TestDrReservation(int reservationNo, int testDriveCarNo, String memNo, Timestamp testDriveDate,
-			String approvalStatus) {
-		super();
-		this.reservationNo = reservationNo;
-		this.testDriveCarNo = testDriveCarNo;
-		this.memNo = memNo;
-		this.testDriveDate = testDriveDate;
-		this.approvalStatus = approvalStatus;
-	}
-
-
-
-	public String getCooName() {
-		return cooName;
-	}
-
-
-
-	public void setCooName(String cooName) {
-		this.cooName = cooName;
-	}
-
-
-
-	public String getMemAdress() {
-		return memAdress;
-	}
-
-
-
-	public void setMemAdress(String memAdress) {
-		this.memAdress = memAdress;
-	}
-
-
-
-	public String getBrand() {
-		return brand;
-	}
-
-
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-
 
 	public int getReservationNo() {
 		return reservationNo;
@@ -91,19 +42,19 @@ public class TestDrReservation {
 		this.testDriveCarNo = testDriveCarNo;
 	}
 
-	public String getMemNo() {
+	public int getMemNo() {
 		return memNo;
 	}
 
-	public void setMemNo(String memNo) {
+	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
 
-	public Timestamp getTestDriveDate() {
+	public String getTestDriveDate() {
 		return testDriveDate;
 	}
 
-	public void setTestDriveDate(Timestamp testDriveDate) {
+	public void setTestDriveDate(String testDriveDate) {
 		this.testDriveDate = testDriveDate;
 	}
 
@@ -139,6 +90,14 @@ public class TestDrReservation {
 		this.carModel = carModel;
 	}
 
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
 	public int getFileNo() {
 		return fileNo;
 	}
@@ -171,7 +130,21 @@ public class TestDrReservation {
 		this.memNo2 = memNo2;
 	}
 
+	public String getCooName() {
+		return cooName;
+	}
 
+	public void setCooName(String cooName) {
+		this.cooName = cooName;
+	}
+
+	public String getMemAdress() {
+		return memAdress;
+	}
+
+	public void setMemAdress(String memAdress) {
+		this.memAdress = memAdress;
+	}
 
 	@Override
 	public String toString() {
@@ -182,9 +155,7 @@ public class TestDrReservation {
 				+ ", memAdress=" + memAdress + "]";
 	}
 
-
-
-
+	
 	
 	
 	
