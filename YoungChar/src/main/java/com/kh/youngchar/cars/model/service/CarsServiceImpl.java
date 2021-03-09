@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 import com.kh.youngchar.cars.model.dao.CarsDAO;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
@@ -75,5 +76,19 @@ public class CarsServiceImpl implements CarsService{
 		return dao.selectAtList2(carNo2);
 	}
 	
+//	검색 페이지 인포
+	@Override
+	public PageInfo2 getSearchPageInfo(Search search, int cp) {
+		
+		int listCount = dao.getListCount(search);
+		
+		return new PageInfo2(cp, listCount);
+	}
+	
+//	카테고리 검색 차량 
+	@Override
+	public List<Cars> selectCarList2(Search search, PageInfo2 pInfo) {
+		return dao.selectCarList2(search , pInfo);
+	}
 
 }

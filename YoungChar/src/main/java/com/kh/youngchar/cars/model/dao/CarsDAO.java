@@ -2,12 +2,14 @@ package com.kh.youngchar.cars.model.dao;
 
 import java.util.List;
 
+
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
@@ -93,6 +95,30 @@ public class CarsDAO {
 	public List<CAttachment> selectAtList2(int carNo2) {
 		return sqlSession.selectList("carsMapper.selectAtList1", carNo2);
 
+	}
+
+	/** 검색 페이지 인포
+	 * @param search
+	 * @return
+	 */
+	public int getListCount(Search search) {
+		
+		return sqlSession.selectOne("carsMapper.getListCount" , search);
+	}
+
+	/** 카테고리 검색 조회
+	 * @param search
+	 * @param pInfo
+	 * @return
+	 */
+	public List<Cars> selectCarList2(Search search, PageInfo2 pInfo) {
+		
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = null;
+		rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		
+		return sqlSession.selectList("carsMapper.selectCarList2",search , rowBounds);
 	}
 
 }

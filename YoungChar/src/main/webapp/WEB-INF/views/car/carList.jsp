@@ -37,6 +37,17 @@
 			<!-- Responsive css-->
 			<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css">
 
+<style type="text/css">
+
+.select-sk{
+	
+	display:none;
+
+}
+
+</style>
+
+
 
 </head>
 	
@@ -67,58 +78,55 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="rn-big-search-form rn-big-search-form-dark">
-							<form action="carSearch">
-								<div class="row">
-
-									<div class="col-lg-3 ">
-										<div class="row">
-											<div class="col-lg-7 col-md-8 col-8">
-												
-											</div>
-											<div class="col-lg-5 col-md-4 col-4">
-												
-											</div>
-										</div>
-									</div>
+						<div >
+								<!-- /spring/board/list/1or2 -> search/2 -->
+								<form action="search" class="text-center" id="searchForm" >
+									<span> 카테고리(다중 선택 가능)<br> 
 									
-									<div class="col-lg-3 col-sm-6">
-										<div class="rn-icon-input">
-											<i class="fas fa-map-marker-alt"></i>
-											<input type="text" placeholder="검색할 차량을 입력해 주세요.">
-										</div>
-									</div>
-
-
+									<label for="exercise">테슬라</label> 
+									<input type="checkbox" name="ct" value="테슬라" id="tesla"> &nbsp; 
 									
+									<label for="movie">현대자동차</label>
+									<input type="checkbox" name="ct" value="현대자동차" id="hyundai"> &nbsp; 
 									
-									
-									<div class="col-lg-3 col-sm-6">
-										<div class="rn-icon-input">
-											<i class="fas fa-map-marker-alt"></i>
-											<input type="text" placeholder="비교할 차량을 입력해 주세요.">
-										</div>
-									</div>
-
-
-									<div class="col-lg-3 ">
-										<div class="row">
-											<div class="col-lg-7 col-md-8 col-8">
-												
-											</div>
-											<div class="col-lg-5 col-md-4 col-4">
-												 
-											</div>
-										</div>
-									</div>
-
-
-								</div>
+									<label for="music">기아</label> 
+									 <input type="checkbox" name="ct" value="기아" id="kia"> &nbsp; 
+									 
+									 <label for="cooking">벤츠</label>
+									  <input type="checkbox" name="ct" value="벤츠" id="benz"> &nbsp; 
+									  
+									  <label for="game">BMW</label>
+									   <input type="checkbox" name="ct" value="BMW" id="bmw"> &nbsp; 
+									   
+									  <label for="game">아우디</label>
+									   <input type="checkbox" name="ct" value="아우디" id="audi"> &nbsp; 
+									   
+									  <label for="game">포르쉐</label>
+									   <input type="checkbox" name="ct" value="포르쉐" id="porsche"> &nbsp;
+									    
+									  <label for="game">르노</label>
+									   <input type="checkbox" name="ct" value="르노" id="renault"> &nbsp; 
+									   
+									   
+									   
+									</span> 
+									<br> 
+									<!-- <select  name="sk" class="form-control select-sk" style="width: 100px; display: inline-block; margin-bottom: 10px;">
+										<option value="tit">글제목</option>
+										<option value="con">내용</option>
+										<option value="titcont">제목+내용</option>
+									</select> <input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;"> -->
+									<!-- <button class="form-control btn btn-success" id="searchBtn" type="submit" style="width: 100px; display: inline-block;">검색</button> -->
 								<div class="text-center">
-									<button class="btn btn-orange btn-lg mt-30 btn-shadow" type="submit">
+									<button class="btn btn-orange btn-lg mt-30 btn-shadow" type="submit" id="searchBtn">
 										<i class="fas fa-search"> </i> Find Now
 									</button>
 								</div>
-							</form>
+								</form>
+							</div>
+							
+							
+							
 						</div>
 					</div>
 				</div>
@@ -136,32 +144,11 @@
 				<div class="row">
 					<div class="col-lg-12">
 
-						<!-- Car Search Filters-->
-						<div class="rn-car-search-filters">
-							<div class="rn-car-search-filter-item">
-								<label>Car Brand</label>
-								<select>
-									<option value="Any">Any</option>
-									<option value="Rover">Rover</option>
-									<option value="Lexus">Lexus</option>
-									<option value="BMW">BMW</option>
-									<option value="Tesla">Tesla</option>
-									<option value="Lamborghini">Lamborghini</option>
-								</select>
-							</div>
+						
+						
 							
 							
-							<div class="rn-car-search-filter-item rn-csf-item-last">
-								<label>Sort by</label>
-								<select>
-									<option value="Default">Default</option>
-									<option value="Relavent">Relavent</option>
-									<option value="Price: High to Low">Price: High to Low</option>
-									<option value="Price: Low to High">Price: Low to High</option>
-									<option value="Name: A to Z">Name: A to Z</option>
-									<option value="Name: Z to A">Name: Z to A</option>
-								</select>
-							</div>
+							
 						</div>
 						<!-- End Car Search Filters-->
 
@@ -222,7 +209,42 @@
 							<!-- Post Pagination-->
 					<div class="my-4">
 							<nav class="rn-pagination rn-pagination-center">
-										<ul >
+										<ul>
+											
+												<%-- 주소 조합 작업 --%>
+										<c:choose>
+											<%-- 검색이 된 경우 --%>
+											<c:when test="${!empty search }">
+												<%--선택된 카테고리를 하나의 쿼리스트링으로 조합 --%>
+
+												<c:forEach items="${search.ct}" var="c">
+													<c:set var="category" value="${category}ct=${c}&" />
+												</c:forEach>
+
+												<c:set var="searchStr" value="${category}" />
+
+												<%-- 검색된 내용이 있다면 --%>
+											 	<c:if test="${!empty search.sv}">
+													<c:set var="searchStr" value="${category}sk=${search.sk}&sv=${search.sv}" />
+												</c:if> 
+
+												<c:url var="pageUrl" value="../search?${searchStr}&" />
+												<c:set var="returnListURL" value="${contextPath}/car/search/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+											</c:when>
+
+											<%-- 안된 경우 --%>
+											<c:otherwise>
+												<c:url var="pageUrl" value="${pInfo.boardType}?" />
+												<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+												<c:set var="returnListURL" value="${contextPath}/car/list/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+											</c:otherwise>
+
+										</c:choose>
+										
+										
+										
+										
+										
 										
 										<c:set var="firstPage" value="?cp=1"/>
 										<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
@@ -274,6 +296,7 @@
 												<a class="page-link" href="${lastPage}">&gt;&gt;</a>
 											</li>
 										</c:if>
+										
 									</ul>
 							</nav>
 					</div>
@@ -338,6 +361,32 @@
 				
 				
 			});
+			
+			
+			// ------- 검색 파라미터 유지 ----------
+			$(function(){
+				// 카테고리 
+				<c:forEach items="${search.ct}" var="ctName">
+					$("input[name=ct]").each(function(index, item){
+						if($(item).val() == "${ctName}"){
+							$(item).prop("checked",true);
+						}
+					});	
+				
+				</c:forEach>
+				
+				/* // 검색 조건(sk)
+				$("select[name=sk] > option").each(function(index,item){
+					if($(item).val() == "${search.sk}"){
+						$(item).prop("selected",true);
+					}
+				}); 
+				
+				// 검색 값(sv)
+				$("input[name=sv]").val("${search.sv}"); */
+				
+			});
+			
 			
 		
 		</script>
