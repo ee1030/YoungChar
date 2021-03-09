@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.company.model.service.CompanyService;
+import com.kh.youngchar.company.model.service.DriveReviewService;
 import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.Company;
 import com.kh.youngchar.company.model.vo.PageInfo;
@@ -142,7 +147,6 @@ public class CompanyController {
 		
 		int result = service.updateAplStatus(apl);
 		
-		
 		return result;
 	}
 	
@@ -210,6 +214,35 @@ public class CompanyController {
 		
 		return "redirect:companyinfo"; 
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("changeProfileImg")
+	public int changeProfileImg(HttpServletRequest request,
+								@RequestParam("image") MultipartFile image,
+								@ModelAttribute("loginMember") Member loginMember,
+								Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String savePath = request.getSession().getServletContext().getRealPath("resources/memberFile");
+		
+		System.out.println(image);
+		
+		map.put("image", image);
+		map.put("savePath", savePath);
+		map.put("memberNo", loginMember.getMemberNo());
+		
+		int result = service.changeProfileImg(map);
+		
+		if(result > 0) {
+			Company company = service.getCompanyProfile(loginMember.getMemberNo());
+			
+			if(company != null) {
+				model.addAttribute("company", company);
+			}
+		}
+		
+		return result;
 	}
 
 

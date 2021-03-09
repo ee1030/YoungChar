@@ -3,6 +3,8 @@ package com.kh.youngchar.company.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.youngchar.company.model.vo.Application;
 import com.kh.youngchar.company.model.vo.Company;
 import com.kh.youngchar.company.model.vo.PageInfo;
@@ -32,6 +34,8 @@ public interface CompanyService {
 	int updateMember(Member updateMember, String newPwd);
 
 	int updateMemberStatus(Member member);
+
+	int changeProfileImg(Map<String, Object> map);
 
 
 

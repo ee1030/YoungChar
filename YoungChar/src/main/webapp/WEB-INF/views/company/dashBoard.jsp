@@ -16,24 +16,47 @@
 <!-- Preloader CSS-->
 		<style>
 			.card{
-			font-family: 'Noto Sans KR', sans-serif;
+				font-family: 'Noto Sans KR', sans-serif;
+			}
+			
+			.card-body{
+				height: 400px;
+			}
+			
+			.col-md-3{
+				display: inline-block;
+				margin: 0 30px;
+				padding: 0px !important;
+			}
+			
+			.col-md-5, .col-md-6{
+				display: inline-block;
+				padding: 5px !important;
+			}
+			
+			.col-md-8{
+				padding: 0px !important;
+			}
+			
+			.table-responsive{
+				max-height: 300px;
+			}
+			
+			.datepicker--cell{
+				height: 40px !important;
 			}
 		
 			.rn-header{
 				position: inherit !important;
 				background-color: #112E3B;
 			}
-
 			
 			.rn-service-item {
-				width: 230px;
 				display: inline-block;
-				margin: 25px;
-			}
-			
-			.card {
-				background-color: #79cb4d1f !important;
-				width: 850px;
+				width: 100%;
+				padding: 0px;
+				cursor: pointer;
+				border : 1px solid #d3d3d3b3 !important;
 			}
 			
 			.rn-widget {
@@ -41,9 +64,11 @@
 				font-size: 20px;
 				line-height: 60px;
 			}
+			
+
 
 </style>
-
+ <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/date-picker.css">
 
 
 
@@ -59,7 +84,7 @@
 	<section class="rn-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 order-lg-1 pb-15">
+				<div class="col-md-8 order-lg-1 pb-15">
 
 					<div class="col-lg-12">
 
@@ -69,12 +94,11 @@
 							<p>오늘의 시승 예약 건과 대기 중인 업무를 확인해보세요.</p>
 							<span class="rn-title-bg">Today's tasks</span>
 						</div>
-
 					</div>
-					             
-
 
 					<!-- Service Item-->
+					<div class="col-md-3">
+					
 					<div class="rn-service-item">
 						<div class="rn-service-icon">
 							<i class="lnr lnr-calendar-full"></i>
@@ -82,11 +106,15 @@
 						<div class="rn-service-desc">
 							<p>당일 예약</p>
 						</div>
-						<div class="rn-service-title">5 건</div>
+						<div class="rn-service-title">${aplCount} 건</div>
+					</div>
+					
 					</div>
 					<!-- End Service Item-->
 
 					<!-- Service Item-->
+					<div id="waiting" class="col-md-3">
+					
 					<div class="rn-service-item">
 						<div class="rn-service-icon">
 							<i class="lnr lnr-user"></i>
@@ -94,11 +122,15 @@
 						<div class="rn-service-desc">
 							<p>승인 대기</p>
 						</div>
-						<div class="rn-service-title">5 건</div>
+						<div class="rn-service-title">${waitingCount} 건</div>
+					</div>
+					
 					</div>
 					<!-- End Service Item-->
 
 					<!-- Service Item-->
+					<div id="review" class="col-md-3">
+					
 					<div class="rn-service-item">
 						<div class="rn-service-icon">
 							<i class="lnr lnr-car"></i>
@@ -106,12 +138,24 @@
 						<div class="rn-service-desc">
 							<p>시승 후기</p>
 						</div>
-						<div class="rn-service-title">5 건</div>
+						<div class="rn-service-title">${reviewCount} 건</div>
+					</div>
+					
 					</div>
 					<!-- End Service Item-->
-
-
-
+					
+					
+					<div class="xl-50 calendar-sec col-md-5">
+						<div class="card gradient-primary o-hidden">
+              <div class="card-body">
+                <div class="default-datepicker">
+                  <div class="datepicker-here" data-language="en"></div>
+                </div><span class="default-dots-stay overview-dots full-width-dots"><span class="dots-group"><span class="dots dots1"></span><span class="dots dots2 dot-small"></span><span class="dots dots3 dot-small"></span><span class="dots dots4 dot-medium"></span><span class="dots dots5 dot-small"></span><span class="dots dots6 dot-small"></span><span class="dots dots7 dot-small-semi"></span><span class="dots dots8 dot-small-semi"></span><span class="dots dots9 dot-small">                </span></span></span>
+              </div>
+            </div>
+         </div>
+         
+         <div class="col-md-6">
 					<div class="card">
 						<div class="card-body">
 							<div class="best-seller-table responsive-tbl">
@@ -120,38 +164,30 @@
 										<table class="table table-bordernone">
 											<thead>
 												<tr>
-													<th class="f-22"><h2>Today</h2></th>
-													<th>이름</th>
-													<th>전화번호</th>
-													<th>차량</th>
-													<th>예약일시</th>
+													<th><h6>Name</h6></th>
+													<th><h6>Phone</h6></th>
+													<th><h6>Car</h6></th>
+													<th><h6>Time</h6></th>
 												</tr>
 											</thead>
-											<tbody>
-												<c:if test="${empty rList }">
+											<tbody id="table">
+												<c:if test="${empty apl }">
 													<tr>
 														<td colspan="5">금일 시승 예약건이 없습니다.</td>
 													<tr>
 												</c:if>
-												<c:if test="${!empty rList }">
-													<c:forEach var="booking" items="${rList}" varStatus="vs">
+												<c:if test="${!empty apl }">
+													<c:forEach var="apl" items="${apl}" varStatus="vs">
 														<tr>
-															<td>${booking.bookingNo}</td>
-															<td>${booking.memberNm}</td>
-															<td>${booking.memberPhone}</td>
-															<td>${booking.bookingCar}</td>
+															<td>${apl.memNm}</td>
+															<td>${apl.memPhone}</td>
+															<td>${apl.carName}</td>
 															<td>
 																<%-- 날짜 출력 모양 지정 --%> 
-																<fmt:formatDate var="bookingDate" value="${booking.bookingDate }" pattern="yyyy-MM-dd" /> 
-																<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> 
-																<c:choose>
-																	<c:when test="${bookingDate != now}">
-																	${bookingDate }
-																</c:when>
-																	<c:otherwise>
-																		<fmt:formatDate value="${booking.bookingDate }" pattern="HH:mm" />
-																	</c:otherwise>
-																</c:choose>
+																<span class="badge rounded-pill badge-warning text-dark">
+																	<fmt:formatDate var="testDriveDt" value="${apl.testDriveDt}" pattern="HH:mm" />
+																	${testDriveDt} 
+																</span>
 															</td>
 														</tr>
 													</c:forEach>
@@ -165,6 +201,9 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				</div>
 					<div id="side-bar">
 						<!-- Sidebar-->
 						<jsp:include page="sideMenu.jsp"/>
@@ -175,6 +214,80 @@
 		</div>
 		<!-- End Page Content-->
 	</section>
+	
+	  <script src="${contextPath}/resources/assets/js/datepicker/date-picker/datepicker.js"></script>
+    <script src="${contextPath}/resources/assets/js/datepicker/date-picker/datepicker.en.js"></script>
+    <script src="${contextPath}/resources/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
+		<script>
+		
+		$("#waiting").on('click', function(){
+			
+			location.href = "${contextPath}/company/applicationlist/n"
+			
+		});
+		
+		$("#review").on('click', function(){
+			
+			location.href = "${contextPath}/driveReview/search?sk=sc&sv=${company.cooName}"
+			
+		});
+		
+		
+		$(document).on('click', '.datepicker--cell-day', function(){
+			
+			var date = $(this).attr("data-date");
+			var month = $(this).attr("data-month");
+			var year = $(this).attr("data-year");
+			var searchDate = year + "-" + 3 + "-" + date;
+			
+			$.ajax({
+				url : "${contextPath}/company/selectSchedule/" + searchDate,
+				type : "post",
+				dataType : "json",
+				success : function(aList){
+					
+					var table = $("#table");
+					
+					table.html("");
+						
+					
+					if(aList == ""){
+						
+						var tr = $("<tr>");
+						var td = $("<td>").attr("colspan", 5).html(searchDate + " 의 시승 예약건이 없습니다.");
+						
+						tr.append(td);
+						table.append(tr);
+					}
+
+					
+					$.each(aList, function(index, item){
+						
+						var tr = $("<tr>");
+						
+						var memNm = $("<td>").html(item.memNm);
+						var memPhone = $("<td>").html(item.memPhone);
+						var carName = $("<td>").html(item.carName);
+						var testDriveDt = $("<td>");
+						var span = $("<span>").addClass("badge rounded-pill badge-warning text-dark").html(item.testDriveDt);
+						testDriveDt.append(span);
+						
+						tr.append(memNm).append(memPhone).append(carName).append(testDriveDt);
+						table.append(tr);
+					});
+					
+					
+				}, error : function(){
+					console.log("예약 목록 조회 실패");
+				}
+				
+			});
+			
+		});
+		
+		
+		</script>
+
 
 	<!-- Site Footer-->
 
