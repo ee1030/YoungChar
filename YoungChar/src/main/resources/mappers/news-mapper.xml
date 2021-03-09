@@ -144,7 +144,7 @@
 	<update id="updateNews" parameterType="News">
 		UPDATE NEWS
 		SET
-		NEWS_TITLE=${newsTitle}, PRESS=#{press}, REPORTER=#{reporter}, NEWS_CONTENT=#{newsContent}
+		NEWS_TITLE=#{newsTitle}, PRESS=#{press}, REPORTER=#{reporter}, NEWS_CONTENT=#{newsContent}
 		WHERE
 		NEWS_NO
 		= #{newsNo}
