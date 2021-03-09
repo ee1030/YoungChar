@@ -117,7 +117,11 @@
 		WHERE RESERVATION_NO = #{reservationNo}
 	</update>
 	
-	
+	<!-- 예약 정보 가져오기 -->
+	<select id="getReservation" parameterType="_int" resultMap="testDrReservation_rm">
+		SELECT * FROM TES_DR_RESERVATION
+		WHERE RESERVATION_NO = #{reservationNo}
+	</select>
 	
 </mapper>
 

@@ -117,10 +117,9 @@
 										</div>
 										
 									</div>
-									<%-- <div class="rn-cart-item-actions">
-										<a class="btn btn-main btn-success" href="${contextPath}/driveReview/updateReservation/${rs.reservationNo}">예약 수정</a>
-										<a class="btn btn-delete btn-secondary rsCansle" href="${contextPath}/driveReview/cancleReservation/${rs.reservationNo}">예약 취소</a>
-									</div> --%>
+									 <div class="rn-cart-item-actions">
+									 	<span class="btn btn-delete btn-secondary rsCansle" id="${rs.reservationNo}" onclick="cancle(this)">예약 취소</span>
+									</div> 
 								</div>
 					</c:if>
 						</c:forEach> 
@@ -152,7 +151,6 @@
 										
 									</div>
 									<div class="rn-cart-item-actions">
-										<a class="btn btn-main btn-success" href="${contextPath}/testDrive/updateReservation/${rs.reservationNo}">예약 수정</a>
 										<span class="btn btn-delete btn-secondary rsCansle" id="${rs.reservationNo}" onclick="cancle(this)">예약 취소</span>
 									</div>
 								</div>
@@ -165,35 +163,7 @@
 
 						<div class="col-lg-12 completeArea">
 						 <c:forEach var="rs" items="${rList}"> 
-						<%-- <!-- C:시승취소  --------------------------------------------------------------------->
-						<c:if test='${rs.approvalStatus == "C"}'>
-								<div class="rn-cart-item">
-									<div class="rn-cart-item-thumb">
-										<img class="img-fluid" src="${contextPath}/resources/assets/images/cart-item-1.jpg" alt="Cart Item" srcset="${contextPath}/resources/assets/images/cart-item-1.jpg 1x, ${contextPath}/resources/assets/images/cart-item-1@2x.jpg 2x"/>
-									</div>
-									<div class="rn-cart-item-info">
-										<div class="rn-cart-item-title-price">
-										<span>시승취소</span> <br>
-											<h2>
-												<a href="#">${rs.carName}</a>
-											</h2>
-											<span>${rs.carModel}</span>
-										</div>
-										<div class="rn-locations">
-											<div class="rn-pickup-location">
-													<div class="rn-location">${rs.memAdress}</div>
-											</div>
-											<div class="rn-drop-location">
-												<div class="rn-date-n-time">${rs.testDriveDate}</div>
-											</div>
-										</div>
-										
-									</div>
-									<div class="rn-cart-item-actions">
-										<a class="btn btn-main btn-primary" href="${contextPath}/driveReview/insertreview/${rs.reservationNo}">예약 후기 남기기</a>
-									</div>
-								</div>
-						</c:if> --%>
+						
 						<!-- Y:시승완료 --------------------------------------------------------------------->
 						<c:if test='${rs.approvalStatus == "Y"}'>
 								<div class="rn-cart-item">

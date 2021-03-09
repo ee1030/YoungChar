@@ -359,7 +359,8 @@
 			
 		//-------------------------------------------------------------
 			 $(document).ready(function(){
-			  $(".selectBar").hide();
+			  
+			  $(".selectBar1").hide();
 			  
 			 });
 
@@ -489,6 +490,7 @@
 			// 대리점 불러오기!
 			var comAddr = $("#centerTable").children(":first").children().text();
 			console.log(comAddr);
+			
 			
 	  	
 			

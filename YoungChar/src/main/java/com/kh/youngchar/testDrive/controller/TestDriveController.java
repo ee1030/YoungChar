@@ -166,33 +166,37 @@ public class TestDriveController {
 		return "testDrive/confirmReservation";
 	}
 	
-	//예약 수정 페이지 전환
-	@RequestMapping("updateReservation/{reservationNo}")
-	public String updateReservation(@ModelAttribute("loginMember") Member loginMember,
-									Model model,
-									@PathVariable("reservationNo") int reservationNo) {
-		//모델가져오기
-		List<TestCars> cList = service.selectCarList();
-		
-		//브랜드 리스트 중복제거
-		List<String> brandList = new ArrayList<String>();
-		for(TestCars c : cList) {brandList.add(c.getBrand());}
-		HashSet<String> bList =new HashSet<String>(brandList);
-
-		Gson gson = new Gson();
-	
-		String cListJSON = gson.toJson(cList);
-		
-		System.out.println(cList);
-		
-		
-		model.addAttribute("bList",bList); //브랜드리스트
-		model.addAttribute("cList",cList); //자동차리스트
-		model.addAttribute("cListJSON", cListJSON); //자동차 리스트 JSON
-				
-		
-		return "../updateTestDriveReservation";
-	}
+	/*
+	 * //예약 수정 페이지 전환
+	 * 
+	 * @RequestMapping("updateReservation/{reservationNo}") public String
+	 * updateReservation(@ModelAttribute("loginMember") Member loginMember, Model
+	 * model,
+	 * 
+	 * @PathVariable("reservationNo") int reservationNo) {
+	 * 
+	 * //예약 정보 가져오기 TestDrReservation rs = service.getReservation(reservationNo);
+	 * 
+	 * if(rs != null) { //모델가져오기 List<TestCars> cList = service.selectCarList();
+	 * 
+	 * //브랜드 리스트 중복제거 List<String> brandList = new ArrayList<String>(); for(TestCars
+	 * c : cList) {brandList.add(c.getBrand());} HashSet<String> bList =new
+	 * HashSet<String>(brandList);
+	 * 
+	 * Gson gson = new Gson();
+	 * 
+	 * String cListJSON = gson.toJson(cList);
+	 * 
+	 * System.out.println(cList);
+	 * 
+	 * 
+	 * model.addAttribute("bList",bList); //브랜드리스트
+	 * model.addAttribute("cList",cList); //자동차리스트 model.addAttribute("cListJSON",
+	 * cListJSON); //자동차 리스트 JSON model.addAttribute("rs", rs); //예약 정보 }
+	 * 
+	 * 
+	 * return "testDrive/updateTestDriveReservation"; }
+	 */
 	
 	//예약 삭제
 	@RequestMapping("cancleReservation/{reservationNo}")
