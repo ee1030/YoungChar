@@ -242,7 +242,7 @@ label.light {
 
       <form action="cooSignUpAction" method="post" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
       <div id="logo">
-      <img class="img-fluid" src="${contextPath}/resources/assets/images/0char_logo(200).png" alt="Logo">
+      <img class="img-fluid" src="${contextPath}/resources/assets/images/영차로고.png" alt="Logo">
       </div>
       
         <h1>업체 회원가입</h1>

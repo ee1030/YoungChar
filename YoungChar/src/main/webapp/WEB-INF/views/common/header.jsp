@@ -173,19 +173,24 @@
 											
 											<c:otherwise>
 												<li class="nav-item">
+												<c:if test="${loginMember.memberGrade == 'G'}">
 				                	<a class="nav-link" href="${contextPath}/member/mypage">${loginMember.memberNm}</a>
-				                	
+				                </c:if>
+				                
+												<c:if test="${loginMember.memberGrade == 'A'}">
+				                	<a class="nav-link" href="${contextPath}/admin/dashboard">${loginMember.memberNm}</a>
+				                </c:if>
+
+												<c:if test="${loginMember.memberGrade == 'C'}">
+				                	<a class="nav-link" href="${contextPath}/company/dashboard">${loginMember.memberNm}</a>
+				                </c:if>
+				                
+				                
 				                </li>
 				                <li class="nav-item"><a class="nav-link" href="${contextPath}/member/logout">Logout</a></li>
 											</c:otherwise>
 										</c:choose>
-										
-											<li>
-												<a href="${contextPath}/admin/dashboard">관리자</a>
-											</li>
-											<li>
-												<a href="${contextPath}/company/dashboard">업체</a>
-											</li>
+											
 										</ul>
 								</div>
 							</div>
