@@ -86,6 +86,9 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 				String email = (String) map.get("email");
 				String link = (String) map.get("link");
 				String companyContent = (String) map.get("companyContent");
+				String introduction = (String)map.get("introduction");
+				String itemA = (String)map.get("itemA");
+				String itemB = (String)map.get("itemB");
 
 //				크로스 사이트 스크립팅 방지 처리 적용 
 				companyName = replaceParameter(companyName);
@@ -94,6 +97,9 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 				email = replaceParameter(email);
 				link = replaceParameter(link);
 				companyContent = replaceParameter(companyContent);
+				introduction = replaceParameter(introduction);
+				itemA = replaceParameter(itemA);
+				itemB = replaceParameter(itemB);
 
 //				처리된 문자열을 다시 map에 세팅
 				map.put("companyName", companyName);
@@ -102,6 +108,9 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 				map.put("email", email);
 				map.put("link", link);
 				map.put("companyContent", companyContent);
+				map.put("introduction", introduction);
+				map.put("itemA", itemA);
+				map.put("itemB", itemB);
 				
 
 

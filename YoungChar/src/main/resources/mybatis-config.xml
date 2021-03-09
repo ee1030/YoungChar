@@ -33,6 +33,10 @@
 			<typeAlias type="com.kh.youngchar.news.model.vo.News" alias="News" />
 			<typeAlias type="com.kh.youngchar.news.model.vo.NewsImage" alias="NewsImage" />
 			
+			
+			
+			<typeAlias type="com.kh.youngchar.news.model.vo.Reply" alias="newsReply" />
+			
 	
 	</typeAliases>
 	
@@ -54,5 +58,6 @@
 		<mapper resource="/mappers/testDrive-mapper.xml" />
 		
 		<mapper resource="/mappers/news-mapper.xml" />
+		<mapper resource="/mappers/newsReply-mapper.xml" />
 	</mappers>
 </configuration>

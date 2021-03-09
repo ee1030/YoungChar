@@ -119,6 +119,9 @@ public class ChargerCompanyController {
 		map.put("email", chargerCompany.getEmail());
 		map.put("link", chargerCompany.getLink());
 		map.put("companyContent", chargerCompany.getCompanyContent());
+		map.put("introduction", chargerCompany.getIntroduction());
+		map.put("itemA", chargerCompany.getItemA());
+		map.put("itemB", chargerCompany.getItemB());
 
 //		파일 업로드 확인 
 		for (int i = 0; i < images.size(); i++) {
