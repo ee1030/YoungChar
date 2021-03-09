@@ -350,9 +350,9 @@
 							$(".content1").eq(num).children("img").attr("src", e.target.result);
 							// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
 							console.log($(".content1").eq(num).children("img").attr("src", e.target.result));
-		      	}
+		      	};
 					}
-				}
+				};
 			
 			
 			
@@ -456,8 +456,8 @@
 							var str;
 							switch (key) {
 							case "pwd1": str = "비밀번호";	break;
-							case "pwd2": str = "비밀번호 확인";break;
-							case "nickName":str = "닉네임";break;
+							case "pwd2": str = "비밀번호 확인" ;break;
+							case "nickName" : str = "닉네임" ;break;
 							}
 							
 							
@@ -473,16 +473,16 @@
 
 				$("form[name='signUpForm']").append($memberAddress);
 					
-				}
+				};
 				
 				
 				
 				
 				var $beforeImg = $('#contentImg1');
 				
-				var $newImg = $("<img class='img' id='contentImg1'>")
+				var $newImg = $("<img class='img' id='contentImg1'>");
 				
-				var memImgNo = ${memFile.memImgNo};
+				var memImgNo = ${memFile.memImgNo}
 				$("#clearImg, #otherImg").on("click", function() {
 					
 					$.ajax({
@@ -495,8 +495,8 @@
 								$beforeImg.remove();
 								$(".content1").prepend($newImg);
 							}else{
-								$beforeImg.remove();
 								$(".content1").prepend($newImg);
+								$beforeImg.remove();
 							}
 							
 						},

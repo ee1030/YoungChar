@@ -469,8 +469,8 @@ Remove or comment-out the code block below to see how the browser will fall-back
 }
 
 #test {
-	max-height: 150px;
-	max-width: 150px;
+	height: 150px;
+	width: 150px;
 }
 
 		
@@ -520,11 +520,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 					<li><span class="profile-stat-count">가입일 : </span>
 					<fmt:formatDate var="createDate" value="${loginMember.signDt }" pattern="yyyy-MM-dd"/>
 					<fmt:formatDate var="now" value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd"/> 
-					<c:choose>
-										<c:when test="${createDate != now}">
 											${createDate }
-										</c:when>
-					</c:choose>
 					</li>
 					<li><span class="profile-stat-count">Email : </span> ${loginMember.memberEmail }</li>
 				</ul>
