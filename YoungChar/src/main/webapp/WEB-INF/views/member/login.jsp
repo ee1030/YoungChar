@@ -10,8 +10,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="icon" href="${contextPath}/resources/assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon.png" type="image/x-icon">
     <title>login</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
@@ -48,9 +46,14 @@
     		height: 60px;
     		margin-top: 10px;
     	}
+    	
+    	body{
+    		background-image: url('${contextPath}/resources/assets/images/login_bg.jpg');
+    		background-size: 100% 100%;
+    	}
     </style>
 </head>
-<body style="background-color: #cccccc;">
+<body>
 
 <c:if test="${!empty swalTitle}">
 		<script>
