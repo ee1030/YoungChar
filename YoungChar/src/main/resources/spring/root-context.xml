@@ -101,8 +101,8 @@
 			<property name="host" value="smtp.gmail.com" />
 			<property name="port" value="587" />
 			<property name="defaultEncoding" value="utf-8"/>
-			<property name="username" value="jihoprac@gmail.com" />
-			<property name="password" value="qkr3158!" />
+			<property name="username" value="pjhyoung123@gmail.com" />
+			<property name="password" value="qkr1234!" />
 		
 			<!-- email 요청시는 SMTP -->
 			<property name="javaMailProperties">
