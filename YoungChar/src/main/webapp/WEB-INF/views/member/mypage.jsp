@@ -493,7 +493,14 @@ Remove or comment-out the code block below to see how the browser will fall-back
 		<div class="profile">
 
 			<div class="profile-image">
+			<c:if test="${!empty memFile }">
 				<img src="${contextPath}${memFile.memImgPath}/${memFile.memImgName}" id="test" alt="">
+			</c:if>
+			
+			<c:if test="${empty memFile }">
+				<img src="${contextPath}/resources/assets/images/user-basic.png" id="test" alt="">
+			</c:if>
+			
 			</div>
 
 			<div class="profile-user-settings">
@@ -519,14 +526,13 @@ Remove or comment-out the code block below to see how the browser will fall-back
 										</c:when>
 					</c:choose>
 					</li>
-					<li><span class="profile-stat-count">206</span> following</li>
+					<li><span class="profile-stat-count">Email : </span> ${loginMember.memberEmail }</li>
 				</ul>
 
 			</div>
 
 			<div class="profile-bio">
 
-				<p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
 
 			</div>
 
@@ -543,6 +549,10 @@ Remove or comment-out the code block below to see how the browser will fall-back
 	<div class="container">
 
 		<div class="gallery">
+		<c:if test="${empty bList }">
+			<h3 style="text-align: center;">작성한 게시 글이 없습니다.</h3>		
+		</c:if>
+		
 		<c:if test="${!empty bList }">
 				<c:forEach var="board" items="${bList}" varStatus="vs">
 				<c:forEach items="${thList}" var="th">
@@ -569,7 +579,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
 		</div>
 		<!-- End of gallery -->
 
-		<div class="loader"></div>
 
 	</div>
 	<!-- End of container -->
