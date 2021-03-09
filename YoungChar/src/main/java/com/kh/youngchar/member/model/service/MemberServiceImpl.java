@@ -275,60 +275,60 @@ public class MemberServiceImpl implements MemberService{
 				
 				// 비밀번호 수정 DAO 호출
 				result = dao.updatePwd(map);
-			}
-			
-		}
-		
-		if(result > 0) {
-			result = 0;
-			
-			result = dao.updateAction(map);
-			
-			List<MemberFile> uploadImages = new ArrayList<MemberFile>();
-			
-			String memImgPath = "/resources/memberFile";
-			
-			for(int i=0 ; i<images.size() ; i++) {
-				
-				if( !images.get(i).getOriginalFilename().equals("") ) {
-					String memImgName = rename(images.get(i).getOriginalFilename());
-					MemberFile mf = new MemberFile(memImgPath, memImgName, i, (int)map.get("memberNo"));
+				if(result > 0) {
+					result = 0;
 					
-					uploadImages.add(mf);
-				}
-				
-			}
-			
-			if(!uploadImages.isEmpty()) {
-				
-				result = dao.insertMemberFile(uploadImages);
-				
-				if(result == uploadImages.size()) {
+					result = dao.updateAction(map);
 					
-					int size = uploadImages.size();
+					List<MemberFile> uploadImages = new ArrayList<MemberFile>();
 					
-					for(int i=0 ; i<size ; i++) {
-						try {
-							images.get(uploadImages.get(i).getMemImgLevel())
-							.transferTo(new File(savePath + "/" + uploadImages.get(i).getMemImgName()));
+					String memImgPath = "/resources/memberFile";
+					
+					for(int i=0 ; i<images.size() ; i++) {
+						
+						if( !images.get(i).getOriginalFilename().equals("") ) {
+							String memImgName = rename(images.get(i).getOriginalFilename());
+							MemberFile mf = new MemberFile(memImgPath, memImgName, i, (int)map.get("memberNo"));
 							
-						}catch (Exception e) {
-							e.printStackTrace();
+							uploadImages.add(mf);
+						}
+						
+					}
+					
+					if(!uploadImages.isEmpty()) {
+						
+						result = dao.insertMemberFile(uploadImages);
+						
+						if(result == uploadImages.size()) {
 							
-							throw new InsertAttachmentFailException("파일 서버 저장 실패");
+							int size = uploadImages.size();
+							
+							for(int i=0 ; i<size ; i++) {
+								try {
+									images.get(uploadImages.get(i).getMemImgLevel())
+									.transferTo(new File(savePath + "/" + uploadImages.get(i).getMemImgName()));
+									
+								}catch (Exception e) {
+									e.printStackTrace();
+									
+									throw new InsertAttachmentFailException("파일 서버 저장 실패");
+								}
+								
+							}
+							
+							
+						}else {// 파일 정보를 DB에 삽입하는데 실패했을 때
+							throw new InsertAttachmentFailException("파일 정보 DB 삽입 실패");
 						}
 						
 					}
 					
 					
-				}else {// 파일 정보를 DB에 삽입하는데 실패했을 때
-					throw new InsertAttachmentFailException("파일 정보 DB 삽입 실패");
 				}
-				
 			}
 			
-			
 		}
+		
 		
 		return result;
 	}
