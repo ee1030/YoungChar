@@ -46,6 +46,9 @@ public class ImageDeleteScheduling {
 		savePath = servletContext.getRealPath("/resources/uploadImages");
 		getServerFileList(savePath);
 		
+		savePath = servletContext.getRealPath("/resources/newsImages");
+		getServerFileList(savePath);
+		
 		dbFileList = service.getDbList();
 		
 		if(dbFileList != null && !serverFileList.isEmpty()) {
