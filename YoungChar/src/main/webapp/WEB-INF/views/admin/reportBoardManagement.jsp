@@ -159,19 +159,23 @@ tbody td:hover{
 													<td>
 														${board.reportCount}
 													</td>
-													<td>
-														<c:choose>
-															<c:when test="${board.boardStatus == 'N'}">
+													<c:choose>
+														<c:when test="${board.boardStatus == 'N'}">
+															<td style="color:red;">	
 																삭제됨
-															</c:when>
-															<c:when test="${board.boardStatus == 'B'}">
+															</td>
+														</c:when>
+														<c:when test="${board.boardStatus == 'B'}">
+															<td>	
 																블라인드
-															</c:when>
-															<c:otherwise>
+															</td>
+														</c:when>
+														<c:otherwise>
+															<td style="color:blue;">	
 																게시중
-															</c:otherwise>
-														</c:choose>
-													</td>
+															</td>
+														</c:otherwise>
+													</c:choose>
 												</tr>
 											</c:forEach>
 										</c:otherwise>
