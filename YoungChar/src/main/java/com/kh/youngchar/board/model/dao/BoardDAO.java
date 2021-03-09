@@ -225,6 +225,22 @@ public class BoardDAO {
 	public int insertReport(Report report) {
 		return sqlSession.insert("boardMapper.insertReport", report);
 	}
+ 
+	/** 현재 게시글 신고 수 조회
+	 * @param report
+	 * @return
+	 */
+	public int selectReportCount(Report report) {
+		return sqlSession.selectOne("boardMapper.selectReportCount" , report);
+	}
+
+	/** 신고 누적으로 상테 업데이트
+	 * @param report
+	 * @return
+	 */
+	public int updateReviewStatus(Report report) {
+		return sqlSession.update("boardMapper.updateReviewStatus" , report);
+	}
 
 	
 

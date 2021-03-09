@@ -13,6 +13,7 @@
 
 <!-- Preloader CSS-->
 <style>
+
 #preloader:after, #preloader:before {
 	content: "";
 	display: block;
@@ -167,12 +168,11 @@ to {
 									<h3>
 										<a href="../chargerCompany/${chargerCompany.companyNo}">${chargerCompany.companyName}</a>
 									</h3>
-									<p>업체 간단한 소개 글 등등..</p>
+									<p>${chargerCompany.introduction}</p>
 									<div class="rn-car-list-n-price">
 										<ul>
-											<li>항목1</li>
-											<li>항목2</li>
-											<li>항목3</li>
+											<li>${chargerCompany.itemA}</li>
+											<li>${chargerCompany.itemB}</li>
 										</ul>
 										<div class="rn-car-price-wrap">
 											<a class="rn-car-price" href="../chargerCompany/${chargerCompany.companyNo}"><span class="rn-car-price-from">Go</span> </a>
@@ -189,54 +189,13 @@ to {
 
 
 
+
+			</div>
+
 				<%-- 로그인이 되어있는 경우 --%>
 				<c:if test="${!empty loginMember}">
 					<a class="btn btn-success float-right" href="../chargerCompany/insertChargerCompany">등록하기</a>
 				</c:if>
-
-
-
-				<!-- 
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				
-				<div class="col-lg-12 d-none d-lg-block">
-					<a href="#"> <img class="img-fluid mb-50" src="assets/images/big-banner.png" alt="banner" srcset="assets/images/big-banner.png 1x, assets/images/big-banner@2x.png 2x">
-					</a>
-				</div>
-				
-				
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				
-				<div class="col-lg-12 d-none d-lg-block">
-					<a href="#"> <img class="img-fluid mb-50" src="assets/images/big-banner.png" alt="banner" srcset="assets/images/big-banner.png 1x, assets/images/big-banner@2x.png 2x">
-					</a>
-				</div>
-				
-				
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				<div class="col-lg-4 col-md-6">
-				</div>
-				
-				<div class="col-lg-4 col-md-6">	
-				</div>
-				
-			-->
-			</div>
 			
 		<!-- Post Pagination-->
 			<div class="my-4">

@@ -137,4 +137,10 @@
 			AND (CAR_STATUS = 'Y' OR CAR_STATUS = 'N')
    </select>
    
+   <update id="changeProfileImg" parameterType="map">
+   		UPDATE MEMBER_FILE SET
+			MEM_IMG_NAME = #{fileName}
+			WHERE MEM_NO = #{memberNo} AND MEM_IMG_LEVEL = 0
+   </update>
+   
 </mapper>

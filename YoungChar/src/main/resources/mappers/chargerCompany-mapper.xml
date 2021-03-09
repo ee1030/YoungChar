@@ -13,6 +13,9 @@
 		<result property="companyContent" column="COMP_CONTENT" />
 		<result property="memberNo" column="MEM_NO" />
 		<result property="status" column="STATUS" />
+		<result property="introduction" column="INTRODUCTION" />
+		<result property="itemA" column="ITEM_A" />
+		<result property="itemB" column="ITEM_B" />
 	</resultMap>
 
 	<resultMap type="CompanyImage" id="companyImage_rm">
@@ -39,7 +42,7 @@
 		resultMap="chargerCompany_rm">
 		SELECT COMP_NO, COMP_NM,
 		PHONE, FAX, EMAIL, LINK,
-		COMP_CONTENT
+		COMP_CONTENT, INTRODUCTION, ITEM_A, ITEM_B
 		FROM V_CHARGER_COMPANY
 		WHERE
 		STATUS = 'Y'
@@ -66,7 +69,7 @@
 	<select id="selectCompany" parameterType="ChargerCompany"
 		resultMap="chargerCompany_rm">
 		SELECT COMP_NO, COMP_NM, PHONE, FAX, EMAIL, LINK,
-		COMP_CONTENT
+		COMP_CONTENT, INTRODUCTION, ITEM_A, ITEM_B
 		FROM V_CHARGER_COMPANY
 		WHERE STATUS = 'Y'
 		AND COMP_NO =
@@ -95,7 +98,7 @@
 		INSERT INTO
 		CHARGER_COMPANY VALUES
 		(#{companyNo}, #{companyName}, #{phone}, #{fax},
-		#{email}, #{link}, #{companyContent}, #{memberNo}, DEFAULT)
+		#{email}, #{link}, #{companyContent}, #{memberNo}, DEFAULT, #{introduction}, #{itemA}, #{itemB})
 	</insert>
 
 
@@ -123,7 +126,8 @@
 		UPDATE CHARGER_COMPANY
 		SET
 		COMP_NM = #{companyName}, PHONE = #{phone}, FAX = #{fax}, EMAIL =
-		#{email}, LINK = #{link}, COMP_CONTENT = #{companyContent}
+		#{email}, LINK = #{link}, COMP_CONTENT = #{companyContent}, INTRODUCTION = #{introduction},
+		ITEM_A = #{itemA}, ITEM_B = #{itemB}
 		WHERE
 		COMP_NO
 		= #{companyNo}

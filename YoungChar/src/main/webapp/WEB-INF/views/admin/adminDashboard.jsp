@@ -242,6 +242,31 @@
 			chart.draw(data, options);
 		}
 	</script>
+	
+	<script>
+		var xhr = new XMLHttpRequest();
+		var url = 'http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList'; /*URL*/
+		var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'BaNcWD4e9CFC4lkfKsgboUrtN04RAcf5YFiZNgDSutaT2%2FCEgIBC9MKuvt5JL8CbbjzhOi3ghQp%2F2rsm%2FDSZGw%3D%3D'; /*Service Key*/
+		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
+		queryParams += '&' + encodeURIComponent('addr') + '=' + encodeURIComponent('의정부'); /**/
+		xhr.open('GET', url + queryParams);
+		xhr.onreadystatechange = function () {
+		    if (this.readyState == 4) {
+	         var responseData = xhr.responseXML;
+	         var addrs = responseData.getElementsByTagName("addr");
+	         var lats = responseData.getElementsByTagName("lat");
+	         var longis = responseData.getElementsByTagName("longi");
+	         
+	         console.log(addrs[0]);
+	         console.log(lats[0]);
+	         console.log(longis[0]);
+		    }
+		};
+	
+		xhr.send('');
+
+	</script>
 
 </body>
 </html>

@@ -88,7 +88,7 @@
 						<div class="col-sm-12">
 							<div class="card">
 							  <div class="card-header">
-								<div id="head">시승 신청 목록</div>
+								<div id="head">시승 관리</div>
                   <div class="dropdown-basic">
                     <div class="dropdown">
                       <button id="select1" class="btn btn-light active text-dark" type="button">선택<span><i class="icofont icofont-arrow-down"></i></span></button>
@@ -285,7 +285,8 @@
 					          statusBox.append(C);
 				            break;
 					    }
-					    $(e.target).children("option").eq(0).prop("selected", true);
+					    
+					    //$(e.target).children("option").eq(0).prop("selected", true);
 							
 						}
 					}, error : function(){

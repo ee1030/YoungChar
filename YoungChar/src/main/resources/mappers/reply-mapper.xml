@@ -73,7 +73,6 @@
 	<insert id="insertChildReply" parameterType="map">
 		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, BOARD_NO, PARENT_REPLY_NO, REPLY_WRITER, REPLY_DEPTH)
 		VALUES(SEQ_RNO.NEXTVAL, #{replyContent}, #{parentBoardNo}, #{parentReplyNo}, #{replyWriter}, 1)
-	
 	</insert>
 	
 	

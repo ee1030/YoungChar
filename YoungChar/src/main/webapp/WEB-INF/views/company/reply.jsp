@@ -96,7 +96,7 @@
 
 /* 답글 */
 .childReply-li{
-	padding-left: 50px;  
+	padding-left: 100px;  
 }
 
 .childReplyArea{
@@ -505,12 +505,12 @@ function selectReplyList(){
 				type : "post",
 				success : function(result){
 					if(result > 0){
-						swal({icon : "success" , title : "답글 등록 성공"});
+						swal({icon : "success" , title : "답글이 등록되었습니다."});
 						selectReplyList();
 					}
 					
 				}, error: function(){
-					console.log("답글(대댓글) 등록 실패")
+					console.log("답글 등록에 실패했습니다.")
 				}
 			});
 		}

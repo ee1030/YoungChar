@@ -3,6 +3,7 @@ package com.kh.youngchar.cars.model.service;
 import java.util.List;
 
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
@@ -61,5 +62,21 @@ public interface CarsService {
 	 * @return
 	 */
 	List<CAttachment> selectAtList2(int carNo2);
+
+	/** 서치 카 페이지 인포
+	 * @param cp 
+	 * @param ctList 
+	 * @param strings
+	 * @param cp
+	 * @return
+	 */
+	PageInfo2 getSearchPageInfo(Search search, int cp);
+
+	/** 카테고리 검색 차량 
+	 * @param search
+	 * @param pInfo
+	 * @return
+	 */
+	List<Cars> selectCarList2(Search search, PageInfo2 pInfo);
 
 }

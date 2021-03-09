@@ -40,13 +40,17 @@
 		}
 
 		#search-form{
-			width: 500px;
+			width: 470px;
 			margin:0 auto;
 		}
 
 		#search-bar{
 			width: 300px !important;
 			padding: 5px;
+		}
+		
+		.search-key{
+			width: 100px;
 		}
 		
 		.badge{
@@ -80,7 +84,7 @@
 			cursor: pointer;
 		}
 		
-		.checkbox_animated:after, .form-control, .form-control-plaintext{
+		.checkbox_animated:after, .search-key, .form-control-plaintext{
 			border: 1px solid #c1c1c182 !important;
 		}
 
@@ -153,14 +157,14 @@
 									<br>
 									<div class="input-group m-0">
 									
-										<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
+										<select name="sk" class="search-key" style="width: 100px; display: inline-block;">
 											<option value="tit">글제목</option>
 											<option value="con">내용</option>
 											<option value="titcont">제목+내용</option>
 											<option value="sc">센터</option>
 										</select> 
 										<input id="search-bar" name="sv" class="form-control-plaintext" type="search" placeholder="검색어를 입력해주세요.">
-										<button type="submit" class="btn btn-success input-group-text">Search</button>
+										<button type="submit" class="btn btn-success input-group-text"><i class="icon-search"></i></button>
 									</form>
 									
 									</div>
@@ -266,7 +270,7 @@
 												<c:url var="pageUrl" value="search?${searchStr}" />
 												
 													<c:set var="returnListURL" 
-															 value="${contextPath}/driveReview/search/${pageUrl}&cp=${pInfo.currentPage}"
+															 value="${contextPath}/driveReview/${pageUrl}&cp=${pInfo.currentPage}"
 															 scope="session"/>
 															 
 											</c:when>
@@ -274,7 +278,7 @@
 													<c:url var="pageUrl" value="?" />
 													<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
 													<c:set var="returnListURL" 
-															 value="${contextPath}/driveReview/reviewlist/${pageUrl}&cp=${pInfo.currentPage}"
+															 value="${contextPath}/driveReview/reviewlist${pageUrl}&cp=${pInfo.currentPage}"
 															 scope="session"/>
 											</c:otherwise>
 										</c:choose>

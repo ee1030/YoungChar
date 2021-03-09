@@ -9,24 +9,35 @@
 <title>충전기 설치 업체 등록</title>
 
 <style>
-    .insert-label {
-      display: inline-block;
-      width: 80px;
-      line-height: 40px
-    }
-    
-    #submitButton {
-    	float: right;
-    	margin-left: 25px;
-    }
-    
-    .boardImg{
-    	cursor: pointer;
-    }
-    
-    #cont {
-    	margin-left: 10px;
-    }
+.deleteImg {
+	position: absolute;
+	display: inline-block;
+	margin-left: -15px;
+	border: none;
+	background-color: rgba(1, 1, 1, 0);
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.insert-label {
+	display: inline-block;
+	width: 80px;
+	line-height: 40px
+}
+
+#submitButton {
+	float: right;
+	margin-left: 25px;
+}
+
+.boardImg {
+	cursor: pointer;
+}
+
+#cont {
+	margin-left: 10px;
+}
 </style>
 
 <!--
@@ -67,86 +78,101 @@
 	<section class="rn-section">
 		<div class="container">
 
-		<div class="container pb-5 mb-5">
+			<div class="container pb-5 mb-5">
 
 
-			<form action="insertAction"  method="post" enctype="multipart/form-data" role="form" onsubmit="return validate();">
-			<!-- enctype="multipart/form-data" -->
+				<form action="insertAction" method="post" enctype="multipart/form-data" role="form" onsubmit="return validate();">
+					<!-- enctype="multipart/form-data" -->
 
-				<div class="form-inline mb-2">
-					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
-					</div>
-					<label class="input-group-addon mr-3 insert-label" id="cont">INSERT IMAGE</label>
-				</div>
-				
-					<!-- 파일 업로드 하는 부분 -->
-				<div id="fileArea">
-					<input type="file" id="img0" name="image" onchange="LoadImg(this,0)"> 
-				</div>
-				
-				<hr>
-				
-				<div class="row">
-				<div class="col-lg-8" id="companyContent">
-					<textarea class="form-control" id="content" name="companyContent" placeholder="내용을 입력하세요." rows="10" style="resize: none;"></textarea>
-				</div>
-				<div class="col-lg-4">
-
-					<!-- Check Availability-->
-					<div class="rn-small-search-form">
-						<div class="rn-small-search-form-title">
-							<h2>충전기 설치 업체 등록</h2>
+					<div class="form-inline mb-2">
+						<div class="boardImg" id="titleImgArea">
+							<img id="titleImg" width="200" height="200"> <span class="deleteImg">x</span>
 						</div>
-							<div class="rn-icon-input" id="companyName">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="companyName" placeholder="업체명을 입력하세요.">
-							</div>
-							<div class="rn-icon-input" id="phone">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="phone" placeholder="전화번호를 입력하세요.">
-							</div>
-							<div class="rn-icon-input" id="fax">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="fax" placeholder="팩스번호를 입력하세요.">
-							</div>
-							<div class="rn-icon-input" id="email">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="email" placeholder="이메일을 입력하세요.">
-							</div>
-							<div class="rn-icon-input" id="link">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="link" placeholder="링크를 입력하세요">
-							</div>
-
+						<label class="input-group-addon mr-3 insert-label" id="cont">INSERT MAIN IMAGE</label>
 					</div>
-					<!-- End Check Availability-->
 
-					<!-- Car Sharing Buttons-->
-					<div class="rn-car-share">
-						<span>Share this Company : </span>
-						<ul>
-							<li><a href="#"> <i class="fab fa-facebook-f"></i>
-							</a></li>
-							<li><a href="#"> <i class="fab fa-twitter"></i>
-							</a></li>
-							<li><a href="#"> <i class="fab fa-google-plus-g"></i>
-							</a></li>
-							<li><a href="#"> <i class="fab fa-linkedin-in"></i>
-							</a></li>
-						</ul>
+					<!-- 파일 업로드 하는 부분 -->
+					<div id="fileArea">
+						<input type="file" id="img0" name="image" onchange="LoadImg(this,0)">
 					</div>
-					<!-- End Car Sharing Buttons-->
 
-				</div>
+					<hr>
+
+					<div class="row">
+
+						<div class="form-inline mb-2">
+							<label class="input-group-addon insert-label">한 줄 소개</label> <input type="text" class="form-control" id="introduction" name="introduction" size="70">
+						</div>
+
+						<div class="col-lg-8">
+							<textarea class="form-control" id="companyContent" name="companyContent" placeholder="내용을 입력하세요." rows="10" style="resize: none;"></textarea>
+						</div>
+						
+						<div class="col-lg-4">
+
+							<!-- Check Availability-->
+							<div class="rn-small-search-form">
+								<div class="rn-small-search-form-title">
+									<h2>충전기 설치 업체 등록</h2>
+								</div>
+								<div class="rn-icon-input">
+									<i class="fas fa-edit"></i><input type="text" id="companyName" name="companyName" placeholder="업체명을 입력하세요.">
+								</div>
+								<div class="rn-icon-input">
+									<i class="fas fa-edit"></i><input type="text" id="phone" name="phone" placeholder="전화번호를 입력하세요.">
+								</div>
+								<div class="rn-icon-input">
+									<i class="fas fa-edit"></i><input type="text" id="fax" name="fax" placeholder="팩스번호를 입력하세요.">
+								</div>
+								<div class="rn-icon-input">
+									<i class="fas fa-edit"></i><input type="text" id="email" name="email" placeholder="이메일을 입력하세요.">
+								</div>
+								<div class="rn-icon-input">
+									<i class="fas fa-edit"></i><input type="text" id="link" name="link" placeholder="링크를 입력하세요">
+								</div>
+
+							</div>
+							<!-- End Check Availability-->
+
+							<!-- Car Sharing Buttons-->
+							<div class="rn-car-share">
+								<span>Share this Company : </span>
+								<ul>
+									<li><a href="#"> <i class="fab fa-facebook-f"></i>
+									</a></li>
+									<li><a href="#"> <i class="fab fa-twitter"></i>
+									</a></li>
+									<li><a href="#"> <i class="fab fa-google-plus-g"></i>
+									</a></li>
+									<li><a href="#"> <i class="fab fa-linkedin-in"></i>
+									</a></li>
+								</ul>
+							</div>
+							<!-- End Car Sharing Buttons-->
+
+						</div>
+					</div>
+
+					<div>
+						<div class="form-inline mb-2">
+							<label class="input-group-addon mr-3 insert-label">대표항목1</label> <input type="text" class="form-control" id="itemA" name="itemA" size="70">
+						</div>
+						<div class="form-inline mb-2">
+							<label class="input-group-addon mr-3 insert-label">대표항목2</label> <input type="text" class="form-control" id="itemB" name="itemB" size="70">
+						</div>
+					</div>
+
+					<hr class="mb-4">
+
+					<div class="text-center">
+						<button id="submitButton" type="submit" class="btn btn-success">등록</button>
+						<a class="btn btn-success float-right" href="javascript:history.back();">이전</a>
+					</div>
+
+				</form>
 			</div>
 
-				<hr class="mb-4">
-
-				<div class="text-center">
-					<button id="submitButton" type="submit" class="btn btn-success">등록</button>
-					<a class="btn btn-success float-right" href="${sessionScope.returnListURL}">이전</a>
-				</div>
-
-			</form>
 		</div>
-
-	</div>
 	</section>
 	<!-- End Single Car Content-->
 
@@ -285,7 +311,69 @@
 
 	</footer>
 	<!-- End Site Footer-->
-	
+
+
+	<script>
+		// 유효성 검사
+		function validate() {
+			if ($("#companyName").val().trim().length == 0) {
+				alert("업체명을 입력해 주세요.");
+				$("#companyName").focus();
+				return false;
+			}
+
+			if ($("#phone").val().trim().length == 0) {
+				alert("전화번호를 입력해 주세요.");
+				$("#phone").focus();
+				return false;
+			}
+			
+			if ($("#fax").val().trim().length == 0) {
+				alert("팩스번호를 입력해 주세요.");
+				$("#fax").focus();
+				return false;
+			}
+			
+			if ($("#email").val().trim().length == 0) {
+				alert("이메일 주소를 입력해 주세요.");
+				$("#email").focus();
+				return false;
+			}
+			
+			if ($("#link").val().trim().length == 0) {
+				alert("링크를 입력해 주세요.");
+				$("#link").focus();
+				return false;
+			}
+			
+			if ($("#introduction").val().trim().length == 0) {
+				alert("한줄 소개를 입력해 주세요.");
+				$("#introduction").focus();
+				return false;
+			}
+			
+			if ($("#companyContent").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$("#companyContent").focus();
+				return false;
+			}
+			
+			if ($("#itemA").val().trim().length == 0) {
+				alert("항목내용을 입력해 주세요.");
+				$("#itemA").focus();
+				return false;
+			}
+			
+			if ($("#itemB").val().trim().length == 0) {
+				alert("항목내용을 입력해 주세요.");
+				$("#itemB").focus();
+				return false;
+			}
+		}
+	</script>
+
+
+
 	<script>
 	// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 	$(function(){
@@ -339,9 +427,56 @@
 		}
 	}
 	</script>
+
+	<script>
+	// 게시글에 업로드 된 이미지 삭제
+	var deleteImages = [];
+	// 배열을 생성하여 이미지 삭제 버튼 수 만큼 배열에 false 요소를 추가
+	// -> 배열에 4개 false가 추가 됨 == 인덱스는 0~3 == fileLevel과 같음
+	// --> 이미지 삭제 버튼이 클릭 될 경우
+	// 		해당 fileLevel과 같은 인덱스 값을 true로 변경
+	//  	--> 해당 이미지가 삭제 되었음을 전달하기 위한 용도로 사용할 예정
+
+	for(var i=0; i<$(".deleteImg").length; i++) {
+		deleteImages.push(false);
+	}
 	
-	
-	
+	// 이미지 삭제 버튼 동작
+	$(".deleteImg").on("click", function(event){
+		// event : 현재 발생한 이벤트에 대한 정보가 담긴 객체
+		event.stopPropagation(); 		// 이벤트가 연달아 실행되는 것을 방지
+		
+		// 기존 이미지 태그를 삭제하고 새로운 이미지 태그를 만들어서 제자리에 추가
+		
+		// 기존 이미지 태그
+		var $beforeImg = $(this).prev();
+		
+		// 기존 정보를 토대로 새로운 이미지 태그 생성
+		var $newImg = $("<img>", {id : $beforeImg.attr("id"),
+															width : $beforeImg.css("width"),
+															height : $beforeImg.css("height")	});
+		
+		$(this).prev().remove();		// 기존 이미지 태그 삭제
+		$(this).before($newImg); 		// 새로운 이미지 태그 추가
+		
+		
+		// 특정 fileLevel의 요소가 삭제 되었음을 알리기 위해 deleteImages에 기록
+		// == deleteImages에 클릭된 삭제버튼 인덱스와
+		// 일치하는 deleteImages 인덱스 값을 true로 변경
+		
+		deleteImages[$(".deleteImg").index(this)] = true;
+		
+		console.log(deleteImages);
+		
+		// 삭제 버튼이 클릭된 경우
+		// 해당 이미지와 연결된 input type="file" 태그의 값을 없앰
+		$("#img" + ($(".deleteImg").index(this) )).val("");
+		
+	});
+	</script>
+
+
+
 	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>

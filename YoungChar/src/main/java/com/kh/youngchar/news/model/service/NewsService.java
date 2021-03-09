@@ -1,11 +1,15 @@
 package com.kh.youngchar.news.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.news.model.vo.News;
+import com.kh.youngchar.news.model.vo.NewsImage;
 
 @Service
 public interface NewsService {
@@ -13,9 +17,34 @@ public interface NewsService {
 	PageInfo getPageInfo(int cp);
 
 	List<News> selectNewsList(PageInfo pInfo);
+	List<News> selectRecentNewsList(PageInfo pInfo);
+	
 
 	News selectNews(int newsNo);
+	
+	
 
-	List<News> selectCharNewsList(int newsNo);
+	List<NewsImage> selectCharNewsList(int newsNo);
+	
+	
+
+	int insertNews(Map<String, Object> map, List<MultipartFile> images, String savePath);
+	
+	
+
+	List<CompanyImage> selectThumbnailList(List<News> nList);
+	List<CompanyImage> recentThumbnailList(List<News> recentList);
+	
+	
+
+	NewsImage insertImage(MultipartFile uploadFile, String savePath);
+
+	int updateNews(News updateNews, List<MultipartFile> images, String savePath, boolean[] deleteImages);
+	
+	
+
+	int deleteNews(News news);
+
+
 
 }

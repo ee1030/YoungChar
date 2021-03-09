@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.youngchar.chargerCompany.model.dao.ChargerCompanyDAO;
 import com.kh.youngchar.chargerCompany.model.vo.ChargerCompany;
 import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
-import com.kh.youngchar.company.model.vo.PageInfo;
+import com.kh.youngchar.chargerCompany.model.vo.PageInfo5;
 
 @Service
 public class ChargerCompanyServiceImpl implements ChargerCompanyService{
@@ -23,14 +23,14 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 	private ChargerCompanyDAO dao;
 
 	@Override
-	public PageInfo getPageInfo(int cp) {
+	public PageInfo5 getPageInfo(int cp) {
 		int listCount = dao.getListCount(cp);
 
-		return new PageInfo(cp, listCount);
+		return new PageInfo5(cp, listCount);
 	}
 
 	@Override
-	public List<ChargerCompany> selectList(PageInfo pInfo) {
+	public List<ChargerCompany> selectList(PageInfo5 pInfo) {
 		return dao.selectList(pInfo);
 	}
 
@@ -86,6 +86,9 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 				String email = (String) map.get("email");
 				String link = (String) map.get("link");
 				String companyContent = (String) map.get("companyContent");
+				String introduction = (String)map.get("introduction");
+				String itemA = (String)map.get("itemA");
+				String itemB = (String)map.get("itemB");
 
 //				크로스 사이트 스크립팅 방지 처리 적용 
 				companyName = replaceParameter(companyName);
@@ -94,6 +97,9 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 				email = replaceParameter(email);
 				link = replaceParameter(link);
 				companyContent = replaceParameter(companyContent);
+				introduction = replaceParameter(introduction);
+				itemA = replaceParameter(itemA);
+				itemB = replaceParameter(itemB);
 
 //				처리된 문자열을 다시 map에 세팅
 				map.put("companyName", companyName);
@@ -102,6 +108,9 @@ public class ChargerCompanyServiceImpl implements ChargerCompanyService{
 				map.put("email", email);
 				map.put("link", link);
 				map.put("companyContent", companyContent);
+				map.put("introduction", introduction);
+				map.put("itemA", itemA);
+				map.put("itemB", itemB);
 				
 
 

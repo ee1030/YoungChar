@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.youngchar.board.model.vo.Attachment;
 import com.kh.youngchar.board.model.vo.PageInfo2;
+import com.kh.youngchar.board.model.vo.Search;
 import com.kh.youngchar.cars.model.service.CarsService;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
@@ -111,6 +113,45 @@ public class CarsController {
 		
 		return "car/carSearch";
 	}
+	
+	@RequestMapping("search")
+	public String categorySearch(@RequestParam(value = "cp" , required= false, defaultValue = "1") int cp,
+			@ModelAttribute Search search /*ct,sv,sk 커맨드 객체 형태로 반환 */ ,Model model , RedirectAttributes ra
+			/*@RequestParam(value = "ct") List<Search> ct*/ ) {
+		
+		
+		System.out.println("search : " + search);
+		
+//		String[] ctList = search.getCt();
+		PageInfo2 pInfo = service.getSearchPageInfo(search , cp);
+		
+		List<Cars> carList = service.selectCarList2(search ,pInfo);
+		
+		System.out.println("carList : " +  carList);
+		System.out.println("pinfo" + pInfo);
+		
+		
+//		3) 썸네일 목록 조회
+		if(!carList.isEmpty()) { // 검색된 목록이 있다면
+			
+			List<CAttachment> thList = service.selectThumbnailList(carList);
+			
+			model.addAttribute("thList",thList);
+			
+		}
+		
+		/*
+		 * ra.addFlashAttribute("carList" , carList); ra.addFlashAttribute("pInfo" ,
+		 * pInfo); ra.addFlashAttribute("search" , search);
+		 */
+		
+		model.addAttribute("carList" , carList);
+		model.addAttribute("pInfo" , pInfo);
+		model.addAttribute("search" , search);
+		
+		return "car/carList";
+	}
+	
 	
 	
 

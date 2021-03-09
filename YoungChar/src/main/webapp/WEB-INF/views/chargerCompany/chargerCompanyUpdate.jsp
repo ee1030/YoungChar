@@ -9,24 +9,35 @@
 <title>충전기 설치 업체 수정</title>
 
 <style>
-    .insert-label {
-      display: inline-block;
-      width: 80px;
-      line-height: 40px
-    }
-    
-    #submitButton {
-    	float: right;
-    	margin-left: 25px;
-    }
-    
-    .boardImg{
-    	cursor: pointer;
-    }
-    
-    #cont {
-    	margin-left: 10px;
-    }
+.deleteImg {
+	position: absolute;
+	display: inline-block;
+	margin-left: -15px;
+	border: none;
+	background-color: rgba(1, 1, 1, 0);
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.insert-label {
+	display: inline-block;
+	width: 80px;
+	line-height: 40px
+}
+
+#submitButton {
+	float: right;
+	margin-left: 25px;
+}
+
+.boardImg {
+	cursor: pointer;
+}
+
+#cont {
+	margin-left: 10px;
+}
 </style>
 
 <!--
@@ -67,87 +78,100 @@
 	<section class="rn-section">
 		<div class="container">
 
-		<div class="container pb-5 mb-5">
+			<div class="container pb-5 mb-5">
 
 
-			<form action="updateAction"  method="post" name="updateForm" enctype="multipart/form-data" role="form" onsubmit="return validate();">
-			<!-- enctype="multipart/form-data" -->
+				<form action="updateAction" method="post" name="updateForm" enctype="multipart/form-data" role="form" onsubmit="return validate();">
+					<!-- enctype="multipart/form-data" -->
 
-				<div class="form-inline mb-2">
-					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
-						<span class="deleteImg">x</span>
-					</div>
-					<label class="input-group-addon mr-3 insert-label" id="cont">UPDATE IMAGE</label>
-				</div>
-				
-					<!-- 파일 업로드 하는 부분 -->
-				<div id="fileArea">
-					<input type="file" id="img0" name="image" onchange="LoadImg(this,0)"> 
-				</div>
-				
-				<hr>
-				
-				<div class="row">
-				<div class="col-lg-8" id="companyContent">
-					<textarea class="form-control" id="content" name="companyContent"  rows="10" style="resize: none;">${chargerCompany.companyContent}</textarea>
-				</div>
-				<div class="col-lg-4">
-
-					<!-- Check Availability-->
-					<div class="rn-small-search-form">
-						<div class="rn-small-search-form-title">
-							<h2>충전기 설치 업체 수정</h2>
+					<div class="form-inline mb-2">
+						<div class="boardImg" id="titleImgArea">
+							<img id="titleImg" width="200" height="200"> <span class="deleteImg">x</span>
 						</div>
-							<div class="rn-icon-input" id="companyName">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="companyName" value="${chargerCompany.companyName}">
-							</div>
-							<div class="rn-icon-input" id="phone">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="phone" value="${chargerCompany.phone}">
-							</div>
-							<div class="rn-icon-input" id="fax">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="fax" value="${chargerCompany.fax}">
-							</div>
-							<div class="rn-icon-input" id="email">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="email" value=" ${chargerCompany.email}">
-							</div>
-							<div class="rn-icon-input" id="link">
-								<i class="fas fa-map-marker-alt"></i> <input type="text" name="link" value="${chargerCompany.link}">
-							</div>
-
+						<label class="input-group-addon mr-3 insert-label" id="cont">UPDATE IMAGE</label>
 					</div>
-					<!-- End Check Availability-->
 
-					<!-- Car Sharing Buttons-->
-					<div class="rn-car-share">
-						<span>Share this Company : </span>
-						<ul>
-							<li><a href="#"> <i class="fab fa-facebook-f"></i>
-							</a></li>
-							<li><a href="#"> <i class="fab fa-twitter"></i>
-							</a></li>
-							<li><a href="#"> <i class="fab fa-google-plus-g"></i>
-							</a></li>
-							<li><a href="#"> <i class="fab fa-linkedin-in"></i>
-							</a></li>
-						</ul>
+					<!-- 파일 업로드 하는 부분 -->
+					<div id="fileArea">
+						<input type="file" id="img0" name="image" onchange="LoadImg(this,0)">
 					</div>
-					<!-- End Car Sharing Buttons-->
 
-				</div>
+					<hr>
+
+					<div class="row">
+					
+						<div class="form-inline mb-2">
+							<label class="input-group-addon insert-label">한 줄 소개</label> <input type="text" class="form-control" id="introduction" name="introduction" size="70" value="${chargerCompany.introduction}">
+						</div>
+						
+						<div class="col-lg-8">
+								<textarea class="form-control" id="content" name="companyContent" rows="10" style="resize: none;">${chargerCompany.companyContent}</textarea>
+							</div>
+							
+							<div class="col-lg-4">
+
+								<!-- Check Availability-->
+								<div class="rn-small-search-form">
+									<div class="rn-small-search-form-title">
+										<h2>충전기 설치 업체 수정</h2>
+									</div>
+									<div class="rn-icon-input">
+										<i class="fas fa-edit"></i><input type="text" id="companyName" name="companyName" value="${chargerCompany.companyName}">
+									</div>
+									<div class="rn-icon-input">
+										<i class="fas fa-edit"></i><input type="text" id="phone" name="phone" value="${chargerCompany.phone}">
+									</div>
+									<div class="rn-icon-input">
+										<i class="fas fa-edit"></i><input type="text" id="fax" name="fax" value="${chargerCompany.fax}">
+									</div>
+									<div class="rn-icon-input">
+										<i class="fas fa-edit"></i><input type="text" id="email" name="email" value=" ${chargerCompany.email}">
+									</div>
+									<div class="rn-icon-input">
+										<i class="fas fa-edit"></i><input type="text" id="link"name="link" value="${chargerCompany.link}">
+									</div>
+
+								</div>
+								<!-- End Check Availability-->
+
+								<!-- Car Sharing Buttons-->
+								<div class="rn-car-share">
+									<span>Share this Company : </span>
+									<ul>
+										<li><a href="#"> <i class="fab fa-facebook-f"></i>
+										</a></li>
+										<li><a href="#"> <i class="fab fa-twitter"></i>
+										</a></li>
+										<li><a href="#"> <i class="fab fa-google-plus-g"></i>
+										</a></li>
+										<li><a href="#"> <i class="fab fa-linkedin-in"></i>
+										</a></li>
+									</ul>
+								</div>
+								<!-- End Car Sharing Buttons-->
+
+							</div>
+						</div>
+
+						<div>
+							<div class="form-inline mb-2">
+								<label class="input-group-addon mr-3 insert-label">대표항목1</label> <input type="text" class="form-control" id="itemA" name="itemA" size="70" value="${chargerCompany.itemA}">
+							</div>
+							<div class="form-inline mb-2">
+								<label class="input-group-addon mr-3 insert-label">대표항목2</label> <input type="text" class="form-control" id="itemB" name="itemB" size="70" value="${chargerCompany.itemB}">
+							</div>
+						</div>
+
+						<hr class="mb-4">
+
+						<div class="text-center">
+							<button id="submitButton" type="submit" class="btn btn-success">수정</button>
+							<a class="btn btn-success float-right" href="javascript:history.back();">이전</a>
+						</div>
+				</form>
 			</div>
 
-				<hr class="mb-4">
-
-				<div class="text-center">
-					<button id="submitButton" type="submit" class="btn btn-success">수정</button>
-					<a class="btn btn-success float-right" href="${sessionScope.returnListURL}">이전</a>
-				</div>
-
-			</form>
 		</div>
-
-	</div>
 	</section>
 	<!-- End Single Car Content-->
 
@@ -288,64 +312,127 @@
 	<!-- End Site Footer-->
 	
 	<script>
-	// 이미지 배치
+	<c:forEach var="at" items="${chargerCompanyList}">
+	$(".boardImg").eq(${at.fileLevel}).children("img").attr("src", "${contextPath}${at.filePath}/${at.fileName}");
+</c:forEach>
+	</script>
+
+	<script>
+		// 유효성 검사
+		function validate() {
+			if ($("#companyName").val().trim().length == 0) {
+				alert("업체명을 입력해 주세요.");
+				$("#companyName").focus();
+				return false;
+			}
+
+			if ($("#phone").val().trim().length == 0) {
+				alert("전화번호를 입력해 주세요.");
+				$("#phone").focus();
+				return false;
+			}
+			
+			if ($("#fax").val().trim().length == 0) {
+				alert("팩스번호를 입력해 주세요.");
+				$("#fax").focus();
+				return false;
+			}
+			
+			if ($("#email").val().trim().length == 0) {
+				alert("이메일 주소를 입력해 주세요.");
+				$("#email").focus();
+				return false;
+			}
+			
+			if ($("#link").val().trim().length == 0) {
+				alert("링크를 입력해 주세요.");
+				$("#link").focus();
+				return false;
+			}
+			
+			if ($("#introduction").val().trim().length == 0) {
+				alert("한줄 소개를 입력해 주세요.");
+				$("#introduction").focus();
+				return false;
+			}
+			
+			if ($("#companyContent").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$("#companyContent").focus();
+				return false;
+			}
+			
+			if ($("#itemA").val().trim().length == 0) {
+				alert("항목내용을 입력해 주세요.");
+				$("#itemA").focus();
+				return false;
+			}
+			
+			if ($("#itemB").val().trim().length == 0) {
+				alert("항목내용을 입력해 주세요.");
+				$("#itemB").focus();
+				return false;
+			}
+		}
+	</script>
 
 
+
+	<script>
 	// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 	$(function(){
 		$("#fileArea").hide(); // #fileArea 요소를 숨김.		
 		
 		$(".boardImg").on("click", function(){ // 이미지 영역이 클릭 되었을 때
-			var index = $(".boardImg").index(this);// 클릭한 이미지 영역 인덱스 얻어오기
-			$("#img" + index).click(); // 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+			
+			// 클릭한 이미지 영역 인덱스 얻어오기
+			var index = $(".boardImg").index(this);
+					// -> 클릭된 요소가 .boardImg 중 몇번째 인덱스인지 반환
+					
+			//console.log(index);
+			
+			// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+			$("#img" + index).click();
 		});
 		
 	});
 	 
 	
-	 // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-	 function LoadImg(value, num) {
+	
+  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+  function LoadImg(value, num) {
+	  // value.files : 파일이 업로드되어 있으면 true
+	  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
 	  
 		if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
 			
 			var reader = new FileReader();
-	    	reader.readAsDataURL(value.files[0]);
-	    	
-	    	reader.onload = function(e){
-	    		
-	    		// 미리보기
+   	// 자바스크립트 FileReader
+  	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
+  	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
+  	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+  	
+  	reader.readAsDataURL(value.files[0]);
+    // FileReader.readAsDataURL()
+  	// 지정된의 내용을 읽기 시작합니다. 
+  	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.	
+  	
+  	reader.onload = function(e){
+    	// FileReader.onload
+				// load 이벤트의 핸들러. 
+				// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
+  		
+				// 읽어들인 내용(이미지 파일)을 화면에 출력
+				
 				$(".boardImg").eq(num).children("img").attr("src", e.target.result);
+				// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
 				
-	    		
-	    		// 특정 fileLevel에 이미지가 업로드 된 경우
-	    		// == deleteImages 배열에서 해당 fileLevel과 일치하는 인덱스의 값을
-	    		// false로 바꿔 삭제되지 않음을 알려줌.
-	    		
-				
-				
-	    	}
+  	}
 		}
 	}
-	
-  
-	// 유효성 검사
-	function validate() {
+	</script>
 
-		// 유효성 검사에서 문제가 없을 경우
-		// 유효성 검사에서 문제가 없을 경우 서버에 제출 전
-         // deleteImages배열의 내용을 hidden 타입으로 하여 form태그 마지막에 추가하여 파라미터로 전달
-         for(var i=0 ; i<deleteImages.length ; i++){
-            $deleteImages = $("<input>", {type : "hidden", name : "deleteImages", value : deleteImages[i]});
-            $("form[name=updateForm]").append($deleteImages);
-         }
-		
-		
-	}
-	
-	
-	
-	
-	
+	<script>
 	// 게시글에 업로드 된 이미지 삭제
 	var deleteImages = [];
 	// 배열을 생성하여 이미지 삭제 버튼 수 만큼 배열에 false 요소를 추가
@@ -391,9 +478,9 @@
 		
 	});
 	</script>
-	
-	
-	
+
+
+
 	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
 	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
