@@ -144,22 +144,22 @@
 				<div class="row">
 					<div class="col-lg-8 order-lg-1 pb-15">
 						<div class="col-xl-8">
-							<form class="card" method="POST" action="updateAction" name="updateAction" onsubmit="return updateValidate();">
+							<form class="card" method="POST" action="updateAction" name="updateAction" enctype="multipart/form-data" onsubmit="return updateValidate();">
 							  <div class="card-header">
 									<div class="img bg-wrap text-center">
 										<div class="user-logo">
 										
 											<c:choose>
-												<c:when test="${!empty memFile.memImgPath}">
-													<div class="loadImg img" style="background-image: url(${contextPath}${company.memImgPath}/${company.memImgName});"></div>
+												<c:when test="${!empty company.memImgPath}">
+													<img class="img" id="contentImg1" src="${contextPath}${company.memImgPath}/${company.memImgName}">
 												</c:when>
 												<c:otherwise>
-													<div class="loadImg img" style="background-image: url(${contextPath}/resources/assets/images/user-basic.png);"></div>
+													<img class="img" id="contentImg1" src="${contextPath}/resources/assets/images/user-basic.png">
 												</c:otherwise>
 											</c:choose>		
 											
 											
-											<input type="file" id="fileArea" name="image" onchange="LoadImg(this)"> 
+											<input type="file" id="fileArea" name="image" onchange="LoadImg(this)" style="display:none"> 
 											<div id="insertImage" class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div>
 
 											<h4 class="card-title mb-0">${company.categoryNm}&nbsp;${company.cooName}</h4>
@@ -255,57 +255,81 @@
 	
 		// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 		$(function(){
-			$("#fileArea").hide(); // #fileArea 요소를 숨김.		
+			
 			
 			$("#insertImage").on("click", function(){ // 이미지 영역이 클릭 되었을 때
-				
-				// 클릭한 이미지 영역 인덱스 얻어오기
-				var index = $(".boardImg").index(this);
-						// -> 클릭된 요소가 .boardImg 중 몇번째 인덱스인지 반환
-						
 				// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
 				$("#fileArea").click();
 			});
+			
+			
 		});
 		
 		
-		  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-		  function LoadImg(value) {
-			  
-			  console.log("로드이미지")
-			  // value.files : 파일이 업로드되어 있으면 true
-			  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
-			  
-				if(value.files){ // 해당 요소에 업로드된 파일이 있을 경우
+	  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+	  function LoadImg(value) {
+		  // value.files : 파일이 업로드되어 있으면 true
+		  // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+		  
+			if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
+				
+				var reader = new FileReader();
+       	// 자바스크립트 FileReader
+      	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
+      	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
+      	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+      	
+      	reader.readAsDataURL(value.files[0]);
+        // FileReader.readAsDataURL()
+      	// 지정된의 내용을 읽기 시작합니다. 
+      	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.	
+      	
+      	reader.onload = function(e){
+        	// FileReader.onload
+					// load 이벤트의 핸들러. 
+					// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
+      		
+					// 읽어들인 내용(이미지 파일)을 화면에 출력
+					// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
 					
-					var reader = new FileReader();
-	       	// 자바스크립트 FileReader
-	      	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
-	      	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
-	      	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
-	      	
-	      	reader.readAsDataURL(value.files[0]);
-	        // FileReader.readAsDataURL()
-	      	// 지정된의 내용을 읽기 시작합니다. 
-	      	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.	
-	      		console.log("하이")
-	      	
-	      	reader.onload = function(e){
-	        	// FileReader.onload
-						// load 이벤트의 핸들러. 
-						// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.	
-	      		
-						// 읽어들인 내용(이미지 파일)을 화면에 출력
-						
-						console.log(e.target.result);
-						
-						$(".loadImg").attr("background-image", e.target.result);
-						// e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
-						
-	      	}
-				}
+							$(".user-logo").children("img").attr("src", e.target.result);
+					
+      	 }
 			}
+		}
+	  
 		
+	  $(document).on('change', '.img', function(){
+			
+ 				var formData = new FormData();
+				formData.append("image", $("input[name='image']")[0].files[0]); 
+				
+				console.log($("input[name='image']")[0].files)
+				
+				$.ajax({
+					url : "${contextPath}/company/changeProfileImg",
+					type : "POST",
+					enctype : "multipart/form-data",
+					data : formData,
+					contentType : false,
+					processData : false,
+					success : function(result){
+						
+						if(result > 0){	
+							swal({icon : "success" , title : "프로필 사진이 변경되었습니다."});
+						}else{
+							swal({icon : "error" , title : "프로필 사진 변경에 실패했습니다."});
+						}
+						
+					},
+					error : function(){
+						console.log("ajax 통신 실패");
+					}
+				});  
+			
+		});
+		
+
 		
 	
 		// 도로명 주소 API

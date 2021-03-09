@@ -99,6 +99,10 @@ public class CompanyDAO {
 		return sqlSession.selectOne("companyMapper.selectAplCount", memberNo);
 	}
 
+	public int changeProfileImg(Map<String, Object> map) {
+		return sqlSession.update("companyMapper.changeProfileImg", map);
+	}
+
 
 
 

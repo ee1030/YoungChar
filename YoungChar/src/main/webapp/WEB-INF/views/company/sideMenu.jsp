@@ -77,7 +77,7 @@
 											<a href="${contextPath}/company/dashboard">Dash board</a>
 										</li>
 										<li>
-											<a href="${contextPath}/company/applicationlist/all">Application list</a>
+											<a href="${contextPath}/company/applicationlist/all">Drive Management</a>
 										</li>
 										<li>
 											<a href="${contextPath}/company/companyinfo">Company Info</a>
