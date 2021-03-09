@@ -10,8 +10,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="icon" href="${contextPath}/resources/assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon.png" type="image/x-icon">
     <title>login</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
@@ -47,6 +45,11 @@
     	#nLogin{
     		height: 60px;
     		margin-top: 10px;
+    	}
+    	
+    	body{
+    		background-image: url('${contextPath}/resources/assets/images/login_bg.jpg');
+    		background-size: 100% 100%;
     	}
     </style>
 </head>
@@ -166,6 +169,35 @@
 	  	        });   
 	  	    }
 	  	    
+	  	    
+	  	  $(document).ready(function(){
+
+	  		  // Click event of the showPassword button
+	  		  $('.show').on('click', function(){
+
+	  		    // Get the password field
+	  		    var passwordField = $('#memberPwd');
+
+	  		    // Get the current type of the password field will be password or text
+	  		    var passwordFieldType = passwordField.attr('type');
+
+	  		    // Check to see if the type is a password field
+	  		    if(passwordFieldType == 'password')
+	  		    {
+	  		        // Change the password field to text
+	  		        passwordField.attr('type', 'text');
+
+	  		        // Change the Text on the show password button to Hide
+	  		        $(this).val('Hide');
+	  		    } else {
+	  		        // If the password field type is not a password field then set it to password
+	  		        passwordField.attr('type', 'password');
+
+	  		        // Change the value of the show password button to Show
+	  		        $(this).val('Show');
+	  		    }
+	  		  });
+	  		});
 	  	    
 	  	    
 	  	    

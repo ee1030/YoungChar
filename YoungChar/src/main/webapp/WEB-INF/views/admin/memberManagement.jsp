@@ -141,15 +141,19 @@
 																	<fmt:formatDate value="${member.signDt }" pattern="HH:mm" />
 																</c:otherwise>
 															</c:choose>
-														</td>
-														<td><c:choose>
-																<c:when test="${member.memberStatus == 'N' }">
-																	가입
-																</c:when>
-																<c:otherwise>
+														</td>											
+														<c:choose>
+															<c:when test="${member.memberStatus == 'N' }">
+																<td style="color:red;">	
 																	탈퇴
-																</c:otherwise>
-															</c:choose></td>
+																</td>
+															</c:when>
+															<c:otherwise>
+																<td style="color:blue;">	
+																	가입
+																</td>
+															</c:otherwise>
+														</c:choose>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

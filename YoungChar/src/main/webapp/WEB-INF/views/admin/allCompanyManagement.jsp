@@ -138,16 +138,18 @@
 															</c:choose>
 														</td>
 														<td>${allCompany.brandCategory}</td>
-														<td>
-															<c:choose>
-																<c:when test="${allCompany.memberStatus == 'Y'}">
+														<c:choose>
+															<c:when test="${allCompany.memberStatus == 'Y'}">
+																<td style="color:red;">	
 																	미승인
-																</c:when>
-																<c:otherwise>
+																</td>
+															</c:when>
+															<c:otherwise>
+																<td style="color:blue;">	
 																	승인
-																</c:otherwise>
-															</c:choose>
-														</td>
+																</td>
+															</c:otherwise>
+														</c:choose>
 													</tr>
 												</c:forEach>
 											</c:otherwise>

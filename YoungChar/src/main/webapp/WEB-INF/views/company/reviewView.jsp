@@ -15,8 +15,9 @@
 	<style>
 		.card{
 			font-family: 'Noto Sans KR', sans-serif;
+			border : 1px solid #d3d3d3b3 !important;
 		}
-	
+		
 		#board-area{ margin-bottom:100px;}
 		#board-content{ padding-bottom:150px;}
 		#date-area{font-size: 12px; line-height: 12px}
@@ -66,7 +67,7 @@
 	<!-- Page Content-->
 	<section class="rn-section">
 		<div class="container">
-			<h2>R E V I E W</h2>
+			<h2><a style="color:black" href="${contextPath}/driveReview/reviewlist">R E V I E W</a></h2>
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
@@ -77,7 +78,7 @@
 								<!-- End InvoiceTop-->
 								<div class="row">
 									<div class="col-md-8">
-											<br><br>
+											<br>
 										  <h3 class="media-heading">${board.boardTitle}</h3>
 										  <br>
 									  <div class="media">
@@ -88,7 +89,7 @@
 												<img class="media-object rounded-circle img-60" src="${contextPath}${board.memImgPath}/${board.memImgName}">
 											</c:when>
 											<c:otherwise>
-												<img class="media-object rounded-circle img-60" src="${contextPath}/resources/memberFile/user-basic.png">
+												<img class="media-object rounded-circle img-60" src="${contextPath}/resources/assets/images/user-basic.png">
 											</c:otherwise>
 										</c:choose>
 										
@@ -113,7 +114,7 @@
 									<div class="col-md-4">
 									
 									
-									<div class="card o-hidden">
+									<div class="o-hidden">
                   <div class="chart-widget-top">
                     <div class="row card-body">
                       <div class="col-8">
@@ -178,17 +179,17 @@
 											
 											<c:choose>
 												<c:when test="${!empty param.adm}">
-													<a class="btn btn-light" href="javascript:history.back();">목록으로</a>
+													<a class="btn btn-light active text-dark" href="javascript:history.back();">목록으로</a>
 												</c:when>
 												<c:otherwise>
-													<a class="btn btn-light" href="${sessionScope.returnListURL}">목록으로</a>
+													<a class="btn btn-light active text-dark" href="${sessionScope.returnListURL}">목록으로</a>
 												</c:otherwise>
 											</c:choose>
 											
 											<c:url var="updateUrl" value="../update/${board.boardNo}" />
 											<c:if test="${(loginMember != null) && (board.memId == loginMember.memberId)}">
-												<a href="${updateUrl}" class="btn btn-light">수정</a>
-												<button id="deleteButton" type="button" class="btn btn-light">삭제</button>
+												<a href="${updateUrl}" class="btn btn-light active text-dark">수정</a>
+												<button id="deleteButton" type="button" class="btn btn-light active text-dark">삭제</button>
 											</c:if>
 										</div>
 									</div>

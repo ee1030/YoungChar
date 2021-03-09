@@ -226,7 +226,7 @@ public class MemberController {
 	@ResponseBody
 	public String normalSignUpMail(HttpServletRequest request) {
 		
-		String setfrom = "jihoprac@gmail.com";
+		String setfrom = "pjhyoung123@gmail.com";
 		String tomail = request.getParameter("mail"); // 받는 사람 이메일
 		String title = "[영차영차] 회원 가입에 필요한 이메일 인증 키값 전송"; // 제목
 		String content = "키 값을 인증번호 확인영역에 입력해주세요."; // 내용
@@ -515,7 +515,7 @@ public class MemberController {
 		@ResponseBody
 		public String findPwdMail(HttpServletRequest request) {
 			
-			String setfrom = "jihoprac@gmail.com";
+			String setfrom = "pjhyoung123@gmail.com";
 			String tomail = request.getParameter("mail"); // 받는 사람 이메일
 			String title = "[영차영차] 비밀번호 찾기에 필요한 이메일 인증 키값 전송"; // 제목
 			String content = "키 값을 인증번호 확인영역에 입력해주세요."; // 내용

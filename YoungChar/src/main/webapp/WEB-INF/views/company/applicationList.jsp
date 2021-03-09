@@ -16,6 +16,7 @@
 		<style>
 			.card{
 				font-family: 'Noto Sans KR', sans-serif;
+				width: 850px;
 			}
 		
 			.rn-header{
@@ -30,10 +31,6 @@
 				margin: 25px;
 			}
 
-			.card{
-				width: 850px;
-			}
-
 			.rn-widget {
 				margin-bottom: 40px;
 				font-size: 20px;
@@ -45,8 +42,6 @@
 	 			  text-align: center;
 			}
 			
-
-
 			#select1{
 				width: 160px;
 			}
@@ -93,10 +88,10 @@
 						<div class="col-sm-12">
 							<div class="card">
 							  <div class="card-header">
-								<div id="head">시승 신청 내역</div>
+								<div id="head">시승 신청 목록</div>
                   <div class="dropdown-basic">
                     <div class="dropdown">
-                      <button id="select1" class="btn btn-light" type="button">선택<span><i class="icofont icofont-arrow-down"></i></span></button>
+                      <button id="select1" class="btn btn-light active text-dark" type="button">선택<span><i class="icofont icofont-arrow-down"></i></span></button>
 	                      <div class="dropdown-content">
 		                      <a id="all" class="select-status">전체</a>
 		                      <a id="n" class="select-status">승인대기</a>

@@ -153,6 +153,9 @@
 														<img class="img-radius align-top m-r-15 rounded-circle" src="${src}" alt="">
 														<div class="d-inline-block">
 															<h6>
+																<c:if test="${member.nickName == null}">
+																	SNS가입자
+																</c:if>
 																${member.nickName} 
 															</h6>
 														</div>
@@ -160,6 +163,9 @@
 												</td>
 												<td>${member.memberNm}</td>
 												<td>
+													<c:if test="${member.nickName == null}">
+														SNS가입자
+													</c:if>
 													${member.memberEmail}
 												</td>
 												<td>${member.signDt}</td>

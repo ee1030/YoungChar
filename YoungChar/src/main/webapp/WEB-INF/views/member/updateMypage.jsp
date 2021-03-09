@@ -30,7 +30,8 @@
 				height: 100px;
 				border-radius: 50%;
 				margin: 0 auto;
-				margin-bottom: 10px; }
+				margin-bottom: 10px; 
+				}
 			.bg-wrap .user-logo h3 {
 				color: black;
 				font-size: 18px; }
@@ -121,9 +122,31 @@
 	z-index: 9999;
 }
 
-#contentImg1:hover{
-	cursor: pointer;
-}
+
+	.icon-wrapper{
+		position: absolute;
+    bottom: 80px;
+    left: 52%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    margin: 0 auto;
+    font-size: 17px;
+    -webkit-box-shadow: 0 0 6px 3px rgb(68 102 242 / 10%);
+		border : 1px solid #d3d3d3b3 !important;
+	}
 		
 		</style>
 		
@@ -148,9 +171,23 @@
 							<form class="card" action="mypageUpdate" method="post" name="signUpForm" enctype="multipart/form-data" onsubmit="return memberJoinvalidate();">
 							  <div class="card-header">
 									<div class="img bg-wrap text-center">
-										<div class="user-logo content1" data-toggle="modal" data-target="#exampleModal">
-											<img class="img" id="contentImg1" src="${contextPath}${memFile.memImgPath}/${memFile.memImgName}">
-												<input type="file" id="img0" name="image" onchange="LoadImg(this,0)">
+										<div class="user-logo content1">
+										
+											<c:choose>
+												<c:when test="${!empty memFile.memImgPath}">
+													<img class="img" id="contentImg1" src="${contextPath}${memFile.memImgPath}/${memFile.memImgName}">
+												</c:when>
+												<c:otherwise>
+													<img class="img" id="contentImg1" src="${contextPath}/resources/assets/images/user-basic.png">
+												</c:otherwise>
+											</c:choose>		
+										
+												
+											<input type="file" id="img0" name="image" onchange="LoadImg(this,0)" style="display:none">
+											
+											<div id="insertImage" class="icon-wrapper" data-toggle="modal" data-target="#exampleModal"><i class="icofont icofont-pencil-alt-5"></i></div>
+											
+											
 											<h4 class="card-title mb-0">${loginMember.memberNm}</h4>
 										</div>
 									</div>
@@ -275,7 +312,8 @@
 			<script>
 			 // 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 			$(function(){
-				$("#img0").hide(); // #fileArea 요소를 숨김.		
+				
+				//$("#img0").hide(); // #fileArea 요소를 숨김.		
 				
 				$("#otherImg").on("click", function(){ // 이미지 영역이 클릭 되었을 때
 					// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
@@ -457,6 +495,8 @@
 								$beforeImg.remove();
 								$(".content1").prepend($newImg);
 							}else{
+								$beforeImg.remove();
+								$(".content1").prepend($newImg);
 							}
 							
 						},

@@ -1,7 +1,6 @@
 package com.kh.youngchar.company.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,7 +9,7 @@ import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.company.model.vo.Reply;
 import com.kh.youngchar.company.model.vo.Report;
-import com.kh.youngchar.member.model.vo.MemberFile;
+import com.kh.youngchar.board.model.vo.Search;
 
 /** 업체 페이지 및 시승후기 관련 Service
  * @author jeonga
@@ -40,8 +39,11 @@ public interface DriveReviewService{
 	
 	int deleteBoard(int boardNo);
 
-
 	int reportBoard(Report report);
+
+	PageInfo getSearchPageInfo(Search search, int cp);
+
+	List<DriveReview> selectSearchList(Search search, PageInfo pInfo);
 
 
 
