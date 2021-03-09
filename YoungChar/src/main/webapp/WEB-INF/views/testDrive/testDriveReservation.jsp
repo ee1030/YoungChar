@@ -72,7 +72,7 @@
 			}
 			
 			.inputs{
-				/* display: none; */
+				 display: none; 
 			}
 			
 			.spanNone{
@@ -370,9 +370,8 @@
 			<form action="makeReservation" method="post" onsubmit="return validate();">
 				<div class="row justify-content-md-center">
 						<div class="inputArea">
-							<input name="car" class="inputs">
-							<input name="company" class="inputs">
-							<input name="time" class="inputs">
+							<input name="testDriveCarNo" class="inputs">
+							<input name="testDriveDate" class="inputs">
 						</div>
 					<button class="col-lg-1 btn btn-main  btn-shadow btn-block" type="submit">완료</button>
 				</div>
@@ -556,7 +555,7 @@
 	  		$(".time").text($("#pickup-date").val()+" " +$("#pickup-time").val());
 	  		
 	  		//input태그에 시간 추가
-				$("input[name=time]").val($("#pickup-date").val()+" " +$("#pickup-time").val());
+				$("input[name=testDriveDate]").val($("#pickup-date").val()+" " +$("#pickup-time").val());
 			});
 			
 			

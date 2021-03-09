@@ -93,8 +93,8 @@ console.log(company.length);
                 $(".centerName").text(brandName+" "+cooName);
 
             //input에 값추가하기
-                $("input[name=car]").val(testDriveNo);
-                $("input[name=company]").val(memberNo);
+                $("input[name=testDriveCarNo]").val(testDriveNo);
+                console.log(testDriveNo);
           
         });
 
