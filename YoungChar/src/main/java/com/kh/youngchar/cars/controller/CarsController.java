@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,7 +22,7 @@ import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 
 @Controller
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"carList" ,"thList" })
 @RequestMapping("/car/*")
 public class CarsController {
 	
@@ -33,6 +34,26 @@ public class CarsController {
 	private String swalText = null;
 	
 	
+	
+	
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		
+		List<Cars> carList = service.selectList();
+		
+		if(carList != null) {
+			List<CAttachment> thumbnailList = service.selectThumbnailList(carList);
+			
+			if(thumbnailList != null) {
+				model.addAttribute("thList" , thumbnailList);
+			}
+		}
+		
+		model.addAttribute("carList" , carList);
+		
+		return "index";
+	}
 	
 //	차량 리스트 조회
 	@RequestMapping("list")
@@ -59,6 +80,9 @@ public class CarsController {
 		
 		return "car/carList";
 	}
+	
+	
+	
 	
 //	차량 상세조회
 	@RequestMapping("carView/{carNo}")

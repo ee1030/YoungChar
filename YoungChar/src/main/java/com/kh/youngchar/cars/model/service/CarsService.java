@@ -79,4 +79,6 @@ public interface CarsService {
 	 */
 	List<Cars> selectCarList2(Search search, PageInfo2 pInfo);
 
+	List<Cars> selectList();
+
 }

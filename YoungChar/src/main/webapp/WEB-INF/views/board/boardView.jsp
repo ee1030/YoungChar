@@ -142,17 +142,23 @@
 							<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-danger">신고</button>
 						</c:if>
 
-						<c:choose>
-							<c:when test="${!empty param.adm}">
+						<%--  <c:choose>
+							<	<c:when test="${!empty param.adm}">
 								<a class="btn btn-success" href="javascript:history.back();">목록으로</a>
-							</c:when>
+							</c:when> -
 							<c:otherwise>
-								<a class="btn btn-success returnUrl">목록으로</a>
 							</c:otherwise>
-						</c:choose>
+						</c:choose>  --%>
 						
+							<c:if test="${!empty param.adm}">
+									<a class="btn btn-success" href="javascript:history.back();">목록으로</a>
+							</c:if>
+						
+							<c:if test="${empty param.adm}">
+						 		<a class="btn btn-success returnUrl" style="color: ghostwhite;">목록으로</a>
+							</c:if>
 	                	
-	                	<c:url var="updateUrl" value="${board.boardNo}/update"/>
+	           <c:url var="updateUrl" value="${board.boardNo}/update"/>
 	                	
 	                	<!-- 로그인된 회원이 글 작성자인 경우 -->
 						<c:if test="${(loginMember != null) && (board.memberId == loginMember.memberId)}">

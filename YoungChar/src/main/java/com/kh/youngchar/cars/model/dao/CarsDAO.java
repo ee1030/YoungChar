@@ -121,4 +121,8 @@ public class CarsDAO {
 		return sqlSession.selectList("carsMapper.selectCarList2",search , rowBounds);
 	}
 
+	public List<Cars> selectList() {
+		return sqlSession.selectList("carsMapper.selectList");
+	}
+
 }

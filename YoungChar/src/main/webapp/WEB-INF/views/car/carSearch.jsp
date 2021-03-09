@@ -228,6 +228,10 @@
 						</div>
 					</div>
 				</div>
+				
+					<div class="float-right" style="margin-bottom:50px;">
+					 <a class="btn btn-success returnUrl" style="color: ghostwhite;">목록으로</a>
+					</div>
 			
 			</div>
 		</div>
@@ -239,7 +243,17 @@
 	</div>
 							
 							
-							
+	<script type="text/javascript">
+	// 목록으로
+	$(".returnUrl").on('click', function() {
+
+		
+		var returnURL = "../../list";
+
+		location.href = returnURL;
+	});
+	
+	</script>
 							
 							
 							
@@ -264,8 +278,8 @@
     <!-- Sidebar jquery-->
     <script src="${contextPath}/resources/assets/js/config.js"></script>
     <!-- Theme js-->
-    <script src="${contextPath}/resources/assets/js/script.js"></script>
-    <script src="${contextPath}/resources/assets/js/theme-customizer/customizer.js"></script>
+     <script src="${contextPath}/resources/assets/js/script.js"></script>
+    <%--<script src="${contextPath}/resources/assets/js/theme-customizer/customizer.js"></script> --%>
     <!-- login js-->
     
     <!-- 없읍 -->

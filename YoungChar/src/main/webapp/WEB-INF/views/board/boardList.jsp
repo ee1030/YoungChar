@@ -60,8 +60,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="rn-page-title-inner">
-						<h1></h1>
-						<p></p>
+						<h1>잡담 게시판</h1>
+						<p>무엇이든 적어 보세요 !</p>
 					</div>
 				</div>
 			</div>
@@ -306,8 +306,6 @@
 						<!-- Widget Item-->
 						<div class="rn-widget">
 							<div class="rn-widget-content">
-								<a href="#"> <img class="img-fluid" src="assets/images/banner.png" alt="banner" srcset="assets/images/banner.png 1x, assets/images/banner@2x.png 2x">
-								</a>
 							</div>
 						</div>
 						<!-- End Widget Item-->
