@@ -212,13 +212,13 @@ select:focus, select:active {
 						<ul>
 						
 							
-							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
-							<fmt:parseNumber var="prev" value="${ c1 * 10 }" integerOnly="true" />
+							<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }" integerOnly="true" />
+							<fmt:parseNumber var="prev" value="${ c1 * 5 }" integerOnly="true" />
 							<c:set var="prevPage" value="?cp=${prev}" />
 
 
-							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 10 }" integerOnly="true" />
-							<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+							<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
+							<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
 							<c:set var="nextPage" value="?cp=${next}" />
 							
 							<c:if test="${pInfo.currentPage > pInfo.pageSize}">
@@ -365,7 +365,7 @@ select:focus, select:active {
 		<div class="modal-dialog">
 			<div class="modal-content" style="width: 1100px;">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">차량 등록</h5>
+					<h5 class="modal-title" id="exampleModalLabel">차량 정보 수정</h5>
 					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
