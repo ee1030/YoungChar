@@ -13,6 +13,14 @@
 
 <!-- Preloader CSS-->
 <style>
+
+#recentImage{
+	width:100%;
+	height: 100%;
+}
+#eyeIcon {
+	margin-right: 5px;
+}
 #preloader:after, #preloader:before {
 	content: "";
 	display: block;
@@ -252,7 +260,12 @@ to {
 							<!-- Blog Post Item (Small Size)-->
 							<div class="rn-post-item rn-post-size-sm">
 								<div class="rn-post-item-thumb">
-									<a href="#"> <img class="img-fluid" src="assets/images/blog-item-sm-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-sm-1.jpg 1x, assets/images/blog-item-sm-1@2x.jpg 2x" />
+									<a href="car-single.html">
+									<c:forEach items="${thList}" var="th">
+										<c:if test="${th.newsNo  == news.newsNo}">
+											<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}"></a>
+										</c:if>
+									</c:forEach>
 									</a>
 								</div>
 								<div class="rn-post-item-header">
@@ -264,16 +277,20 @@ to {
 									</div>
 									<div class="rn-post-item-title-meta">
 										<div class="rn-post-item-title-meta-inner">
+										
 											<div class="rn-post-item-meta">
 												<span class="rn-post-item-categories"><a href="#">${news.press}</a>
 												</span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
 												</span>
+												<span class="rn-post-view-icon"> <i id="eyeIcon" class="far fa-eye"></i>${news.readCount}</span>
 											</div>
 											<h3 class="rn-post-item-title">
 												<a href="../news/${news.newsNo}">${news.newsTitle}</a>
 											</h3>
 										</div>
+										
 									</div>
+									
 								</div>
 							</div>
 							<!-- End Blog Post Item (Small Size)-->
@@ -320,31 +337,40 @@ to {
 
 						<!-- Widget Item-->
 						<section class="rn-widget">
-							<h2 class="rn-widget-title">Recent Posts</h2>
+							<h2 class="rn-widget-title">RECENT NEWS</h2>
 							<div class="rn-widget-content">
 								<ul class="rn-recent-posts">
-									<li>
+								
+								
+								<c:if test="${!empty recentList }">
+					<c:forEach var="news" items="${recentList}" varStatus="vs">
+									<li id="recentPostsItem">
 										<!-- Extra Small Post-->
 										<div class="rn-recent-post-item">
 											<div class="rn-recent-post-item-thumb">
-												<a href="#"> <img class="img-fluid" src="assets/images/blog-item-xs-1.jpg" alt="A standard blog post with image" srcset="assets/images/blog-item-xs-1.jpg 1x, assets/images/blog-item-xs-1@2x.jpg 2x" />
-												</a>
+												<c:forEach items="${thList}" var="th">
+										<c:if test="${th.newsNo  == news.newsNo}">
+											<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
+										</c:if>
+									</c:forEach>
+												
 											</div>
 											<div class="rn-recent-post-item-info">
 												<div class="rn-recent-post-item-meta">
-													<span class="rn-recent-post-item-categories">In <a>News</a>
-													</span> <span class="rn-recent-post-item-author">At <a href="#">15 May, 2018</a>
+													<span class="rn-recent-post-item-categories">${news.reporter}</a>
+													</span> <span class="rn-recent-post-item-author">At 15 May, 2018
 													</span>
 												</div>
 												<div class="rn-recent-post-item-title">
-													<h3>
-														<a>A standard blog post with image</a>
-													</h3>
+													<span class=""><a href="../news/${news.newsNo}">${news.newsTitle}</a></span>
 												</div>
 											</div>
 										</div> <!-- End Extra Small Post-->
 
 									</li>
+									
+									</c:forEach>
+									</c:if>
 								</ul>
 							</div>
 						</section>
@@ -353,12 +379,19 @@ to {
 
 					</aside>
 					<!-- End Sidebar-->
+				<%-- 로그인이 되어있는 경우 --%>
+				<c:if test="${!empty loginMember}">
+					<a class="btn btn-success float-right" href="../news/insertNews">등록하기</a>
+				</c:if>
+	
+	
 
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- End Page Content-->
+	
 	
 	<!-- Post Pagination-->
 			<div class="my-4">

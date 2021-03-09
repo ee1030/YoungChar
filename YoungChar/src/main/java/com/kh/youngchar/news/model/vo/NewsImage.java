@@ -9,10 +9,10 @@ public class NewsImage {
 	private int newsNo;
 	
 	public NewsImage() {}
+	
 
-	public NewsImage(int fileNo, String filePath, String fileName, int fileLevel, int newsNo) {
+	public NewsImage(String filePath, String fileName, int fileLevel, int newsNo) {
 		super();
-		this.fileNo = fileNo;
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.fileLevel = fileLevel;

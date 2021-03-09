@@ -11,11 +11,12 @@
 <title>충전기 설치 업체 상세페이지</title>
 
 <style>
-
-
-	#deleteBtn, #updateBtn {
-		float: right;
-	}
+#buttonsFam{
+	margin-top: 50px;
+}
+#deleteBtn, #updateBtn {
+	float: right;
+}
 </style>
 
 <!--
@@ -59,27 +60,37 @@
 			<div class="row">
 				<div class="col-lg-8" id="content">
 					<h3>${chargerCompany.companyName}</h3>
-					<br> ${chargerCompany.companyContent}
+					<br>
+					<div id="chargerCompany-content">
+						<%-- ${board.boardContent} --%>
+						<%-- JSTL을 이용한 개행문자 처리 --%>
+						<%-- <%%>는 원래 자바코드 --%>
+						<%
+					pageContext.setAttribute("newLine", "\n");
+				%>
+						${fn:replace(chargerCompany.companyContent , newLine, "<br>") }
+						<%-- el jstl은 컴파일시 자바코드로 변환  --%>
+					</div>
 				</div>
 				<div class="col-lg-4">
 
 					<!-- Check Availability-->
 					<div class="rn-small-search-form">
-					
+
 						<div class="rn-small-search-form-title">
 							<h2>INFORMATION</h2>
 						</div>
 						<form>
-							<div class="rn-icon-input" id="title">업체명    :  ${chargerCompany.companyName}</div>
+							<div class="rn-icon-input" id="title">업체명 : ${chargerCompany.companyName}</div>
 							<hr>
-							<div class="rn-icon-input" id="phone">전화번호 :   ${chargerCompany.phone}</div>
+							<div class="rn-icon-input" id="phone">전화번호 : ${chargerCompany.phone}</div>
 							<hr>
-							<div class="rn-icon-input" id="fax">팩스 :   ${chargerCompany.fax}</div>
+							<div class="rn-icon-input" id="fax">팩스 : ${chargerCompany.fax}</div>
 							<hr>
-							<div class="rn-icon-input" id="email">이메일 :  ${chargerCompany.email}</div>
+							<div class="rn-icon-input" id="email">이메일 : ${chargerCompany.email}</div>
 							<hr>
 							<div class="rn-icon-input" id="link">
-								<a href="${chargerCompany.link}">바로 가기</a>
+								<a href="${chargerCompany.link}">사이트 바로 가기</a>
 							</div>
 							<hr>
 
@@ -102,20 +113,19 @@
 						</ul>
 					</div>
 					<!-- End Car Sharing Buttons-->
-					
-					<div class="text-center">
-					<a class="btn btn-success float-right" href="${sessionScope.returnListURL}">이전</a>
-					
-					<c:url var="updateUrl" value="${chargerCompany.companyNo}/chargerCompanyUpdate" />
-	                	
-	                	<!-- 로그인된 회원이 글 작성자인 경우 -->
+					<div class="text-center" id="buttonsFam">
+						<a class="btn btn-success float-right" href="javascript:history.back();">이전</a>
+
+						<c:url var="updateUrl" value="${chargerCompany.companyNo}/chargerCompanyUpdate" />
+
+						<!-- 로그인된 회원이 글 작성자인 경우 -->
 						<c:if test="${(loginMember != null) }">
 							<a href="${updateUrl}" id="updateBtn" class="btn btn-success ml-1 mr-1">수정</a>
 							<form method="POST" action="${chargerCompany.companyNo}/deleteCompany" enctype="multipart/form-data" onsubmit="return validate();">
-								<button id="deleteBtn" class="btn btn-success">삭제</button> 
+								<button id="deleteBtn" class="btn btn-success">삭제</button>
 							</form>
 						</c:if>
-				</div>
+					</div>
 
 				</div>
 			</div>
@@ -123,37 +133,14 @@
 			<!-- Car Facilities-->
 			<div class="row rn-facilities">
 				<div class="col-lg-12">
-					<h2 class="rn-simple-title">Facilities</h2>
+					<h2 class="rn-simple-title">MAIN ITEMS</h2>
 				</div>
 				<div class="col-md-3 col-6">
 					<ul>
-						<li><i class="fas fa-check"></i> Audio input</li>
-						<li><i class="fas fa-check"></i> Bluetooth</li>
-						<li><i class="fas fa-check"></i> Heated seats</li>
+						<li><i class="fas fa-check"></i>${chargerCompany.itemA}</li>
+						<li><i class="fas fa-check"></i>${chargerCompany.itemB}</li>
 					</ul>
 				</div>
-				<div class="col-md-3 col-6">
-					<ul>
-						<li><i class="fas fa-check"></i> All Wheel drive</li>
-						<li><i class="fas fa-check"></i> USB input</li>
-						<li><i class="fas fa-check"></i> FM Radio</li>
-					</ul>
-				</div>
-				<div class="col-md-3 col-6">
-					<ul>
-						<li><i class="fas fa-check"></i> GPS Navigation</li>
-						<li><i class="fas fa-check"></i> Safe</li>
-						<li><i class="fas fa-check"></i> Air Conditioner</li>
-					</ul>
-				</div>
-				<div class="col-md-3 col-6">
-					<ul>
-						<li><i class="fas fa-times"></i> Parking Sensors</li>
-						<li><i class="fas fa-times"></i> WI-FI</li>
-						<li><i class="fas fa-times"></i> Sunroof</li>
-					</ul>
-				</div>
-			</div>
 			<!-- End Car Facilities-->
 
 		</div>
@@ -302,8 +289,8 @@
 	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
-	
-	
+
+
 	<script>
 		function validate() {
 			return confirm("정말로 삭제하시겠습니까?");
