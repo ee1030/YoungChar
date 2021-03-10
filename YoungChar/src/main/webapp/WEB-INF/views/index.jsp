@@ -11,6 +11,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>영차영차 메인</title>
+		<style>
+			#createDATE{
+				margin-top: 100px;
+			}
+		</style>
 	</head>
 	<jsp:include page="common/header.jsp"></jsp:include>
 
@@ -205,114 +210,52 @@
 					</div>
 				</div>
 				<div class="row rn-post-list">
+				
+				
+				<c:if test="${!empty mainNewsList }">
+					<c:forEach var="news" items="${mainNewsList}" varStatus="vs">
 					<div class="col-md-4">
 
 						<!-- Blog Post Item (Small Size)-->
 						<div class="rn-post-item rn-post-size-sm">
 							<div class="rn-post-item-thumb">
-								<a href="#">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/blog-item-sm-1.jpg" alt="Expanding Your Home Network’s Reach" srcset="${contextPath}/resources/assets/images/blog-item-sm-1.jpg 1x, ${contextPath}/resources/assets/images/blog-item-sm-1@2x.jpg 2x"/>
-								</a>
+							<c:forEach items="${nThList}" var="th">
+										<c:if test="${th.newsNo  == news.newsNo}">
+									<img src="${contextPath}${th.filePath}/${th.fileName}">
+								</c:if>
+								</c:forEach>
 							</div>
 							<div class="rn-post-item-header">
 								<div class="rn-post-date">
 									<div class="rn-post-date-inner">
-										<div class="rn-post-date-d">15</div>
-										<div class="rn-post-date-m-y">May, 2018</div>
+										<div class="rn-post-date-m-y">${news.newsCreateDate}</div>
 									</div>
 								</div>
 								<div class="rn-post-item-title-meta">
 									<div class="rn-post-item-title-meta-inner">
 										<div class="rn-post-item-meta">
-											<span class="rn-post-item-categories">In 
-												<a href="#">News</a>
+											<span class="rn-post-item-categories">${news.press}
 											</span>
 											<span class="rn-post-item-author">By 
-												<a href="#">John Doe</a>
+												<a href="#">${news.reporter}</a>
 											</span>
+											
 										</div>
 										<h3 class="rn-post-item-title">
-											<a href="#">Expanding Your Home Network’s Reach</a>
+											<a href="news/${news.newsNo}">${news.newsTitle}</a>
 										</h3>
 									</div>
+										<span class="rn-post-item-author" id="createDATE">${news.newsCreateDate}</span>
 								</div>
 							</div>
 						</div>
 						<!-- End Blog Post Item (Small Size)-->
 
 					</div>
-					<div class="col-md-4">
+					</c:forEach>
+					</c:if>
+				
 
-						<!-- Blog Post Item (Small Size)-->
-						<div class="rn-post-item rn-post-size-sm">
-							<div class="rn-post-item-thumb">
-								<a href="#">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/blog-item-sm-2.jpg" alt="Hannah Bronfman: Beauty Hound" srcset="${contextPath}/resources/assets/images/blog-item-sm-2.jpg 1x, ${contextPath}/resources/assets/images/blog-item-sm-2@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-post-item-header">
-								<div class="rn-post-date">
-									<div class="rn-post-date-inner">
-										<div class="rn-post-date-d">15</div>
-										<div class="rn-post-date-m-y">May, 2018</div>
-									</div>
-								</div>
-								<div class="rn-post-item-title-meta">
-									<div class="rn-post-item-title-meta-inner">
-										<div class="rn-post-item-meta">
-											<span class="rn-post-item-categories">In 
-												<a href="#">News</a>
-											</span>
-											<span class="rn-post-item-author">By 
-												<a href="#">John Doe</a>
-											</span>
-										</div>
-										<h3 class="rn-post-item-title">
-											<a href="#">Hannah Bronfman: Beauty Hound</a>
-										</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Blog Post Item (Small Size)-->
-
-					</div>
-					<div class="col-md-4">
-
-						<!-- Blog Post Item (Small Size)-->
-						<div class="rn-post-item rn-post-size-sm">
-							<div class="rn-post-item-thumb">
-								<a href="#">
-									<img class="img-fluid" src="${contextPath}/resources/assets/images/blog-item-sm-3.jpg" alt="Daily Report: A Busy Week Ahead" srcset="${contextPath}/resources/assets/images/blog-item-sm-3.jpg 1x, ${contextPath}/resources/assets/images/blog-item-sm-3@2x.jpg 2x"/>
-								</a>
-							</div>
-							<div class="rn-post-item-header">
-								<div class="rn-post-date">
-									<div class="rn-post-date-inner">
-										<div class="rn-post-date-d">15</div>
-										<div class="rn-post-date-m-y">May, 2018</div>
-									</div>
-								</div>
-								<div class="rn-post-item-title-meta">
-									<div class="rn-post-item-title-meta-inner">
-										<div class="rn-post-item-meta">
-											<span class="rn-post-item-categories">In 
-												<a href="#">News</a>
-											</span>
-											<span class="rn-post-item-author">By 
-												<a href="#">John Doe</a>
-											</span>
-										</div>
-										<h3 class="rn-post-item-title">
-											<a href="#">Daily Report: A Busy Week Ahead</a>
-										</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End Blog Post Item (Small Size)-->
-
-					</div>
 				</div>
 			</div>
 		</section>

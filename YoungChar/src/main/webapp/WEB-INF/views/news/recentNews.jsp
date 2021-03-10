@@ -5,10 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 
 <!-- Preloader CSS-->
 <style>
@@ -19,6 +15,10 @@
 
 #eyeIcon {
 	margin-right: 5px;
+}
+
+#eyeICON {
+	float: right;
 }
 
 #preloader:after, #preloader:before {
@@ -221,61 +221,49 @@ to {
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 
-</head>
-<body>
-	<!-- Widget Item-->
-	<section class="rn-widget">
-		<h2 class="rn-widget-title">RECENT NEWS</h2>
-		<div class="rn-widget-content">
-			<ul class="rn-recent-posts">
+
+						<!-- End Widget Item-->
 
 
-				<c:if test="${!empty recentList }">
-					<c:forEach var="news" items="${recentList}" varStatus="vs">
-						<li id="recentPostsItem">
-							<!-- Extra Small Post-->
-							<div class="rn-recent-post-item">
-								<div class="rn-recent-post-item-thumb">
-									<c:forEach items="${thList}" var="th">
-										<c:if test="${th.newsNo  == news.newsNo}">
-											<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
-										</c:if>
-									</c:forEach>
-
-								</div>
-								<div class="rn-recent-post-item-info">
-									<div class="rn-recent-post-item-meta">
-										<span class="rn-recent-post-item-categories">${news.reporter} </span> <span class="rn-recent-post-item-author">${news.newsCreateDate } </span>
-									</div>
-									<div class="rn-recent-post-item-title">
-										<span class=""><a href="../news/${news.newsNo}">${news.newsTitle}</a></span>
-									</div>
-								</div>
-							</div> <!-- End Extra Small Post-->
-
-						</li>
-
-					</c:forEach>
-				</c:if>
-			</ul>
-		</div>
-	</section>
-	<!-- End Widget Item-->
+						<!-- Widget Item-->
+						<section class="rn-widget">
+							<h2 class="rn-widget-title">RECENT NEWS</h2>
+							<div class="rn-widget-content">
+								<ul class="rn-recent-posts">
 
 
+									<c:if test="${!empty recentList }">
+										<c:forEach var="news" items="${recentList}" varStatus="vs">
+											<li id="recentPostsItem">
+												<!-- Extra Small Post-->
+												<div class="rn-recent-post-item">
+													<div class="rn-recent-post-item-thumb">
+														<c:forEach items="${thList}" var="th">
+															<c:if test="${th.newsNo  == news.newsNo}">
+																<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
+															</c:if>
+														</c:forEach>
 
+													</div>
+													<div class="rn-recent-post-item-info">
+														<div class="rn-recent-post-item-meta">
+															<span class="rn-recent-post-item-categories">${news.reporter}</a>
+															</span> <span class="rn-recent-post-item-author">${news.newsCreateDate} </span>
+														</div>
+														<div class="rn-recent-post-item-title">
+															<span class=""><a href="../news/${news.newsNo}">${news.newsTitle}</a></span>
+														</div>
+													</div>
+												</div> <!-- End Extra Small Post-->
 
+											</li>
 
-	<!--
-		All JavaScripts Codes Loaded
-		Ex: jquery, bootstrap, etc.
-		-->
-	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/popper.min.js"></script>
-	<script src="${contextPath}/resources/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${contextPath}/resources/assets/libs/flatpickr/flatpickr.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
-	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+										</c:forEach>
+									</c:if>
+								</ul>
+							</div>
+						</section>
+						<!-- End Widget Item-->
+
 </body>
 </html>

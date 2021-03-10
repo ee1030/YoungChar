@@ -428,4 +428,14 @@ public class NewsServiceImpl implements NewsService {
 		return result;
 	}
 
+	@Override
+	public List<News> selectMainNews() {
+		return dao.selectMainNews();
+	}
+
+	@Override
+	public List<NewsImage> selectNThumbnailList(List<News> mainNewsList) {
+		return dao.selectNThumbnailList(mainNewsList);
+	}
+
 }
