@@ -584,6 +584,7 @@ public class MemberController {
 		if(result > 0) {
 			swalIcon = "success";
 			swalTitle = "회원정보가 변경되었습니다.";
+			swalText = "변경된 비밀번호로 로그인을 해주세요.";
 			url = "redirect:/";
 			
 		}else {
@@ -595,6 +596,7 @@ public class MemberController {
 		
 		ra.addFlashAttribute("swalIcon", swalIcon);
 		ra.addFlashAttribute("swalTitle", swalTitle);
+		ra.addFlashAttribute("swalText", swalText);
 		return url;
 	}
 	
