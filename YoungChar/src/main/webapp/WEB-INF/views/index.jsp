@@ -209,8 +209,11 @@
 
 					</div>
 				</div>
-				<div class="row rn-post-list">
 				
+				
+				
+				
+				<div class="row rn-post-list">
 				
 				<c:if test="${!empty mainNewsList }">
 					<c:forEach var="news" items="${mainNewsList}" varStatus="vs">
@@ -219,7 +222,7 @@
 						<!-- Blog Post Item (Small Size)-->
 						<div class="rn-post-item rn-post-size-sm">
 							<div class="rn-post-item-thumb">
-							<c:forEach items="${nThList}" var="th">
+							<c:forEach items="${mainThList}" var="th">
 										<c:if test="${th.newsNo  == news.newsNo}">
 									<img src="${contextPath}${th.filePath}/${th.fileName}">
 								</c:if>

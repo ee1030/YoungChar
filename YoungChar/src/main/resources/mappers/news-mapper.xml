@@ -125,8 +125,7 @@
 	</insert>
 	
 	
-	
-	<select id="selectThumbnailList" parameterType="list"
+	<select id="selectMainThumbnailList" parameterType="list"
 		resultMap="newsImage_rm">
 		SELECT * FROM NEWS_IMAGE
 		WHERE FILE_LEVEL = 0
@@ -138,7 +137,9 @@
 
 	</select>
 	
-	<select id="selectNThumbnailList" parameterType="list"
+	
+	
+	<select id="selectThumbnailList" parameterType="list"
 		resultMap="newsImage_rm">
 		SELECT * FROM NEWS_IMAGE
 		WHERE FILE_LEVEL = 0

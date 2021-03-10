@@ -33,6 +33,7 @@ public interface NewsService {
 
 	List<NewsImage> selectThumbnailList(List<News> nList);
 	List<NewsImage> recentThumbnailList(List<News> recentList);
+	List<NewsImage> selectMainThumbnailList(List<News> mainNewsList);
 	
 	
 
@@ -46,7 +47,6 @@ public interface NewsService {
 
 	List<News> selectMainNews();
 
-	List<NewsImage> selectNThumbnailList(List<News> mainNewsList);
 
 
 
