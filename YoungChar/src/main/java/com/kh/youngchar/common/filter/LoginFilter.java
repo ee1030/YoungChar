@@ -31,7 +31,24 @@ public class LoginFilter implements Filter {
 			//ALLOWED_PATH.add("/resources/\\w"); // 이미지, css, js 파일 등을 접근할 수 있는 경로 추가
 			
 			// 회원 전용 페이지 중 비회원이 접근 가능한 페이지 경로 추가
-			ALLOWED_PATH.add("자기 페이지 경로 입력"); // 로그인 페이지 요청
+			ALLOWED_PATH.add("/member/login"); // 로그인 페이지 요청
+			ALLOWED_PATH.add("/member/loginAction");
+			ALLOWED_PATH.add("/member/signUp");
+			ALLOWED_PATH.add("/member/SignUpAction");
+			ALLOWED_PATH.add("/member/cooSignUp");
+			ALLOWED_PATH.add("/member/cooSignUpAction");
+			ALLOWED_PATH.add("/member/idDupCheck");
+			ALLOWED_PATH.add("/member/nickDupCheck");
+			ALLOWED_PATH.add("/member/findPwdMail");
+			ALLOWED_PATH.add("/member/normalSignUpMail");
+			ALLOWED_PATH.add("/member/callback");
+			ALLOWED_PATH.add("/member/kakaoLogin");
+			ALLOWED_PATH.add("/member/findId");
+			ALLOWED_PATH.add("/member/findIdAction");
+			ALLOWED_PATH.add("/member/findIdResult");
+			ALLOWED_PATH.add("/member/findPwd");
+			ALLOWED_PATH.add("/member/findPwdAction");
+			
 			
 			
 			HttpServletRequest req = (HttpServletRequest)request;
