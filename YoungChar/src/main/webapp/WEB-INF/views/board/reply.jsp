@@ -216,7 +216,7 @@ $("#addReply").on("click", function(){
 		var replyContent = $("#replyContent").val(); // 작성된 댓글 내용을 얻어와 저장
 		
 		if(replyContent.trim().length == 0){
-			swal({icon : "info", title : "댓글 작성 후 클릭해주세요."});
+			swal({icon : "info", title : "댓글 작성 후 클릭해주세요 !"});
 		} else { // 로그인 O , 닷글 작성 O 인 경우 
 			
 			$.ajax({
@@ -229,7 +229,7 @@ $("#addReply").on("click", function(){
 					if(result > 0){ // 댓글 삽입 성공 
 						
 						$("#replyContent").val(""); // 작성한 댓글 내용을 삭제 
-						swal({icon : "success", title : "댓글 삽입 성공"});
+						swal({icon : "success", title : "댓글이 등록 되었습니다."});
 						selectReplyList(); // 다시 목록 조회
 					
 						
@@ -237,7 +237,7 @@ $("#addReply").on("click", function(){
 					
 				}, error : function () {
 					
-					console.log("댓글 삽입 실패");
+					console.log("댓글 등록이 실패 되었습니다.");
 				}
 				
 				
@@ -317,7 +317,7 @@ function showUpdateReply(replyNo, el){
 		var replyContent = $(el).parent().prev().val();
 		
 		if(replyContent.trim().length == 0){ // 댓글이 작성되지 않은 경우
-			swal({icon : "info", title : "댓글을 작성해주세요."});	
+			swal({icon : "info", title : "댓글을 작성 부탁드립니다 ^_^"});	
 		} else {
 			
 			// queryString : 주소에 파라미터를 담아서 전달 
@@ -339,7 +339,7 @@ function showUpdateReply(replyNo, el){
 					
 					if(result > 0 ){
 						
-						swal({icon : "success", title : "댓글 수정 성공"});
+						swal({icon : "success", title : "성공적으로 댓글이 수정 되었습니다."});
 						selectReplyList();
 					}
 					
@@ -379,7 +379,7 @@ function showUpdateReply(replyNo, el){
 					
 					if(result > 0){
 						
-						swal({icon : "success", title : "댓글 삭제 성공"});
+						swal({icon : "success", title : "댓글이 삭제 되었습니다."});
 						selectReplyList(); // 삭제 성공 시  , 전체 댓글리스트를 다시 조회
 						
 					}
@@ -510,13 +510,13 @@ function showUpdateReply(replyNo, el){
 				success : function(result){
 					if(result > 0){
 						
-						swal({icon : "success", title : "답글 등록 성공"});
+						swal({icon : "success", title : "성공적으로 답글 등록이 되었습니다."});
 						selectReplyList();
 						
 					}
 					
 				}, error : function(){
-					console.log("답글(대댓글) 등록 실패");
+					console.log("답글(대댓글) 등록 실패ㅠㅠ");
 				}
 			});
 			

@@ -77,7 +77,7 @@
 						<div class = "card">
 								<!-- /spring/board/list/1or2 -> search/2 -->
 								<form action="../search/${pInfo.boardType}" class="text-center" id="searchForm" >
-									<span> 카테고리(다중 선택 가능)<br> 
+									<span> <br> 
 									
 									<label for="exercise">테슬라</label> 
 									<input type="checkbox" name="ct" value="테슬라" id="tesla"> &nbsp; 
