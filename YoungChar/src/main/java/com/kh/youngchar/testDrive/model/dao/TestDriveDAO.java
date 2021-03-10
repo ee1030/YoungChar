@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.TestCars;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.testDrive.model.vo.CompanyMember;
@@ -103,6 +104,13 @@ public class TestDriveDAO {
 	 */
 	public List<TestDrReservation> selecCarImgs(List<TestDrReservation> rList) {
 		return sqlSession.selectList("testDriveMapper.selectCarImgs", rList);
+	}
+
+	/** 리뷰 최신 5개 가져오기
+	 * @return reviewList
+	 */
+	public List<DriveReview> reviewList() {
+		return sqlSession.selectList("testDriveMapper.reviewList");
 	}
 
 }

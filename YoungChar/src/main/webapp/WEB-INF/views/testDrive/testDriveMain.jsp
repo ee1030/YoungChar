@@ -32,7 +32,9 @@
   border-color: #00D231 !important;
   color: #fff !important;
 }
-		
+		.carImg{
+			max-width : 200px !important;
+		}
 		
 		</style>
 
@@ -149,7 +151,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-<<%--
+
 						<!-- Section Title-->
 						<div class="rn-section-title   ">
 							<h2 class="rn-title">Review</h2>
@@ -162,17 +164,18 @@
 								<div class="carousel-inner">
 								
 								
-								 div class="carousel-item active">
+								 <div class="carousel-item active">
 										<blockquote class="rn-testimonial-item">
 											<div class="rn-testimonial-author">
 												<div class="rn-testimonial-author-thumb">
-													<img src="${contextPath}${reviewList[0].memImgPath}/${reviewList[0].memImgName}" alt="${reviewList[0].memNickname}" srcset="${contextPath}${reviewList[0].memImgPath}/${reviewList[0].memImgName} 1x, ${contextPath}${reviewList[0].memImgPath}/${reviewList[0].memImgName} 2x"/>
+													<!-- <img class="carImg" src="/youngchar/resources/assets/images/teslaCar.jpg" srcset="/youngchar/resources/assets/images/teslaCar.jpg 1x, /youngchar/resources/assets/images/teslaCar.jpg 2x"/>
+ -->
 												</div>
-												<div class="rn-testimonial-author-info"><strong>${review.memNickname}</strong>
-													<p>${reviewList[0].memId}</p>
+												<div class="rn-testimonial-author-info"><strong>${reviewList[0].memNickname}</strong>
+													<p>${reviewList[0].carName}</p>
 												</div>
 											</div>
-											<p>${reviewList[0].boardContent}
+											<p> ${ reviewList[0].boardTitle}
 											</p>
 											<footer>
 												<div class="rn-testimonial-rating">
@@ -186,21 +189,42 @@
 										</blockquote>
 									</div>
 									
-										<!-- End Testimonial Item-->
-									<c:forEach var="review" items="${reviewList}">
-								
-										<!-- Testimonial Item-->
 									<div class="carousel-item">
 										<blockquote class="rn-testimonial-item">
 											<div class="rn-testimonial-author">
 												<div class="rn-testimonial-author-thumb">
-													<img src="${contextPath}${review.memImgPath}/${review.memImgName}" alt="${review.memNickname}" srcset="${contextPath}${review.memImgPath}/${review.memImgName} 1x, ${contextPath}${review.memImgPath}/${review.memImgName} 2x"/>
-												</div>
-												<div class="rn-testimonial-author-info"><strong>${review.memNickname}</strong>
-													<p>${review.memId}</p>
+													<%-- <img class="carImg" src="${contextPath}${memImgPath}/${memImgName}" srcset="${contextPath}${memImgPath}/${memImgName} 1x, ${contextPath}${memImgPath}/${memImgName} 2x"/>
+												 --%></div>
+												<div class="rn-testimonial-author-info"><strong>${reviewList[0].memNickname}</strong>
+													<p>${reviewList[0].carName}</p>
 												</div>
 											</div>
-											<p>${review.boardContent}
+											<p> ${ reviewList[0].boardTitle}
+											</p>
+											<footer>
+												<div class="rn-testimonial-rating">
+												<c:set var="star" value="${csat}"/>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+												</div>
+											</footer>
+										</blockquote>
+									</div>
+									
+									<div class="carousel-item">
+										<blockquote class="rn-testimonial-item">
+											<div class="rn-testimonial-author">
+												<div class="rn-testimonial-author-thumb">
+													<!-- <img class="carImg" src="/youngchar/resources/assets/images/teslaCar.jpg" srcset="/youngchar/resources/assets/images/teslaCar.jpg 1x, /youngchar/resources/assets/images/teslaCar.jpg 2x"/>
+											 -->	</div>
+												<div class="rn-testimonial-author-info"><strong>${reviewList[0].memNickname}</strong>
+													<p>${reviewList[0].carName}</p>
+												</div>
+											</div>
+											<p> ${ reviewList[0].boardTitle}
 											</p>
 											<footer>
 												<div class="rn-testimonial-rating">
@@ -213,10 +237,6 @@
 											</footer>
 										</blockquote>
 									</div>
-										<!-- End Testimonial Item-->
-									
-										</c:forEach> --%>
-
 
 								</div>
 								<a class="carousel-control-prev" href="#rn-testimonials" role="button" data-slide="prev">
