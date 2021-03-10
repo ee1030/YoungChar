@@ -370,7 +370,7 @@
 			// 		spring /	board	/					1				/500
 
 			// 상대경로 
-			var boardViewURL = "../${pInfo.boardType}/" + boardNo;
+			var boardViewURL = "../boardView/${pInfo.boardType}/" + boardNo;
 
 			location.href = boardViewURL;
 		});

@@ -339,7 +339,7 @@ li {
 			
 			console.log(boardNo);
 			
-			var boardViewURL = "../${pInfo.boardType}/" + boardNo;
+			var boardViewURL = "../boardView/${pInfo.boardType}/" + boardNo;
 
 			location.href = boardViewURL;
 		});
