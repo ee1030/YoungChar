@@ -37,7 +37,6 @@
 <link id="color" rel="stylesheet" href="${contextPath}/resources/assets/css/color-1.css" media="screen">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/responsive.css"> --%>
-.css">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/chartist.css">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/owlcarousel.css">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/css/vendors/prism.css">
