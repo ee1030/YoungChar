@@ -339,7 +339,7 @@
 						case "pwd1": str = "비밀번호";	break;
 						case "pwd2": str = "비밀번호 확인";break;
 						}
-						
+						return false;
 						swal({icon:"warning", title:str+" 형식이 유효하지 않습니다."});
 						
 					}

@@ -173,7 +173,7 @@
 											
 											<c:otherwise>
 												<li class="nav-item">
-												<c:if test="${loginMember.memberGrade == 'G'}">
+												<c:if test="${loginMember.memberGrade == 'G' || loginMember.memberGrade == null}">
 				                	<a class="nav-link" href="${contextPath}/member/mypage">${loginMember.memberNm}</a>
 				                </c:if>
 				                

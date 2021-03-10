@@ -102,11 +102,13 @@ public class MemberController {
 	String nickName = (String)response_obj.get("nickname");
 	String memberNm = (String)response_obj.get("name");
 	String memberEmail = (String)response_obj.get("email");
+	String memberGrade = "G";
 	
 	loginMember.setMemberId(memberId);
 	loginMember.setNickName(nickName);
 	loginMember.setMemberNm(memberNm);
 	loginMember.setMemberEmail(memberEmail);
+	loginMember.setMemberGrade(memberGrade);
 	
 	model.addAttribute("loginMember", loginMember);
 	

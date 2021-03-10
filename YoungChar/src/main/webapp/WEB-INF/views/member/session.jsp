@@ -168,18 +168,13 @@
 									</textarea>
 									</div>
 								  </div>
-								  <div class="checkbox pull-right">
-										<div class="custom-checkbox">
-											<div class="form-check">
+								  <div class="d-block">
 												<input type="checkbox" name="agree" id="agree"
-													class="form-check-input custom-control-input"> <br>
-												<label class="form-check-label custom-control-label"
+													class="checkbox_animated">
+												<label
 													for="agree">위 약관에 동의합니다.</label>
-											</div>
-										</div>
 									</div>
-								  
-								  
+								
 								  
 								</div>
 							  </div>
