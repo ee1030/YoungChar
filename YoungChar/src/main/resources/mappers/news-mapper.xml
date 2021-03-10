@@ -44,6 +44,38 @@
 		ORDER BY NEWS_NO DESC
 	</select>
 	
+	<select id="selectOldestNewsList" parameterType="_int"
+		resultMap="news_rm">
+		SELECT NEWS_NO, NEWS_TITLE, PRESS, REPORTER, NEWS_CONTENT, NEWS_CREATE_DT,
+		NEWS_STATUS, READCOUNT, BEST, WORST
+		FROM V_NEWS
+		WHERE
+		NEWS_STATUS = 'Y'
+		ORDER BY NEWS_NO ASC
+	</select>
+	
+	
+	<select id="selectBestNewsList" parameterType="_int"
+		resultMap="news_rm">
+		SELECT NEWS_NO, NEWS_TITLE, PRESS, REPORTER, NEWS_CONTENT, NEWS_CREATE_DT,
+		NEWS_STATUS, READCOUNT, BEST, WORST
+		FROM V_NEWS
+		WHERE
+		NEWS_STATUS = 'Y'
+		ORDER BY BEST DESC
+	</select>
+	
+	
+	<select id="selectWorstNewsList" parameterType="_int"
+		resultMap="news_rm">
+		SELECT NEWS_NO, NEWS_TITLE, PRESS, REPORTER, NEWS_CONTENT, NEWS_CREATE_DT,
+		NEWS_STATUS, READCOUNT, BEST, WORST
+		FROM V_NEWS
+		WHERE
+		NEWS_STATUS = 'Y'
+		ORDER BY WORST DESC
+	</select>
+	
 	
 	<select id="selectRecentNewsList" parameterType="_int"
 		resultMap="news_rm">

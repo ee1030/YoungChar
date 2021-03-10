@@ -71,6 +71,7 @@ public class NewsController {
 	}
 	
 	
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -277,5 +278,116 @@ public class NewsController {
 
 		return url;
 	}
+	
+	
+	@RequestMapping("oldestNewsMain")
+	public String OldestNews(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+
+		PageInfo pInfo = service.getPageInfo(cp);
+		
+
+		List<News> oldList = service.selectOldestNewsList(pInfo);
+		List<News> recentList = service.selectRecentNewsList(pInfo);
+		
+		if (oldList != null && !oldList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<NewsImage> thumbnailList = service.selectThumbnailList(oldList);
+
+			if (thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+
+		}
+		
+		else if (recentList != null && !recentList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<NewsImage> recentThumbnailList = service.recentThumbnailList(recentList);
+
+			if (recentThumbnailList != null) {
+				model.addAttribute("recentThList", recentThumbnailList);
+			}
+
+		}
+
+
+
+		model.addAttribute("oldList", oldList);
+		model.addAttribute("recentList", recentList);
+		model.addAttribute("pInfo", pInfo);
+
+		return "news/oldestNewsMain";
+	}
+	
+	
+	
+	@RequestMapping("bestNewsMain")
+	public String bestNews(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+
+		PageInfo pInfo = service.getPageInfo(cp);
+
+		List<News> bestList = service.selectBestNewsList(pInfo);
+		List<News> recentList = service.selectRecentNewsList(pInfo);
+
+		if (bestList != null && !bestList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<NewsImage> thumbnailList = service.selectThumbnailList(bestList);
+
+			if (thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+
+		}
+		else if (recentList != null && !recentList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<NewsImage> recentThumbnailList = service.recentThumbnailList(recentList);
+
+			if (recentThumbnailList != null) {
+				model.addAttribute("recentThList", recentThumbnailList);
+			}
+
+		}
+
+
+
+		model.addAttribute("bestList", bestList);
+		model.addAttribute("recentList", recentList);
+		model.addAttribute("pInfo", pInfo);
+
+		return "news/bestNewsMain";
+	}
+	
+	
+	
+	
+	@RequestMapping("worstNewsMain")
+	public String worstNews(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+
+		PageInfo pInfo = service.getPageInfo(cp);
+
+		List<News> worstList = service.selectWorstNewsList(pInfo);
+		List<News> recentList = service.selectRecentNewsList(pInfo);
+
+		if (worstList != null && !worstList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<NewsImage> thumbnailList = service.selectThumbnailList(worstList);
+
+			if (thumbnailList != null) {
+				model.addAttribute("thList", thumbnailList);
+			}
+
+		}
+		else if (recentList != null && !recentList.isEmpty()) { // 게시글 목록 조회 성공 시
+			List<NewsImage> recentThumbnailList = service.recentThumbnailList(recentList);
+
+			if (recentThumbnailList != null) {
+				model.addAttribute("recentThList", recentThumbnailList);
+			}
+
+		}
+
+
+
+		model.addAttribute("worstList", worstList);
+		model.addAttribute("recentList", recentList);
+		model.addAttribute("pInfo", pInfo);
+
+		return "news/worstNewsMain";
+	}
+
 
 }

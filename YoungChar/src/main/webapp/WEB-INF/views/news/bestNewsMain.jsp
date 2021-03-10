@@ -256,8 +256,8 @@ to {
 				<div class="col-lg-8 rn-post-list rn-grid-post-col-2">
 					<div class="row">
 
-						<c:if test="${!empty nList }">
-							<c:forEach var="news" items="${nList}" varStatus="vs">
+						<c:if test="${!empty bestList }">
+							<c:forEach var="news" items="${bestList}" varStatus="vs">
 								<div class="col-md-6">
 
 									<!-- Blog Post Item (Small Size)-->
@@ -327,9 +327,9 @@ to {
 							<h2 class="rn-widget-title">CATEGORI</h2>
 							<div class="rn-widget-content">
 								<ul>
-									<li><a href="../news/newsMain"><b>NEWEST</b></a></li>
+									<li><a href="../news/newsMain">NEWEST</a></li>
 									<li><a href="../news/oldestNewsMain">OLDEST</a></li>
-									<li><a href="../news/bestNewsMain">BEST</a></li>
+									<li><a href="../news/bestNewsMain"><b>BEST</b></a></li>
 									<li><a href="../news/worstNewsMain">WOSRT</a></li>
 								</ul>
 							</div>
