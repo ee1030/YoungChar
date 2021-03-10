@@ -71,16 +71,16 @@ public class LoginFilter implements Filter {
 				
 				if(Pattern.matches("/", path) 
 						|| Pattern.matches("/resources/.*", path)
-						|| Pattern.matches("/reviewlist/*", path)
-						|| Pattern.matches("/search/*", path) 
-						|| Pattern.matches("/chargerLocation/*", path)
-						|| Pattern.matches("/chargerCompany/*", path)
+						|| Pattern.matches("/reviewlist/.*", path)
+						|| Pattern.matches("/search/.*", path) 
+						|| Pattern.matches("/chargerLocation/.*", path)
+						|| Pattern.matches("/chargerCompany/.*", path)
 						|| Pattern.matches("/car/list", path)
-						|| Pattern.matches("/car/carView/*", path)
-						|| Pattern.matches("/board/list/*", path)
-						|| Pattern.matches("/board/search/*", path)
-						|| Pattern.matches("/board/boardView/*", path)
-						|| Pattern.matches("/news/*", path) ) {
+						|| Pattern.matches("/car/carView/.*", path)
+						|| Pattern.matches("/board/list/.*", path)
+						|| Pattern.matches("/board/search/.*", path)
+						|| Pattern.matches("/board/boardView/.*", path)
+						|| Pattern.matches("/news/.*", path) ) {
 					chain.doFilter(request, response);
 				}else {
 					res.sendRedirect(req.getContextPath()); // 메인페이지로 이동
