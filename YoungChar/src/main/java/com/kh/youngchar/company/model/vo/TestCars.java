@@ -12,8 +12,27 @@ public class TestCars {
 	private String brand; //브랜드
 	
 	public TestCars() {}
+	
+	
 
 	
+	public TestCars(int testDrivecCarNo, int carNo, String carName, String carModel, int fileNo, String filePath,
+			String fileName, int memNo2, String brand) {
+		super();
+		this.testDrivecCarNo = testDrivecCarNo;
+		this.carNo = carNo;
+		this.carName = carName;
+		this.carModel = carModel;
+		this.fileNo = fileNo;
+		this.filePath = filePath;
+		this.fileName = fileName;
+		this.memNo2 = memNo2;
+		this.brand = brand;
+	}
+
+
+
+
 	public String getBrand() {
 		return brand;
 	}

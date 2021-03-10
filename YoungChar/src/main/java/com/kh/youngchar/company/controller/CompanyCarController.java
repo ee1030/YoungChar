@@ -1,5 +1,6 @@
 package com.kh.youngchar.company.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +83,10 @@ public class CompanyCarController {
 	@RequestMapping("carSearch")
 	public List<TestCars> carSearch(@RequestParam String carName1) {
 		
-		//System.out.println(carName1);
+		//시승 가능 차량 LIST
 		List<TestCars> cars = service.carSearch(carName1);
+		
+		
 		
 		if(cars != null && !cars.isEmpty()) {
 			List<TestCars> imgs = carImages(cars);
@@ -98,7 +101,23 @@ public class CompanyCarController {
 				}
 			}
 		}
-		return cars;
+		
+		//이미지 없는 차량 제외하기
+		List<TestCars> newCar = new ArrayList<TestCars>();
+		
+		for(TestCars c : cars) {
+			
+			if(c.getFileNo() != 0) {
+			newCar.add(new TestCars(c.getTestDrivecCarNo(), c.getCarNo(), c.getCarName(), c.getCarModel(), 
+									c.getFileNo(), c.getFilePath(), c.getFileName(), c.getMemNo2(), c.getBrand()));
+			
+			}
+		}
+		
+		//System.out.println(cars);
+		//System.out.println(newCar);
+		
+		return newCar;
 	}
 	
 	
