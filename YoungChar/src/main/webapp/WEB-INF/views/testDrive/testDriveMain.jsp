@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -146,7 +149,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-
+<<%--
 						<!-- Section Title-->
 						<div class="rn-section-title   ">
 							<h2 class="rn-title">Review</h2>
@@ -157,20 +160,19 @@
 						<div class="rn-testimonials">
 							<div class="rn-testimonials-carousel carousel slide" id="rn-testimonials" data-ride="carousel">
 								<div class="carousel-inner">
-									<div class="carousel-item active">
-
-										<!-- Testimonial Item-->
+								
+								
+								 div class="carousel-item active">
 										<blockquote class="rn-testimonial-item">
 											<div class="rn-testimonial-author">
 												<div class="rn-testimonial-author-thumb">
-													<img src="${contextPath}/resources/assets/images/author-1.jpg" alt="John Doe" srcset="${contextPath}/resources/assets/images/author-1.jpg 1x, ${contextPath}/resources/assets/images/author-1@2x.jpg 2x"/>
+													<img src="${contextPath}${reviewList[0].memImgPath}/${reviewList[0].memImgName}" alt="${reviewList[0].memNickname}" srcset="${contextPath}${reviewList[0].memImgPath}/${reviewList[0].memImgName} 1x, ${contextPath}${reviewList[0].memImgPath}/${reviewList[0].memImgName} 2x"/>
 												</div>
-												<div class="rn-testimonial-author-info"><strong>안나공주</strong>
-													<p>Anna princess</p>
+												<div class="rn-testimonial-author-info"><strong>${review.memNickname}</strong>
+													<p>${reviewList[0].memId}</p>
 												</div>
 											</div>
-											<p>테슬라 개 짱짱
-												역시 전기차는 테슬라죠? 천슬라 가즈아
+											<p>${reviewList[0].boardContent}
 											</p>
 											<footer>
 												<div class="rn-testimonial-rating">
@@ -182,10 +184,38 @@
 												</div>
 											</footer>
 										</blockquote>
-										<!-- End Testimonial Item-->
-
 									</div>
 									
+										<!-- End Testimonial Item-->
+									<c:forEach var="review" items="${reviewList}">
+								
+										<!-- Testimonial Item-->
+									<div class="carousel-item">
+										<blockquote class="rn-testimonial-item">
+											<div class="rn-testimonial-author">
+												<div class="rn-testimonial-author-thumb">
+													<img src="${contextPath}${review.memImgPath}/${review.memImgName}" alt="${review.memNickname}" srcset="${contextPath}${review.memImgPath}/${review.memImgName} 1x, ${contextPath}${review.memImgPath}/${review.memImgName} 2x"/>
+												</div>
+												<div class="rn-testimonial-author-info"><strong>${review.memNickname}</strong>
+													<p>${review.memId}</p>
+												</div>
+											</div>
+											<p>${review.boardContent}
+											</p>
+											<footer>
+												<div class="rn-testimonial-rating">
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+													<i class="fas fa-star"></i>
+												</div>
+											</footer>
+										</blockquote>
+									</div>
+										<!-- End Testimonial Item-->
+									
+										</c:forEach> --%>
 
 
 								</div>
