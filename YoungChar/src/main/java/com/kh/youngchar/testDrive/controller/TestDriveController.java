@@ -47,9 +47,9 @@ public class TestDriveController {
 			TestCars car = new TestCars();
 			car.setCarName(r.getCarName());
 			imgs.add(car);
-			System.out.println(car);
+			//System.out.println(car);
 		}
-		System.out.println(imgs);
+		//System.out.println(imgs);
 		
 		//차 이미지 가져오기
 		List<TestCars> carImgList = service.carImages(imgs);
@@ -63,7 +63,7 @@ public class TestDriveController {
 			}
 		}
 		
-		System.out.println(reviewList);
+		//System.out.println(reviewList);
 		model.addAttribute("reviewList",reviewList);
 		
 		return "testDrive/testDriveMain";
@@ -106,7 +106,7 @@ public class TestDriveController {
 	
 		String cListJSON = gson.toJson(cList);
 		
-		System.out.println(cList);
+		//System.out.println(cList);
 		
 		//대리점들 주소 불러오기
 		//List<CompanyMember> list = service.companyList();
@@ -130,10 +130,10 @@ public class TestDriveController {
 	public String getAddr (@RequestParam int carNo,
 									Model model){
 		
-		System.out.println(carNo);
+		//System.out.println(carNo);
 		List<CompanyMember> companyList = service.selectCompanyList(carNo);
 		
-		System.out.println(companyList);
+		//System.out.println(companyList);
 		
 		Gson gson = new Gson();
 		String companyListJSON = gson.toJson(companyList);
@@ -153,8 +153,8 @@ public class TestDriveController {
 		int memNo = loginMember.getMemberNo();
 		reservation.setMemNo(memNo);
 		
-		System.out.println("예약"+reservation);
-		System.out.println(memNo);
+		//System.out.println("예약"+reservation);
+		//System.out.println(memNo);
 		
 		int result = service.makeReservation(reservation);
 		
@@ -186,7 +186,7 @@ public class TestDriveController {
 		
 		//예약 목록 조회하기
 		List<TestDrReservation> rList = service.selectReservation(memNo);
-		System.out.println(rList);
+		//System.out.println(rList);
 		
 		if(rList != null && !rList.isEmpty()) { //예약 있다면 (예약중/시승완료)
 			

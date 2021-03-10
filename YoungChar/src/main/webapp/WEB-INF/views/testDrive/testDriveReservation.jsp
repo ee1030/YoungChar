@@ -451,7 +451,7 @@
 				 		carList.html(originalCarList);
 				 	}
 					 var cList = ${cListJSON};
-					 console.log(cList);
+					 //console.log(cList);
 					 
 					 
 					 for(var car of cList){
@@ -516,7 +516,7 @@
 				
 				
 				
-				console.log("carNo : "+carNo);
+				//console.log("carNo : "+carNo);
 				//ajax로 차 등록되어있는 업체 가져오기.
 				$.ajax({
 					url: "getAddr",
@@ -544,7 +544,7 @@
 			
 			// 대리점 불러오기!
 			var comAddr = $("#centerTable").children(":first").children().text();
-			console.log(comAddr);
+			//console.log(comAddr);
 			
 			
 		</script>
@@ -573,7 +573,7 @@
 		
 			//시간 선택 버튼 클릭 시
 			$("#timeBtn").on("click",function(){
-	  		console.log($("#pickup-date").val()+" " +$("#pickup-time").val());
+	  		//console.log($("#pickup-date").val()+" " +$("#pickup-time").val());
 	  		$(".time").text($("#pickup-date").val()+" " +$("#pickup-time").val());
 	  		
 	  		//input태그에 시간 추가

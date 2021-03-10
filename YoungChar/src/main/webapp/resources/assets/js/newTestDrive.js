@@ -3,7 +3,7 @@
 function map(company){
 
 
-console.log(company);
+//console.log(company);
 //로그인한 사람 주소 가져와서 중심좌표에 넣기..?
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -17,7 +17,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-console.log(company.length);
+//console.log(company.length);
     //반복문으로 가져온 업체 주소 배열 좌표에 넣기
     for(var i = 0; i < company.length ; i++){
         
@@ -53,7 +53,7 @@ console.log(company.length);
     $("#searchNo").html("검색결과 "+company.length+"건");
     $("#centerTable").html("");
     var com = company;
-    console.log(com);
+    //console.log(com);
     for(var c of com){
         var tr = $("<tr>");
         var td = $("<td>");
@@ -68,7 +68,7 @@ console.log(company.length);
            
         //ajax 완료시 수행
 		if(checkFlag == true){
-            console.log(com[0].memberAddr);
+            //console.log(com[0].memberAddr);
             addTo(com[0].memberAddr, com[0].brand, com[0].memberNo, com[0].cooName, com[0].memPhone, com[0].testDriveNo);
         }
 
@@ -96,7 +96,7 @@ console.log(company.length);
 
             //input에 값추가하기
                 $("input[name=testDriveCarNo]").val(testDriveNo);
-                console.log(testDriveNo);
+                //console.log(testDriveNo);
           
         });
 
