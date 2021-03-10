@@ -47,6 +47,12 @@ public interface NewsService {
 
 	List<News> selectMainNews();
 
+	List<News> selectOldestNewsList(PageInfo pInfo);
+
+	List<News> selectBestNewsList(PageInfo pInfo);
+
+	List<News> selectWorstNewsList(PageInfo pInfo);
+
 
 
 

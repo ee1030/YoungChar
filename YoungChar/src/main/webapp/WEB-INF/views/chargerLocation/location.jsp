@@ -36,7 +36,7 @@
 	margin: 10px 0 30px 10px;
 	padding: 5px;
 	overflow-y: auto;
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.4);
 	z-index: 1;
 	font-size: 12px;
 	border-radius: 10px;
@@ -346,6 +346,14 @@
 	font-size: 11px;
 	margin-top: 0;
 }
+
+#keyWord {
+float: left;
+}
+
+#searchButton{
+	margin-top: 15px;
+}
 </style>
 
 <!--
@@ -372,8 +380,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="rn-page-title-inner">
-						<h1>Fullwidth</h1>
-						<p>Cras eros lorem, rhoncus ac risus sit amet, fringilla ultrices purus.</p>
+						<h1>MAP</h1>
+						<p>당신에게 가까운 충전소를 찾아보세요!</p>
 					</div>
 				</div>
 			</div>
@@ -393,14 +401,11 @@
 						<div class="option">
 							<div>
 								<form onsubmit="test(); return false;">
-									키워드 : <input type="text" value="" id="keyword" size="15">
-									<button type="submit">검색하기</button>
+									<p  id="keyWord">키워드 : </p><input type="text" value="" id="keyword" size="15" placeholder="키워드를 입력하면 화면이 나타납니다">
+									<button id="searchButton" type="submit">검색하기</button>
 								</form>
 							</div>
 						</div>
-						<hr>
-						<ul id="placesList"></ul>
-						<div id="pagination"></div>
 					</div>
 				</div>
 			</div>
@@ -408,138 +413,7 @@
 	</div>
 	<!-- End Page Content-->
 
-	<!-- Site Footer-->
-	<footer class="rn-footer">
-
-		<!-- Footer Widgets-->
-		<div class="rn-footer-widgets">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">About Us</h2>
-							<div class="rn-widget-content">
-								<a class="brand-name" href="index.html"> <img src="assets/images/logo.svg" alt="Logo">
-								</a>
-								<p>Sed sit amet ligula ac nulla finibus euismod nec nec diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper, risus eget ornare maximus, ipsum ante semper.</p>
-								<ul class="rn-widget-social">
-									<li><a href="#"> <i class="fab fa-facebook-f"></i>
-									</a></li>
-									<li><a href="#"> <i class="fab fa-twitter"></i>
-									</a></li>
-									<li><a href="#"> <i class="fab fa-instagram"></i>
-									</a></li>
-									<li><a href="#"> <i class="fab fa-linkedin-in"></i>
-									</a></li>
-								</ul>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
-					</div>
-					<div class="col-md-5">
-
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">Quick Links</h2>
-							<div class="rn-widget-content">
-								<div class="row rn-quick-links">
-									<div class="col-6">
-										<ul>
-											<li><a href="#">About Us</a></li>
-											<li><a href="#">Contact Us</a></li>
-											<li><a href="#">Support</a></li>
-											<li><a href="#">View Booking</a></li>
-											<li><a href="#">Affiliate Programme</a></li>
-											<li><a href="#">Marketplace</a></li>
-										</ul>
-									</div>
-									<div class="col-6">
-										<ul>
-											<li><a href="#">Site Map</a></li>
-											<li><a href="#">Careers</a></li>
-											<li><a href="#">Press</a></li>
-											<li><a href="#">Get a Receipt</a></li>
-											<li><a href="#">Community</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
-					</div>
-					<div class="col-md-3">
-
-						<!-- Widget Item-->
-						<section class="rn-widget">
-							<h2 class="rn-widget-title">Contact Us</h2>
-							<div class="rn-widget-content">
-								<div class="rn-icon-contents">
-									<div class="rn-phone rn-icon-content">
-										<div class="rn-icon">
-											<i class="lnr lnr-phone"></i>
-										</div>
-										<div class="rn-info">
-											<ul>
-												<li>(954)-944-1250</li>
-												<li>(954)-944-1251</li>
-											</ul>
-										</div>
-									</div>
-									<div class="rn-email rn-icon-content">
-										<div class="rn-icon">
-											<i class="lnr lnr-envelope"></i>
-										</div>
-										<div class="rn-info">
-											<ul>
-												<li>support@example.coms</li>
-												<li>sale@example.com</li>
-											</ul>
-										</div>
-									</div>
-									<div class="rn-address rn-icon-content">
-										<div class="rn-icon">
-											<i class="lnr lnr-map-marker"></i>
-										</div>
-										<div class="rn-info">
-											<ul>
-												<li>1425 Pointe Lane, Miami</li>
-												<li>Florida – 33169, USA</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<!-- End Widget Item-->
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Footer Widgets-->
-
-		<!-- Footer Copyright-->
-		<div class="rn-footer-copyright">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<p>Copyright &copy; RentNow 2018. All rights reserved.</p>
-					</div>
-					<div class="col-md-6 text-right">
-						<span class="rn-pyament-methods"> <span>We Accept</span> <img src="assets/images/payments.png" alt="payments" srcset="assets/images/payments.png 1x, assets/images/payments@2x.png 2x">
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Footer Copyright-->
-
-	</footer>
-	<!-- End Site Footer-->
+	<jsp:include page="../common/footer.jsp"/> 
 
 	<!--
 		All JavaScripts Codes Loaded
@@ -723,11 +597,11 @@
 				var infowindow = new kakao.maps.InfoWindow({
 
 					// 인포윈도우에 표시할 내용
-					content : '<b>' + positions[i].csNm + '</b>' + '<br>' + '주소 : '
+					content : '<div style="width:300px; text-align:center;padding-top:4px;">' + '<b>' + positions[i].csNm + '</b>' + '<br>' + '주소 : '
 							+ positions[i].addr + '<br>' + '충전기 단자 : '
-							+ positions[i].cpTp + '<br>' + '충전 타입(완속/급속)  : '
-							+ positions[i].chargeTp + '<br>' + '충전기 상태: '
-							+ positions[i].cpStat
+							+ positions[i].cpTp + '<br>' + '충전 타입(완속/급속) : '
+							+ positions[i].chargeTp + '<br>' + '충전기 상태 : '
+							+ positions[i].cpStat + '</div>'
 				});
 
 				kakao.maps.event.addListener(marker, 'mouseover',
@@ -752,6 +626,8 @@
 			}
 		}
 	</script>
+	
+	
 
 
 	<script src="${contextPath}/resources/assets/js/jquery.min.js"></script>

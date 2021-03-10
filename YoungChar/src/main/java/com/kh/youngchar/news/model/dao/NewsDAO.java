@@ -133,6 +133,32 @@ public class NewsDAO {
 
 
 
+	public List<News> selectOldestNewsList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("newsMapper.selectOldestNewsList", rowBounds);
+	}
+
+
+
+	public List<News> selectBestNewsList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("newsMapper.selectBestNewsList", rowBounds);
+	}
+
+
+
+	public List<News> selectWorstNewsList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("newsMapper.selectWorstNewsList", rowBounds);
+	}
+
+
 
 	
 

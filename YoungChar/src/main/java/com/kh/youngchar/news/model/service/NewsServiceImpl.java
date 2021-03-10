@@ -438,5 +438,20 @@ public class NewsServiceImpl implements NewsService {
 		return dao.selectMainThumbnailList(mainNewsList);
 	}
 
+	@Override
+	public List<News> selectOldestNewsList(PageInfo pInfo) {
+		return dao.selectOldestNewsList(pInfo);
+	}
+
+	@Override
+	public List<News> selectBestNewsList(PageInfo pInfo) {
+		return dao.selectBestNewsList(pInfo);
+	}
+
+	@Override
+	public List<News> selectWorstNewsList(PageInfo pInfo) {
+		return dao.selectWorstNewsList(pInfo);
+	}
+
 
 }
