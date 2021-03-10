@@ -121,6 +121,18 @@ public class NewsDAO {
 
 
 
+	public List<News> selectMainNews() {
+		return sqlSession.selectList("newsMapper.selectMainNews");
+	}
+
+
+
+	public List<NewsImage> selectNThumbnailList(List<News> mainNewsList) {
+		return sqlSession.selectList("newsMapper.selectNThumbnailList" , mainNewsList);
+	}
+
+
+
 	
 
 

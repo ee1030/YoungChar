@@ -67,15 +67,11 @@ height:150px;}
 					<!-- Blog Post Item -->
 					<article class="rn-post-item rn-post-size-lg">
 						<div class="rn-post-item-header">
-							<div class="rn-post-date">
-								<div class="rn-post-date-inner">
-									<div class="rn-post-date-d">15</div>
-									<div class="rn-post-date-m-y">May, 2018</div>
-								</div>
-							</div>
+							
 							<div class="rn-post-item-title-meta">
 								<div class="rn-post-item-title-meta-inner">
 									<div class="rn-post-item-meta">
+									<span class="rn-post-item-author">${news.newsCreateDate}</span>
 										<span class="rn-post-item-categories"> <a href="#">${news.press}</a>
 										</span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
 										</span>
@@ -253,7 +249,6 @@ height:150px;}
 	<!-- End Page Content-->
 	
 	
-<jsp:include page="newsReply.jsp"/>
 
 
 

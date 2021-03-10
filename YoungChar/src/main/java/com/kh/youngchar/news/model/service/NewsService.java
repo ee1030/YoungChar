@@ -44,6 +44,10 @@ public interface NewsService {
 
 	int deleteNews(News news);
 
+	List<News> selectMainNews();
+
+	List<NewsImage> selectNThumbnailList(List<News> mainNewsList);
+
 
 
 }

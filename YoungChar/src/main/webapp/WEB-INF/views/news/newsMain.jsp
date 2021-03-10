@@ -13,17 +13,19 @@
 
 <!-- Preloader CSS-->
 <style>
-
-#recentImage{
-	width:100%;
+#recentImage {
+	width: 100%;
 	height: 100%;
 }
-#eyeIcon{
+
+#eyeIcon {
 	margin-right: 5px;
 }
+
 #eyeICON {
 	float: right;
 }
+
 #preloader:after, #preloader:before {
 	content: "";
 	display: block;
@@ -224,8 +226,6 @@ to {
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/magnific-popup.css">
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/style.css">
 
-<!-- Google Map JS-->
-<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]"></script>
 </head>
 <body>
 	<!-- Header-->
@@ -255,53 +255,54 @@ to {
 			<div class="row">
 				<div class="col-lg-8 rn-post-list rn-grid-post-col-2">
 					<div class="row">
-					
-					<c:if test="${!empty nList }">
-					<c:forEach var="news" items="${nList}" varStatus="vs">
-						<div class="col-md-6">
 
-							<!-- Blog Post Item (Small Size)-->
-							<div class="rn-post-item rn-post-size-sm">
-								<div class="rn-post-item-thumb">
-									<a href="car-single.html">
-									<c:forEach items="${thList}" var="th">
-										<c:if test="${th.newsNo  == news.newsNo}">
-											<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}"></a>
-										</c:if>
-									</c:forEach>
-									</a>
-								</div>
-								<div class="rn-post-item-header">
-									<div class="rn-post-date">
-										<div class="rn-post-date-inner">
-											<div class="rn-post-date-m-y">${news.newsCreateDate}</div>
+						<c:if test="${!empty nList }">
+							<c:forEach var="news" items="${nList}" varStatus="vs">
+								<div class="col-md-6">
+
+									<!-- Blog Post Item (Small Size)-->
+									<div class="rn-post-item rn-post-size-sm">
+										<div class="rn-post-item-thumb">
+											<a href="car-single.html"> <c:forEach items="${thList}" var="th">
+													<c:if test="${th.newsNo  == news.newsNo}">
+														<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}"></a>
+													</c:if>
+												</c:forEach>
+											</a>
 										</div>
-									</div>
-									<div class="rn-post-item-title-meta">
-										<div class="rn-post-item-title-meta-inner">
-										
-											<div class="rn-post-item-meta">
-												<span class="rn-post-item-categories"><a href="#">${news.press}</a>
-												</span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
-												</span>
-												<span id="eyeICON" class="rn-post-view-icon"> <i id="eyeIcon" class="far fa-eye"></i>${news.readCount}</span>
+										<div class="rn-post-item-header">
+											<div class="rn-post-date">
+												<a href="../news/${news.newsNo}">
+													<div class="rn-post-date-inner">
+														<span class="rn-post-date-m-y">click</span>
+													</div>
+												</a>
+
 											</div>
-											<h3 class="rn-post-item-title">
-												<a href="../news/${news.newsNo}">${news.newsTitle}</a>
-											</h3>
-										</div>
-										
-									</div>
-									
-								</div>
-							</div>
-							<!-- End Blog Post Item (Small Size)-->
+											<div class="rn-post-item-title-meta">
+												<div class="rn-post-item-title-meta-inner">
 
-						</div>
-						</c:forEach>
+													<div class="rn-post-item-meta">
+														<span class="rn-post-item-categories"><a href="#">${news.press}</a> </span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
+														</span> <span id="eyeICON" class="rn-post-view-icon"> <i id="eyeIcon" class="far fa-eye"></i>${news.readCount}</span>
+													</div>
+													<h3 class="rn-post-item-title">
+														<a href="../news/${news.newsNo}">${news.newsTitle}</a>
+													</h3>
+													<span class="rn-recent-post-item-author">${news.newsCreateDate} </span>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+									<!-- End Blog Post Item (Small Size)-->
+
+								</div>
+							</c:forEach>
 						</c:if>
-						
-						
+
+
 					</div>
 
 
@@ -342,36 +343,35 @@ to {
 							<h2 class="rn-widget-title">RECENT NEWS</h2>
 							<div class="rn-widget-content">
 								<ul class="rn-recent-posts">
-								
-								
-								<c:if test="${!empty recentList }">
-					<c:forEach var="news" items="${recentList}" varStatus="vs">
-									<li id="recentPostsItem">
-										<!-- Extra Small Post-->
-										<div class="rn-recent-post-item">
-											<div class="rn-recent-post-item-thumb">
-												<c:forEach items="${thList}" var="th">
-										<c:if test="${th.newsNo  == news.newsNo}">
-											<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
-										</c:if>
-									</c:forEach>
-												
-											</div>
-											<div class="rn-recent-post-item-info">
-												<div class="rn-recent-post-item-meta">
-													<span class="rn-recent-post-item-categories">${news.reporter}</a>
-													</span> <span class="rn-recent-post-item-author">${news.newsCreateDate }
-													</span>
-												</div>
-												<div class="rn-recent-post-item-title">
-													<span class=""><a href="../news/${news.newsNo}">${news.newsTitle}</a></span>
-												</div>
-											</div>
-										</div> <!-- End Extra Small Post-->
 
-									</li>
-									
-									</c:forEach>
+
+									<c:if test="${!empty recentList }">
+										<c:forEach var="news" items="${recentList}" varStatus="vs">
+											<li id="recentPostsItem">
+												<!-- Extra Small Post-->
+												<div class="rn-recent-post-item">
+													<div class="rn-recent-post-item-thumb">
+														<c:forEach items="${thList}" var="th">
+															<c:if test="${th.newsNo  == news.newsNo}">
+																<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
+															</c:if>
+														</c:forEach>
+
+													</div>
+													<div class="rn-recent-post-item-info">
+														<div class="rn-recent-post-item-meta">
+															<span class="rn-recent-post-item-categories">${news.reporter}</a>
+															</span> <span class="rn-recent-post-item-author">${news.newsCreateDate} </span>
+														</div>
+														<div class="rn-recent-post-item-title">
+															<span class=""><a href="../news/${news.newsNo}">${news.newsTitle}</a></span>
+														</div>
+													</div>
+												</div> <!-- End Extra Small Post-->
+
+											</li>
+
+										</c:forEach>
 									</c:if>
 								</ul>
 							</div>
@@ -381,85 +381,81 @@ to {
 
 					</aside>
 					<!-- End Sidebar-->
-				<%-- 로그인이 되어있는 경우 --%>
-				<c:if test="${!empty loginMember}">
-					<a class="btn btn-success float-right" href="../news/insertNews">등록하기</a>
-				</c:if>
-	
-	
+					<%-- 로그인이 되어있는 경우 --%>
+					<c:if test="${!empty loginMember}">
+						<a class="btn btn-success float-right" href="../news/insertNews">등록하기</a>
+					</c:if>
+
+
 
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- End Page Content-->
-	
-	
-				<!-- Post Pagination-->
-					<div class="my-4">
-							<nav class="rn-pagination rn-pagination-center">
-										<ul>
-											
-						
-												<c:url var="pageUrl" value="${pInfo}?" />
-												<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
-												<c:set var="returnListURL" value="${contextPath}/news/list/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
 
-										
-										<c:set var="firstPage" value="?cp=1"/>
-										<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
-										
-										
-										<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }"  integerOnly="true" />
-										<fmt:parseNumber var="prev" value="${ c1 * 5 }"  integerOnly="true" />
-										<c:set var="prevPage" value="?cp=${prev}" />
-					
-										<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
-										<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
-										<c:set var="nextPage" value="?cp=${next}" />
-											
-											
-										<c:if test="${pInfo.currentPage > pInfo.pageSize}">
-										<li class="page-item"> <!-- 첫 페이지로 이동(<<) -->
-											<a class="page-link" href="${firstPage}">&lt;&lt;</a>
-										</li>
-										
-										<li class="page-item"> <!-- 이전 페이지로 이동 (<) -->
-											<a class="page-link" href="${prevPage}">&lt;</a>
-										</li>
-										</c:if>	
-											
-										
-										<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}" >
-											<c:choose>
-												<c:when test="${pInfo.currentPage == page }">
-													<li class="page-item disabled">
-														<a class="page-link">${page}</a>
-													</li>
-												</c:when>
-											
-												<c:otherwise>
-													<li  class="page-item">	
-														<a class="page-link" href="?cp=${page}">${page}</a>
-													</li>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-										
-										
-										<c:if test="${next <= pInfo.maxPage}">
-											<li class="page-item"> <!-- 다음 페이지로 이동 (>) -->
-												<a class="page-link" href="${nextPage}">&gt;</a>
-											</li>
-											
-											<li class="page-item"> <!-- 마지막 페이지로 이동(>>) -->
-												<a class="page-link" href="${lastPage}">&gt;&gt;</a>
-											</li>
-										</c:if>
-										
-									</ul>
-							</nav>
-					</div>
+
+	<!-- Post Pagination-->
+	<div class="my-4">
+		<nav class="rn-pagination rn-pagination-center">
+			<ul>
+
+
+				<c:url var="pageUrl" value="${pInfo}?" />
+				<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+				<c:set var="returnListURL" value="${contextPath}/news/list/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
+
+
+				<c:set var="firstPage" value="?cp=1" />
+				<c:set var="lastPage" value="?cp=${pInfo.maxPage}" />
+
+
+				<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }" integerOnly="true" />
+				<fmt:parseNumber var="prev" value="${ c1 * 5 }" integerOnly="true" />
+				<c:set var="prevPage" value="?cp=${prev}" />
+
+				<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
+				<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
+				<c:set var="nextPage" value="?cp=${next}" />
+
+
+				<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+					<li class="page-item">
+						<!-- 첫 페이지로 이동(<<) --> <a class="page-link" href="${firstPage}">&lt;&lt;</a>
+					</li>
+
+					<li class="page-item">
+						<!-- 이전 페이지로 이동 (<) --> <a class="page-link" href="${prevPage}">&lt;</a>
+					</li>
+				</c:if>
+
+
+				<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+					<c:choose>
+						<c:when test="${pInfo.currentPage == page }">
+							<li class="page-item disabled"><a class="page-link">${page}</a></li>
+						</c:when>
+
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="?cp=${page}">${page}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+
+				<c:if test="${next <= pInfo.maxPage}">
+					<li class="page-item">
+						<!-- 다음 페이지로 이동 (>) --> <a class="page-link" href="${nextPage}">&gt;</a>
+					</li>
+
+					<li class="page-item">
+						<!-- 마지막 페이지로 이동(>>) --> <a class="page-link" href="${lastPage}">&gt;&gt;</a>
+					</li>
+				</c:if>
+
+			</ul>
+		</nav>
+	</div>
 
 	<!-- Site Footer-->
 	<footer class="rn-footer">

@@ -1,7 +1,5 @@
 package com.kh.youngchar.home.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.home.model.service.HomeService;
+import com.kh.youngchar.news.model.vo.News;
+import com.kh.youngchar.news.model.vo.NewsImage;
 
 /**
  * Handles requests for the application home page.
@@ -25,6 +25,7 @@ public class HomeController {
 	
 	@Autowired
 	private HomeService service;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -45,6 +46,7 @@ public class HomeController {
 		 */
 		
 		List<Cars> carList = service.selectList();
+		List<News> mainNewsList = service.selectMainNews();
 		
 		if(carList != null) {
 			List<CAttachment> thumbnailList = service.selectThumbnailList(carList);
@@ -54,7 +56,16 @@ public class HomeController {
 			}
 		}
 		
+		else if(mainNewsList != null) {
+			List<NewsImage> nThumbnailList = service.selectNThumbnailList(mainNewsList);
+			
+			if(nThumbnailList != null) {
+				model.addAttribute("nThList" , nThumbnailList);
+			}
+		}
+		
 		model.addAttribute("carList" , carList);
+		model.addAttribute("mainNewsList" , mainNewsList);
 		
 		
 		
@@ -62,5 +73,7 @@ public class HomeController {
 		
 		return "index";
 	}
+	
+
 	
 }
