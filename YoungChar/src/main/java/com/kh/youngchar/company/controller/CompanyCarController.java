@@ -47,7 +47,7 @@ public class CompanyCarController {
 		int memNo = loginMember.getMemberNo();
 		List<TestCars> cList = service.carList(memNo);
 		
-		System.out.println("이미지 추가 전" +cList);
+		//System.out.println("이미지 추가 전" +cList);
 		
 		if(cList != null && !cList.isEmpty()) {
 			List<TestCars> imgs = carImages(cList);
@@ -64,7 +64,7 @@ public class CompanyCarController {
 			
 		}
 		
-		System.out.println("이미지 추가 후" +cList);
+		//System.out.println("이미지 추가 후" +cList);
 		
 		return cList;
 	}
@@ -82,7 +82,7 @@ public class CompanyCarController {
 	@RequestMapping("carSearch")
 	public List<TestCars> carSearch(@RequestParam String carName1) {
 		
-		System.out.println(carName1);
+		//System.out.println(carName1);
 		List<TestCars> cars = service.carSearch(carName1);
 		
 		if(cars != null && !cars.isEmpty()) {
@@ -120,16 +120,16 @@ public class CompanyCarController {
 		
 		//추가된적 있나 없나 검사
 		int ex = service.ex(map);
-		System.out.println(ex);
+		//System.out.println(ex);
 		
 		if(ex >0) { //추가 됐던 적 있음 (상태값 변경)
 			
 			String exist = service.carListEx(map);
-			System.out.println(exist);
+			//System.out.println(exist);
 			
 			if(exist.equals("N")) { //상태 N일때
 				result = service.updateStatus(map);
-				System.out.println(result);
+				//System.out.println(result);
 			}else { //상태 Y일때 이미 있음 알림
 				result = 0;
 			}

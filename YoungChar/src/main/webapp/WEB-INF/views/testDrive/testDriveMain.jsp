@@ -195,21 +195,19 @@
 												<div class="rn-testimonial-author-thumb">
 													<%-- <img class="carImg" src="${contextPath}${memImgPath}/${memImgName}" srcset="${contextPath}${memImgPath}/${memImgName} 1x, ${contextPath}${memImgPath}/${memImgName} 2x"/>
 												 --%></div>
-												<div class="rn-testimonial-author-info"><strong>${reviewList[0].memNickname}</strong>
-													<p>${reviewList[0].carName}</p>
+												<div class="rn-testimonial-author-info"><strong>${reviewList[1].memNickname}</strong>
+													<p>${reviewList[1].carName}</p>
 												</div>
 											</div>
-											<p> ${ reviewList[0].boardTitle}
+											<p> ${ reviewList[1].boardTitle}
 											</p>
 											<footer>
 												<div class="rn-testimonial-rating">
-												<c:set var="star" value="${csat}"/>
 													<i class="fas fa-star"></i>
 													<i class="fas fa-star"></i>
 													<i class="fas fa-star"></i>
 													<i class="fas fa-star"></i>
 													<i class="fas fa-star"></i>
-												</div>
 											</footer>
 										</blockquote>
 									</div>
@@ -220,11 +218,11 @@
 												<div class="rn-testimonial-author-thumb">
 													<!-- <img class="carImg" src="/youngchar/resources/assets/images/teslaCar.jpg" srcset="/youngchar/resources/assets/images/teslaCar.jpg 1x, /youngchar/resources/assets/images/teslaCar.jpg 2x"/>
 											 -->	</div>
-												<div class="rn-testimonial-author-info"><strong>${reviewList[0].memNickname}</strong>
-													<p>${reviewList[0].carName}</p>
+												<div class="rn-testimonial-author-info"><strong>${reviewList[2].memNickname}</strong>
+													<p>${reviewList[2].carName}</p>
 												</div>
 											</div>
-											<p> ${ reviewList[0].boardTitle}
+											<p> ${ reviewList[2].boardTitle}
 											</p>
 											<footer>
 												<div class="rn-testimonial-rating">

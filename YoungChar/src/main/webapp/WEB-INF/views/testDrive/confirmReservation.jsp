@@ -273,7 +273,7 @@
 		
 		//예약 취소 버튼 눌렀을때 swal
 		function cancle(e){
-			console.log($(e).attr('id'));
+			//console.log($(e).attr('id'));
 			swal({
 				  title: "예약을 취소하시겠습니까?",
 				  text: "",
@@ -284,7 +284,7 @@
 					  if (willDelete) {
 						    
 						    var h = "cancleReservation/"+$(e).attr('id');
-						    console.log
+						    //console.log
 						    location.href=h; 
 						  } 
 						});
