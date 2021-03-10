@@ -117,28 +117,28 @@
 									<div class="o-hidden">
                   <div class="chart-widget-top">
                     <div class="row card-body">
-                      <div class="col-8">
+                      <div class="col-4">
                         <h6 class="f-w-600 font-success">BRAND</h6>
                       </div>
-                      <div class="col-4 text-end">
+                      <div class="col-8 text-end">
                         <h6 class="num total-value"><span class="counter">${board.categoryNm}</span></h6>
                       </div>
-                      <div class="col-8">
+                      <div class="col-4">
                         <h6 class="f-w-600 font-success">CENTER</h6>
                       </div>
-                      <div class="col-4 text-end">
+                      <div class="col-8 text-end">
                         <h6 class="num total-value"><span class="counter">${board.cooName}</span></h6>
                       </div>
-                      <div class="col-8">
+                      <div class="col-4">
                         <h6 class="f-w-600 font-success">PRODUCT</h6>
                       </div>
-                      <div class="col-4 text-end">
+                      <div class="col-8 text-end">
                         <h6 class="num total-value"><span class="counter">${board.carName}</span></h6>
                       </div>
-                      <div class="col-8">
+                      <div class="col-4">
                         <h6 class="f-w-600 font-success">RATING</h6>
                       </div>
-                      <div class="col-4 text-end">
+                      <div class="col-8 text-end">
                         <h6 class="num total-value"><span class="counter">
                         	<c:forEach begin="1" end="${board.csat}">
 														<i class="icofont icofont-ui-rating"></i>
