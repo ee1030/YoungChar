@@ -148,7 +148,7 @@ public class BoardController {
 	
 	
 //	게시글 상세조회 Controller
-	@RequestMapping("{type}/{boardNo}")
+	@RequestMapping("boardView/{type}/{boardNo}")
 	public String boardView(@PathVariable("type") int type, @PathVariable("boardNo") int boardNo,
 							Model model, @RequestHeader(value = "referer",required = false ) String referer,
 							RedirectAttributes ra) {
@@ -258,10 +258,10 @@ public class BoardController {
 			swalTitle = "게시글 등록 성공";
 			
 //			상세 조회 페이지로 이동 
-			url = "redirect:" + result;
+			url = "redirect:../boardView/" + type + "/" + result;
 			
 //			새로 작성한 게시글 상세 조회 시 목록으로 버튼 경로 지정하기
-			request.getSession().setAttribute("returnListURL", "../list/" + type);
+			request.getSession().setAttribute("returnListURL", "../../list/" + type);
 			
 			
 		}else {
@@ -340,8 +340,8 @@ public class BoardController {
 		if(result > 0) {
 			swalIcon = "success";
 			swalTitle = "게시글 수정 성공";
-			url = "redirect:../"+boardNo;
-		}else {
+			url = "redirect:../../boardView/" + type + "/" + boardNo;
+		} else {
 			swalIcon = "error";
 			swalTitle = "게시글 수정 실패";
 			url = "redirect:" + request.getHeader("referer");

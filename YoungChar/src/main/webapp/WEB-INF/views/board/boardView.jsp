@@ -158,7 +158,7 @@
 						 		<a class="btn btn-success returnUrl" style="color: ghostwhite;">목록으로</a>
 							</c:if>
 	                	
-	           <c:url var="updateUrl" value="${board.boardNo}/update"/>
+	           <c:url var="updateUrl" value="../../${board.boardCode}/${board.boardNo}/update"/>
 	                	
 	                	<!-- 로그인된 회원이 글 작성자인 경우 -->
 						<c:if test="${(loginMember != null) && (board.memberId == loginMember.memberId)}">
@@ -229,7 +229,7 @@
 
 			if (confirm("정말 삭제하시겠습니까?")) {
 
-				location.href = "../delete/${board.boardCode}/" + ${board.boardNo};
+				location.href = "../../delete/${board.boardCode}/" + ${board.boardNo};
 
 			}
 
