@@ -196,156 +196,156 @@
 }
 
 #category {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            border-radius: 5px;
-            border: 1px solid #909090;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-            background: #fff;
-            overflow: hidden;
-            z-index: 2;
-        }
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	border-radius: 5px;
+	border: 1px solid #909090;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+	background: #fff;
+	overflow: hidden;
+	z-index: 2;
+}
 
-        #category li {
-            float: left;
-            list-style: none;
-            width: 50px;
-            px;
-            border-right: 1px solid #acacac;
-            padding: 6px 0;
-            text-align: center;
-            cursor: pointer;
-        }
+#category li {
+	float: left;
+	list-style: none;
+	width: 50px; px;
+	border-right: 1px solid #acacac;
+	padding: 6px 0;
+	text-align: center;
+	cursor: pointer;
+}
 
-        #category li.on {
-            background: #eee;
-        }
+#category li.on {
+	background: #eee;
+}
 
-        #category li:hover {
-            background: #ffe6e6;
-            border-left: 1px solid #acacac;
-            margin-left: -1px;
-        }
+#category li:hover {
+	background: #ffe6e6;
+	border-left: 1px solid #acacac;
+	margin-left: -1px;
+}
 
-        #category li:last-child {
-            margin-right: 0;
-            border-right: 0;
-        }
+#category li:last-child {
+	margin-right: 0;
+	border-right: 0;
+}
 
-        #category li span {
-            display: block;
-            margin: 0 auto 3px;
-            width: 27px;
-            height: 28px;
-        }
+#category li span {
+	display: block;
+	margin: 0 auto 3px;
+	width: 27px;
+	height: 28px;
+}
 
-        #category li .category_bg {
-            background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;
-        }
+#category li .category_bg {
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
+		no-repeat;
+}
 
-        #category li .bank {
-            background-position: -10px 0;
-        }
+#category li .bank {
+	background-position: -10px 0;
+}
 
-        #category li .mart {
-            background-position: -10px -36px;
-        }
+#category li .mart {
+	background-position: -10px -36px;
+}
 
-        #category li .pharmacy {
-            background-position: -10px -72px;
-        }
+#category li .pharmacy {
+	background-position: -10px -72px;
+}
 
-        #category li .oil {
-            background-position: -10px -108px;
-        }
+#category li .oil {
+	background-position: -10px -108px;
+}
 
-        #category li .cafe {
-            background-position: -10px -144px;
-        }
+#category li .cafe {
+	background-position: -10px -144px;
+}
 
-        #category li .store {
-            background-position: -10px -180px;
-        }
+#category li .store {
+	background-position: -10px -180px;
+}
 
-        #category li.on .category_bg {
-            background-position-x: -46px;
-        }
+#category li.on .category_bg {
+	background-position-x: -46px;
+}
 
-        .placeinfo_wrap {
-            position: absolute;
-            bottom: 28px;
-            left: -150px;
-            width: 300px;
-        }
+.placeinfo_wrap {
+	position: absolute;
+	bottom: 28px;
+	left: -150px;
+	width: 300px;
+}
 
-        .placeinfo {
-            position: relative;
-            width: 100%;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
-            background: #fff;
-        }
+.placeinfo {
+	position: relative;
+	width: 100%;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	padding-bottom: 10px;
+	background: #fff;
+}
 
-        .placeinfo:nth-of-type(n) {
-            border: 0;
-            box-shadow: 0px 1px 2px #888;
-        }
+.placeinfo:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
 
-        .placeinfo_wrap .after {
-            content: '';
-            position: relative;
-            margin-left: -12px;
-            left: 50%;
-            width: 22px;
-            height: 12px;
-            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-        }
+.placeinfo_wrap .after {
+	content: '';
+	position: relative;
+	margin-left: -12px;
+	left: 50%;
+	width: 22px;
+	height: 12px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
 
-        .placeinfo a,
-        .placeinfo a:hover,
-        .placeinfo a:active {
-            color: #fff;
-            text-decoration: none;
-        }
+.placeinfo a, .placeinfo a:hover, .placeinfo a:active {
+	color: #fff;
+	text-decoration: none;
+}
 
-        .placeinfo a,
-        .placeinfo span {
-            display: block;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-        }
+.placeinfo a, .placeinfo span {
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
 
-        .placeinfo span {
-            margin: 5px 5px 0 5px;
-            cursor: default;
-            font-size: 13px;
-        }
+.placeinfo span {
+	margin: 5px 5px 0 5px;
+	cursor: default;
+	font-size: 13px;
+}
 
-        .placeinfo .title {
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 6px 6px 0 0;
-            margin: -1px -1px 0 -1px;
-            padding: 10px;
-            color: #fff;
-            background: #d95050;
-            background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
-        }
+.placeinfo .title {
+	font-weight: bold;
+	font-size: 14px;
+	border-radius: 6px 6px 0 0;
+	margin: -1px -1px 0 -1px;
+	padding: 10px;
+	color: #fff;
+	background: #d95050;
+	background: #d95050
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+		no-repeat right 14px center;
+}
 
-        .placeinfo .tel {
-            color: #0f7833;
-        }
+.placeinfo .tel {
+	color: #0f7833;
+}
 
-        .placeinfo .jibun {
-            color: #999;
-            font-size: 11px;
-            margin-top: 0;
-        }
-
+.placeinfo .jibun {
+	color: #999;
+	font-size: 11px;
+	margin-top: 0;
+}
 </style>
 
 <!--
@@ -545,82 +545,210 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-	
+
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dd19bab7101200951c3127b359fc8c3f"></script>
 	<script>
 		var keyword = "";
-		
+
 		function test() {
 			keyword = $("#keyword").val();
-			
+
 			findCharger(keyword);
 		}
-	
+
 		function findCharger(keyword) {
 			var xhr = new XMLHttpRequest();
 			var url = 'http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList'; /*URL*/
-			var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'BaNcWD4e9CFC4lkfKsgboUrtN04RAcf5YFiZNgDSutaT2%2FCEgIBC9MKuvt5JL8CbbjzhOi3ghQp%2F2rsm%2FDSZGw%3D%3D'; /*Service Key*/
-			queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
-			queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('100'); /**/
-			queryParams += '&' + encodeURIComponent('addr') + '=' + encodeURIComponent(keyword); /**/
+			var queryParams = '?'
+					+ encodeURIComponent('ServiceKey')
+					+ '='
+					+ 'BaNcWD4e9CFC4lkfKsgboUrtN04RAcf5YFiZNgDSutaT2%2FCEgIBC9MKuvt5JL8CbbjzhOi3ghQp%2F2rsm%2FDSZGw%3D%3D'; /*Service Key*/
+			queryParams += '&' + encodeURIComponent('pageNo') + '='
+					+ encodeURIComponent('1'); /**/
+			queryParams += '&' + encodeURIComponent('numOfRows') + '='
+					+ encodeURIComponent('100'); /**/
+			queryParams += '&' + encodeURIComponent('addr') + '='
+					+ encodeURIComponent(keyword); /**/
 			xhr.open('GET', url + queryParams);
-			xhr.onreadystatechange = function () {
-			    if (this.readyState == 4) {
-		         var responseData = xhr.responseXML;
-		         var addrs = responseData.getElementsByTagName("addr");
-		         var lats = responseData.getElementsByTagName("lat");
-		         var longis = responseData.getElementsByTagName("longi");
-		         
-		         makeMarkers(addrs, lats, longis);
-		         
-/* 		         console.log(addrs[0].childNodes[0].nodeValue);
-		         console.log(lats[0].childNodes[0].nodeValue);
-		         console.log(longis[0].childNodes[0].nodeValue); */
-			    }
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var responseData = xhr.responseXML;
+					var addrs = responseData.getElementsByTagName("addr");
+					var lats = responseData.getElementsByTagName("lat");
+					var longis = responseData.getElementsByTagName("longi");
+					var csNms = responseData.getElementsByTagName("csNm");
+					var cpTps = responseData.getElementsByTagName("cpTp");
+					var chargeTps = responseData
+							.getElementsByTagName("chargeTp");
+					var cpStats = responseData.getElementsByTagName("cpStat");
+					var statUpdateDatetimes = responseData
+							.getElementsByTagName("statUpdateDatetime");
+
+					makeMarkers(addrs, lats, longis, csNms, cpTps, chargeTps,
+							cpStats, statUpdateDatetimes);
+
+					/* 		         console.log(addrs[0].childNodes[0].nodeValue);
+					 console.log(lats[0].childNodes[0].nodeValue);
+					 console.log(longis[0].childNodes[0].nodeValue); */
+				}
+
 			};
-		
+
 			xhr.send('');
 		}
-		
-		function makeMarkers(addrs, lats, longis) {
+
+		function makeMarkers(addrs, lats, longis, csNms, cpTps, chargeTps,
+				cpStats, statUpdateDatetimes) {
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(lats[0].childNodes[0].nodeValue, longis[0].childNodes[0].nodeValue), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };
-		
+			mapOption = {
+				center : new kakao.maps.LatLng(lats[0].childNodes[0].nodeValue,
+						longis[0].childNodes[0].nodeValue), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			 
+
 			// 마커를 표시할 위치와 title 객체 배열입니다 
 			var positions = [];
-			
-			for(var i = 0; i < addrs.length; i++) {
-				positions.push({
-					addr : addrs[i].childNodes[0].nodeValue,
-					latlng : new kakao.maps.LatLng(lats[i].childNodes[0].nodeValue, longis[i].childNodes[0].nodeValue)
-				});
+
+			var chargerType = "";
+			var chargerMode = "";
+			var chargerStat = "";
+
+			for (var i = 0; i < addrs.length; i++) {
+
+				switch (cpTps[i].childNodes[0].nodeValue) {
+				case "1":
+					chargerType = "B타입(5핀)";
+					break;
+				case "2":
+					chargerType = "C타입(5)핀";
+					break;
+				case "3":
+					chargerType = "BC타입(5핀)";
+					break;
+				case "4":
+					chargerType = "BC타입(7핀)";
+					break;
+				case "5":
+					chargerType = "DC차데모";
+					break;
+				case "6":
+					chargerType = "AC3상";
+					break;
+				case "7":
+					chargerType = "DC콤보";
+					break;
+				case "8":
+					chargerType = "DC차데모 + DC콤보";
+					break;
+				case "9":
+					chargerType = "DC차데모 + AC3상";
+					break;
+				case "10":
+					chargerType = "DC차데모 + AC3상 + DC콤보";
+					break;
+				}
+
+				switch (chargeTps[i].childNodes[0].nodeValue) {
+				case "1":
+					chargerMode = "완속 충전";
+					break;
+				case "2":
+					chargerMode = "급속 충전";
+					break;
+
+				}
+				
+				
+				switch (cpStats[i].childNodes[0].nodeValue) {
+				case "1":
+					chargerStat = "충전 가능";
+					break;
+				case "2":
+					chargerStat = "충전 중";
+					break;
+				case "3":
+					chargerStat = "고장/점검";
+					break;
+				case "4":
+					chargerStat = "통신장애";
+					break;
+				case "5":
+					chargerStat = "통신 미연결";
+					break;
+
+				}
+				
+				
+				positions
+						.push({
+							addr : addrs[i].childNodes[0].nodeValue,
+							latlng : new kakao.maps.LatLng(
+									lats[i].childNodes[0].nodeValue,
+									longis[i].childNodes[0].nodeValue),
+							csNm : csNms[i].childNodes[0].nodeValue,
+							cpTp : chargerType,
+							chargeTp : chargerMode,
+							cpStat : chargerStat,
+							statUpdateDatetime : statUpdateDatetimes[i].childNodes[0].nodeValue
+						});
+
 			}
-			
+
 			console.log(positions);
-		
+
 			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-			    
-			for (var i = 0; i < positions.length; i ++) {
-			    
-			    // 마커 이미지의 이미지 크기 입니다
-			    var imageSize = new kakao.maps.Size(24, 35); 
-			    
-			    // 마커 이미지를 생성합니다    
-			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-			    
-			    // 마커를 생성합니다
-			    var marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
-			        position: positions[i].latlng, // 마커를 표시할 위치
-			        addr : positions[i].addr, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지 
-			    });
+			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+			for (var i = 0; i < positions.length; i++) {
+
+				// 마커 이미지의 이미지 크기 입니다
+				var imageSize = new kakao.maps.Size(24, 35);
+
+				// 마커 이미지를 생성합니다    
+				var markerImage = new kakao.maps.MarkerImage(imageSrc,
+						imageSize);
+
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map : map, // 마커를 표시할 지도
+					position : positions[i].latlng, // 마커를 표시할 위치
+					addr : positions[i].addr, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					image : markerImage
+				// 마커 이미지 
+				});
+
+				var infowindow = new kakao.maps.InfoWindow({
+
+					// 인포윈도우에 표시할 내용
+					content : '<b>' + positions[i].csNm + '</b>' + '<br>' + '주소 : '
+							+ positions[i].addr + '<br>' + '충전기 단자 : '
+							+ positions[i].cpTp + '<br>' + '충전 타입(완속/급속)  : '
+							+ positions[i].chargeTp + '<br>' + '충전기 상태: '
+							+ positions[i].cpStat
+				});
+
+				kakao.maps.event.addListener(marker, 'mouseover',
+						makeOverListener(map, marker, infowindow));
+				kakao.maps.event.addListener(marker, 'mouseout',
+						makeOutListener(infowindow));
+
+			}
+
+			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+			function makeOverListener(map, marker, infowindow) {
+				return function() {
+					infowindow.open(map, marker);
+				};
+			}
+
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+				return function() {
+					infowindow.close();
+				};
 			}
 		}
 	</script>

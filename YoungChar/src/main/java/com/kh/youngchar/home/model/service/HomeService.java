@@ -15,6 +15,6 @@ public interface HomeService {
 
 	List<News> selectMainNews();
 
-	List<NewsImage> selectNThumbnailList(List<News> mainNewsList);
+	List<NewsImage> selectMainThumbnailList(List<News> mainNewsList);
 
 }

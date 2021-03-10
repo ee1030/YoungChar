@@ -57,15 +57,18 @@ public class HomeController {
 		}
 		
 		else if(mainNewsList != null) {
-			List<NewsImage> nThumbnailList = service.selectNThumbnailList(mainNewsList);
+			List<NewsImage> mainThumbnailList = service.selectMainThumbnailList(mainNewsList);
 			
-			if(nThumbnailList != null) {
-				model.addAttribute("nThList" , nThumbnailList);
+			if(mainThumbnailList != null) {
+				model.addAttribute("mainThList" , mainThumbnailList);
+				
 			}
 		}
 		
 		model.addAttribute("carList" , carList);
 		model.addAttribute("mainNewsList" , mainNewsList);
+		
+		
 		
 		
 		

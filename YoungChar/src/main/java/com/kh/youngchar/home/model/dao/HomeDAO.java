@@ -30,8 +30,8 @@ public class HomeDAO {
 		return sqlSession.selectList("newsMapper.selectMainNews");
 	}
 
-	public List<NewsImage> selectNThumbnailList(List<News> mainNewsList) {
-		return sqlSession.selectList("newsMapper.selectNThumbnailList" , mainNewsList);
+	public List<NewsImage> selectMainThumbnailList(List<News> mainNewsList) {
+		return sqlSession.selectList("newsMapper.selectMainThumbnailList" , mainNewsList);
 	}
 	
 	

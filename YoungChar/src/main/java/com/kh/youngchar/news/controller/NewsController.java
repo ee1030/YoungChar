@@ -73,15 +73,15 @@ public class NewsController {
 	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String mainNews(Model model) {
+	public String home(Model model) {
 		
 		List<News> mainNewsList = service.selectMainNews();
 		
 		if(mainNewsList != null) {
-			List<NewsImage> nThumbnailList = service.selectNThumbnailList(mainNewsList);
+			List<NewsImage> mainThumbnailList = service.selectMainThumbnailList(mainNewsList);
 			
-			if(nThumbnailList != null) {
-				model.addAttribute("nThList" , nThumbnailList);
+			if(mainThumbnailList != null) {
+				model.addAttribute("mainThList" , mainThumbnailList);
 			}
 		}
 		
