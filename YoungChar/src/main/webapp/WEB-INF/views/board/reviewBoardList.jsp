@@ -101,7 +101,7 @@ li {
 					<div >
 								<!-- /spring/board/list/1or2 -> search/2 -->
 								<form action="../search/${pInfo.boardType}" class="text-center" id="searchForm" >
-									<span> 카테고리(다중 선택 가능)<br> 
+									<span> <br> 
 									
 									<label for="exercise">테슬라</label> 
 									<input type="checkbox" name="ct" value="테슬라" id="tesla"> &nbsp; 
@@ -282,12 +282,13 @@ li {
 								<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) /10 }" integerOnly="true" />
 								<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
 								<c:set var="nextPage" value="${pageUrl}cp=${next}" />
+								
 
 
 
 								<c:if test="${pInfo.currentPage > pInfo.pageSize}">
 									<li>
-										<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i class="fas fa-angle-right">..</i></a>
+										<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i class="fas fa-angle-left"></i></a>
 									</li>
 
 									<li>
