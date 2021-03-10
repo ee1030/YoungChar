@@ -95,7 +95,7 @@ public class TestDriveService {
 	 * @param rList
 	 * @return cList
 	 */
-	public List<TestCars> selectCarImgs(List<TestDrReservation> rList) {
+	public List<TestDrReservation> selectCarImgs(List<TestDrReservation> rList) {
 		return dao.selecCarImgs(rList);
 	}
 

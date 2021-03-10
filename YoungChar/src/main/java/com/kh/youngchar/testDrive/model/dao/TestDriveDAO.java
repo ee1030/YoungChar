@@ -101,7 +101,7 @@ public class TestDriveDAO {
 	 * @param rList
 	 * @return cList
 	 */
-	public List<TestCars> selecCarImgs(List<TestDrReservation> rList) {
+	public List<TestDrReservation> selecCarImgs(List<TestDrReservation> rList) {
 		return sqlSession.selectList("testDriveMapper.selectCarImgs", rList);
 	}
 
