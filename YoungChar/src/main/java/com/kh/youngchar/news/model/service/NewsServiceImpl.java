@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.news.model.dao.NewsDAO;
 import com.kh.youngchar.news.model.vo.News;
@@ -271,12 +270,12 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public List<CompanyImage> selectThumbnailList(List<News> nList) {
+	public List<NewsImage> selectThumbnailList(List<News> nList) {
 		return dao.selectThumbnailList(nList);
 	}
 
 	@Override
-	public List<CompanyImage> recentThumbnailList(List<News> recentList) {
+	public List<NewsImage> recentThumbnailList(List<News> recentList) {
 		return dao.recentThumbnailList(recentList);
 	}
 

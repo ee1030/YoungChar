@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.news.model.service.NewsService;
@@ -47,7 +46,7 @@ public class NewsController {
 		List<News> recentList = service.selectRecentNewsList(pInfo);
 
 		if (nList != null && !nList.isEmpty()) { // 게시글 목록 조회 성공 시
-			List<CompanyImage> thumbnailList = service.selectThumbnailList(nList);
+			List<NewsImage> thumbnailList = service.selectThumbnailList(nList);
 
 			if (thumbnailList != null) {
 				model.addAttribute("thList", thumbnailList);
@@ -56,7 +55,7 @@ public class NewsController {
 		}
 		
 		else if(recentList != null && !recentList.isEmpty()) { // 게시글 목록 조회 성공 시
-			List<CompanyImage> recentThumbnailList = service.recentThumbnailList(recentList);
+			List<NewsImage> recentThumbnailList = service.recentThumbnailList(recentList);
 
 			if (recentThumbnailList != null) {
 				model.addAttribute("recentThList", recentThumbnailList);

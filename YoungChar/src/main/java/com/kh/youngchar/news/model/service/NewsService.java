@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.news.model.vo.News;
 import com.kh.youngchar.news.model.vo.NewsImage;
@@ -32,8 +31,8 @@ public interface NewsService {
 	
 	
 
-	List<CompanyImage> selectThumbnailList(List<News> nList);
-	List<CompanyImage> recentThumbnailList(List<News> recentList);
+	List<NewsImage> selectThumbnailList(List<News> nList);
+	List<NewsImage> recentThumbnailList(List<News> recentList);
 	
 	
 

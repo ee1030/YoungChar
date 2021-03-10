@@ -397,5 +397,11 @@ height:150px;}
 	<script src="${contextPath}/resources/assets/js/starrr.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="${contextPath}/resources/assets/js/scripts.js"></script>
+	
+	<script>
+		function validate() {
+			return confirm("정말로 삭제하시겠습니까?");
+		}
+	</script>
 </body>
 </html>

@@ -18,8 +18,11 @@
 	width:100%;
 	height: 100%;
 }
-#eyeIcon {
+#eyeIcon{
 	margin-right: 5px;
+}
+#eyeICON {
+	float: right;
 }
 #preloader:after, #preloader:before {
 	content: "";
@@ -281,7 +284,7 @@ to {
 												<span class="rn-post-item-categories"><a href="#">${news.press}</a>
 												</span> <span class="rn-post-item-author">By <a href="#">${news.reporter}</a>
 												</span>
-												<span class="rn-post-view-icon"> <i id="eyeIcon" class="far fa-eye"></i>${news.readCount}</span>
+												<span id="eyeICON" class="rn-post-view-icon"> <i id="eyeIcon" class="far fa-eye"></i>${news.readCount}</span>
 											</div>
 											<h3 class="rn-post-item-title">
 												<a href="../news/${news.newsNo}">${news.newsTitle}</a>
@@ -392,76 +395,71 @@ to {
 	<!-- End Page Content-->
 	
 	
-	<!-- Post Pagination-->
-			<div class="my-4">
-				<nav class="rn-pagination rn-pagination-center">
-					<ul>
+				<!-- Post Pagination-->
+					<div class="my-4">
+							<nav class="rn-pagination rn-pagination-center">
+										<ul>
+											
+						
+												<c:url var="pageUrl" value="${pInfo}?" />
+												<%-- 목록으로 버튼에 사용할 URL 저장 변수 선언 --%>
+												<c:set var="returnListURL" value="${contextPath}/news/list/${pageUrl}cp=${pInfo.currentPage }" scope="session" />
 
-						<%-- 주소 조합 작업 --%>
-
-						<!-- 화살표에 들어갈 주소를 변수로 생성 -->
-						<c:set var="firstPage" value="${pageUrl}cp=1" />
-						<c:set var="lastPage" value="${pageUrl}cp=${pInfo.maxPage}" />
-
-
-
-						<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }"
-							integerOnly="true" />
-						<fmt:parseNumber var="prev" value="${ c1 * 10 }"
-							integerOnly="true" />
-						<c:set var="prevPage" value="${pageUrl}cp=${prev}" />
-
-
-						<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) /10 }"
-							integerOnly="true" />
-						<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }"
-							integerOnly="true" />
-						<c:set var="nextPage" value="${pageUrl}cp=${next}" />
-
-
-
-						<c:if test="${pInfo.currentPage > pInfo.pageSize}">
-							<li>
-								<!-- 첫 페이지로 이동(<<) --> <a href="${firstPage}"><i
-									class="fas fa-angle-right">..</i></a>
-							</li>
-
-							<li>
-								<!-- 이전 페이지로 이동 (<) --> <a href="${prevPage}"> <i
-									class="fas fa-angle-left"></i></a>
-							</li>
-						</c:if>
-
-						<!-- 페이지 목록 -->
-						<c:forEach var="page" begin="${pInfo.startPage}"
-							end="${pInfo.endPage}">
-							<c:choose>
-								<c:when test="${pInfo.currentPage == page }">
-									<li><a class="page-link">${page}</a></li>
-								</c:when>
-
-								<c:otherwise>
-									<li><a class="page-link" href="${pageUrl}cp=${page}">${page}</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-
-
-						<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
-						<c:if test="${next <= pInfo.maxPage}">
-							<li>
-								<!-- 다음 페이지로 이동 (>) --> <a href="${nextPage}"><i
-									class="fas fa-angle-right"></i></a>
-							</li>
-
-							<li>
-								<!-- 마지막 페이지로 이동(>>) --> <a href="${lastPage}"><i
-									class="fas fa-angle-right"></i></a>
-							</li>
-						</c:if>
-					</ul>
-				</nav>
-			</div>
+										
+										<c:set var="firstPage" value="?cp=1"/>
+										<c:set var="lastPage" value="?cp=${pInfo.maxPage}"/>
+										
+										
+										<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 5 }"  integerOnly="true" />
+										<fmt:parseNumber var="prev" value="${ c1 * 5 }"  integerOnly="true" />
+										<c:set var="prevPage" value="?cp=${prev}" />
+					
+										<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 4) / 5 }" integerOnly="true" />
+										<fmt:parseNumber var="next" value="${ c2 * 5 + 1 }" integerOnly="true" />
+										<c:set var="nextPage" value="?cp=${next}" />
+											
+											
+										<c:if test="${pInfo.currentPage > pInfo.pageSize}">
+										<li class="page-item"> <!-- 첫 페이지로 이동(<<) -->
+											<a class="page-link" href="${firstPage}">&lt;&lt;</a>
+										</li>
+										
+										<li class="page-item"> <!-- 이전 페이지로 이동 (<) -->
+											<a class="page-link" href="${prevPage}">&lt;</a>
+										</li>
+										</c:if>	
+											
+										
+										<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}" >
+											<c:choose>
+												<c:when test="${pInfo.currentPage == page }">
+													<li class="page-item disabled">
+														<a class="page-link">${page}</a>
+													</li>
+												</c:when>
+											
+												<c:otherwise>
+													<li  class="page-item">	
+														<a class="page-link" href="?cp=${page}">${page}</a>
+													</li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										
+										
+										<c:if test="${next <= pInfo.maxPage}">
+											<li class="page-item"> <!-- 다음 페이지로 이동 (>) -->
+												<a class="page-link" href="${nextPage}">&gt;</a>
+											</li>
+											
+											<li class="page-item"> <!-- 마지막 페이지로 이동(>>) -->
+												<a class="page-link" href="${lastPage}">&gt;&gt;</a>
+											</li>
+										</c:if>
+										
+									</ul>
+							</nav>
+					</div>
 
 	<!-- Site Footer-->
 	<footer class="rn-footer">

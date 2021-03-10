@@ -10,6 +10,9 @@
 <title>뉴스 등록</title>
 
 <style>
+#subImage {
+	margin-left: 25px;
+}
 .insert-label {
 	display: inline-block;
 	width: 80px;
@@ -117,11 +120,25 @@
 						<img id="titleImg" width="200" height="200">
 						<span class="deleteImg">x</span>
 					</div>
+					
+					<div class="form-inline mb-2" id="subImage">
+					<div class="mr-2 boardImg" id="contentImgArea1">
+						<img id="contentImg1" width="150" height="150">
+						<span class="deleteImg">x</span>
+					</div>
+
+					<div class="mr-2 boardImg" id="contentImgArea2">
+						<img id="contentImg2" width="150" height="150">
+						<span class="deleteImg">x</span>
+					</div>
+				</div>
 				</div>
 				
 					<!-- 파일 업로드 하는 부분 -->
 				<div id="fileArea">
-					<input type="file" id="img0" name="image" onchange="LoadImg(this,0)"> 
+					<input type="file" id="img0" name="image" onchange="LoadImg(this,0)">
+					<input type="file" id="img1" name="image" onchange="LoadImg(this,1)"> 
+					<input type="file" id="img2" name="image" onchange="LoadImg(this,2)">
 				</div>
 					</div>
 					

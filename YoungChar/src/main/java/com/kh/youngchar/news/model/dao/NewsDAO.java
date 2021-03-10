@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.youngchar.chargerCompany.model.vo.CompanyImage;
 import com.kh.youngchar.company.model.vo.PageInfo;
 import com.kh.youngchar.news.model.vo.News;
 import com.kh.youngchar.news.model.vo.NewsImage;
@@ -72,11 +71,11 @@ public class NewsDAO {
 
 
 
-	public List<CompanyImage> selectThumbnailList(List<News> nList) {
+	public List<NewsImage> selectThumbnailList(List<News> nList) {
 		return sqlSession.selectList("newsMapper.selectThumbnailList", nList);
 	}
 	
-	public List<CompanyImage> recentThumbnailList(List<News> recentList) {
+	public List<NewsImage> recentThumbnailList(List<News> recentList) {
 		return sqlSession.selectList("newsMapper.recentThumbnailList", recentList);
 	}
 	
