@@ -124,8 +124,11 @@
 							<br>
 							<hr>
 							<br>
-					
 							<hr>
+							
+							<div style="height:100px;">
+							</div>
+					
 							
 						</div>
 					</div>
@@ -170,7 +173,7 @@
     <script src="${contextPath}/resources/assets/js/config.js"></script>
     <!-- Theme js-->
     <script src="${contextPath}/resources/assets/js/script.js"></script>
-    <script src="${contextPath}/resources/assets/js/theme-customizer/customizer.js"></script>
+    <%-- <script src="${contextPath}/resources/assets/js/theme-customizer/customizer.js"></script> --%>
     <!-- login js-->
     
     <!-- 없읍 -->
