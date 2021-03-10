@@ -642,9 +642,9 @@ Remove or comment-out the code block below to see how the browser will fall-back
 			var myBoardList;
 			
 			switch(boardName) {
-				case '리뷰게시판' : myBoardList = "${contextPath}/board/1/" + boardNo; break;
-				case '정보게시판' : myBoardList = "${contextPath}/board/2/" + boardNo; break;
-				case '잡담게시판' : myBoardList = "${contextPath}/board/3/" + boardNo; break;
+				case '리뷰게시판' : myBoardList = "${contextPath}/board/boardView/1/" + boardNo; break;
+				case '정보게시판' : myBoardList = "${contextPath}/board/boardView/2/" + boardNo; break;
+				case '잡담게시판' : myBoardList = "${contextPath}/board/boardView/3/" + boardNo; break;
 				case '시승후기게시판' : myBoardList = "${contextPath}/driveReview/review/" + boardNo; break;
 			}
 			
