@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
 import com.kh.youngchar.home.model.dao.HomeDAO;
+import com.kh.youngchar.news.model.vo.News;
+import com.kh.youngchar.news.model.vo.NewsImage;
 
 @Service
 public class HomeServiceImpl implements HomeService {
@@ -23,6 +25,16 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public List<CAttachment> selectThumbnailList(List<Cars> carList) {
 		return dao.selectThumbnailList(carList);
+	}
+
+	@Override
+	public List<News> selectMainNews() {
+		return dao.selectMainNews();
+	}
+
+	@Override
+	public List<NewsImage> selectNThumbnailList(List<News> mainNewsList) {
+		return dao.selectNThumbnailList(mainNewsList);
 	}
 	
 

@@ -159,18 +159,17 @@ public class TestDriveController {
 		
 		if(rList != null && !rList.isEmpty()) { //예약 있다면 (예약중/시승완료)
 			
+			
 			//예약목록들의 자동차 사진 가져오기
-			List<TestCars> cList = service.selectCarImgs(rList);
+			List<TestDrReservation> iList = service.selectCarImgs(rList);
 			
 			//이미지 추가하기
-			List<TestCars> imgs = carImages(cList);
-					
-			for(TestCars c : cList) {
-				for(TestCars img : imgs) {
-					if(c.getCarNo() == img.getCarNo()) {
-						c.setFileNo(img.getFileNo());
-						c.setFilePath(img.getFilePath());
-						c.setFileName(img.getFileName());
+			for(TestDrReservation r : rList) {
+				for(TestDrReservation img : iList) {
+					if(r.getCarNo() == img.getCarNo()) {
+						r.setFileNo(img.getFileNo());
+						r.setFilePath(img.getFilePath());
+						r.setFileName(img.getFileName());
 					}
 				}
 			}

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.youngchar.cars.model.vo.CAttachment;
 import com.kh.youngchar.cars.model.vo.Cars;
+import com.kh.youngchar.news.model.vo.News;
+import com.kh.youngchar.news.model.vo.NewsImage;
 
 @Repository
 public class HomeDAO {
@@ -22,6 +24,14 @@ public class HomeDAO {
 	public List<CAttachment> selectThumbnailList(List<Cars> carList) {
 		
 		return sqlSession.selectList("carsMapper.selectThumbnailList" , carList);
+	}
+
+	public List<News> selectMainNews() {
+		return sqlSession.selectList("newsMapper.selectMainNews");
+	}
+
+	public List<NewsImage> selectNThumbnailList(List<News> mainNewsList) {
+		return sqlSession.selectList("newsMapper.selectNThumbnailList" , mainNewsList);
 	}
 	
 	
