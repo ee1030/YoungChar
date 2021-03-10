@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.TestCars;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.testDrive.model.dao.TestDriveDAO;
@@ -17,6 +18,13 @@ public class TestDriveService {
 	@Autowired
 	private TestDriveDAO dao;
 
+	/** 리뷰 최신 5개 가져오기
+	 * @return reviewList
+	 */
+	public List<DriveReview> reviewList() {
+		return dao.reviewList();
+	}
+	
 	/** 자동차 목록 불러오기
 	 * @return cList
 	 */
@@ -98,6 +106,8 @@ public class TestDriveService {
 	public List<TestDrReservation> selectCarImgs(List<TestDrReservation> rList) {
 		return dao.selecCarImgs(rList);
 	}
+
+
 
 
 	/** 예약 정보 가져오기

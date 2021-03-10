@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.kh.youngchar.company.model.vo.DriveReview;
 import com.kh.youngchar.company.model.vo.TestCars;
 import com.kh.youngchar.member.model.vo.Member;
 import com.kh.youngchar.testDrive.model.service.TestDriveService;
@@ -33,7 +34,37 @@ public class TestDriveController {
 	
 	// 헤더에서 testDrive Main으로 화면 전환 하는 Controller
 	@RequestMapping("main")
-	public String Main() {
+	public String Main(Model model) {
+		
+		//리뷰 최신 5개 가져오기
+		List<DriveReview> reviewList = service.reviewList();
+		
+		//차량 이름 저장 list
+		List<TestCars> imgs = new ArrayList<TestCars>();
+		
+		//리뷰의 차 이름 가져와서 car리스트에 넣기
+		for(DriveReview r : reviewList) {
+			TestCars car = new TestCars();
+			car.setCarName(r.getCarName());
+			imgs.add(car);
+			System.out.println(car);
+		}
+		System.out.println(imgs);
+		
+		//차 이미지 가져오기
+		List<TestCars> carImgList = service.carImages(imgs);
+		
+		for(DriveReview review : reviewList) {
+			for(TestCars img : carImgList) {
+				if(review.getCarName().equals(img.getCarName()) ) {
+					review.setMemImgPath(img.getFilePath());
+					review.setMemImgName(img.getFileName());
+				}
+			}
+		}
+		
+		System.out.println(reviewList);
+		model.addAttribute("reviewList",reviewList);
 		
 		return "testDrive/testDriveMain";
 	}
