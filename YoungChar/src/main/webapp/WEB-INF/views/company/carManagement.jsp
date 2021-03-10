@@ -296,7 +296,7 @@
 										var thumb = $("<div>").addClass("rn-car-item-thumb");
 										//var img = $("<img>").addClass("img-fluid").attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
 										var img = $("<img>").addClass("img-fluid");
-										if(value.filePath != ""){
+										if(value.fileNo != 0){
 											var srcset = "${contextPath}"+value.filePath +"/" + value.fileName+" 1x," +"${contextPath}"+value.filePath +"/" + value.fileName+" 2x,";
 											//img.attr("alt", "자동차 이미지").attr("src", value.filePath).attr("srcset", "${contextPath}/resources/assets/images/tesla_model3.jpg 1x, ${contextPath}/resources/assets/images/tesla_model3.jpg 2x");
 											img.attr("alt", "자동차 이미지").attr("src", srcset).attr("srcset", srcset );
