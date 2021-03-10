@@ -220,7 +220,7 @@
 		$(".returnUrl").on('click', function() {
 
 			var boardCode = ${board.boardCode};
-			var returnURL = "../list/" + boardCode;
+			var returnURL = "../../list/" + boardCode;
 
 			location.href = returnURL;
 		});
