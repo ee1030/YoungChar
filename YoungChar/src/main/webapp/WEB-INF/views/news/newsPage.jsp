@@ -146,7 +146,7 @@ height:150px;}
 						<c:url var="updateUrl" value="${news.newsNo}/updateNews" />
 
 						<!-- 로그인된 회원이 글 작성자인 경우 -->
-						<c:if test="${(loginMember != null) }">
+						<c:if test="${!empty loginMember && loginMember.memberGrade == 'A'}">
 							<a href="${updateUrl}" id="updateBtn" class="btn btn-success ml-1 mr-1">수정</a>
 							<form method="POST" action="${news.newsNo}/deleteNews" enctype="multipart/form-data" onsubmit="return validate();">
 								<button id="deleteBtn" class="btn btn-success">삭제</button>
@@ -167,14 +167,6 @@ height:150px;}
 					<!-- Sidebar-->
 					<aside class="rn-widget-area" id="secondary">
 
-						<!-- Widget Item-->
-						<div class="rn-widget">
-							<div class="rn-widget-content">
-								<a href="#"> <img class="img-fluid" src="assets/images/banner.png" alt="banner" srcset="assets/images/banner.png 1x, assets/images/banner@2x.png 2x">
-								</a>
-							</div>
-						</div>
-						<!-- End Widget Item-->
 
 
 						<!-- Widget Item-->
@@ -204,18 +196,11 @@ height:150px;}
 									<li id="recentPostsItem">
 										<!-- Extra Small Post-->
 										<div class="rn-recent-post-item">
-											<div class="rn-recent-post-item-thumb">
-												<c:forEach items="${thList}" var="th">
-										<c:if test="${th.newsNo  == news.newsNo}">
-											<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
-										</c:if>
-									</c:forEach>
-												
-											</div>
+									
 											<div class="rn-recent-post-item-info">
 												<div class="rn-recent-post-item-meta">
-													<span class="rn-recent-post-item-categories">${news.reporter}</a>
-													</span> <span class="rn-recent-post-item-author">At 15 May, 2018
+													<span class="rn-recent-post-item-categories">${news.reporter}
+													</span> <span class="rn-recent-post-item-author">${news.newsCreateDate}
 													</span>
 												</div>
 												<div class="rn-recent-post-item-title">

@@ -97,10 +97,16 @@ public class NewsController {
 
 	@RequestMapping("{newsNo}")
 	public String NewsView(@PathVariable("newsNo") int newsNo, Model model,
-			@RequestHeader(value = "referer", required = false) String referer, RedirectAttributes ra) {
+			@RequestHeader(value = "referer", required = false) String referer, RedirectAttributes ra,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		PageInfo pInfo = service.getPageInfo(cp);
+		
 
 		News news = service.selectNews(newsNo);
-
+		List<News> recentList = service.selectRecentNewsList(pInfo);
+		
+		
 		String url = null;
 
 		if (news != null) { // 상세 조회 성공 시
@@ -113,9 +119,19 @@ public class NewsController {
 
 				model.addAttribute("newsList", newsList);
 			}
+			
+			else if (recentList != null && !recentList.isEmpty()) { // 게시글 목록 조회 성공 시
+				List<NewsImage> recentThumbnailList = service.recentThumbnailList(recentList);
+
+				if (recentThumbnailList != null) {
+					model.addAttribute("recentThList", recentThumbnailList);
+				}
+
+			}
 
 //			request scope로 board를 세팅한다.
 			model.addAttribute("news", news);
+			model.addAttribute("recentList", recentList);
 
 			url = "news/newsPage";
 

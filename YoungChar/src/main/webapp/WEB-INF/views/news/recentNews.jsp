@@ -238,7 +238,7 @@ to {
 												<!-- Extra Small Post-->
 												<div class="rn-recent-post-item">
 													<div class="rn-recent-post-item-thumb">
-														<c:forEach items="${thList}" var="th">
+														<c:forEach items="${recentThList}" var="th">
 															<c:if test="${th.newsNo  == news.newsNo}">
 																<a href="../news/${news.newsNo}"><img src="${contextPath}${th.filePath}/${th.fileName}" id="recentImage"></a>
 															</c:if>
@@ -247,7 +247,7 @@ to {
 													</div>
 													<div class="rn-recent-post-item-info">
 														<div class="rn-recent-post-item-meta">
-															<span class="rn-recent-post-item-categories">${news.reporter}</a>
+															<span class="rn-recent-post-item-categories">${news.reporter}
 															</span> <span class="rn-recent-post-item-author">${news.newsCreateDate} </span>
 														</div>
 														<div class="rn-recent-post-item-title">

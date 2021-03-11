@@ -193,7 +193,7 @@ to {
 			</div>
 
 				<%-- 로그인이 되어있는 경우 --%>
-				<c:if test="${!empty loginMember}">
+				<c:if test="${!empty loginMember && loginMember.memberGrade == 'A'}">
 					<a class="btn btn-success float-right" href="../chargerCompany/insertChargerCompany">등록</a>
 				</c:if>
 			
