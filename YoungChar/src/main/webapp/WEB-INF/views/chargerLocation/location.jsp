@@ -424,6 +424,17 @@ float: left;
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dd19bab7101200951c3127b359fc8c3f"></script>
 	<script>
+		$(function(){
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			mapOption = {
+				center : new kakao.maps.LatLng(37.55516625903957, 126.9707168380652), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		})
+	
 		var keyword = "";
 
 		function test() {

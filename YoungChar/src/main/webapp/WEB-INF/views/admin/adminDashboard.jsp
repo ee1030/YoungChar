@@ -136,17 +136,17 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="member" items="${mList}">
-											<c:forEach var="memberFile" items="${mfList}">
-												<c:choose>
-													<c:when test="${member.memberNo == memberFile.memNo}">
-														<c:set var="src" value="${contextPath}${memberFile.memImgPath}/${memberFile.memImgName}"/>
-													</c:when>
-													<c:otherwise>
-														<c:set var="src" value="${contextPath}/resources/assets/images/user/defaultProfile.jpg"/>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
+									
+									<c:set var="src" value="${contextPath}/resources/assets/images/user/defaultProfile.jpg"/>
+									
+									<c:forEach var="member" items="${mList}">
+										<c:set var="flag" value="false"/>
+										<c:forEach var="memberFile" items="${mfList}">
+											<c:if test="${member.memberNo == memberFile.memNo and flag == false}">
+												<c:set var="src" value="${contextPath}${memberFile.memImgPath}/${memberFile.memImgName}"/>
+												<c:set var="flag" value="true"/>
+											</c:if>
+										</c:forEach>
 											<tr>
 												<td class="bd-t-none u-s-tb">
 													<div class="align-middle image-sm-size">
@@ -217,6 +217,7 @@
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+	
 		google.charts.load('current', {
 			'packages' : [ 'corechart' ]
 		});
