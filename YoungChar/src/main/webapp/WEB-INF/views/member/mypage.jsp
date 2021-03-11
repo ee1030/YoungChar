@@ -615,7 +615,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 			</div>
 		</div>
 	</div>
-		
+		<jsp:include page="../common/footer.jsp"/>
 		<!-- Site Footer-->
 		<!-- End Site Footer-->
 
