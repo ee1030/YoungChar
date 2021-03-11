@@ -312,14 +312,6 @@ to {
 					<!-- Sidebar-->
 					<aside class="rn-widget-area" id="secondary">
 
-						<!-- Widget Item-->
-						<div class="rn-widget">
-							<div class="rn-widget-content">
-								<a href="#"> <img class="img-fluid" src="assets/images/banner.png" alt="banner" srcset="assets/images/banner.png 1x, assets/images/banner@2x.png 2x">
-								</a>
-							</div>
-						</div>
-						<!-- End Widget Item-->
 
 
 						<!-- Widget Item-->
