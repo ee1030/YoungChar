@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+		footer.rn-footer .rn-footer-widgets {
+		    padding: 40px 0 0px;
+    }
+</style>
 <body>
 <!-- Site Footer-->
 		<footer class="rn-footer">
@@ -48,64 +53,17 @@
 							<!-- End Widget Item-->
 
 						</div>
-						<div class="col-md-5">
-
-							<!-- Widget Item-->
-							<section class="rn-widget">
-								<div class="rn-widget-content">
-									<div class="row rn-quick-links">
-										<div class="col-6">
-											<ul>
-												<li>
-													믿음
-												</li>
-												<li>
-												   	소망
-												</li>
-												<li>
-													 사랑
-												</li>
-												<li>
-												</li>
-												<li>
-													 
-												</li>
-												<li>
-												</li>
-											</ul>
-										</div>
-										<div class="col-6">
-											<ul>
-												<li>
-													신뢰
-												</li>
-												<li>
-												정직
-												</li>
-												<li>
-													축복
-												</li>
-												<li>
-													
-												</li>
-												<li>
-													
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
-							<!-- End Widget Item-->
-
-						</div>
-						<div class="col-md-3">
+						
+							<div class="col-md-8">
 
 							<!-- Widget Item-->
 							<section class="rn-widget">
 								<div class="rn-widget-content">
 									<div class="rn-icon-contents">
 										<div class="rn-phone rn-icon-content">
+										
+										<div class="col-md-4">
+										
 											<div class="rn-icon">
 												<i class="lnr lnr-phone"></i>
 											</div>
@@ -115,8 +73,10 @@
 													<li>(033)-244-7415</li>
 												</ul>
 											</div>
-										</div>
-										<div class="rn-email rn-icon-content">
+											
+											</div>
+											<div class="col-md-4">						
+											
 											<div class="rn-icon">
 												<i class="lnr lnr-envelope"></i>
 											</div>
@@ -126,27 +86,36 @@
 													<li>gopseok2@gmail.com</li>
 												</ul>
 											</div>
-										</div>
-										<div class="rn-address rn-icon-content">
-											<div class="rn-icon">
-												<i class="lnr lnr-map-marker"></i>
+											
 											</div>
-											<div class="rn-info">
-												<ul>
-													<li>서울특별시 중구 남대문로 120  </li>
-													<li> 대일빌딩 2F , Aclass</li>
-												</ul>
+											
+											<div class="col-md-4">			
+											
+												<div class="rn-icon">
+													<i class="lnr lnr-map-marker"></i>
+												</div>
+												<div class="rn-info">
+													<ul>
+														<li>서울특별시 중구 남대문로 120  </li>
+														<li> 대일빌딩 2F , Aclass</li>
+													</ul>
+												</div>
+											
 											</div>
-										</div>
+											
+											</div>
+
+
 									</div>
 								</div>
 							</section>
 							<!-- End Widget Item-->
+							
+							</div>
 
 						</div>
 					</div>
 				</div>
-			</div>
 			<!-- End Footer Widgets-->
 
 			<!-- Footer Copyright-->
