@@ -221,13 +221,6 @@
 
 						<!-- Blog Post Item (Small Size)-->
 						<div class="rn-post-item rn-post-size-sm">
-							<div class="rn-post-item-thumb">
-							<c:forEach items="${mainThList}" var="th">
-										<c:if test="${th.newsNo  == news.newsNo}">
-									<img src="${contextPath}${th.filePath}/${th.fileName}">
-								</c:if>
-								</c:forEach>
-							</div>
 							<div class="rn-post-item-header">
 								<div class="rn-post-date">
 									<div class="rn-post-date-inner">

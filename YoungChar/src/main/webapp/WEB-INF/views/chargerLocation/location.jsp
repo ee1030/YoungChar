@@ -395,9 +395,11 @@ float: left;
 		<div class="container pb-15">
 			<div class="row">
 				<div class="map_wrap">
+				
+				<hr>
 					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 
-					<div id="menu_wrap" class="bg_white">
+					<div id="menu_wrap" >
 						<div class="option">
 							<div>
 								<form onsubmit="test(); return false;">
@@ -556,8 +558,7 @@ float: left;
 				}
 				
 				
-				positions
-						.push({
+				positions.push({
 							addr : addrs[i].childNodes[0].nodeValue,
 							latlng : new kakao.maps.LatLng(
 									lats[i].childNodes[0].nodeValue,
@@ -597,7 +598,7 @@ float: left;
 				var infowindow = new kakao.maps.InfoWindow({
 
 					// 인포윈도우에 표시할 내용
-					content : '<div style="width:300px; text-align:center;padding-top:4px;">' + '<b>' + positions[i].csNm + '</b>' + '<br>' + '주소 : '
+					content : '<div style="width:300px; text-align:center; padding-top:4px;">' + '<b>' + positions[i].csNm + '</b>' + '<br>' + '주소 : '
 							+ positions[i].addr + '<br>' + '충전기 단자 : '
 							+ positions[i].cpTp + '<br>' + '충전 타입(완속/급속) : '
 							+ positions[i].chargeTp + '<br>' + '충전기 상태 : '

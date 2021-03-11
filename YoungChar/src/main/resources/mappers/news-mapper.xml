@@ -86,7 +86,7 @@
 		WHERE
 		NEWS_STATUS = 'Y'
 		ORDER BY NEWS_NO DESC)
-        WHERE ROWNUM <![CDATA[<=]]> 3
+        WHERE ROWNUM <![CDATA[<=]]> 5
 	</select>
 	
 	<select id="selectMainNews" resultMap="news_rm">
