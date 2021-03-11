@@ -291,7 +291,7 @@
 	
 		<!-- End Page Content-->
 		</section>
-		
+		<jsp:include page="../common/footer.jsp"/>
 		
 		<!-- Site Footer-->
 		<!-- End Site Footer-->
