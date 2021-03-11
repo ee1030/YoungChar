@@ -115,7 +115,7 @@
 							</div>
 							<div class="rn-service-title">내 시승 예약</div>
 							<div class="rn-service-desc">
-								<p>예약 확인 / 수정 / 취소</p>
+								<p>예약 확인 / 취소</p>
 							</div>
 						</div>
 						<!-- End Service Item-->

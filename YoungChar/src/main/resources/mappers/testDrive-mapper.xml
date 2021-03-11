@@ -110,6 +110,7 @@
 	<select id="selectReservation" parameterType="_int" resultMap="testDrReservation_rm">
 		SELECT * FROM V_RESERVATION
 		WHERE MEM_NO = #{memNo}
+		AND CAR_STATUS = 'Y'
 	</select>
 
 	<!-- 예약 목록 사진 조회 -->
