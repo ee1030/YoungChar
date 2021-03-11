@@ -74,7 +74,7 @@
 					<div class="col-lg-12">
 						<div class="rn-page-title-inner">
 							<h1>시승 예약 확인</h1>
-							<p>예약 확인 | 예약 수정 | 예약 취소</p>
+							<p>예약 확인 | 예약 취소</p>
 						</div>
 					</div>
 				</div>
