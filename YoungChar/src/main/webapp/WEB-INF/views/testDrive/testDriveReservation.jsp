@@ -378,6 +378,7 @@
 			</div>
 		</div>
 		</section>
+		<span class="selectBar1" display="none"></span>
 		<br><br><br><br>
 			<form action="makeReservation" method="post" onsubmit="return validate();">
 				<div class="row justify-content-md-center">
@@ -398,7 +399,7 @@
 		All JavaScripts Codes Loaded
 		Ex: jquery, bootstrap, etc.
 		-->
-		<script>
+		<script display="none">
 		
 			             
    
