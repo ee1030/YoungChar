@@ -119,7 +119,7 @@
 						<c:url var="updateUrl" value="${chargerCompany.companyNo}/chargerCompanyUpdate" />
 
 						<!-- 로그인된 회원이 글 작성자인 경우 -->
-						<c:if test="${(loginMember != null) }">
+						<c:if test="${!empty loginMember && loginMember.memberGrade == 'A'}">
 							<a href="${updateUrl}" id="updateBtn" class="btn btn-success ml-1 mr-1">수정</a>
 							<form method="POST" action="${chargerCompany.companyNo}/deleteCompany" enctype="multipart/form-data" onsubmit="return validate();">
 								<button id="deleteBtn" class="btn btn-success">삭제</button>

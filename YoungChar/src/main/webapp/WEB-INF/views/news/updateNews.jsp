@@ -117,13 +117,18 @@
 					</div>
 					
 					<div class="contents" id="contentsImage">
+					
+					
 						<div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label" id="cont">INSERT MAIN IMAGE</label>
 					<div class="boardImg" id="titleImgArea">
 						<img id="titleImg" width="200" height="200">
 						<span class="deleteImg">x</span>
 					</div>
+					
 					<div class="form-inline mb-2" id="subImage">
+					
+					
 					<div class="mr-2 boardImg" id="contentImgArea1">
 						<img id="contentImg1" width="150" height="150">
 						<span class="deleteImg">x</span>
@@ -133,6 +138,8 @@
 						<img id="contentImg2" width="150" height="150">
 						<span class="deleteImg">x</span>
 					</div>
+					
+					
 				</div>
 				</div>
 				

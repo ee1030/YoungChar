@@ -312,14 +312,6 @@ to {
 					<!-- Sidebar-->
 					<aside class="rn-widget-area" id="secondary">
 
-						<!-- Widget Item-->
-						<div class="rn-widget">
-							<div class="rn-widget-content">
-								<a href="#"> <img class="img-fluid" src="assets/images/banner.png" alt="banner" srcset="assets/images/banner.png 1x, assets/images/banner@2x.png 2x">
-								</a>
-							</div>
-						</div>
-						<!-- End Widget Item-->
 
 
 						<!-- Widget Item-->
@@ -359,7 +351,7 @@ to {
 													</div>
 													<div class="rn-recent-post-item-info">
 														<div class="rn-recent-post-item-meta">
-															<span class="rn-recent-post-item-categories">${news.reporter}</a>
+															<span class="rn-recent-post-item-categories">${news.reporter}
 															</span> <span class="rn-recent-post-item-author">${news.newsCreateDate} </span>
 														</div>
 														<div class="rn-recent-post-item-title">
@@ -381,7 +373,7 @@ to {
 					</aside>
 					<!-- End Sidebar-->
 					<%-- 로그인이 되어있는 경우 --%>
-					<c:if test="${!empty loginMember}">
+					<c:if test="${!empty loginMember && loginMember.memberGrade == 'A'}">
 						<a class="btn btn-success float-right" href="../news/insertNews">등록하기</a>
 					</c:if>
 

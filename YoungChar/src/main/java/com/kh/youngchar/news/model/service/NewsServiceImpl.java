@@ -332,7 +332,7 @@ public class NewsServiceImpl implements NewsService {
 			List<NewsImage> removeFileList = new ArrayList<NewsImage>();
 
 			// DB에 저장할 웹상 이미지 접근 경로
-			String filePath = "/resources/chargerCompanyImages";
+			String filePath = "/resources/newsImages";
 
 			// 새롭게 업로드 된 파일 정보를 가지고 있는 images에 반복 접근
 			for (int i = 0; i < images.size(); i++) {
